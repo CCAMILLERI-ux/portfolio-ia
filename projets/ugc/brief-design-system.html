@@ -1,0 +1,893 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design system du prototype assistant et abonnement – Caroline Camilleri</title>
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+<style>
+body{margin:0;background:#FAF8F4;color:#1C1C1E;font:1rem/1.65 Inter,system-ui,sans-serif}
+.note{background:#F3EAD3;padding:.75rem 1rem;font-size:.9rem}
+.note p{max-width:52rem;margin:0 auto}
+main{max-width:52rem;margin:0 auto;padding:2rem 1rem 4rem}
+h1,h2,h3{line-height:1.25;text-wrap:balance} p,li{text-wrap:pretty}
+a{color:#7D6020} :focus-visible{outline:3px solid #AC8938;outline-offset:3px}
+pre{background:#fff;border:1px solid #E6E1D6;border-radius:8px;padding:1rem;overflow-x:auto;font-size:.85rem}
+code{font-size:.9em;overflow-wrap:anywhere}
+pre code{overflow-wrap:normal}
+table{border-collapse:collapse;max-width:100%;font-size:.9rem;display:block;overflow-x:auto}
+th,td{border:1px solid #E6E1D6;padding:.4rem .6rem;text-align:left;vertical-align:top}
+th{background:#fff}
+</style>
+</head>
+<body>
+<aside class="note" aria-label="Mention"><p>Fichier de design system préparé par Caroline Camilleri et transmis à Claude Code avant la génération du prototype. Reproduit tel quel. Projet fictif de démonstration, sans lien avec la marque citée. <a href="../../cas-ugc.html">Retour à l'étude de cas</a></p></aside>
+<main>
+<h1 id="ugc-design-system-prototype-ia">UGC DESIGN SYSTEM --- PROTOTYPE IA</h1>
+<blockquote>
+<p><strong>Statut :</strong> Design system de prototypage inspiré de l'univers digital
+public d'UGC.\
+<strong>Usage :</strong> à utiliser comme source de vérité visuelle et UI pour tout
+prototype généré avec Claude Code.\
+<strong>Important :</strong> ce document n'est pas la charte graphique officielle
+d'UGC. Les couleurs et dimensions non explicitement publiées par UGC
+sont des tokens de prototypage cohérents avec l'univers observé sur
+UGC.fr. Les logos, labels et sélections UGC doivent utiliser les
+assets officiels lorsqu'ils sont disponibles et ne doivent pas être
+redessinés ou altérés.</p>
+</blockquote>
+<hr />
+<h2 id="1-instructions-pour-claude-code">1. INSTRUCTIONS POUR CLAUDE CODE</h2>
+<p>Pour toute interface créée dans ce projet :</p>
+<ol>
+<li>Lire ce fichier avant de générer ou modifier une interface.</li>
+<li>Réutiliser les tokens et composants définis ici.</li>
+<li>Ne pas inventer une nouvelle direction artistique page par page.</li>
+<li>Privilégier les composants existants avant d'en créer de nouveaux.</li>
+<li>Conserver une cohérence stricte entre desktop, tablette et mobile.</li>
+<li>Faire des affiches de films et visuels cinéma la principale source
+    d'émotion visuelle.</li>
+<li>Garder l'interface fonctionnelle, sobre, lisible et orientée
+    réservation.</li>
+<li>Respecter l'accessibilité : contraste, navigation clavier, focus
+    visible, labels de formulaires et textes alternatifs.</li>
+<li>Ne jamais présenter le prototype comme un service officiel UGC.</li>
+<li>Utiliser des contenus fictifs ou autorisés lorsque les droits sur
+    les contenus réels ne sont pas disponibles.</li>
+</ol>
+<h3 id="interdictions-visuelles">Interdictions visuelles</h3>
+<p>Ne pas : - utiliser du glassmorphism ; - introduire des gradients
+violets ou une esthétique générique « AI/SaaS » ; - multiplier les
+grandes cartes très arrondies ; - utiliser des ombres décoratives fortes
+partout ; - ajouter des couleurs hors palette sans raison fonctionnelle
+; - modifier, étirer, recolorer ou redessiner le logo UGC ; - recréer
+approximativement les labels UGC lorsqu'un asset officiel existe ; -
+surcharger les écrans avec des effets graphiques concurrençant les
+affiches de films.</p>
+<hr />
+<h2 id="2-principes-de-marque">2. PRINCIPES DE MARQUE</h2>
+<h3 id="mots-cles">Mots-clés</h3>
+<ul>
+<li>Cinéma</li>
+<li>Premium</li>
+<li>Accessible</li>
+<li>Direct</li>
+<li>Éditorial</li>
+<li>Immersif</li>
+<li>Fonctionnel</li>
+<li>Réservation</li>
+<li>Découverte</li>
+</ul>
+<h3 id="principe-directeur">Principe directeur</h3>
+<p><strong>Strong cinema imagery + restrained interface.</strong></p>
+<p>L'identité visuelle doit principalement provenir : - des affiches de
+films ; - des photographies cinéma ; - du bleu de marque ; - des labels
+et sélections ; - d'une typographie forte et lisible.</p>
+<p>L'interface sert le contenu. Elle ne doit jamais concurrencer les films.</p>
+<hr />
+<h2 id="3-design-tokens">3. DESIGN TOKENS</h2>
+<h3 id="31-couleurs">3.1 Couleurs</h3>
+<p>Les valeurs ci-dessous sont des <strong>tokens de prototypage</strong>, et non une
+transcription garantie de la charte officielle.</p>
+<pre tabindex="0"><code class="language-css">:root {
+  /* BRAND */
+  --ugc-navy: #061A55;
+  --ugc-blue: #123B9B;
+  --ugc-electric-blue: #1769E0;
+  --ugc-light-blue: #35B9E9;
+
+  /* OPTIONAL ACTION / PROMO ACCENTS */
+  --ugc-red: #E83F5B;
+  --ugc-yellow: #FFD500;
+
+  /* NEUTRALS */
+  --white: #FFFFFF;
+  --background: #F5F6F8;
+  --surface: #FFFFFF;
+  --surface-subtle: #F0F2F5;
+  --text-primary: #10131A;
+  --text-secondary: #60646C;
+  --text-muted: #858A94;
+  --border: #E2E5EA;
+  --border-strong: #C7CBD2;
+
+  /* CINEMA / DARK */
+  --cinema-black: #090B12;
+  --cinema-surface: #111625;
+  --cinema-surface-elevated: #192033;
+
+  /* FEEDBACK */
+  --success: #18794E;
+  --warning: #A15C00;
+  --error: #C62828;
+  --info: #1769E0;
+}
+</code></pre>
+<h3 id="32-regles-couleur">3.2 Règles couleur</h3>
+<ul>
+<li><code>--ugc-navy</code> : header, footer, zones premium, fonds institutionnels.</li>
+<li><code>--ugc-blue</code> : CTA principaux, liens actifs, sélection.</li>
+<li><code>--ugc-electric-blue</code> : accent, focus, interactions ponctuelles.</li>
+<li>Blanc / gris très clair : surfaces principales.</li>
+<li><code>--cinema-black</code> : uniquement pour les expériences immersives, hero
+    cinéma, trailer, événement.</li>
+<li>Rouge et jaune : accents ponctuels, jamais couleurs dominantes.</li>
+<li>Ne jamais utiliser la couleur seule pour communiquer un état.</li>
+</ul>
+<hr />
+<h2 id="4-typographie">4. TYPOGRAPHIE</h2>
+<h3 id="police-de-prototypage">Police de prototypage</h3>
+<p>Utiliser en priorité :</p>
+<pre tabindex="0"><code class="language-css">font-family: &quot;Inter&quot;, Arial, Helvetica, sans-serif;
+</code></pre>
+<p>Si Inter n'est pas disponible :</p>
+<pre tabindex="0"><code class="language-css">font-family: Arial, &quot;Helvetica Neue&quot;, sans-serif;
+</code></pre>
+<h3 id="echelle-typographique">Échelle typographique</h3>
+<p>Token          Taille   Interligne   Graisse Usage</p>
+<hr />
+<p>Display          48px         56px       700 Hero desktop
+  H1               40px         48px       700 Titre principal
+  H2               32px         40px       700 Sections majeures
+  H3               24px         32px       700 Sous-sections
+  H4               20px         28px       700 Cartes / blocs
+  Card title       16px         22px       700 Titre film
+  Body             16px         24px       400 Texte courant
+  Body small       14px         20px       400 Métadonnées
+  Label            12px         16px       600 Badge / catégorie</p>
+<h3 id="regles">Règles</h3>
+<ul>
+<li>Les CTA peuvent être en capitales.</li>
+<li>Les titres doivent être courts, forts et très lisibles.</li>
+<li>Éviter les textes centrés sauf hero ou campagne.</li>
+<li>Ne pas utiliser plus de 3 niveaux de graisse sur un même écran.</li>
+<li>Les titres de films doivent rester lisibles même sur des cartes
+    étroites.</li>
+</ul>
+<hr />
+<h2 id="5-espacement">5. ESPACEMENT</h2>
+<p>Système basé principalement sur 8 px.</p>
+<pre tabindex="0"><code class="language-css">--space-1: 4px;
+--space-2: 8px;
+--space-3: 12px;
+--space-4: 16px;
+--space-6: 24px;
+--space-8: 32px;
+--space-12: 48px;
+--space-16: 64px;
+--space-20: 80px;
+</code></pre>
+<p>Règles : - 8--12 px entre éléments très liés. - 16--24 px dans un
+composant. - 32--48 px entre groupes. - 64--80 px entre grandes sections
+desktop. - Réduire les espacements de section sur mobile sans supprimer
+la hiérarchie.</p>
+<hr />
+<h2 id="6-grille-et-responsive">6. GRILLE ET RESPONSIVE</h2>
+<h3 id="desktop">Desktop</h3>
+<pre tabindex="0"><code class="language-text">max-width: 1280px
+columns: 12
+gutter: 24px
+page margin: 32–48px
+</code></pre>
+<h3 id="tablette">Tablette</h3>
+<pre tabindex="0"><code class="language-text">columns: 8
+gutter: 20px
+page margin: 24px
+</code></pre>
+<h3 id="mobile">Mobile</h3>
+<pre tabindex="0"><code class="language-text">columns: 4
+gutter: 16px
+page margin: 16px
+</code></pre>
+<h3 id="breakpoints-de-prototypage">Breakpoints de prototypage</h3>
+<pre tabindex="0"><code class="language-css">--bp-sm: 640px;
+--bp-md: 768px;
+--bp-lg: 1024px;
+--bp-xl: 1280px;
+</code></pre>
+<h3 id="regles-responsive">Règles responsive</h3>
+<ul>
+<li>Mobile first.</li>
+<li>Aucun scroll horizontal de page.</li>
+<li>Les carrousels de films peuvent scroller horizontalement sur mobile.</li>
+<li>Les CTA critiques doivent rester facilement accessibles au pouce.</li>
+<li>Les zones cliquables doivent viser au minimum 44 × 44 px.</li>
+<li>Les modales desktop deviennent de préférence des panneaux plein
+    écran ou bottom sheets adaptés sur mobile.</li>
+</ul>
+<hr />
+<h2 id="7-radius-et-ombres">7. RADIUS ET OMBRES</h2>
+<pre tabindex="0"><code class="language-css">--radius-xs: 2px;
+--radius-sm: 4px;
+--radius-md: 8px;
+--radius-lg: 12px;
+--radius-pill: 999px;
+
+--shadow-card: 0 4px 16px rgba(0,0,0,.08);
+--shadow-overlay: 0 12px 32px rgba(0,0,0,.18);
+</code></pre>
+<h3 id="regle">Règle</h3>
+<p>Le design UGC ne doit pas ressembler à un dashboard SaaS.\
+Utiliser peu de radius et peu d'ombres. Les affiches peuvent rester
+presque rectangulaires.</p>
+<hr />
+<h2 id="8-iconographie">8. ICONOGRAPHIE</h2>
+<p>Pour le prototype, utiliser <strong>Lucide Icons</strong> ou une librairie d'icônes
+outline équivalente.</p>
+<p>Style : - outline ; - géométrique ; - simple ; - stroke 1.5--2 px ; -
+cohérent sur toute l'interface.</p>
+<p>Icônes de base : - Search - User - MapPin - Heart - Play - Calendar -
+Clock - Ticket - ChevronDown - ChevronRight - ArrowLeft - Menu - X /
+Close - Filter - Star - Info - Check - AlertCircle</p>
+<p>Ne pas mélanger plusieurs familles d'icônes.</p>
+<hr />
+<h2 id="9-logo-et-assets-ugc">9. LOGO ET ASSETS UGC</h2>
+<p>Le logo UGC et les éléments de marque officiels doivent être traités
+comme des assets protégés.</p>
+<h3 id="regles_1">Règles</h3>
+<ul>
+<li>Utiliser uniquement les fichiers officiels lorsqu'ils sont fournis
+    au projet.</li>
+<li>Respecter leurs proportions.</li>
+<li>Ne pas modifier les couleurs.</li>
+<li>Ne pas ajouter d'effet, contour ou ombre.</li>
+<li>Ne pas recréer le logo en texte.</li>
+<li>Préserver une zone de respiration autour du logo.</li>
+<li>Si aucun asset officiel n'est disponible, utiliser un placeholder
+    explicite plutôt que fabriquer un faux logo.</li>
+</ul>
+<h3 id="labels-et-selections">Labels et sélections</h3>
+<p>Prévoir notamment les catégories observées dans l'écosystème UGC : - UGC
+Aime - UGC Découvre - UGC Spectateurs - UGC Frissonne - Sélection UGC
+Family - Sélection UGC Docs - Sélection UGC Culte</p>
+<p>Lorsque les assets officiels sont disponibles, ils priment sur tout
+badge générique.</p>
+<hr />
+<h2 id="10-header-navigation">10. HEADER / NAVIGATION</h2>
+<h3 id="desktop_1">Desktop</h3>
+<p>Structure recommandée :</p>
+<pre tabindex="0"><code class="language-text">[LOGO UGC]  Films  Cinémas  Labels &amp; sélections  Événements ...   [Search] [Mon compte]
+</code></pre>
+<p>Le header doit : - être immédiatement identifiable ; - privilégier les
+accès Films et Cinémas ; - offrir la recherche ; - offrir l'accès au
+compte ; - pouvoir ouvrir un menu secondaire pour les univers
+complémentaires.</p>
+<h3 id="dimensions">Dimensions</h3>
+<pre tabindex="0"><code class="language-css">height: 64px à 72px;
+background: var(--ugc-navy);
+color: white;
+</code></pre>
+<h3 id="etats">États</h3>
+<ul>
+<li>Default : texte blanc.</li>
+<li>Hover : opacité / soulignement discret.</li>
+<li>Active : indicateur bleu clair ou trait inférieur.</li>
+<li>Focus : anneau visible.</li>
+<li>Mobile : logo + recherche + compte/menu selon espace disponible.</li>
+</ul>
+<hr />
+<h2 id="11-cinema-selector">11. CINEMA SELECTOR</h2>
+<p>Le choix du cinéma est un composant stratégique.</p>
+<h3 id="structure">Structure</h3>
+<pre tabindex="0"><code class="language-text">[MapPin] Mon cinéma
+UGC Ciné Cité …                           [ChevronDown]
+</code></pre>
+<h3 id="composants">Composants</h3>
+<pre tabindex="0"><code class="language-text">CinemaSelector
+CinemaSearch
+CinemaSearchResult
+CinemaCard
+FavoriteCinemaButton
+GeolocationButton
+</code></pre>
+<h3 id="comportement">Comportement</h3>
+<ul>
+<li>Afficher clairement le cinéma sélectionné.</li>
+<li>Permettre la recherche par nom ou ville.</li>
+<li>Prévoir « À proximité » si la géolocalisation est autorisée.</li>
+<li>Ne jamais déclencher la géolocalisation sans action/consentement
+    approprié.</li>
+<li>Mémoriser le cinéma favori uniquement si la logique du prototype le
+    prévoit.</li>
+</ul>
+<hr />
+<h2 id="12-movie-card">12. MOVIE CARD</h2>
+<p>Le composant central du système.</p>
+<h3 id="anatomie">Anatomie</h3>
+<pre tabindex="0"><code class="language-text">MovieCard
+├── MoviePoster
+├── MovieLabel (optional)
+├── MovieTitle
+├── MovieMetadata (optional)
+├── TrailerAction (optional)
+└── ShowtimesAction
+</code></pre>
+<h3 id="poster">Poster</h3>
+<pre tabindex="0"><code class="language-css">aspect-ratio: 2 / 3;
+object-fit: cover;
+border-radius: var(--radius-sm);
+</code></pre>
+<h3 id="regles_2">Règles</h3>
+<ul>
+<li>L'affiche est l'élément dominant.</li>
+<li>Ne pas ajouter un gros fond de carte si ce n'est pas nécessaire.</li>
+<li>Le titre doit être sous l'affiche ou dans une zone clairement
+    associée.</li>
+<li>Les labels doivent rester secondaires par rapport au titre.</li>
+<li>Ne pas afficher plus de métadonnées que nécessaire dans une grille.</li>
+<li>Sur mobile, préserver une taille d'affiche suffisante pour
+    identifier le film.</li>
+</ul>
+<hr />
+<h2 id="13-movie-grid">13. MOVIE GRID</h2>
+<h3 id="desktop_2">Desktop</h3>
+<ul>
+<li>4 à 6 cartes selon largeur disponible.</li>
+<li>Gap : 20--24 px.</li>
+</ul>
+<h3 id="tablette_1">Tablette</h3>
+<ul>
+<li>3 à 4 cartes.</li>
+</ul>
+<h3 id="mobile_1">Mobile</h3>
+<ul>
+<li>2 cartes pour une grille.</li>
+<li>Ou carousel horizontal avec aperçu de la carte suivante.</li>
+</ul>
+<p>Ne pas écraser les posters pour faire tenir plus de films.</p>
+<hr />
+<h2 id="14-movie-carousel">14. MOVIE CAROUSEL</h2>
+<p>Structure :</p>
+<pre tabindex="0"><code class="language-text">SectionHeader
+[poster] [poster] [poster] [poster] [poster]  →
+</code></pre>
+<p>Sections possibles : - Nouveautés - À l'affiche - Avant-premières - UGC
+Aime - UGC Découvre - En famille - Événements - Films cultes</p>
+<h3 id="navigation">Navigation</h3>
+<p>Desktop : - flèches gauche/droite ; - lien « Tout voir ».</p>
+<p>Mobile : - swipe horizontal ; - ne pas dépendre uniquement des flèches.</p>
+<hr />
+<h2 id="15-buttons">15. BUTTONS</h2>
+<h3 id="primary">Primary</h3>
+<pre tabindex="0"><code class="language-css">height: 48px;
+padding: 0 24px;
+background: var(--ugc-blue);
+color: white;
+font-weight: 700;
+border-radius: var(--radius-sm);
+</code></pre>
+<p>Usage : - Réserver - Continuer - Confirmer</p>
+<h3 id="secondary">Secondary</h3>
+<pre tabindex="0"><code class="language-css">height: 48px;
+padding: 0 24px;
+background: white;
+color: var(--ugc-blue);
+border: 1px solid var(--ugc-blue);
+border-radius: var(--radius-sm);
+</code></pre>
+<p>Usage : - Voir les séances - En savoir plus</p>
+<h3 id="tertiary">Tertiary</h3>
+<p>Lien ou bouton texte :</p>
+<pre tabindex="0"><code class="language-text">Voir la bande-annonce →
+Toutes les nouveautés →
+</code></pre>
+<h3 id="etats-obligatoires">États obligatoires</h3>
+<p>Chaque bouton doit prévoir : - default ; - hover ; - focus-visible ; -
+active ; - disabled ; - loading si action asynchrone.</p>
+<h3 id="hierarchie">Hiérarchie</h3>
+<p>Maximum <strong>un CTA principal dominant par zone fonctionnelle</strong>.</p>
+<hr />
+<h2 id="16-showtimes-seances">16. SHOWTIMES / SÉANCES</h2>
+<h3 id="structure_1">Structure</h3>
+<pre tabindex="0"><code class="language-text">AUJOURD'HUI    MAR. 20    MER. 21    JEU. 22
+
+VF
+[14:10] [16:30] [18:45] [21:10]
+
+VOST
+[17:15] [20:30]
+
+FORMAT PREMIUM
+[19:45]
+</code></pre>
+<h3 id="showtimebutton">ShowtimeButton</h3>
+<p>Default :</p>
+<pre tabindex="0"><code class="language-text">fond blanc
+bord bleu
+texte bleu
+</code></pre>
+<p>Hover :</p>
+<pre tabindex="0"><code class="language-text">fond bleu très clair
+</code></pre>
+<p>Selected :</p>
+<pre tabindex="0"><code class="language-text">fond UGC blue
+texte blanc
+</code></pre>
+<p>Disabled :</p>
+<pre tabindex="0"><code class="language-text">fond gris clair
+texte gris
+non cliquable
+</code></pre>
+<h3 id="regles_3">Règles</h3>
+<ul>
+<li>L'heure est toujours l'information dominante.</li>
+<li>Version, format et accessibilité doivent être explicites.</li>
+<li>Ne pas utiliser uniquement une couleur pour distinguer les formats.</li>
+<li>Une séance sélectionnée doit rester identifiable au clavier.</li>
+</ul>
+<hr />
+<h2 id="17-date-selector">17. DATE SELECTOR</h2>
+<p>Composant horizontal.</p>
+<pre tabindex="0"><code class="language-text">Aujourd’hui
+Lun. 19
+Mar. 20
+Mer. 21
+Jeu. 22
+</code></pre>
+<p>État sélectionné : - fond ou soulignement UGC blue ; - contraste AA
+minimum ; - <code>aria-selected="true"</code> si implémentation adaptée.</p>
+<p>Sur mobile : scroll horizontal autorisé.</p>
+<hr />
+<h2 id="18-hero-cinema">18. HERO CINÉMA</h2>
+<p>Utiliser pour : - film événement ; - avant-première ; - campagne ; -
+abonnement ; - temps fort.</p>
+<h3 id="structure_2">Structure</h3>
+<pre tabindex="0"><code class="language-text">[BACKGROUND / KEY VISUAL]
+
+Eyebrow
+TITRE DU FILM
+Accroche courte
+
+[Réserver] [Voir la bande-annonce]
+</code></pre>
+<h3 id="regles_4">Règles</h3>
+<ul>
+<li>Image grand format.</li>
+<li>Overlay sombre si nécessaire pour la lisibilité.</li>
+<li>Texte limité.</li>
+<li>Maximum deux CTA.</li>
+<li>Éviter les gros blocs de texte.</li>
+<li>Conserver une forte lisibilité sur mobile.</li>
+</ul>
+<hr />
+<h2 id="19-label-badge">19. LABEL / BADGE</h2>
+<p>Pour les badges génériques non couverts par un asset officiel :</p>
+<pre tabindex="0"><code class="language-css">display: inline-flex;
+min-height: 24px;
+padding: 4px 8px;
+border-radius: var(--radius-xs);
+font-size: 12px;
+font-weight: 600;
+</code></pre>
+<p>Exemples fonctionnels : - VF - VOST - IMAX / format spécifique -
+Avant-première - Nouveau</p>
+<p>Ne pas imiter graphiquement un label officiel UGC avec un badge
+générique.</p>
+<hr />
+<h2 id="20-news-editorial-card">20. NEWS / EDITORIAL CARD</h2>
+<h3 id="anatomie_1">Anatomie</h3>
+<pre tabindex="0"><code class="language-text">EditorialCard
+├── Image
+├── Date
+├── Category (optional)
+├── Title
+├── Excerpt (optional)
+└── ReadMore
+</code></pre>
+<h3 id="regles_5">Règles</h3>
+<ul>
+<li>Image en haut.</li>
+<li>Titre prioritaire.</li>
+<li>Date discrète.</li>
+<li>Maximum 2--3 lignes de résumé dans une grille.</li>
+<li>Éviter les encadrements inutiles.</li>
+</ul>
+<hr />
+<h2 id="21-promo-banner">21. PROMO BANNER</h2>
+<p>Pour : - UGC Illimité ; - Pass Culture ; - carte / offre ; - campagne
+événementielle.</p>
+<h3 id="structure_3">Structure</h3>
+<pre tabindex="0"><code class="language-text">[VISUAL]  Headline
+          Supporting copy
+          [CTA]
+</code></pre>
+<p>Desktop : split layout possible.\
+Mobile : image puis contenu.</p>
+<p>Le fond peut utiliser <code>--ugc-navy</code> ou une image de campagne officielle.</p>
+<hr />
+<h2 id="22-univers-ugc-illimite">22. UNIVERS UGC ILLIMITÉ</h2>
+<p>Pour différencier l'abonnement sans créer une nouvelle marque :</p>
+<pre tabindex="0"><code class="language-css">background: var(--ugc-navy);
+color: white;
+accent: var(--ugc-electric-blue);
+</code></pre>
+<p>Possibilité de légers effets lumineux bleus sur les campagnes premium.</p>
+<p>Éviter : - néons excessifs ; - gradients multicolores ; - codes visuels
+« fintech ».</p>
+<hr />
+<h2 id="23-formulaires">23. FORMULAIRES</h2>
+<h3 id="input">Input</h3>
+<pre tabindex="0"><code class="language-css">min-height: 48px;
+padding: 12px 16px;
+border: 1px solid var(--border-strong);
+border-radius: var(--radius-sm);
+background: white;
+</code></pre>
+<h3 id="focus">Focus</h3>
+<pre tabindex="0"><code class="language-css">outline: 3px solid rgba(23,105,224,.25);
+border-color: var(--ugc-electric-blue);
+</code></pre>
+<h3 id="regles_6">Règles</h3>
+<ul>
+<li>Toujours afficher un label.</li>
+<li>Placeholder ≠ label.</li>
+<li>Message d'erreur placé près du champ.</li>
+<li>Erreur décrite en texte, pas uniquement en rouge.</li>
+<li>Conserver les données valides après une erreur de formulaire.</li>
+</ul>
+<p>Composants :</p>
+<pre tabindex="0"><code class="language-text">TextInput
+SearchInput
+Select
+Checkbox
+Radio
+Textarea
+FormField
+FieldError
+</code></pre>
+<hr />
+<h2 id="24-search">24. SEARCH</h2>
+<p>La recherche doit permettre selon le contexte : - film ; - cinéma ; -
+éventuellement contenu éditorial.</p>
+<h3 id="searchfield">SearchField</h3>
+<pre tabindex="0"><code class="language-text">[Search icon] Rechercher un film, un cinéma…
+</code></pre>
+<h3 id="searchoverlay">SearchOverlay</h3>
+<p>Desktop : - overlay ou panneau large.</p>
+<p>Mobile : - écran dédié plein format recommandé.</p>
+<p>Afficher : - suggestions ; - historique si pertinent ; - catégories de
+résultat clairement séparées.</p>
+<hr />
+<h2 id="25-modal-drawer">25. MODAL / DRAWER</h2>
+<h3 id="modal">Modal</h3>
+<p>Usage : - confirmation ; - action courte ; - information nécessitant
+l'attention.</p>
+<h3 id="drawer">Drawer</h3>
+<p>Usage : - filtres ; - détail contextuel ; - sélection cinéma sur mobile.</p>
+<h3 id="regles-accessibilite">Règles accessibilité</h3>
+<ul>
+<li>focus piégé dans la modale ;</li>
+<li>fermeture Escape ;</li>
+<li>bouton de fermeture accessible ;</li>
+<li>retour du focus à l'élément déclencheur.</li>
+</ul>
+<hr />
+<h2 id="26-feedback-states">26. FEEDBACK STATES</h2>
+<p>Prévoir systématiquement :</p>
+<pre tabindex="0"><code class="language-text">LoadingState
+Skeleton
+EmptyState
+ErrorState
+SuccessState
+Toast
+InlineAlert
+</code></pre>
+<h3 id="exemple-empty-state">Exemple Empty State</h3>
+<pre tabindex="0"><code class="language-text">Aucune séance disponible pour cette date.
+
+[Choisir une autre date]
+</code></pre>
+<p>Ne pas laisser une zone simplement vide.</p>
+<hr />
+<h2 id="27-accessibilite">27. ACCESSIBILITÉ</h2>
+<p>Objectif de prototypage : <strong>WCAG 2.2 AA / logique compatible avec les
+bonnes pratiques RGAA</strong>.</p>
+<p>Claude doit notamment :</p>
+<ul>
+<li>utiliser du HTML sémantique ;</li>
+<li>garantir la navigation clavier ;</li>
+<li>rendre le focus très visible ;</li>
+<li>respecter l'ordre logique du focus ;</li>
+<li>fournir des labels de formulaires ;</li>
+<li>fournir des textes alternatifs pertinents ;</li>
+<li>ne pas transmettre une information uniquement par la couleur ;</li>
+<li>viser un contraste minimum de 4.5:1 pour le texte courant ;</li>
+<li>viser 3:1 pour les grands textes et composants graphiques lorsque
+    applicable ;</li>
+<li>utiliser des titres hiérarchisés ;</li>
+<li>ajouter des noms accessibles aux boutons icônes ;</li>
+<li>permettre le zoom sans perte de contenu ;</li>
+<li>respecter <code>prefers-reduced-motion</code> pour les animations.</li>
+</ul>
+<hr />
+<h2 id="28-motion">28. MOTION</h2>
+<p>Animations discrètes uniquement.</p>
+<pre tabindex="0"><code class="language-css">--duration-fast: 120ms;
+--duration-normal: 200ms;
+--duration-slow: 300ms;
+</code></pre>
+<p>Utiliser pour : - hover ; - ouverture de menu ; - drawer ; - changement
+d'état ; - carousel.</p>
+<p>Éviter les animations décoratives permanentes.</p>
+<hr />
+<h2 id="29-structure-des-composants">29. STRUCTURE DES COMPOSANTS</h2>
+<pre tabindex="0"><code class="language-text">UGC DESIGN SYSTEM
+
+FOUNDATIONS
+├── Colors
+├── Typography
+├── Spacing
+├── Grid
+├── Radius
+├── Shadows
+├── Motion
+└── Icons
+
+NAVIGATION
+├── Header
+├── MainNavigation
+├── MobileNavigation
+├── Search
+└── AccountMenu
+
+CINEMA
+├── CinemaSelector
+├── CinemaSearch
+├── CinemaSearchResult
+├── CinemaCard
+└── FavoriteCinema
+
+MOVIES
+├── MovieCard
+├── MoviePoster
+├── MovieLabel
+├── MovieCarousel
+├── MovieGrid
+├── MovieMetadata
+└── TrailerButton
+
+SHOWTIMES
+├── DateSelector
+├── ShowtimeButton
+├── FormatBadge
+├── CinemaShowtimes
+└── BookingCTA
+
+CONTENT
+├── Hero
+├── PromoBanner
+├── NewsCard
+├── EditorialCard
+└── SectionHeader
+
+ACCOUNT
+├── Login
+├── SubscriptionCard
+├── LoyaltyCard
+├── Ticket
+└── QRCode
+
+FORM
+├── Input
+├── Select
+├── Checkbox
+├── Radio
+├── SearchField
+└── ErrorMessage
+
+FEEDBACK
+├── Modal
+├── Drawer
+├── Toast
+├── Loader
+├── Skeleton
+├── EmptyState
+└── ErrorState
+</code></pre>
+<hr />
+<h2 id="30-conventions-de-composants">30. CONVENTIONS DE COMPOSANTS</h2>
+<p>Si le prototype utilise React :</p>
+<pre tabindex="0"><code class="language-text">PascalCase pour les composants.
+camelCase pour les props.
+Un composant = une responsabilité principale.
+Pas de styles ad hoc répétés dans les pages.
+</code></pre>
+<p>Exemples :</p>
+<pre tabindex="0"><code class="language-tsx">&lt;MovieCard /&gt;
+&lt;CinemaSelector /&gt;
+&lt;ShowtimeButton /&gt;
+&lt;DateSelector /&gt;
+&lt;PromoBanner /&gt;
+</code></pre>
+<p>Props recommandées :</p>
+<pre tabindex="0"><code class="language-tsx">&lt;MovieCard
+  title=&quot;&quot;
+  posterUrl=&quot;&quot;
+  label=&quot;&quot;
+  trailerUrl=&quot;&quot;
+  onShowtimesClick={() =&gt; {}}
+/&gt;
+</code></pre>
+<h3 id="variants">Variants</h3>
+<p>Utiliser des variants explicites plutôt que dupliquer un composant :</p>
+<pre tabindex="0"><code class="language-text">Button
+- primary
+- secondary
+- tertiary
+
+MovieCard
+- default
+- compact
+- featured
+
+Hero
+- movie
+- event
+- subscription
+</code></pre>
+<hr />
+<h2 id="31-css-tailwind">31. CSS / TAILWIND</h2>
+<p>Si Tailwind est utilisé : - mapper les tokens du présent fichier dans la
+configuration/theme ; - éviter les valeurs arbitraires répétées ; -
+créer des composants réutilisables ; - ne pas multiplier les classes
+spécifiques uniquement pour reproduire une page.</p>
+<p>Si CSS variables : - définir les tokens globalement ; - ne pas hardcoder
+les couleurs de marque dans chaque composant.</p>
+<hr />
+<h2 id="32-page-home-modele-de-composition">32. PAGE HOME --- MODÈLE DE COMPOSITION</h2>
+<p>Ordre recommandé :</p>
+<pre tabindex="0"><code class="language-text">Header
+Hero / Featured movie
+CinemaSelector
+Nouveautés
+À l’affiche
+Avant-premières / labels
+Promo UGC Illimité ou offre
+Sélection UGC Family / éditorialisation
+Dernières news
+Application / service
+Footer
+</code></pre>
+<p>Ce modèle est une base, pas une obligation rigide.</p>
+<hr />
+<h2 id="33-page-film-modele">33. PAGE FILM --- MODÈLE</h2>
+<pre tabindex="0"><code class="language-text">Header
+Breadcrumb (optional)
+MovieHero
+├── Poster
+├── Title
+├── Metadata
+├── Labels
+├── Synopsis
+├── Trailer
+└── Primary CTA
+
+CinemaSelector
+DateSelector
+Showtimes
+FilmDetails
+RelatedMovies
+Footer
+</code></pre>
+<p>Sur mobile, le CTA « Voir les séances / Réserver » peut devenir sticky
+si cela améliore le parcours.</p>
+<hr />
+<h2 id="34-page-cinema-modele">34. PAGE CINÉMA --- MODÈLE</h2>
+<pre tabindex="0"><code class="language-text">Header
+CinemaHeader
+├── Cinema name
+├── Address
+├── Favorite
+├── Access / map action
+└── Practical information
+
+DateSelector
+MoviesAndShowtimes
+Services
+AccessibilityInformation
+News / Events
+Footer
+</code></pre>
+<p>La programmation reste prioritaire sur les informations secondaires.</p>
+<hr />
+<h2 id="35-parcours-reservation-principes">35. PARCOURS RÉSERVATION --- PRINCIPES</h2>
+<p>Le prototype doit favoriser :</p>
+<pre tabindex="0"><code class="language-text">Film
+→ Cinéma
+→ Date
+→ Séance
+→ Places / quantité si applicable
+→ Récapitulatif
+→ Confirmation
+</code></pre>
+<p>Règles : - toujours montrer où l'utilisateur se trouve ; - éviter les
+étapes inutiles ; - préserver les choix précédents ; - rendre possible
+le retour en arrière sans perdre les données ; - afficher clairement
+film, cinéma, date et heure dans le récapitulatif.</p>
+<hr />
+<h2 id="36-ton-ui">36. TON UI</h2>
+<p>Microcopy : - courte ; - directe ; - concrète ; - orientée action.</p>
+<p>Préférer :</p>
+<pre tabindex="0"><code class="language-text">Choisir un cinéma
+Voir les séances
+Réserver
+Voir la bande-annonce
+Ajouter aux favoris
+Toutes les nouveautés
+</code></pre>
+<p>Éviter le jargon technique ou marketing inutile.</p>
+<hr />
+<h2 id="37-donnees-de-prototype">37. DONNÉES DE PROTOTYPE</h2>
+<p>Lorsque les données réelles ne sont pas fournies : - utiliser des
+données mock clairement identifiables ; - ne pas inventer de tarifs
+réels ; - ne pas inventer de promotions présentées comme actuelles ; -
+ne pas inventer de caractéristiques d'un cinéma réel ; - ne pas simuler
+une disponibilité réelle sans l'indiquer.</p>
+<p>Pour un prototype interne, les films peuvent être fictifs ou
+explicitement marqués comme données de démonstration.</p>
+<hr />
+<h2 id="38-regles-de-qualite-avant-livraison">38. RÈGLES DE QUALITÉ AVANT LIVRAISON</h2>
+<p>Avant de considérer un écran terminé, vérifier :</p>
+<ul>
+<li>[ ] Les tokens du design system sont utilisés.</li>
+<li>[ ] Aucun style « AI/SaaS » générique n'a été introduit.</li>
+<li>[ ] Le logo n'a pas été modifié.</li>
+<li>[ ] Les affiches gardent un ratio cohérent.</li>
+<li>[ ] La hiérarchie des CTA est claire.</li>
+<li>[ ] Les états hover/focus/disabled existent.</li>
+<li>[ ] Le clavier permet d'utiliser les fonctions essentielles.</li>
+<li>[ ] Les contrastes sont suffisants.</li>
+<li>[ ] L'écran fonctionne à 320 px de large.</li>
+<li>[ ] Aucun contenu important n'est tronqué.</li>
+<li>[ ] Aucun scroll horizontal involontaire.</li>
+<li>[ ] Les états loading/error/empty sont prévus.</li>
+<li>[ ] Desktop et mobile utilisent les mêmes principes de marque.</li>
+<li>[ ] Les composants existants ont été réutilisés avant d'en créer de
+    nouveaux.</li>
+</ul>
+<hr />
+<h2 id="39-regle-finale-pour-claude">39. RÈGLE FINALE POUR CLAUDE</h2>
+<p><strong>Do not overdesign.</strong></p>
+<p>The UGC experience should feel cinematic because of its films, posters,
+photography and brand identity --- not because of decorative UI effects.</p>
+<p>When uncertain: 1. choose the simplest interface; 2. prioritize the
+movie or cinema content; 3. use UGC blue for the main action; 4.
+preserve generous whitespace; 5. reuse an existing component; 6.
+maintain accessibility; 7. keep the booking path obvious.</p>
+<p><strong>Consistency is more important than novelty.</strong></p>
+<hr />
+<h2 id="40-references-de-conception">40. RÉFÉRENCES DE CONCEPTION</h2>
+<p>Ce design system de prototypage a été préparé à partir de l'observation
+des interfaces et contenus publics UGC, notamment : - UGC.fr :
+navigation Films, Cinémas, recherche, compte, programmation,
+labels/sélections, news et offres ; - pages UGC Illimité ; - charte UGC
+publiée par Groupe UGC, qui met à disposition les logos, labels et
+sélections et précise les règles de protection de la marque.</p>
+<p>Les assets officiels UGC doivent être obtenus depuis les ressources
+officielles et utilisés conformément aux droits et conditions
+applicables.</p>
+</main>
+</body>
+</html>
