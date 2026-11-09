@@ -1,8 +1,8 @@
 # SIPLEC-PORTFOLIO-DESIGN-SYSTEM
 
-Design system de démonstration pour le portfolio de candidature de Caroline Camilleri. Inspiré de l'esprit visuel public de siplec.leclerc ; ce n'est pas le design system officiel de SIPLEC ni d'E.Leclerc.
+Design system de démonstration pour un projet de démonstration de Caroline Camilleri. Inspiré de l'esprit visuel public de siplec.leclerc ; ce n'est pas le design system officiel de SIPLEC ni d'E.Leclerc.
 
-Bibliothèque de démonstration créée par Caroline Camilleri pour un portfolio de candidature. Elle s'inspire de l'esprit visuel public du site siplec.leclerc (palette, typographies, angles vifs) ; ce n'est pas le design system officiel de SIPLEC ni d'E.Leclerc.
+Bibliothèque de démonstration créée par Caroline Camilleri pour un projet de démonstration. Elle s'inspire de l'esprit visuel public du site siplec.leclerc (palette, typographies, angles vifs) ; ce n'est pas le design system officiel de SIPLEC ni d'E.Leclerc.
 
 ## Règles absolues
 
@@ -151,7 +151,7 @@ Chargement : `<link rel="stylesheet" href="https://fonts.googleapis.com/css2?fam
 
 Bandeau de mention obligatoire en haut de chaque page du portfolio.
 
-- Texte : « Concept exploratoire réalisé dans le cadre d'une candidature, sans lien avec SIPLEC ni E.Leclerc. Données fictives. »
+- Texte : « Projet fictif réalisé à titre de démonstration, sans lien avec SIPLEC ni E.Leclerc. Les marques citées appartiennent à leurs propriétaires. Données fictives. »
 - Fond `orange-100`, texte `navy-900` en `caption`, icône d'information, pleine largeur.
 - Toujours visible, jamais refermable, placé avant le contenu principal (après le lien d'évitement).
 
@@ -165,7 +165,7 @@ body{margin:0;padding:16px;background:var(--white);color:var(--navy-900);font-fa
 <style>
 .n{display:flex;gap:10px;align-items:flex-start;background:var(--orange-100);color:var(--navy-900);padding:12px 16px;font-size:14px;line-height:20px}
 </style>
-<div class="n" role="note"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" style="flex:none;margin-top:1px"><circle cx="9" cy="9" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 8v5M9 5v1.5" stroke="currentColor" stroke-width="1.6"/></svg><p style="margin:0">Concept exploratoire réalisé dans le cadre d'une candidature, sans lien avec SIPLEC ni E.Leclerc. Données fictives.</p></div>
+<div class="n" role="note"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" style="flex:none;margin-top:1px"><circle cx="9" cy="9" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 8v5M9 5v1.5" stroke="currentColor" stroke-width="1.6"/></svg><p style="margin:0">Projet fictif réalisé à titre de démonstration, sans lien avec SIPLEC ni E.Leclerc. Les marques citées appartiennent à leurs propriétaires. Données fictives.</p></div>
 </body></html>
 ```
 
