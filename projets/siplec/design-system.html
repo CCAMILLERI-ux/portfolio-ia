@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bibliothèque de composants de démonstration – Portfolio Caroline Camilleri</title>
+<meta name="description" content="Documentation de la bibliothèque de composants de démonstration utilisée dans les deux cas du portfolio : tokens, composants, états et règles d'accessibilité.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Poppins:wght@500&display=swap">
+<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<nav class="skip-links" aria-label="Accès rapide">
+  <a href="#contenu">Aller au contenu</a>
+</nav>
+
+<header class="site-header">
+  <div class="demo-notice" role="note">
+    <div class="demo-notice__inner">
+      <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 8v5M9 5v1.5" stroke="currentColor" stroke-width="1.6"/></svg>
+      <p>Concept exploratoire réalisé dans le cadre d'une candidature, sans lien avec SIPLEC ni E.Leclerc. Données fictives.</p>
+    </div>
+  </div>
+  <div class="container site-header__inner">
+    <a class="site-name" href="index.html">Caroline Camilleri<span>Portfolio de candidature</span></a>
+    <nav class="site-nav" aria-label="Navigation principale">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="cas-energie.html">Cas énergie</a></li>
+        <li><a href="cas-non-alimentaire.html">Cas non-alimentaire</a></li>
+        <li><a href="design-system.html" aria-current="page">Composants</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="contenu" tabindex="-1">
+  <div class="container">
+    <section class="page-intro" aria-labelledby="titre-page">
+      <h1 id="titre-page">Bibliothèque de composants <span class="accent-blue">de démonstration</span></h1>
+      <p class="lead">Les composants réutilisés dans les deux cas, documentés comme dans un outil de type Zeroheight : rôle, états et règles d'accessibilité.</p>
+      <div class="callout callout--orange measure">
+        <p><strong>Ma bibliothèque de démonstration, pas le design system officiel de SIPLEC.</strong> Elle s'inspire de l'esprit visuel public du site siplec.leclerc (palette, typographies, angles vifs) sans en reprendre logo, marque ni élément d'identité. Dans Figma, je décline des maquettes à partir d'un design system existant ; cette page en reprend la logique de documentation.</p>
+      </div>
+      <nav class="ds-nav" aria-labelledby="titre-ds-nav">
+        <h2 id="titre-ds-nav" class="heading-3">Sur cette page</h2>
+        <ul>
+          <li><a href="#tokens">Tokens</a></li>
+          <li><a href="#c-demonotice">DemoNotice</a></li>
+          <li><a href="#c-button">Button</a></li>
+          <li><a href="#c-textlink">TextLink</a></li>
+          <li><a href="#c-sectorblock">SectorBlock</a></li>
+          <li><a href="#c-badge">Badge</a></li>
+          <li><a href="#c-field">Field</a></li>
+          <li><a href="#c-errors">Messages d'erreur</a></li>
+          <li><a href="#c-stepper">Stepper</a></li>
+          <li><a href="#c-productcard">ProductCard</a></li>
+          <li><a href="#c-disclosure">Disclosure</a></li>
+        </ul>
+      </nav>
+    </section>
+
+    <!-- Tokens -->
+    <section class="component" aria-labelledby="tokens">
+      <h2 id="tokens" tabindex="-1">Tokens</h2>
+      <h3>Couleurs</h3>
+      <p class="measure">Ratios de contraste calculés selon la formule de luminance relative des WCAG (script de vérification exécuté sur les valeurs hexadécimales des tokens).</p>
+      <ul class="swatches">
+        <li><div class="swatch" style="background:var(--navy-900)"></div><div class="swatch-info"><p><strong>navy-900</strong> <code>#1c2e5d</code></p><p>Texte, titres, aplats sombres. Sur white : 13,14:1.</p></div></li>
+        <li><div class="swatch" style="background:var(--blue-600)"></div><div class="swatch-info"><p><strong>blue-600</strong> <code>#0066cc</code></p><p>Actions, liens, univers non-alimentaire. White dessus : 5,57:1.</p></div></li>
+        <li><div class="swatch" style="background:var(--blue-500)"></div><div class="swatch-info"><p><strong>blue-500</strong> <code>#3860be</code></p><p>Survol des boutons. White dessus : 5,86:1.</p></div></li>
+        <li><div class="swatch" style="background:var(--slate-500)"></div><div class="swatch-info"><p><strong>slate-500</strong> <code>#626e8d</code></p><p>Mot mis en relief dans les titres. Sur white : 5,08:1 ; sur grey-100 : 4,26:1, réservé aux titres de 24px et plus.</p></div></li>
+        <li><div class="swatch" style="background:var(--orange-500)"></div><div class="swatch-info"><p><strong>orange-500</strong> <code>#ff6633</code></p><p>Aplat décoratif énergie. White dessus : 2,92:1, <strong>interdit</strong>. Navy-900 dessus : 4,51:1.</p></div></li>
+        <li><div class="swatch" style="background:var(--orange-700)"></div><div class="swatch-info"><p><strong>orange-700</strong> <code>#c4461c</code></p><p>Boutons et aplats énergie avec texte white : 4,95:1.</p></div></li>
+        <li><div class="swatch" style="background:var(--orange-100)"></div><div class="swatch-info"><p><strong>orange-100</strong> <code>#ffe5c3</code></p><p>Encarts, badge « fictif ». Navy-900 dessus : 10,79:1.</p></div></li>
+        <li><div class="swatch" style="background:var(--grey-600)"></div><div class="swatch-info"><p><strong>grey-600</strong> <code>#696969</code></p><p>Texte secondaire, bordure des champs. Sur white : 5,49:1 ; sur grey-100 : 4,61:1.</p></div></li>
+        <li><div class="swatch" style="background:var(--grey-100)"></div><div class="swatch-info"><p><strong>grey-100</strong> <code>#ebebeb</code></p><p>Grandes zones claires, filets.</p></div></li>
+        <li><div class="swatch" style="background:var(--danger-700)"></div><div class="swatch-info"><p><strong>danger-700</strong> <code>#b42318</code></p><p>Erreurs, toujours avec icône et mot « Erreur ». Sur white : 6,57:1 ; sur danger-050 : 5,75:1.</p></div></li>
+        <li><div class="swatch" style="background:var(--success-700)"></div><div class="swatch-info"><p><strong>success-700</strong> <code>#1e7a4c</code></p><p>Confirmations, avec icône et texte. Sur white : 5,33:1 ; sur success-050 : 4,75:1.</p></div></li>
+        <li><div class="swatch" style="background:var(--amber-500)"></div><div class="swatch-info"><p><strong>amber-500</strong> <code>#f18e00</code></p><p>Décoratif uniquement : 2,44:1 sur white, jamais en texte.</p></div></li>
+      </ul>
+      <h3>Typographie</h3>
+      <div class="table-wrap" role="region" aria-labelledby="cap-typo" tabindex="0">
+        <table class="table--wide">
+          <caption id="cap-typo">Styles typographiques</caption>
+          <thead><tr><th scope="col">Style</th><th scope="col">Famille</th><th scope="col">Taille / interligne</th><th scope="col">Usage</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">display</th><td>Poppins 500</td><td>50px / 61px</td><td>H1</td></tr>
+            <tr><th scope="row">heading-1</th><td>Poppins 500</td><td>44px / 56px</td><td>H2 de section</td></tr>
+            <tr><th scope="row">heading-2</th><td>Poppins 500</td><td>28px / 36px</td><td>H3, titres de bloc</td></tr>
+            <tr><th scope="row">heading-3</th><td>Montserrat 700</td><td>20,8px / 33,6px</td><td>Intertitres</td></tr>
+            <tr><th scope="row">body</th><td>Montserrat 400</td><td>16px / 26px</td><td>Texte courant</td></tr>
+            <tr><th scope="row">caption</th><td>Montserrat 400</td><td>14px / 20px</td><td>Aides, mentions (grey-600)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="caption">Ajout de la bibliothèque : sous 720px de large, les titres sont réduits (34, 30, 23 et 18px) pour éviter les coupures sur mobile.</p>
+      <h3>Espacements, rayons, bordures</h3>
+      <p><code>space-1</code> 8px · <code>space-2</code> 16px · <code>space-3</code> 24px · <code>space-4</code> 48px · <code>radius-none</code> 0 partout, <code>radius-full</code> pour les pastilles · <code>border-hairline</code> 1px · <code>border-strong</code> 2px (focus, erreur).</p>
+    </section>
+
+    <!-- DemoNotice -->
+    <section class="component" aria-labelledby="c-demonotice">
+      <h2 id="c-demonotice" class="heading-2" tabindex="-1">DemoNotice</h2>
+      <p><strong>Rôle</strong> : mention obligatoire en haut de chaque page, avant le contenu principal.</p>
+      <div class="example"><div class="demo-notice" role="note"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 8v5M9 5v1.5" stroke="currentColor" stroke-width="1.6"/></svg><p>Concept exploratoire réalisé dans le cadre d'une candidature, sans lien avec SIPLEC ni E.Leclerc. Données fictives.</p></div></div>
+      <p><strong>États</strong> : un seul, toujours visible, non refermable.</p>
+      <p><strong>Accessibilité</strong> : <code>role="note"</code>, placé après le lien d'évitement ; icône <code>aria-hidden</code> ; navy-900 sur orange-100 (10,79:1).</p>
+    </section>
+
+    <!-- Button -->
+    <section class="component" aria-labelledby="c-button">
+      <h2 id="c-button" class="heading-2" tabindex="-1">Button</h2>
+      <p><strong>Rôle</strong> : déclencher une action ou mener à l'étape suivante. Libellé avec un verbe explicite.</p>
+      <div class="example">
+        <div class="btn-row" style="margin-top:0">
+          <button type="button" class="btn btn--primary"><span>Découvrir l'offre</span><span class="btn__arrow"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><path d="M3 11 11 3M5 3h6v6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span></button>
+          <button type="button" class="btn btn--energie"><span>Préparer ma demande</span><span class="btn__arrow"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><path d="M3 11 11 3M5 3h6v6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span></button>
+          <button type="button" class="btn btn--secondary"><span>Comparer</span></button>
+          <button type="button" class="btn btn--secondary btn--small is-selected"><span>Dans ma sélection</span></button>
+          <button type="button" class="btn btn--secondary btn--small" disabled><span>Afficher la comparaison</span></button>
+        </div>
+      </div>
+      <p><strong>Variantes et états</strong> : primaire (blue-600, survol blue-500), énergie (orange-700, jamais orange-500 avec texte blanc), secondaire (contour blue-600), sélectionné (aplat navy-900 et libellé changé), désactivé, focus.</p>
+      <p><strong>Accessibilité</strong> : élément <code>&lt;button&gt;</code> natif pour une action, <code>&lt;a&gt;</code> pour une navigation ; hauteur minimale 44 à 48px ; flèche décorative <code>aria-hidden</code> ; contour de focus navy-900 de 2px décalé de 2px ; l'état « sélectionné » est porté par le libellé et annoncé par une zone <code>aria-live</code>, pas seulement par la couleur.</p>
+    </section>
+
+    <!-- TextLink -->
+    <section class="component" aria-labelledby="c-textlink">
+      <h2 id="c-textlink" class="heading-2" tabindex="-1">TextLink</h2>
+      <p><strong>Rôle</strong> : lien de navigation mis en avant, suivi d'une flèche oblique.</p>
+      <div class="example"><a class="text-link" href="cas-energie.html">Voir le cas énergie <svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><path d="M3 11 11 3M5 3h6v6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
+      <div class="example example--dark on-dark" style="background:var(--blue-600)"><a class="text-link" href="cas-non-alimentaire.html">Voir le cas non-alimentaire <svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><path d="M3 11 11 3M5 3h6v6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
+      <p><strong>Accessibilité</strong> : soulignement toujours visible ; intitulé explicite hors contexte ; lien externe signalé « (nouvelle fenêtre) » dans le nom accessible ; contour de focus blanc sur aplat coloré.</p>
+    </section>
+
+    <!-- SectorBlock -->
+    <section class="component" aria-labelledby="c-sectorblock">
+      <h2 id="c-sectorblock" class="heading-2" tabindex="-1">SectorBlock</h2>
+      <p><strong>Rôle</strong> : aplat qui présente un univers (énergie, non-alimentaire) sur la page d'accueil.</p>
+      <div class="sectors">
+        <div class="sector-block sector-block--energie on-dark"><p class="kicker">Exemple</p><p class="heading-3" style="margin:0">Univers énergie</p><p>Fond orange-700, texte white (4,95:1).</p></div>
+        <div class="sector-block sector-block--nonalim on-dark"><p class="kicker">Exemple</p><p class="heading-3" style="margin:0">Univers non-alimentaire</p><p>Fond blue-600, texte white (5,57:1).</p></div>
+      </div>
+      <p style="margin-top:var(--space-2)"><strong>Accessibilité</strong> : chaque bloc est une <code>section</code> nommée par son titre ; jamais de texte blanc sur orange-500 ; l'ordre de lecture suit l'ordre visuel malgré le décalage.</p>
+    </section>
+
+    <!-- Badge -->
+    <section class="component" aria-labelledby="c-badge">
+      <h2 id="c-badge" class="heading-2" tabindex="-1">Badge</h2>
+      <p><strong>Rôle</strong> : qualifier un contenu (fictif, statut d'un contrôle, type de ticket).</p>
+      <div class="example">
+        <ul class="meta-list" aria-label="Exemples de badges">
+          <li><span class="badge">Produit fictif</span></li>
+          <li><span class="badge badge--navy">ENR-21 · Bug</span></li>
+          <li><span class="badge badge--success"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 16 16"><path d="M2 8.5 6 12l8-8" fill="none" stroke="currentColor" stroke-width="2.4"/></svg>Vérifié</span></li>
+          <li><span class="badge badge--todo">À faire</span></li>
+        </ul>
+      </div>
+      <p><strong>Accessibilité</strong> : le statut est toujours écrit en toutes lettres ; la couleur n'en est qu'un renfort.</p>
+    </section>
+
+    <!-- Field -->
+    <section class="component" aria-labelledby="c-field">
+      <h2 id="c-field" class="heading-2" tabindex="-1">Field</h2>
+      <p><strong>Rôle</strong> : saisie d'une information, avec libellé visible, aide facultative et message d'erreur explicite.</p>
+      <div class="example form">
+        <div class="field">
+          <label for="ds-surface">Surface approximative du site, en m²</label>
+          <input type="text" id="ds-surface" aria-describedby="ds-surface-aide" value="1200">
+          <p class="field__hint" id="ds-surface-aide">Une estimation suffit.</p>
+        </div>
+        <div class="field field--error">
+          <label for="ds-email">E-mail professionnel</label>
+          <input type="email" id="ds-email" aria-invalid="true" aria-describedby="ds-email-erreur" value="jean.dupont@">
+          <p class="field__error" id="ds-email-erreur"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 4v5M8 11v1.5" stroke="currentColor" stroke-width="1.6"/></svg><span>Erreur : saisissez une adresse complète, par exemple nom@entreprise.fr</span></p>
+        </div>
+        <fieldset>
+          <legend>Comment préférez-vous être recontacté ?</legend>
+          <div class="choice"><input type="radio" id="ds-r1" name="ds-r"><label for="ds-r1">Par e-mail</label></div>
+          <div class="choice"><input type="radio" id="ds-r2" name="ds-r"><label for="ds-r2">Par téléphone</label></div>
+        </fieldset>
+      </div>
+      <p><strong>États</strong> : par défaut, focus, rempli, erreur, facultatif (mention « (facultatif) » dans le libellé).</p>
+      <p><strong>Accessibilité</strong> : <code>label for</code> ; aide et erreur reliées par <code>aria-describedby</code> ; <code>aria-invalid="true"</code> en erreur ; champs liés dans <code>fieldset</code> + <code>legend</code> ; attribut <code>autocomplete</code> pour les données personnelles ; l'erreur n'apparaît qu'à la validation, puis disparaît dès que la saisie est correcte.</p>
+    </section>
+
+    <!-- Erreurs -->
+    <section class="component" aria-labelledby="c-errors">
+      <h2 id="c-errors" class="heading-2" tabindex="-1">Messages d'erreur</h2>
+      <p><strong>Rôle</strong> : résumé des erreurs en haut de l'étape, en plus du message sous chaque champ.</p>
+      <div class="example">
+        <div class="error-summary">
+          <p class="error-summary__title"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 4v5M8 11v1.5" stroke="currentColor" stroke-width="1.6"/></svg><span>2 erreurs à corriger avant de continuer</span></p>
+          <ul>
+            <li><a href="#ds-email">E-mail professionnel : saisissez une adresse complète, par exemple nom@entreprise.fr</a></li>
+            <li><a href="#ds-surface">Surface approximative du site : indiquez une surface approximative, par exemple 1200.</a></li>
+          </ul>
+        </div>
+      </div>
+      <p><strong>Accessibilité</strong> : le résumé reçoit le focus à la validation, ce qui le fait lire ; chaque lien place le focus dans le champ concerné ; le message dit comment corriger, avec un exemple de format.</p>
+    </section>
+
+    <!-- Stepper -->
+    <section class="component" aria-labelledby="c-stepper">
+      <h2 id="c-stepper" class="heading-2" tabindex="-1">Stepper</h2>
+      <p><strong>Rôle</strong> : indiquer la progression dans un formulaire en étapes.</p>
+      <div class="example">
+        <ol class="stepper" aria-label="Exemple de progression">
+          <li class="is-done"><span class="stepper__dot" aria-hidden="true">✓</span><span>1. Votre besoin <span class="visually-hidden">(terminée)</span></span></li>
+          <li class="is-current" aria-current="step"><span class="stepper__dot" aria-hidden="true">2</span><span>2. Votre projet <span class="visually-hidden">(en cours)</span></span></li>
+          <li class="is-todo"><span class="stepper__dot" aria-hidden="true">3</span><span>3. Vos coordonnées <span class="visually-hidden">(à venir)</span></span></li>
+        </ol>
+        <p class="stepper-status" style="margin:0">Étape 2 sur 3 : votre projet</p>
+      </div>
+      <p><strong>États</strong> : terminée (navy-900 et coche), en cours (blue-600, texte en gras), à venir (contour grey-600).</p>
+      <p><strong>Accessibilité</strong> : liste ordonnée ; numéro et nom de l'étape en texte ; état restitué en texte masqué et par <code>aria-current="step"</code> ; changement d'étape annoncé dans une zone <code>aria-live="polite"</code> et focus placé sur le titre de l'étape.</p>
+    </section>
+
+    <!-- ProductCard -->
+    <section class="component" aria-labelledby="c-productcard">
+      <h2 id="c-productcard" class="heading-2" tabindex="-1">ProductCard</h2>
+      <p><strong>Rôle</strong> : présenter un produit du showroom et donner accès à la fiche, à la comparaison et à la sélection.</p>
+      <div class="example" style="max-width:340px">
+        <article class="product-card" aria-labelledby="ds-pc">
+          <div class="product-card__visual"><img src="assets/img/produits/salon-brise.svg" alt="Illustration schématique : une table entourée de deux chaises." width="160" height="110"></div>
+          <span class="badge">Produit fictif</span>
+          <h3 id="ds-pc" style="font:700 18px/26px var(--font-sans);margin:8px 0 0">Salon de jardin « Brise »</h3>
+          <p class="product-card__usage">Mobilier · Terrasse, Jardin</p>
+          <div class="product-card__actions">
+            <button type="button" class="btn-link">Voir la fiche<span class="visually-hidden"> : Salon de jardin « Brise »</span></button>
+            <div class="choice"><input type="checkbox" id="ds-cmp"><label for="ds-cmp">Comparer<span class="visually-hidden"> Salon de jardin « Brise »</span></label></div>
+            <button type="button" class="btn btn--secondary btn--small btn--block"><span>Ajouter à ma sélection</span></button>
+          </div>
+        </article>
+      </div>
+      <p><strong>Accessibilité</strong> : carte <code>article</code> nommée par son titre ; visuel neutre avec alternative textuelle ; vraie case à cocher pour « Comparer » ; actions complétées par le nom du produit en texte masqué pour être compréhensibles hors contexte ; ajout à la sélection annoncé en <code>aria-live</code> ; badge « Produit fictif » obligatoire, jamais de prix, stock ni certification inventés.</p>
+    </section>
+
+    <!-- Disclosure -->
+    <section class="component" aria-labelledby="c-disclosure">
+      <h2 id="c-disclosure" class="heading-2" tabindex="-1">Disclosure</h2>
+      <p><strong>Rôle</strong> : replier les explications détaillées pour une lecture rapide ; utilisé pour la FAQ et les détails des cas.</p>
+      <div class="example">
+        <details class="disclosure">
+          <summary>Exemple de section repliable <span class="disclosure__hint">Ouvrir pour lire le détail</span></summary>
+          <div class="disclosure__body"><p>Le contenu détaillé s'affiche à la demande.</p></div>
+        </details>
+      </div>
+      <p><strong>Accessibilité</strong> : éléments natifs <code>details</code> et <code>summary</code> (activables au clavier avec Entrée ou Espace, état ouvert ou fermé restitué nativement) ; signe « + » ou « − » en plus de l'état natif.</p>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer on-dark">
+  <div class="container">
+    <p><strong>Caroline Camilleri</strong> – Responsable projets marketing digital</p>
+    <ul>
+      <li><a href="https://www.linkedin.com/in/caroline-camilleri-pro/" target="_blank" rel="noopener">LinkedIn<span class="visually-hidden"> (nouvelle fenêtre)</span></a></li>
+      <li><a href="mailto:camilleri.caro@gmail.com">camilleri.caro@gmail.com</a></li>
+      <li><a href="index.html">Retour à l'accueil</a></li>
+    </ul>
+    <p class="caption" style="color:var(--white)">Concept exploratoire, sans lien avec SIPLEC ni E.Leclerc. Données fictives. Aucun traceur, aucune donnée collectée.</p>
+  </div>
+</footer>
+</body>
+</html>

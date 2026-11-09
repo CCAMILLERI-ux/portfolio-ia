@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cas non-alimentaire : présenter une gamme et faciliter la sélection – Portfolio Caroline Camilleri</title>
+<meta name="description" content="Cas exploratoire : showroom professionnel d'une gamme saisonnière fictive d'équipement extérieur, avec recherche, filtres, fiches, comparaison et sélection. Données fictives.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Poppins:wght@500&display=swap">
+<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<nav class="skip-links" aria-label="Accès rapide">
+  <a href="#contenu">Aller au contenu</a>
+</nav>
+
+<header class="site-header">
+  <div class="demo-notice" role="note">
+    <div class="demo-notice__inner">
+      <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 8v5M9 5v1.5" stroke="currentColor" stroke-width="1.6"/></svg>
+      <p>Concept exploratoire réalisé dans le cadre d'une candidature, sans lien avec SIPLEC ni E.Leclerc. Données fictives.</p>
+    </div>
+  </div>
+  <div class="container site-header__inner">
+    <a class="site-name" href="index.html">Caroline Camilleri<span>Portfolio de candidature</span></a>
+    <nav class="site-nav" aria-label="Navigation principale">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="cas-energie.html">Cas énergie</a></li>
+        <li><a href="cas-non-alimentaire.html" aria-current="page">Cas non-alimentaire</a></li>
+        <li><a href="design-system.html">Composants</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="contenu" tabindex="-1">
+  <div class="container">
+    <section class="page-intro" aria-labelledby="titre-page">
+      <ul class="meta-list" aria-label="Caractéristiques du cas">
+        <li><span class="badge badge--navy">Cas 2 · parcours clé</span></li>
+        <li><span class="badge">Produits fictifs</span></li>
+      </ul>
+      <h1 id="titre-page">Non-alimentaire : présenter une gamme <span class="accent-blue">et faciliter la sélection</span></h1>
+      <p class="lead">Un showroom professionnel pour qu'un acheteur ou un responsable de rayon comprenne une petite gamme saisonnière, compare les références et prépare sa sélection.</p>
+      <p class="caption">Sujet exploratoire : une gamme printemps d'équipement extérieur. Produits, caractéristiques et documents sont inventés pour la démonstration ; aucun prix, stock ni certification n'est indiqué.</p>
+    </section>
+
+    <section class="section" aria-labelledby="offre" style="padding-top:0">
+      <h2 id="offre" class="section-title" tabindex="-1">Fiche offre <span class="accent-slate">courte</span></h2>
+      <dl class="offer-sheet" aria-label="Fiche offre non-alimentaire (exemple)">
+        <dt>Cible</dt>
+        <dd>Acheteur ou responsable de rayon d'un magasin, qui prépare la saison printemps.</dd>
+        <dt>Besoin</dt>
+        <dd>Comprendre rapidement la gamme, comparer les références entre elles et constituer une sélection à discuter.</dd>
+        <dt>Promesse</dt>
+        <dd>Toute l'information utile sur la gamme au même endroit, et une demande d'information préparée en quelques clics.</dd>
+        <dt>Message clé</dt>
+        <dd>« Comparez la gamme printemps et préparez votre sélection. »</dd>
+        <dt>Objectif</dt>
+        <dd>Aider le professionnel à comprendre la gamme, comparer les références et préparer sa sélection ; transmettre aux équipes commerciales des demandes d'information précises.</dd>
+      </dl>
+    </section>
+
+    <section class="section" aria-labelledby="showroom" style="padding-top:0">
+      <h2 id="showroom" class="section-title" tabindex="-1">Prototype : <span class="accent-slate">le showroom professionnel</span></h2>
+      <p class="measure">Parcours clé : rechercher, filtrer, ouvrir une fiche, comparer, ajouter à sa sélection, puis préparer une demande d'information. <strong>Aucune donnée n'est envoyée ni conservée.</strong></p>
+
+      <div class="demo-frame">
+        <div class="demo-frame__bar on-dark">
+          <p><strong>Prototype</strong> · Espace professionnel (fictif)</p>
+          <p>Aucune donnée envoyée</p>
+        </div>
+        <div class="demo-frame__body">
+          <h3>Gamme printemps extérieur <span class="accent-slate">(fictive)</span></h3>
+          <p>Six références pour la terrasse, le jardin et le balcon.</p>
+          <noscript><p class="callout">Le showroom de démonstration nécessite JavaScript.</p></noscript>
+
+          <div class="showroom">
+            <div class="filters" role="search" aria-label="Rechercher et filtrer la gamme">
+              <div class="field">
+                <label for="recherche">Rechercher un produit</label>
+                <input type="search" id="recherche" aria-describedby="recherche-aide">
+                <p class="field__hint" id="recherche-aide">Par nom ou usage. Exemple : parasol</p>
+              </div>
+              <fieldset>
+                <legend>Catégorie</legend>
+                <div id="filtres-categorie"></div>
+              </fieldset>
+              <fieldset>
+                <legend>Usage</legend>
+                <div id="filtres-usage"></div>
+              </fieldset>
+              <button type="button" class="btn-link" id="reset-filtres">Réinitialiser la recherche et les filtres</button>
+            </div>
+
+            <div>
+              <p class="result-count" id="nb-resultats" aria-live="polite"></p>
+              <ul class="product-grid" id="produits" aria-label="Produits de la gamme"></ul>
+              <p class="visually-hidden" id="annonces" aria-live="polite"></p>
+
+              <section class="panel" aria-labelledby="titre-comparaison">
+                <h4 id="titre-comparaison" tabindex="-1">Comparaison <span id="nb-comparaison">(0 produit sur 3 maximum)</span></h4>
+                <p id="comparaison-aide">Cochez « Comparer » sur deux ou trois produits, puis affichez le tableau.</p>
+                <button type="button" class="btn btn--secondary btn--small" id="afficher-comparaison" disabled><span>Afficher la comparaison</span></button>
+                <div id="comparaison" hidden></div>
+              </section>
+
+              <section class="panel" aria-labelledby="titre-selection">
+                <h4 id="titre-selection" tabindex="-1">Ma sélection <span id="nb-selection">(vide)</span></h4>
+                <p id="selection-vide">Ajoutez des produits avec « Ajouter à ma sélection » pour préparer une demande d'information.</p>
+                <ul class="selection-list" id="selection"></ul>
+                <button type="button" class="btn btn--primary btn--small" id="preparer-demande" hidden><span>Préparer ma demande d'information</span><span class="btn__arrow"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><path d="M3 11 11 3M5 3h6v6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span></button>
+
+                <div id="zone-demande" hidden>
+                  <h5 class="heading-3" id="titre-demande" tabindex="-1" style="margin-top:var(--space-3)">Demande d'information sur ma sélection</h5>
+                  <form id="form-showroom" class="form" novalidate data-confirmation="confirmation-showroom">
+                    <div data-error-summary hidden></div>
+                    <p>Produits concernés : <strong id="demande-produits"></strong></p>
+                    <div class="field">
+                      <label for="s-nom">Nom et prénom</label>
+                      <input type="text" id="s-nom" name="nom" autocomplete="name" data-validate data-required data-error-required="indiquez votre nom et votre prénom.">
+                    </div>
+                    <div class="field">
+                      <label for="s-magasin">Magasin</label>
+                      <input type="text" id="s-magasin" name="magasin" autocomplete="organization" aria-describedby="s-magasin-aide" data-validate data-required data-error-required="indiquez le nom ou la ville de votre magasin.">
+                      <p class="field__hint" id="s-magasin-aide">Nom ou ville du magasin.</p>
+                    </div>
+                    <div class="field">
+                      <label for="s-email">E-mail professionnel</label>
+                      <input type="email" id="s-email" name="email" autocomplete="email" data-validate data-required data-rule="email" data-error-required="indiquez votre adresse e-mail professionnelle." data-error-format="saisissez une adresse complète, par exemple nom@magasin.fr">
+                    </div>
+                    <fieldset id="s-objet" data-validate data-required data-error-required="choisissez au moins un objet pour votre demande.">
+                      <legend>Objet de la demande</legend>
+                      <div class="choice"><input type="checkbox" id="s-objet-1" name="objet" value="Conditions"><label for="s-objet-1">Conditions et disponibilités</label></div>
+                      <div class="choice"><input type="checkbox" id="s-objet-2" name="objet" value="Documents"><label for="s-objet-2">Documents techniques</label></div>
+                      <div class="choice"><input type="checkbox" id="s-objet-3" name="objet" value="Animation"><label for="s-objet-3">Kit d'animation en magasin</label></div>
+                    </fieldset>
+                    <div class="field">
+                      <label for="s-message">Précisions <span class="req">(facultatif)</span></label>
+                      <textarea id="s-message" name="message" maxlength="500"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn--primary"><span>Envoyer ma demande (démonstration)</span><span class="btn__arrow"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><path d="M3 11 11 3M5 3h6v6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span></button>
+                  </form>
+                  <div id="confirmation-showroom" hidden>
+                    <div class="alert alert--success">
+                      <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M5.5 10.5 8.5 13.5 14.5 7" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+                      <div>
+                        <p tabindex="-1"><strong>Demande préparée (démonstration).</strong></p>
+                        <p>Sur un espace réel, elle serait transmise à l'équipe commerciale. Ici, rien n'a été envoyé ni conservé.</p>
+                      </div>
+                    </div>
+                    <button type="button" class="btn btn--secondary btn--small" data-reset><span>Recommencer la demande</span></button>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <dialog class="product-dialog" id="fiche" aria-labelledby="fiche-titre">
+        <div class="product-dialog__head">
+          <div>
+            <span class="badge">Produit fictif</span>
+            <h3 id="fiche-titre" class="heading-2" style="margin:var(--space-1) 0 0"></h3>
+          </div>
+          <button type="button" class="btn btn--secondary btn--small" id="fermer-fiche"><span>Fermer<span class="visually-hidden"> la fiche</span></span></button>
+        </div>
+        <div class="product-dialog__body" id="fiche-contenu"></div>
+      </dialog>
+    </section>
+
+    <section class="section" aria-labelledby="kit" style="padding-top:0">
+      <h2 id="kit" class="section-title" tabindex="-1">Kit d'animation <span class="accent-slate">commerciale (aperçu)</span></h2>
+      <p class="measure">Un kit simple pour accompagner la mise en avant de la gamme en magasin, téléchargeable depuis le showroom sur un espace réel. Gabarits fictifs.</p>
+      <ul class="kit-grid">
+        <li><figure><img src="assets/img/kit/affiche.svg" alt="Affiche format A3 sur fond bleu : « Le printemps s'installe dehors ». Illustration d'une table sous un parasol. Mobilier, ombrage, jardinage." width="210" height="297"><figcaption><strong>Affiche A3</strong> : annonce de la gamme en entrée de rayon.</figcaption></figure></li>
+        <li><figure><img src="assets/img/kit/stop-rayon.svg" alt="Stop-rayon : « Nouveau : la gamme printemps extérieur. Demandez conseil à notre équipe. »" width="300" height="120"><figcaption><strong>Stop-rayon</strong> : signalétique au plus près des produits.</figcaption></figure></li>
+        <li><figure><img src="assets/img/kit/argumentaire.svg" alt="Gabarit de fiche argumentaire vendeur en quatre rubriques : pour qui, trois arguments clés, questions fréquentes, ventes associées." width="210" height="297"><figcaption><strong>Fiche argumentaire</strong> : aide pour les équipes de vente.</figcaption></figure></li>
+      </ul>
+      <h3 class="heading-3">Mise en place suggérée</h3>
+      <ol class="measure">
+        <li>Les équipes commerciales présentent le kit lors du lancement de la gamme.</li>
+        <li>Le magasin choisit les supports dans le showroom et les commande ou les imprime.</li>
+        <li>Un retour photo ou un court questionnaire permet de suivre la mise en place.</li>
+      </ol>
+    </section>
+
+    <section class="section" aria-labelledby="details-cas2" style="padding-top:0">
+      <h2 id="details-cas2" class="section-title" tabindex="-1">Choix, accessibilité <span class="accent-slate">et pilotage</span></h2>
+      <details class="disclosure">
+        <summary>Les principaux choix UX</summary>
+        <div class="disclosure__body measure">
+          <ul>
+            <li><strong>Recherche et filtres au même endroit</strong>, avec le nombre de résultats annoncé à chaque changement.</li>
+            <li><strong>Des filtres par usage autant que par catégorie</strong> : un acheteur raisonne aussi en emplacement (terrasse, balcon, jardin).</li>
+            <li><strong>La comparaison limitée à trois produits</strong> : au-delà, le tableau devient illisible sur mobile.</li>
+            <li><strong>Une sélection qui débouche sur une demande</strong> : la sélection n'est pas une fin en soi, elle prépare l'échange commercial.</li>
+            <li><strong>Des fiches en fenêtre de dialogue</strong> : on consulte le détail sans perdre sa position dans la liste.</li>
+          </ul>
+        </div>
+      </details>
+      <details class="disclosure">
+        <summary>Accessibilité (RGAA)</summary>
+        <div class="disclosure__body">
+          <p class="measure">Référentiel <strong>RGAA 4.1.2</strong>. Même méthode que pour le cas énergie (script Playwright, axe-core 4.14.0), le 29 octobre 2026. Quelques critères seulement : <strong>pas de conformité ni de taux annoncés</strong>.</p>
+<div class="table-wrap" role="region" aria-labelledby="cap-rgaa-2" tabindex="0">
+  <table class="table--wide">
+    <caption id="cap-rgaa-2">Contrôles RGAA réalisés (showroom)</caption>
+    <thead><tr><th scope="col">Critère RGAA 4.1.2</th><th scope="col">Élément concerné</th><th scope="col">Méthode de test</th><th scope="col">Mise en œuvre ou correction</th><th scope="col">Résultat vérifié</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">1.1, 1.3 Image porteuse d'information avec alternative pertinente</th><td>Illustrations des six produits et des trois supports du kit</td><td>Script (attribut <code>alt</code> présent) ; relecture des textes</td><td>Alternative décrivant l'illustration ; pour les supports du kit, l'alternative reprend le texte visible dans l'image</td><td><span class="badge badge--success">Vérifié</span> 9 images, toutes avec alternative</td></tr>
+      <tr><th scope="row">1.2 Image de décoration ignorée</th><td>Pictogrammes (flèches, coches, alertes)</td><td>Script : SVG sans <code>aria-hidden</code> ni <code>role="img"</code></td><td><code>aria-hidden="true"</code> sur chaque pictogramme qui double un texte</td><td><span class="badge badge--success">Vérifié</span> 0 SVG non masqué</td></tr>
+      <tr><th scope="row">7.3 Script contrôlable au clavier</th><td>Recherche, filtres, fiche, comparaison, sélection, demande</td><td>Parcours complet au clavier seul à 1280px et 375px</td><td>Éléments natifs ; fiche dans un <code>dialog</code> modal natif, fermeture par Échap et retour du focus sur le bouton d'origine</td><td><span class="badge badge--success">Vérifié</span> parcours réalisé de bout en bout ; focus maintenu dans la fiche ouverte</td></tr>
+      <tr><th scope="row">7.5 Messages de statut</th><td>Nombre de résultats, ajout ou retrait de la sélection et de la comparaison, limite de trois produits</td><td>Script : contenu des zones <code>aria-live</code> après chaque action</td><td>Zones <code>aria-live="polite"</code> ; le libellé du bouton devient « Dans ma sélection »</td><td><span class="badge badge--success">Vérifié (code et DOM)</span> annonces à tester avec un lecteur d'écran</td></tr>
+      <tr><th scope="row">5.6, 5.7 En-têtes du tableau de données</th><td>Tableau de comparaison</td><td>axe-core ; lecture du code</td><td><code>caption</code>, <code>th scope="col"</code> (produits) et <code>scope="row"</code> (caractéristiques)</td><td><span class="badge badge--success">Vérifié</span> 0 violation axe</td></tr>
+      <tr><th scope="row">11.1, 11.5, 11.10 Étiquettes, regroupements, contrôle de saisie</th><td>Recherche, filtres, formulaire de demande</td><td>Script : envoi vide puis complété</td><td>Libellés visibles ; filtres en <code>fieldset</code> et <code>legend</code> ; cases « Comparer » complétées du nom du produit en texte masqué</td><td><span class="badge badge--success">Vérifié</span> 4 erreurs signalées sur la demande vide, confirmation après correction</td></tr>
+      <tr><th scope="row">10.7 et 12.7 Focus visible, lien d'évitement</th><td>Page entière</td><td>Script de tabulation</td><td>Voir le cas énergie</td><td><span class="badge badge--success">Vérifié</span></td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Restant à faire :</strong> restitution avec des lecteurs d'écran (dont le <code>dialog</code> sur iOS), zoom à 200 %, revue de la pertinence des alternatives par une personne qui ne connaît pas le projet, audit complet par un auditeur.</p>
+        </div>
+      </details>
+      <details class="disclosure">
+        <summary>Visibilité : recherche interne d'abord</summary>
+        <div class="disclosure__body measure">
+          <ul>
+            <li><strong>Espace professionnel privé</strong> : il n'a pas vocation à être indexé. La protection repose sur l'authentification ; une directive robots.txt ne suffit pas à empêcher l'indexation. Ajouter <code>noindex</code> par sécurité et ne pas inclure ces pages dans le sitemap.</li>
+            <li><strong>Recherche interne</strong> : synonymes métier (« voile d'ombrage » pour « parasol »), tolérance aux fautes, suggestions ; suivi des recherches sans résultat pour enrichir les fiches.</li>
+            <li><strong>Information produit</strong> : caractéristiques structurées et homogènes entre fiches, pour que filtres et comparaison restent fiables.</li>
+            <li><strong>SEO/GEO</strong> : réservé à une éventuelle page publique présentant la gamme et le principe du showroom, avec un appel à l'action vers la connexion.</li>
+          </ul>
+        </div>
+      </details>
+      <details class="disclosure">
+        <summary>Questions de test du showroom</summary>
+        <div class="disclosure__body measure">
+          <p>Même protocole que pour le cas énergie, avec deux à trois responsables de rayon :</p>
+          <ol>
+            <li>« Trouvez les produits adaptés à un balcon. »</li>
+            <li>« Comparez les deux salons et dites lequel conviendrait à votre magasin, et pourquoi. »</li>
+            <li>« Préparez une demande d'information pour trois produits. »</li>
+          </ol>
+          <p>À observer : compréhension des filtres, utilité perçue de la comparaison, informations manquantes sur les fiches.</p>
+        </div>
+      </details>
+      <details class="disclosure">
+        <summary>Lancement et indicateurs <span class="disclosure__hint">Aucun objectif chiffré sans état initial</span></summary>
+        <div class="disclosure__body">
+          <p class="measure"><strong>Lancement</strong> : présentation aux équipes commerciales, annonce aux magasins (e-mailing, réunion), mise à disposition du kit ; point hebdomadaire sur les demandes reçues pendant la saison.</p>
+          <div class="table-wrap" role="region" aria-labelledby="cap-ga4-2" tabindex="0">
+            <table class="table--wide">
+              <caption id="cap-ga4-2">Indicateurs et événements GA4 à paramétrer (proposition)</caption>
+              <thead><tr><th scope="col">Indicateur</th><th scope="col">Événement</th><th scope="col">Paramètres</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Consultation des fiches</th><td><code>view_item</code></td><td><code>item_id</code>, <code>item_category</code></td></tr>
+                <tr><th scope="row">Usage de la recherche et des filtres</th><td><code>search</code>, <code>filtre_applique</code></td><td><code>search_term</code>, <code>filtre</code>, nombre de résultats</td></tr>
+                <tr><th scope="row">Utilisation de la comparaison</th><td><code>comparaison_affichee</code></td><td>nombre de produits</td></tr>
+                <tr><th scope="row">Sélections</th><td><code>selection_ajout</code>, <code>selection_retrait</code></td><td><code>item_id</code></td></tr>
+                <tr><th scope="row">Demandes d'information</th><td><code>generate_lead</code></td><td>nombre de produits, objet</td></tr>
+                <tr><th scope="row">Kit d'animation</th><td><code>kit_telechargement</code></td><td>support</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="measure"><strong>Hotjar</strong> : carte de chaleur de la grille et des filtres, enregistrements du parcours sélection → demande, champs masqués et après consentement. Ce portfolio n'embarque aucun de ces outils.</p>
+        </div>
+      </details>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer on-dark">
+  <div class="container">
+    <p><strong>Caroline Camilleri</strong> – Responsable projets marketing digital</p>
+    <ul>
+      <li><a href="https://www.linkedin.com/in/caroline-camilleri-pro/" target="_blank" rel="noopener">LinkedIn<span class="visually-hidden"> (nouvelle fenêtre)</span></a></li>
+      <li><a href="mailto:camilleri.caro@gmail.com">camilleri.caro@gmail.com</a></li>
+      <li><a href="design-system.html">Voir la bibliothèque de composants</a></li>
+    </ul>
+    <p class="caption" style="color:var(--white)">Concept exploratoire, sans lien avec SIPLEC ni E.Leclerc. Données fictives. Aucun traceur, aucune donnée collectée.</p>
+  </div>
+</footer>
+<script src="assets/js/forms.js"></script>
+<script src="assets/js/showroom.js"></script>
+</body>
+</html>

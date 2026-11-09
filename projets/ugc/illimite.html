@@ -1,0 +1,1033 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Souscription UGC Illimité</title>
+<meta name="description" content="Prototype de candidature — non officiel. Parcours de souscription UGC Illimité, Caroline Camilleri.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Barlow+Condensed:wght@400;500;600&display=swap">
+<style>
+/* Tokens : UGC-DESIGN-SYSTEM.md (§3 couleurs, §5 espacements, §7 rayons) + valeurs relevées sur les captures de ugc.fr
+   (rouge des CTA, gris des champs, capitales condensées). Police du site non disponible librement : Barlow Condensed la remplace. */
+:root{
+  --ugc-navy:#061A55; --ugc-blue:#123B9B; --ugc-electric-blue:#1769E0; --ugc-light-blue:#35B9E9;
+  --white:#FFFFFF; --background:#F5F6F8; --surface-subtle:#F0F2F5;
+  --text-primary:#10131A; --text-secondary:#60646C; --text-muted:#858A94;
+  --border:#E2E5EA; --border-strong:#C7CBD2;
+  --success:#18794E; --warning:#A15C00; --error:#C62828;
+  --red:#B40000; --red-dark:#8E0000; --grey:#E8EAF0; --page-navy:#00134C;
+  /* relevés sur la capture de ugc.fr */
+  --site-navy:#00134C; --nav-grey:#F1F2F6; --panel-grey:#DADBE6; --info-grey:#E4E5EB; --info-blue:#1BA1E8;
+  --radius-btn:6px; --radius-card:10px; --radius-panel:16px;
+
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-6:24px; --space-8:32px; --space-12:48px; --space-16:64px;
+  --radius-xs:2px; --radius-sm:4px; --radius-md:8px; --radius-pill:999px;
+  --shadow-card:0 4px 16px rgba(0,0,0,.08);
+  --focus-ring:0 0 0 3px rgba(23,105,224,.25);
+  --duration-fast:120ms; --duration-normal:200ms;
+
+  --font:"Inter", Arial, Helvetica, sans-serif;
+  --cond:"Barlow Condensed", "Arial Narrow", Arial, sans-serif;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0; background:var(--white); color:var(--text-primary); font:400 16px/24px var(--font)}
+h1,h2,h3,h4,p{margin:0}
+/* Site simulé : police condensée partout, comme sur ugc.fr ; la note produit reste en Inter */
+.site{--font:var(--cond)}
+.site .input,.site select.input{font-size:17px}
+button,input,select{font:inherit}
+.icon{width:20px; height:20px; flex:none; fill:none; stroke:currentColor; stroke-width:1.75; stroke-linecap:round; stroke-linejoin:round}
+.icon-sm{width:16px; height:16px}
+:focus-visible{outline:3px solid var(--ugc-electric-blue); outline-offset:2px}
+.sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0}
+.wrap{max-width:1180px; margin:0 auto; padding:0 var(--space-4)}
+
+/* ---------- Bandeau portfolio (hors site simulé) ---------- */
+.folio{background:var(--background); border-bottom:1px solid var(--border); font:400 13px/18px var(--font); color:var(--text-secondary)}
+.folio .wrap{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:var(--space-2) var(--space-4); padding-top:var(--space-2); padding-bottom:var(--space-2)}
+.folio nav{display:flex; flex-wrap:wrap; gap:var(--space-1) var(--space-4)}
+.folio a{color:var(--ugc-blue); font-weight:600; text-decoration:none}
+.folio a:hover{text-decoration:underline}
+.folio a[aria-current="page"]{color:var(--text-primary); text-decoration:none; cursor:default}
+
+/* ---------- En-tête ugc.fr ---------- */
+.top{background:var(--site-navy); color:var(--white)}
+.top .wrap{display:flex; align-items:center; justify-content:space-between; gap:var(--space-4); height:64px}
+.logo-slot{display:inline-flex; align-items:center; height:36px; padding:0 var(--space-4); border:1px dashed rgba(255,255,255,.6); border-radius:var(--radius-xs); font:700 12px/16px var(--font); letter-spacing:.08em}
+.tools{display:flex; gap:var(--space-1)}
+.tool{display:grid; justify-items:center; gap:2px; min-width:44px; padding:var(--space-1) var(--space-2); font:600 11px/14px var(--cond); letter-spacing:.04em; text-transform:uppercase}
+.tool span{display:none}
+.tool.on{color:var(--ugc-light-blue)}
+.nav{background:var(--nav-grey)}
+.nav ul{display:flex; gap:var(--space-8); margin:0; padding:0; list-style:none; overflow-x:auto; scrollbar-width:none; font:500 14px/20px var(--cond); letter-spacing:.03em; text-transform:uppercase; color:var(--ugc-navy)}
+.nav li{padding:var(--space-3) 0; border-bottom:3px solid transparent; white-space:nowrap}
+.crumb{font:500 13px/18px var(--cond); letter-spacing:.03em; text-transform:uppercase; color:#8A93B2; padding-top:var(--space-3); padding-bottom:var(--space-3)}
+.crumb ol{display:flex; flex-wrap:wrap; align-items:center; gap:var(--space-1); margin:0; padding:0; list-style:none}
+.crumb .icon{width:16px; height:16px; margin-right:var(--space-2); color:var(--site-navy)}
+.crumb li:first-child::before,.crumb li:nth-child(2)::before{content:none}
+.crumb li+li::before{content:"/"; margin-right:var(--space-1)}
+.crumb [aria-current]{color:var(--site-navy); font-weight:600}
+
+/* ---------- Éléments communs ---------- */
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:var(--space-2); min-height:48px; padding:0 var(--space-6); border-radius:var(--radius-btn);
+  font:600 16px/20px var(--cond); letter-spacing:.06em; text-transform:uppercase; text-decoration:none; cursor:pointer;
+  transition:background var(--duration-fast), border-color var(--duration-fast), color var(--duration-fast)}
+.btn-primary{background:var(--red); border:2px solid var(--red); color:var(--white)}
+.btn-primary:hover{background:var(--red-dark); border-color:var(--red-dark)}
+.btn-primary:active{background:#8C0025; border-color:#8C0025}
+.btn-secondary{background:var(--white); border:2px solid var(--ugc-navy); color:var(--ugc-navy)}
+.btn-secondary:hover{background:var(--grey)}
+.btn-ghost{background:var(--grey); border:2px solid var(--grey); color:var(--ugc-navy)}
+.btn-ghost:hover{border-color:var(--ugc-navy)}
+.btn:disabled{background:var(--grey); border-color:var(--grey); color:var(--text-muted); cursor:not-allowed}
+.btn-block{width:100%}
+.link{background:none; border:0; padding:0; color:var(--ugc-blue); font:600 15px/20px var(--cond); letter-spacing:.04em; text-transform:uppercase; cursor:pointer; text-decoration:underline; text-underline-offset:3px}
+.h-cond{font:400 32px/36px var(--cond); text-transform:uppercase; color:var(--ugc-navy)}
+.label-k{font:600 13px/16px var(--cond); letter-spacing:.08em; text-transform:uppercase; color:var(--text-secondary)}
+.demo{display:inline-flex; align-items:center; gap:var(--space-1); padding:0 var(--space-2); border:1px dashed var(--warning); border-radius:var(--radius-xs); color:var(--warning); font:600 11px/18px var(--font); letter-spacing:.02em; vertical-align:2px; white-space:nowrap}
+.note{display:flex; gap:var(--space-2); align-items:flex-start; font:400 14px/20px var(--font); color:var(--text-secondary)}
+.note .icon{margin-top:2px}
+.alert{display:flex; gap:var(--space-3); padding:var(--space-4); border-radius:var(--radius-xs); font:400 14px/20px var(--font)}
+.alert .icon{margin-top:2px}
+.alert-info{background:#EAF2FD; border-left:4px solid var(--ugc-electric-blue)}
+.alert-error{background:#FDECEC; border-left:4px solid var(--error); color:var(--text-primary)}
+.alert-error .icon{color:var(--error)}
+.alert-error ul{margin:var(--space-1) 0 0; padding-left:20px}
+.alert-error a{color:var(--error); font-weight:600}
+
+/* ---------- Page offres (relevés sur la capture de ugc.fr/les-offres-ugc-illimite.html) ---------- */
+.offers{background:radial-gradient(ellipse 70% 360px at 50% 0,#0B3AA8 0%,rgba(11,58,168,0) 100%),var(--site-navy); color:var(--white); padding:var(--space-8) 0 var(--space-12)}
+.offers h1{font:400 30px/34px var(--cond); text-transform:uppercase; text-align:center; max-width:640px; margin:0 auto; letter-spacing:.01em; text-wrap:balance}
+.offers h1:focus{outline:none}
+.offers .intro{font:400 16px/21px var(--cond); text-align:center; color:#E1E6F5; max-width:560px; margin:var(--space-4) auto 0}
+.compare-link{display:flex; justify-content:flex-end; margin-top:var(--space-8)}
+.compare-link a{color:var(--white); font:600 13px/16px var(--cond); letter-spacing:.04em; text-transform:uppercase; text-underline-offset:3px}
+.grid{display:grid; grid-template-columns:minmax(0,1fr); gap:var(--space-4); margin-top:var(--space-3)}
+.offer{position:relative; display:flex; flex-direction:column; gap:var(--space-3); padding:var(--space-8) var(--space-4) var(--space-3); background:var(--white); color:var(--site-navy); border-radius:var(--radius-card); text-align:center}
+.offer .who{position:absolute; top:var(--space-2); right:var(--space-3); display:flex; color:var(--icon)}
+.offer .who svg{width:12px; height:20px}
+.offer .limited{position:absolute; top:var(--space-2); left:var(--space-3); padding:0 6px; background:#F1F2F6; border-radius:2px; font:500 10px/16px var(--cond); text-transform:uppercase; letter-spacing:.04em; color:var(--text-secondary)}
+.cardviz{justify-self:center; align-self:center; width:96px; aspect-ratio:1.586; border-radius:6px; background:linear-gradient(135deg,#0A1580,#00134C 60%,#1A2CC8); display:grid; place-items:center; box-shadow:0 6px 12px rgba(0,19,76,.35)}
+.offer .cardviz,.cmp-body .cardviz{transform:rotate(-6deg)}
+.cardviz span{border:1px dashed rgba(255,255,255,.6); border-radius:2px; padding:0 4px; font:700 8px/14px var(--cond); letter-spacing:.08em; color:var(--white)}
+.offer h2{font:400 19px/22px var(--cond); text-transform:uppercase; color:var(--site-navy); margin-top:var(--space-3)}
+.offer .tag{font:600 12px/16px var(--cond); letter-spacing:.04em; text-transform:uppercase; color:var(--accent)}
+.offer ul{list-style:none; margin:0; padding:var(--space-3) 0 0; border-top:1px solid #E4E5EB; display:grid; gap:var(--space-1); text-align:left; font:400 14px/18px var(--cond); color:#3A4466; flex:1; align-content:start}
+.offer li{display:flex; gap:var(--space-2)}
+.offer li .icon{width:15px; height:15px; color:var(--icon); stroke-width:3; margin-top:2px}
+.offer li b{font-weight:600; color:var(--site-navy)}
+.offer li .promo-perk{font-weight:600; text-transform:uppercase; text-decoration:underline; text-underline-offset:2px; color:var(--site-navy)}
+.offer sup,.fn{font-size:.7em; color:var(--info-blue); font-weight:600}
+.price-box{padding-top:var(--space-3); border-top:1px solid #E4E5EB}
+.price{font:600 26px/28px var(--cond); color:var(--site-navy)}
+.price sup{font:600 12px/1 var(--cond); color:var(--site-navy); vertical-align:10px; text-transform:uppercase}
+.price-sub{display:block; font:400 11px/15px var(--cond); color:var(--text-secondary); margin-top:2px}
+.offer-actions{display:grid; grid-template-columns:44px 1fr; gap:var(--space-2); margin-top:var(--space-1)}
+.info-btn{display:inline-flex; align-items:center; justify-content:center; width:44px; min-height:44px; border:0; border-radius:var(--radius-btn); background:var(--info-grey); color:var(--info-blue); cursor:pointer}
+.info-btn:hover{background:#D5D7E0}
+.offer .details{text-align:left; font:400 14px/18px var(--cond); color:var(--text-secondary)}
+/* Tuiles de mise en avant */
+.tile{border-radius:var(--radius-card); overflow:hidden; display:grid; place-items:center; text-align:center; padding:var(--space-8) var(--space-4); color:var(--white);
+  background:radial-gradient(ellipse at 60% 30%,#0D49C9 0%,#04238A 55%,#011560 100%); border:1px solid rgba(255,255,255,.12)}
+.tile-promo .k{font:600 18px/20px var(--cond); text-transform:uppercase}
+.tile-promo .m{font:400 30px/34px var(--cond); text-transform:uppercase; margin-top:var(--space-3)}
+.tile-promo .big{font:700 112px/96px var(--cond); letter-spacing:-.02em}
+.tile-promo .big sup{font-size:40px; vertical-align:52px}
+.tile-promo .big small{font-size:32px}
+.tile-promo .f{font:600 16px/20px var(--cond); text-transform:uppercase; color:#4FB4F5; margin-top:var(--space-2)}
+.tile-promo .hl{display:inline-block; padding:2px var(--space-2); background:#1BA1E8; font:600 16px/22px var(--cond); text-transform:uppercase; margin-top:var(--space-1)}
+.tile-promo .d{font:400 15px/20px var(--cond); text-transform:uppercase; margin-top:var(--space-3)}
+.tile-perks h3{font:700 30px/30px var(--cond); text-transform:uppercase}
+.tile-perks h3 span{color:#4FB4F5}
+.tile-perks ul{list-style:none; margin:var(--space-4) 0 0; padding:0; display:grid; gap:var(--space-3); font:600 13px/16px var(--cond); text-transform:uppercase}
+.tile-perks li .icon{display:block; margin:0 auto var(--space-1); color:#4FB4F5}
+.tile-perks .hl{display:inline-block; padding:1px var(--space-2); background:#1BA1E8}
+.tile-neon{position:relative; min-height:320px; background:radial-gradient(ellipse at 50% 40%,#0B2A8A 0%,#00134C 70%)}
+.tile-neon i{position:absolute; width:46%; aspect-ratio:1.586; border-radius:10px; border:3px solid var(--c); box-shadow:0 0 12px var(--c),inset 0 0 10px var(--c); background:rgba(0,19,76,.7)}
+/* Comment m'abonner */
+.howto{margin-top:var(--space-12); display:grid; gap:var(--space-6); padding:var(--space-6); background:var(--panel-grey); border-radius:var(--radius-panel); color:var(--site-navy)}
+.howto h2{font:400 24px/28px var(--cond); text-transform:uppercase}
+.howto-cards{display:grid; gap:var(--space-4)}
+.howto-card{display:grid; justify-items:center; gap:var(--space-2); padding:var(--space-6) var(--space-4); background:var(--white); border-radius:var(--radius-card); text-align:center}
+.howto-card .ico{display:grid; place-items:center; width:56px; height:56px; border-radius:var(--radius-pill); background:#E4EEF8}
+.howto-card .ico .icon{width:28px; height:28px; color:var(--site-navy)}
+.howto-card b{font:600 14px/18px var(--cond); text-transform:uppercase}
+.howto-card span{font:400 14px/18px var(--cond); color:var(--text-secondary)}
+.more{display:grid; gap:var(--space-2); align-content:start}
+.more h2{text-align:left}
+.more a{color:var(--ugc-electric-blue); font:600 13px/18px var(--cond); text-transform:uppercase; letter-spacing:.03em}
+/* Comparateur */
+.cmp{margin-top:var(--space-12)}
+.cmp-head{display:grid; gap:var(--space-3); align-items:end}
+.cmp-head h2{font:400 26px/30px var(--cond); text-transform:uppercase}
+.cmp-head p{font:400 15px/20px var(--cond); color:#E1E6F5}
+.cmp-cols{display:grid; grid-template-columns:repeat(4,minmax(220px,1fr)); gap:var(--space-4); margin-top:var(--space-6); overflow-x:auto; padding-bottom:var(--space-2)}
+.cmp-col{display:grid; grid-template-rows:auto auto 1fr; gap:var(--space-2); justify-items:stretch}
+.cmp-col>label{font:400 13px/16px var(--cond); text-align:center; color:#E1E6F5}
+.cmp-col select{min-height:40px; padding:0 var(--space-3); border:2px solid var(--white); border-radius:4px; background:var(--white); color:var(--site-navy); font:600 14px/18px var(--cond); text-transform:uppercase}
+.cmp-col select:focus{border-color:var(--ugc-electric-blue)}
+.cmp-body{border-radius:var(--radius-card); min-height:420px; background:#4C5A83; display:grid; place-items:center}
+.cmp-body .plus{width:120px; height:120px; border-radius:var(--radius-pill); border:3px solid rgba(255,255,255,.25); display:grid; place-items:center; color:rgba(255,255,255,.3)}
+.cmp-body .plus .icon{width:64px; height:64px; stroke-width:1.5}
+.cmp-body.full{background:#EDF6FF; color:var(--site-navy); place-items:stretch; padding:var(--space-4); display:flex; flex-direction:column; gap:var(--space-3); font:400 14px/18px var(--cond)}
+.cmp-body.full .cardviz{align-self:center}
+.cmp-body.full .perks{text-align:center; display:grid; gap:2px}
+.cmp-row{display:flex; justify-content:space-between; align-items:center; gap:var(--space-2); padding-top:var(--space-2); border-top:2px solid #BFE0F7}
+.cmp-row .k{font:400 12px/16px var(--cond); text-transform:uppercase; color:#3A4466}
+.cmp-line{display:flex; gap:var(--space-2); align-items:flex-start}
+.cmp-line .icon{width:16px; height:16px; stroke-width:2.5; margin-top:1px}
+.cmp-line.yes .icon{color:#1E9E5A}
+.cmp-line.no{color:var(--text-muted)}
+.cmp-line.no .icon{color:var(--error)}
+.cmp-body.full .btn{margin-top:auto}
+/* Quiz et notes */
+.quiz-band{background:var(--white); border-radius:var(--radius-panel) var(--radius-panel) 0 0; color:var(--site-navy); padding:var(--space-8) 0}
+.quiz{display:grid; gap:var(--space-6); align-items:center}
+.quiz h2{font:400 26px/30px var(--cond); text-transform:uppercase}
+.quiz p{font:400 16px/21px var(--cond); margin-top:var(--space-3)}
+.quiz .btn{margin-top:var(--space-4)}
+.quiz .tile-neon{min-height:220px; border-radius:var(--radius-panel)}
+.notes{border-top:1px solid #E4E5EB; margin-top:var(--space-8); padding-top:var(--space-4); font:400 12px/16px var(--cond); color:var(--text-secondary); display:grid; gap:var(--space-1)}
+
+/* ---------- Parcours ---------- */
+.flow{background:var(--background); padding:var(--space-6) 0 var(--space-16)}
+.progress{background:var(--white); border-bottom:1px solid var(--border); position:sticky; top:0; z-index:5}
+.progress .wrap{padding-top:var(--space-3); padding-bottom:var(--space-3)}
+.progress-m{display:flex; justify-content:space-between; align-items:baseline; gap:var(--space-3); font:600 15px/20px var(--cond); letter-spacing:.04em; text-transform:uppercase; color:var(--ugc-navy)}
+.progress-m span{color:var(--text-secondary); font-weight:500}
+.bar{height:4px; margin-top:var(--space-2); background:var(--grey); border-radius:var(--radius-pill); overflow:hidden}
+.bar i{display:block; height:100%; background:var(--ugc-electric-blue); transition:width var(--duration-normal)}
+.steps{display:none; list-style:none; margin:0; padding:0; grid-template-columns:repeat(6,1fr); gap:var(--space-2)}
+.steps li{display:grid; grid-template-columns:auto 1fr; align-items:center; gap:var(--space-2); padding-bottom:var(--space-2); border-bottom:3px solid var(--grey); font:500 14px/18px var(--cond); letter-spacing:.02em; text-transform:uppercase; color:var(--text-muted)}
+.steps .n{display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border-radius:var(--radius-pill); border:2px solid currentColor; font:600 13px/1 var(--cond)}
+.steps li.done{color:var(--ugc-navy); border-bottom-color:var(--ugc-blue)}
+.steps li.done .n{background:var(--ugc-blue); border-color:var(--ugc-blue); color:var(--white)}
+.steps li[aria-current="step"]{color:var(--ugc-blue); border-bottom-color:var(--ugc-electric-blue); font-weight:600}
+.steps li[aria-current="step"] .n{background:var(--ugc-electric-blue); border-color:var(--ugc-electric-blue); color:var(--white)}
+
+.layout{display:grid; grid-template-columns:minmax(0,1fr); gap:var(--space-6); align-items:start}
+.main{display:grid; gap:var(--space-6); min-width:0}
+.aside{order:-1}
+.panel{background:var(--white); border:1px solid var(--border); border-radius:var(--radius-xs); padding:var(--space-6) var(--space-4); display:grid; gap:var(--space-4)}
+.step-title{font:400 30px/34px var(--cond); text-transform:uppercase; color:var(--ugc-navy)}
+.step-title:focus{outline:none}
+.step-lede{color:var(--text-secondary); margin-top:calc(-1 * var(--space-2))}
+.backbar{display:flex; justify-content:space-between; align-items:center; gap:var(--space-3)}
+.back{display:inline-flex; align-items:center; gap:var(--space-2); min-height:44px; padding:0; border:0; background:none; color:var(--ugc-blue); font:600 15px/20px var(--cond); letter-spacing:.04em; text-transform:uppercase; cursor:pointer}
+.back:hover{text-decoration:underline}
+.saved{font:400 12px/16px var(--font); color:var(--success); display:inline-flex; align-items:center; gap:var(--space-1)}
+.actions{display:flex; flex-wrap:wrap; justify-content:flex-end; gap:var(--space-3)}
+.actions .btn{flex:1 1 220px}
+
+/* Récapitulatif de l'offre (conservé tout le parcours) */
+.summary{background:var(--white); border:1px solid var(--border); border-top:4px solid var(--accent, var(--ugc-blue)); border-radius:var(--radius-xs)}
+.summary summary{list-style:none; display:flex; align-items:center; gap:var(--space-3); padding:var(--space-4); cursor:pointer}
+.summary summary::-webkit-details-marker{display:none}
+.summary .cardviz{width:64px}
+.summary .s-name{font:600 18px/22px var(--cond); text-transform:uppercase; color:var(--ugc-navy)}
+.summary .s-price{font:400 14px/20px var(--font); color:var(--text-secondary)}
+.summary .chev{margin-left:auto; transition:transform var(--duration-fast)}
+.summary[open] .chev{transform:rotate(180deg)}
+.summary .s-body{display:grid; gap:var(--space-3); padding:0 var(--space-4) var(--space-4); font:400 14px/20px var(--font)}
+.summary ul{list-style:none; margin:0; padding:0; display:grid; gap:var(--space-2)}
+.summary li{display:flex; gap:var(--space-2)}
+.summary li .icon{width:16px; height:16px; color:var(--accent); stroke-width:2.5; margin-top:2px}
+.summary dl{display:grid; grid-template-columns:auto 1fr; gap:var(--space-1) var(--space-3); margin:0; padding-top:var(--space-3); border-top:1px solid var(--border)}
+.summary dt{color:var(--text-secondary)}
+.summary dd{margin:0; font-weight:600; text-align:right}
+
+/* Choix (radio en cartes) */
+.choices{display:grid; gap:var(--space-3); border:0; margin:0; padding:0; min-width:0}
+.choices legend{font:600 15px/20px var(--cond); letter-spacing:.04em; text-transform:uppercase; color:var(--ugc-navy); margin-bottom:var(--space-3); padding:0}
+.choice{position:relative; display:grid; grid-template-columns:auto 1fr auto; gap:var(--space-3); align-items:start; padding:var(--space-4); border:2px solid var(--border-strong); border-radius:var(--radius-xs); background:var(--white); cursor:pointer}
+.choice:hover{border-color:var(--ugc-navy)}
+.choice:has(input:checked){border-color:var(--ugc-electric-blue); background:#F3F8FF}
+.choice:has(input:focus-visible){outline:3px solid var(--ugc-electric-blue); outline-offset:2px}
+.choice input{width:20px; height:20px; margin:2px 0 0; accent-color:var(--ugc-electric-blue)}
+.choice b{display:block; font:600 17px/22px var(--cond); text-transform:uppercase; color:var(--ugc-navy)}
+.choice span{font:400 14px/20px var(--font); color:var(--text-secondary)}
+.choice .amt{font:600 18px/22px var(--cond); color:var(--ugc-navy); white-space:nowrap}
+
+/* Champs (§23 + gris ugc.fr) */
+.fields{display:grid; grid-template-columns:minmax(0,1fr); gap:var(--space-4)}
+.field{display:grid; gap:var(--space-1); align-content:start}
+.field label,.field .lbl{font:600 14px/20px var(--font); color:var(--ugc-navy)}
+.field .opt{font-weight:400; color:var(--text-secondary)}
+.field .hint{font:400 13px/18px var(--font); color:var(--text-secondary)}
+.input,select.input{width:100%; min-height:48px; padding:var(--space-3) var(--space-4); background:var(--grey); border:2px solid var(--grey); border-radius:var(--radius-xs); color:var(--ugc-navy); font:400 16px/22px var(--font); transition:border-color var(--duration-fast)}
+.input:hover{border-color:var(--border-strong)}
+.input:focus{outline:none; border-color:var(--ugc-electric-blue); box-shadow:var(--focus-ring); background:var(--white)}
+.input[aria-invalid="true"]{border-color:var(--error); background:#FFF6F6}
+.err{display:none; align-items:flex-start; gap:var(--space-1); font:600 13px/18px var(--font); color:var(--error)}
+.err .icon{width:16px; height:16px; margin-top:1px}
+.field.invalid .err{display:flex}
+.radios{display:flex; flex-wrap:wrap; gap:var(--space-2) var(--space-6); border:0; margin:0; padding:0}
+.radios legend{font:600 14px/20px var(--font); color:var(--ugc-navy); padding:0; margin-bottom:var(--space-1)}
+.radios label{display:inline-flex; align-items:center; gap:var(--space-2); min-height:44px; font:400 15px/20px var(--font); cursor:pointer}
+.radios input,.check input{width:20px; height:20px; accent-color:var(--ugc-electric-blue)}
+.check{display:grid; grid-template-columns:auto 1fr; gap:var(--space-3); align-items:start; font:400 14px/20px var(--font); cursor:pointer}
+.check input{margin:2px 0 0}
+.pw{position:relative}
+.pw .input{padding-right:96px}
+.pw button{position:absolute; right:4px; top:4px; bottom:4px; padding:0 var(--space-3); border:0; border-radius:var(--radius-xs); background:transparent; color:var(--ugc-blue); font:600 14px/20px var(--cond); text-transform:uppercase; letter-spacing:.04em; cursor:pointer}
+.rules{list-style:none; margin:var(--space-1) 0 0; padding:0; display:grid; gap:2px; font:400 13px/18px var(--font); color:var(--text-secondary)}
+.rules li{display:flex; align-items:center; gap:var(--space-2)}
+.rules li .icon{width:14px; height:14px}
+.rules li.ok{color:var(--success)}
+.tabs{display:grid; grid-template-columns:1fr 1fr; border-bottom:1px solid var(--border)}
+.tab{min-height:48px; border:0; border-bottom:3px solid transparent; background:none; color:var(--text-secondary); font:500 16px/20px var(--cond); letter-spacing:.04em; text-transform:uppercase; cursor:pointer}
+.tab[aria-selected="true"]{color:var(--ugc-blue); border-bottom-color:var(--ugc-electric-blue); font-weight:600}
+.tab:hover{color:var(--ugc-navy)}
+
+/* Documents */
+.needs{display:grid; gap:var(--space-3); padding:var(--space-4); background:#EAF2FD; border-left:4px solid var(--ugc-electric-blue); border-radius:var(--radius-xs)}
+.needs h3{font:600 17px/22px var(--cond); letter-spacing:.04em; text-transform:uppercase; color:var(--ugc-navy)}
+.needs ul{margin:0; padding:0; list-style:none; display:grid; gap:var(--space-3); font:400 14px/20px var(--font)}
+.needs li{display:grid; grid-template-columns:auto 1fr; gap:var(--space-3)}
+.needs li .icon{color:var(--ugc-blue); margin-top:2px}
+.needs b{font-weight:600}
+.upload{display:grid; gap:var(--space-3); padding:var(--space-4); border:2px dashed var(--border-strong); border-radius:var(--radius-xs); background:var(--white)}
+.upload.invalid{border-color:var(--error); background:#FFF6F6}
+.upload.has{border-style:solid; border-color:var(--success)}
+.upload h3{font:600 17px/22px var(--cond); letter-spacing:.04em; text-transform:uppercase; color:var(--ugc-navy)}
+.up-row{display:grid; grid-template-columns:96px minmax(0,1fr); gap:var(--space-4); align-items:center}
+.preview{width:96px; aspect-ratio:3/4; border-radius:var(--radius-xs); background:var(--grey); display:grid; place-items:center; color:var(--text-muted); overflow:hidden}
+.preview img{width:100%; height:100%; object-fit:cover; display:block}
+.preview .icon{width:32px; height:32px}
+.doc-ico{width:56px; height:56px; border-radius:var(--radius-xs); background:var(--grey); display:grid; place-items:center; color:var(--ugc-navy)}
+.up-row.doc{grid-template-columns:56px minmax(0,1fr)}
+.up-meta{display:grid; gap:var(--space-2); min-width:0}
+.up-meta .fname{font:600 14px/20px var(--font); overflow-wrap:anywhere}
+.up-btns{display:flex; flex-wrap:wrap; gap:var(--space-2)}
+.up-btns .btn{min-height:44px; padding:0 var(--space-4); font-size:15px}
+.file-input{position:absolute; width:1px; height:1px; opacity:0}
+.ok-line{display:flex; align-items:center; gap:var(--space-2); font:600 13px/18px var(--font); color:var(--success)}
+
+/* Récapitulatif financier */
+.money{width:100%; border-collapse:collapse; font:400 15px/20px var(--font)}
+.money caption{text-align:left; font:600 17px/22px var(--cond); letter-spacing:.04em; text-transform:uppercase; color:var(--ugc-navy); padding-bottom:var(--space-2)}
+.money th,.money td{padding:var(--space-3) 0; border-bottom:1px solid var(--border); text-align:left; vertical-align:top}
+.money td{text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums; font-weight:600; padding-left:var(--space-3)}
+.money th{font-weight:400}
+.money th small{display:block; color:var(--text-secondary); font-size:13px}
+.money .strike{text-decoration:line-through; color:var(--text-muted); font-weight:400; margin-right:var(--space-2)}
+.money .free{color:var(--success)}
+.money tr.total th,.money tr.total td{border-bottom:0; font:600 20px/24px var(--cond); text-transform:uppercase; color:var(--ugc-navy)}
+.blocks{display:grid; gap:var(--space-4)}
+.mblock{padding:var(--space-4); border:1px solid var(--border); border-radius:var(--radius-xs); background:var(--white)}
+.mblock.today{border-left:4px solid var(--red)}
+.mblock.monthly{border-left:4px solid var(--ugc-electric-blue)}
+.mblock.commit{border-left:4px solid var(--ugc-navy)}
+.mblock .k{font:600 13px/16px var(--cond); letter-spacing:.08em; text-transform:uppercase; color:var(--text-secondary)}
+.mblock .v{font:600 30px/34px var(--cond); color:var(--ugc-navy); margin-top:var(--space-1)}
+.mblock .d{font:400 14px/20px var(--font); color:var(--text-secondary)}
+.secure{display:flex; align-items:center; gap:var(--space-2); font:600 13px/18px var(--font); color:var(--success)}
+
+/* Confirmation et carte dématérialisée */
+.success-head{display:flex; gap:var(--space-3); align-items:center}
+.success-head .ok{display:inline-flex; width:40px; height:40px; align-items:center; justify-content:center; border-radius:var(--radius-pill); background:var(--success); color:var(--white); flex:none}
+.next{display:grid; gap:var(--space-3); padding:var(--space-4); background:var(--ugc-navy); color:var(--white); border-radius:var(--radius-xs)}
+.next .k{font:600 13px/16px var(--cond); letter-spacing:.1em; text-transform:uppercase; color:var(--ugc-light-blue)}
+.next h3{font:500 24px/28px var(--cond); text-transform:uppercase}
+.next p{color:#D5D9E8; font-size:15px}
+.next .btn-primary{justify-self:start}
+.dcard{width:100%; max-width:380px; justify-self:center; aspect-ratio:1.586; border-radius:12px; padding:var(--space-4); display:grid; grid-template-columns:72px 1fr; grid-template-rows:auto 1fr auto; gap:var(--space-2) var(--space-3);
+  background:linear-gradient(135deg,#0A1580,#061A55 55%,#1A2CC8); color:var(--white); box-shadow:0 12px 32px rgba(6,26,85,.35)}
+.dcard .logo-slot{grid-column:1/-1; justify-self:start; height:24px; font-size:9px; padding:0 var(--space-2)}
+.dcard .ph{grid-row:2/4; width:72px; aspect-ratio:3/4; border-radius:4px; overflow:hidden; background:rgba(255,255,255,.15); align-self:end}
+.dcard .ph img{width:100%; height:100%; object-fit:cover; display:block}
+.dcard .who{align-self:end; display:grid; gap:2px}
+.dcard .who b{font:600 18px/20px var(--cond); text-transform:uppercase}
+.dcard .who span{font:400 11px/14px var(--font); color:#D5D9E8}
+.dcard .qr{justify-self:end; align-self:end; width:64px; height:64px; background:var(--white); border-radius:4px; padding:4px}
+.dcard .bottom{display:flex; justify-content:space-between; align-items:end; gap:var(--space-2)}
+.timeline{list-style:none; margin:0; padding:0; display:grid; gap:var(--space-3)}
+.timeline li{display:grid; grid-template-columns:auto 1fr; gap:var(--space-3)}
+.timeline .dot{width:32px; height:32px; border-radius:var(--radius-pill); display:grid; place-items:center; background:var(--grey); color:var(--ugc-navy)}
+.timeline b{display:block; font:600 16px/20px var(--cond); letter-spacing:.03em; text-transform:uppercase; color:var(--ugc-navy)}
+.timeline span{font:400 14px/20px var(--font); color:var(--text-secondary)}
+.toast{position:fixed; left:50%; bottom:var(--space-6); transform:translateX(-50%); z-index:30; max-width:calc(100% - 32px); padding:var(--space-3) var(--space-4); background:var(--ugc-navy); color:var(--white); border-radius:var(--radius-xs); box-shadow:0 12px 32px rgba(0,0,0,.18); font:400 14px/20px var(--font)}
+.toast[hidden]{display:none}
+
+/* ---------- Pied de page ugc.fr ---------- */
+.foot{background:var(--site-navy); color:var(--white); padding:var(--space-8) 0; text-align:center}
+.social{display:flex; justify-content:center; gap:var(--space-3); margin-bottom:var(--space-6)}
+.social span{display:grid; place-items:center; width:32px; height:32px; border-radius:var(--radius-pill); background:var(--white); color:var(--site-navy); font:700 12px/1 var(--font)}
+.foot ul{display:flex; flex-wrap:wrap; justify-content:center; gap:var(--space-2) var(--space-8); margin:0 0 var(--space-3); padding:0; list-style:none; font:600 13px/16px var(--cond); letter-spacing:.04em; text-transform:uppercase}
+.foot p{font:400 13px/18px var(--font); color:#C9CEDC}
+
+/* ---------- Note de candidature (hors site simulé) ---------- */
+.about{background:var(--background); border-top:1px solid var(--border); padding:var(--space-12) 0}
+.about .wrap{display:grid; gap:var(--space-6)}
+.about h2{font:700 24px/32px var(--font)}
+.about-k{font:600 12px/16px var(--font); letter-spacing:.08em; text-transform:uppercase; color:var(--ugc-blue); margin-bottom:var(--space-2)}
+.about .why{border-left:4px solid var(--ugc-blue); display:grid; gap:var(--space-3)}
+.about .why p{color:var(--text-primary)}
+.imp-grid{display:grid; gap:var(--space-4); margin-top:var(--space-2)}
+.imp{position:relative; background:var(--white); border:1px solid var(--border); border-radius:var(--radius-md); padding:var(--space-6) var(--space-6) var(--space-6) 64px}
+.imp-n{position:absolute; left:var(--space-6); top:var(--space-6); display:grid; place-items:center; width:28px; height:28px; border-radius:var(--radius-pill); background:var(--ugc-blue); color:var(--white); font:700 14px/1 var(--font)}
+.imp h4{font:700 17px/24px var(--font); margin:0 0 var(--space-3)}
+.imp dl{display:grid; gap:var(--space-1); margin:0; font:400 14px/20px var(--font)}
+.imp dt{font-weight:700; font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--text-secondary); margin-top:var(--space-2)}
+.imp dt:first-child{margin-top:0}
+.imp dd{margin:0}
+.about h3{font:700 18px/24px var(--font); margin-bottom:var(--space-2)}
+.about .cols{display:grid; gap:var(--space-4)}
+.about section{background:var(--white); border:1px solid var(--border); border-radius:var(--radius-md); padding:var(--space-6)}
+.about ul{margin:0; padding-left:20px; display:grid; gap:var(--space-2); font:400 15px/22px var(--font)}
+.about p{font:400 15px/22px var(--font); color:var(--text-secondary)}
+.about code{font:400 13px/18px ui-monospace, Menlo, monospace; background:var(--surface-subtle); padding:1px 4px; border-radius:2px}
+
+@media (min-width:640px){
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tile-promo{grid-column:span 2}
+  .howto-cards{grid-template-columns:repeat(2,minmax(0,240px))}
+  .fields.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fields .full{grid-column:1/-1}
+  .blocks{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .panel{padding:var(--space-8)}
+}
+@media (min-width:900px){
+  .wrap{padding:0 var(--space-8)}
+  .tool span{display:block}
+  .offers h1{font-size:40px; line-height:44px}
+  .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .howto{grid-template-columns:1fr auto}
+  .more{justify-items:end}
+  .more h2{text-align:right}
+  .cmp-head{grid-template-columns:1fr 1fr}
+  .quiz{grid-template-columns:1fr 1.6fr}
+  .steps{display:grid}
+  .progress-m,.bar{display:none}
+  .layout{grid-template-columns:minmax(0,1fr) 340px}
+  .aside{position:sticky; top:96px; order:0}
+  .summary summary{cursor:default; pointer-events:none}
+  .summary .chev{display:none}
+  .about .cols{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .imp-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .next{grid-template-columns:1fr auto; align-items:center}
+}
+@media (min-width:1100px){ .grid{grid-template-columns:repeat(4,minmax(0,1fr))} }
+@media (prefers-reduced-motion:no-preference){
+  .main>.panel{animation:rise var(--duration-normal) ease-out both}
+  @keyframes rise{from{transform:translateY(6px)}to{transform:none}}
+}
+</style>
+</head>
+<body>
+
+<!-- Icônes Lucide (outline, §8) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M5 21v-1a7 7 0 0 1 14 0v1"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="i-circle-user" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></symbol>
+  <symbol id="i-ticket" viewBox="0 0 24 24"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></symbol>
+  <symbol id="i-card" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2"/><path d="M2 10h20"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></symbol>
+  <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+  <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2"/><path d="M12 18h.01"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-10 5L2 7"/></symbol>
+  <symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></symbol>
+  <symbol id="i-laptop" viewBox="0 0 24 24"><rect width="18" height="12" x="3" y="4" rx="2"/><path d="M2 20h20"/></symbol>
+  <symbol id="i-sofa" viewBox="0 0 24 24"><path d="M20 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v3"/><path d="M2 16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"/><path d="M4 18v2"/><path d="M20 18v2"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+  <symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"/></symbol>
+  <symbol id="i-popcorn" viewBox="0 0 24 24"><path d="M18 8a2 2 0 0 0 0-4 2 2 0 0 0-4 0 2 2 0 0 0-4 0 2 2 0 0 0-4 0 2 2 0 0 0 0 4"/><path d="M10 22 9 8"/><path d="m14 22 1-14"/><path d="M20 8c.5 0 .9.4.8 1l-2.6 12c-.1.5-.7 1-1.2 1H7c-.6 0-1.1-.4-1.2-1L3.2 9c-.1-.6.3-1 .8-1Z"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></symbol>
+</svg>
+
+<!-- Bandeau portfolio : hors du site simulé -->
+<div class="folio">
+  <div class="wrap">
+    <span><b>Prototype de candidature — non officiel</b> · un concept pour illustrer une démarche produit, pas une copie du site actuel · Caroline Camilleri</span>
+    <nav aria-label="Projets du portfolio">
+      <a href="index.html">Projet 1 · Assistant « Quel film ce soir ? »</a>
+      <a href="illimite.html" aria-current="page">Projet 2 · Souscription UGC Illimité</a>
+      <a href="#about">Lire la note produit</a>
+    </nav>
+  </div>
+</div>
+
+<!-- ---------- Site simulé ---------- -->
+<header class="site">
+  <div class="top">
+    <div class="wrap">
+      <span class="logo-slot" role="img" aria-label="Emplacement du logo UGC officiel">LOGO UGC</span>
+      <div class="tools" aria-hidden="true">
+        <span class="tool"><svg class="icon"><use href="#i-search"/></svg><span>Rechercher</span></span>
+        <span class="tool"><svg class="icon"><use href="#i-circle-user"/></svg><span>Mon compte</span></span>
+        <span class="tool on"><svg class="icon"><use href="#i-ticket"/></svg><span>UGC Illimité</span></span>
+        <span class="tool"><svg class="icon"><use href="#i-card"/></svg><span>Cartes &amp; offres</span></span>
+      </div>
+    </div>
+  </div>
+  <nav class="nav" aria-hidden="true">
+    <div class="wrap"><ul><li>Cinémas</li><li>Films</li><li>Labels &amp; sélections</li><li>En famille</li><li>Événements</li><li>Viva l'opéra</li><li>News</li></ul></div>
+  </nav>
+</header>
+
+<main id="app" class="site"></main>
+
+<footer class="foot site">
+  <div class="wrap">
+    <div class="social" aria-hidden="true"><span>f</span><span>X</span><span>ig</span><span>tt</span><span>yt</span><span>in</span></div>
+    <ul aria-hidden="true"><li>Besoin d'aide&nbsp;?</li><li>Contact</li><li>Recrutement</li><li>Groupe</li><li>Professionnels</li><li>Belgique</li></ul>
+    <ul aria-hidden="true"><li>Politique de confidentialité</li><li>Conditions générales</li><li>Mentions légales</li><li>Cookies</li><li>Accessibilité</li><li>Charte des spectateurs</li></ul>
+    <p>Prototype de candidature — non officiel · Caroline Camilleri · Paiement et souscription simulés, aucune donnée transmise.</p>
+  </div>
+</footer>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<!-- ---------- Note de candidature ---------- -->
+<section class="about" id="about" aria-labelledby="aboutH">
+  <div class="wrap">
+    <div>
+      <p class="about-k">Note produit · Caroline Camilleri, candidature Digital Product Manager</p>
+      <h2 id="aboutH">Souscription UGC Illimité : du choix de l'offre à la première séance</h2>
+    </div>
+
+    <section class="why" aria-labelledby="whyH">
+      <h3 id="whyH">Pourquoi ce prototype&nbsp;?</h3>
+      <p>Ce prototype <strong>n'a pas vocation à imiter ni à remplacer le site ugc.fr</strong>. Il reprend ses codes visuels pour que les propositions se lisent dans un contexte familier, mais son objet est ailleurs : montrer comment je passe d'une intuition produit à un parcours testable, en cadrant le problème, en formulant des hypothèses, en maquettant un parcours interactif et en définissant comment mesurer le résultat.</p>
+      <p>Les améliorations ci-dessous sont des <strong>hypothèses à valider</strong> avec les équipes et les utilisateurs. Elles ne constituent pas un diagnostic du site actuel, dont je ne connais ni les données d'usage ni les contraintes techniques.</p>
+    </section>
+
+    <section aria-labelledby="goalH">
+      <h3 id="goalH">Objectif</h3>
+      <p>Faciliter le passage du choix d'un abonnement à sa première utilisation, avec un parcours clair et rassurant sur ordinateur et sur mobile : moins d'abandons pendant la souscription, moins de questions au service client, et une première séance réservée plus vite.</p>
+    </section>
+
+    <section aria-labelledby="impH">
+      <h3 id="impH">Synthèse des améliorations proposées</h3>
+      <div class="imp-grid">
+        <article class="imp"><span class="imp-n">1</span><h4>L'offre choisie reste visible et modifiable</h4>
+          <dl><dt>Constat supposé</dt><dd>Au moment de payer, l'abonné n'a plus sous les yeux ce qu'il a choisi et revient en arrière pour vérifier.</dd>
+          <dt>Proposition</dt><dd>Récapitulatif de l'offre affiché à chaque étape, avec « Changer d'offre » sans perdre la saisie.</dd>
+          <dt>Indicateur</dt><dd>Retours vers la page des offres ; abandons à l'étape paiement.</dd></dl></article>
+        <article class="imp"><span class="imp-n">2</span><h4>Progression claire, retour sans perte</h4>
+          <dl><dt>Constat supposé</dt><dd>Un parcours en plusieurs étapes inquiète quand on ne sait pas combien il en reste, et décourage si un retour efface la saisie.</dd>
+          <dt>Proposition</dt><dd>Indicateur « Étape X sur 6 », retour à l'étape précédente et saisie conservée, même après un rechargement de la page.</dd>
+          <dt>Indicateur</dt><dd>Taux d'abandon par étape ; reprises de parcours.</dd></dl></article>
+        <article class="imp"><span class="imp-n">3</span><h4>Documents expliqués avant le téléversement</h4>
+          <dl><dt>Constat supposé</dt><dd>Découvrir en cours de route qu'il faut une photo ou un justificatif fait abandonner, surtout sur mobile.</dd>
+          <dt>Proposition</dt><dd>Liste des documents selon la formule, avec le format attendu et la raison, affichée avant le téléversement.</dd>
+          <dt>Indicateur</dt><dd>Abandons à l'étape documents ; contacts au service client sur ce sujet.</dd></dl></article>
+        <article class="imp"><span class="imp-n">4</span><h4>Photo vérifiée tout de suite</h4>
+          <dl><dt>Constat supposé</dt><dd>Une photo refusée après coup retarde l'activation de la carte et génère des échanges.</dd>
+          <dt>Proposition</dt><dd>Aperçu immédiat, contrôle du format, du poids et de la taille, et un message qui dit quoi faire.</dd>
+          <dt>Indicateur</dt><dd>Photos rejetées après souscription ; délai d'activation de la carte.</dd></dl></article>
+        <article class="imp"><span class="imp-n">5</span><h4>Récapitulatif financier sans ambiguïté</h4>
+          <dl><dt>Constat supposé</dt><dd>Mélanger promotion, frais d'adhésion, mensualités et engagement crée des doutes au paiement et des réclamations ensuite.</dd>
+          <dt>Proposition</dt><dd>Trois blocs (à payer aujourd'hui, puis chaque mois, engagement jusqu'au…), le détail des remises et le total sur la durée d'engagement.</dd>
+          <dt>Indicateur</dt><dd>Conversion à l'étape paiement ; contacts « facturation » ; résiliations dans les premiers mois.</dd></dl></article>
+        <article class="imp"><span class="imp-n">6</span><h4>Une confirmation qui mène à la première séance</h4>
+          <dl><dt>Constat supposé</dt><dd>Après le paiement, l'abonné ne sait pas toujours comment utiliser sa carte tout de suite.</dd>
+          <dt>Proposition</dt><dd>Carte dématérialisée affichée immédiatement, action principale « Réserver une séance », et une frise de la suite (carte physique, premier prélèvement, fin d'engagement).</dd>
+          <dt>Indicateur</dt><dd>Délai entre souscription et première séance ; part des nouveaux abonnés ayant réservé dans les 7 jours.</dd></dl></article>
+      </div>
+    </section>
+
+    <div class="cols">
+      <section aria-labelledby="prioH">
+        <h3 id="prioH">Priorisation proposée</h3>
+        <ul>
+          <li><strong>Gains rapides</strong> (surtout du contenu et de l'interface) : récapitulatif financier (5), documents expliqués (3), confirmation orientée action (6).</li>
+          <li><strong>Chantiers plus lourds</strong> (travail avec la DSI) : saisie conservée entre les étapes (2), contrôle automatique de la photo (4), offre modifiable pendant le parcours (1).</li>
+        </ul>
+      </section>
+      <section aria-labelledby="nextH">
+        <h3 id="nextH">Prochaines étapes</h3>
+        <ul>
+          <li>Partir des données réelles du tunnel pour confirmer où se situent les abandons.</li>
+          <li>Tester ce prototype avec 5 ou 6 futurs abonnés, sur mobile en priorité.</li>
+          <li>Cadrer avec la DSI : contrôle des photos et justificatifs, données personnelles (RGPD), prélèvement SEPA, carte dématérialisée.</li>
+          <li>Déployer par lots et mesurer chaque amélioration (test A/B quand c'est possible).</li>
+        </ul>
+      </section>
+      <section aria-labelledby="srcH">
+        <h3 id="srcH">Sources et données</h3>
+        <ul>
+          <li>Offres, tarifs, engagements et promotion : relevés sur des captures de ugc.fr (20/10/2026).</li>
+          <li>Marqués <span class="demo">Démo</span> : frais d'adhésion, règles de photo et de justificatifs, date de prélèvement.</li>
+          <li>Logo et visuels de carte officiels non utilisés (emplacements à la place) ; police remplacée par Barlow Condensed.</li>
+          <li>Paiement et souscription simulés : aucune donnée n'est transmise. Les valeurs métier sont regroupées dans l'objet <code>CONFIG</code> du script.</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+/* =====================================================================
+   CONFIG : toutes les données métier, faciles à modifier.
+   source "ugc.fr" = relevé sur des captures du site (20/10/2026) ; "démo" = hypothèse à vérifier.
+   ===================================================================== */
+const CONFIG = {
+  adhesionFee:{amount:30, source:"démo"},                    // montant non affiché sur les captures
+  promo:{label:"1 mois à 0,00 € & frais d'adhésion offerts", until:"2026-11-03", freeMonths:1, waiveFee:true, source:"ugc.fr"},
+  debitDay:{label:"le même jour chaque mois", source:"démo"},
+  cashMonths:12,                                             // paiement au comptant : 12 mois (ugc.fr)
+  offers:[
+    {id:"77", name:"UGC Illimité 7/7", tag:"Tous les jours", who:1, icon:"#1BA1E8", accent:"#0A6FB0", days:"Tous les jours", companion:true, price:23.90, commit:6,
+     perks:["Accès aux séances cinéma <b>tous les jours</b>","-20 % sur les formules gourmandes","6 € la place pour un accompagnant par séance","Rentable dès 2 séances par mois"], docs:["photo"]},
+    {id:"duo", name:"UGC Illimité Duo", tag:"1 invité à chaque séance", who:2, icon:"#2BB673", accent:"#167A47", days:"Tous les jours", price:39.90, commit:6,
+     perks:["<b>1 invité</b> à chaque séance","Accès aux séances cinéma tous les jours","-20 % sur les formules gourmandes","Rentable dès 2 séances par mois"], docs:["photo"]},
+    {id:"26", name:"UGC Illimité -26 ans", tag:"Pour les moins de 26 ans", who:1, icon:"#A21FE8", accent:"#8A16CF", days:"Tous les jours", companion:true, price:19.90, commit:6, maxAge:26,
+     perks:["Accès aux séances cinéma tous les jours","-20 % sur les formules gourmandes","6 € la place pour un accompagnant par séance"], docs:["photo","age"]},
+    {id:"sem", name:"UGC Illimité Semaine", tag:"Du lundi au vendredi inclus", who:1, icon:"#F2B200", accent:"#9A6500", days:"Du lundi au vendredi", companion:true, price:19.90, commit:6, limited:true,
+     perks:["Accès aux séances <b>du lundi au vendredi</b> inclus","-20 % sur les formules gourmandes","6 € la place pour un accompagnant par séance","Rentable dès 2 séances par mois"], docs:["photo"]},
+    {id:"we", name:"UGC Illimité Week-end", tag:"Du vendredi au dimanche inclus", who:1, icon:"#F07800", accent:"#B84A00", days:"Du vendredi au dimanche", companion:true, price:19.90, commit:6, limited:true,
+     perks:["Accès aux séances <b>du vendredi au dimanche</b> inclus","-20 % sur les formules gourmandes","6 € la place pour un accompagnant par séance","Rentable dès 2 séances par mois"], docs:["photo"]},
+    {id:"fam", name:"UGC Illimité Famille", tag:"3 invités à chaque séance", who:4, icon:"#D61FA0", accent:"#B0157F", days:"Tous les jours", popcorn:true, price:49.90, commit:12, limited:true,
+     perks:["<b>3 invités</b> à chaque séance","2 grands pop-corn offerts chaque mois","Accès aux séances cinéma tous les jours","Rentable dès 2 séances par mois"], docs:["photo"]}
+  ],
+  docs:{
+    photo:{title:"Photo d'identité", what:"Photo récente, visage de face, fond clair, sans lunettes de soleil.", why:"Elle figure sur votre carte, qui est nominative.", formats:"JPG ou PNG, 5 Mo maximum, au moins 300 × 400 px.", source:"démo"},
+    age:{title:"Justificatif d'âge", what:"Carte d'identité, passeport ou titre de séjour, recto lisible.", why:"Il confirme que vous avez moins de 26 ans au jour de la souscription.", formats:"PDF, JPG ou PNG, 5 Mo maximum.", source:"démo"}
+  },
+  cinemas:["Ciné Démo Bercy","Ciné Démo Odéon","Ciné Démo Gobelins","Ciné Démo Lyon Part-Dieu","Ciné Démo Bordeaux"]
+};
+
+/* ---------- Outils ---------- */
+const $ = s=>document.querySelector(s);
+const app = $("#app");
+const eur = n=>n.toLocaleString("fr-FR",{minimumFractionDigits:2, maximumFractionDigits:2})+" €";
+const esc = t=>String(t??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const icon = (id,cls)=>'<svg class="icon'+(cls?" "+cls:"")+'" aria-hidden="true"><use href="#i-'+id+'"/></svg>';
+const demo = '<span class="demo" title="Donnée de démonstration, à vérifier">Démo</span>';
+const fmtDate = d=>d.toLocaleDateString("fr-FR",{day:"numeric", month:"long", year:"numeric"});
+const addMonths = (d,n)=>{const r=new Date(d); r.setMonth(r.getMonth()+n); return r;};
+const today = new Date(); today.setHours(0,0,0,0);
+const promoActive = ()=>today<=new Date(CONFIG.promo.until+"T23:59:59");
+const offerById = id=>CONFIG.offers.find(o=>o.id===id);
+function toast(msg){ const t=$("#toast"); t.textContent=msg; t.hidden=false; clearTimeout(toast.t); toast.t=setTimeout(()=>t.hidden=true,4000); }
+
+/* ---------- État du parcours (conservé en session, hors fichiers) ---------- */
+const STEPS=["Offre","Compte","Informations","Photo et justificatifs","Paiement","Confirmation"];
+const blank = ()=>({offer:null, step:0, pay:"debit", authMode:"create", account:{email:"",password:""}, info:{civ:"",first:"",last:"",birth:"",address:"",zip:"",city:"",phone:"",cinema:""},
+  files:{}, payment:{holder:"",iban:"",mandate:false,cardNumber:"",cardExp:"",cardCvc:"",cgv:false}, ref:""});
+let S = blank();
+try{ const saved=JSON.parse(sessionStorage.getItem("ugc-illimite")||"null"); if(saved&&saved.offer) S=Object.assign(blank(),saved,{files:{}}); }catch(e){}
+function save(){ try{ const {files,...rest}=S; sessionStorage.setItem("ugc-illimite",JSON.stringify(rest)); }catch(e){} }
+
+/* ---------- Calculs financiers ---------- */
+function money(){
+  const o=offerById(S.offer); const promo=promoActive();
+  const fee=CONFIG.adhesionFee.amount, feeDue=promo&&CONFIG.promo.waiveFee?0:fee;
+  const free=promo?CONFIG.promo.freeMonths:0;
+  if(S.pay==="cash"){
+    const months=CONFIG.cashMonths, paid=Math.max(0,months-free);
+    const today_=feeDue+paid*o.price;
+    return {o,promo,fee,feeDue,free,months,commit:months,today:today_,monthly:0,firstDebit:null,end:addMonths(today,months),total:today_};
+  }
+  const commit=o.commit, firstMonth=free>0?0:o.price;
+  const today_=feeDue+firstMonth;
+  const firstDebit=addMonths(today,1);
+  return {o,promo,fee,feeDue,free,months:commit,commit,today:today_,monthly:o.price,firstDebit,end:addMonths(today,commit),total:today_+o.price*(commit-1)};
+}
+
+/* ---------- Vue 1 : page des offres (structure de ugc.fr/les-offres-ugc-illimite.html) ---------- */
+const person=c=>'<svg viewBox="0 0 12 20" aria-hidden="true"><circle cx="6" cy="3" r="2.6" fill="'+c+'"/><path d="M2 7h8v6H8.6v7H3.4v-7H2Z" fill="'+c+'"/></svg>';
+const crumb=items=>'<div class="crumb"><div class="wrap"><nav aria-label="Fil d\'Ariane"><ol><li>'+icon("undo")+'</li>'+items.map((t,i)=>'<li'+(i===items.length-1?' aria-current="page"':'')+'>'+t+'</li>').join("")+'</ol></nav></div></div>';
+const fmtPrice=n=>eur(n).replace(" €","")+'<sup>€/mois</sup>';
+function offerCard(o,promo){
+  return '<article class="offer" style="--accent:'+o.accent+';--icon:'+o.icon+'" aria-labelledby="o-'+o.id+'">'+
+    (o.limited?'<span class="limited">Série limitée<sup>3</sup></span>':'')+
+    '<span class="who" aria-label="'+o.who+(o.who>1?" spectateurs":" spectateur")+' par séance" role="img">'+person(o.icon).repeat(o.who)+'</span>'+
+    '<div class="cardviz" aria-hidden="true"><span>VISUEL CARTE</span></div>'+
+    '<div><h2 id="o-'+o.id+'">'+esc(o.name)+'</h2><p class="tag">'+esc(o.tag)+'</p></div>'+
+    '<ul>'+(promo?'<li>'+icon("check")+'<span><span class="promo-perk">'+esc(CONFIG.promo.label)+'</span> jusqu\'au '+fmtDate(new Date(CONFIG.promo.until))+'<sup>2</sup></span></li>':'')+o.perks.map(p=>'<li>'+icon("check")+'<span>'+p+'</span></li>').join("")+'</ul>'+
+    '<div class="price-box"><p class="price">'+fmtPrice(o.price)+'</p><span class="price-sub">Abonnement à partir de '+o.commit+' mois<sup>1</sup></span></div>'+
+    '<div class="offer-actions"><button type="button" class="info-btn" data-info="'+o.id+'" aria-label="Détails de l\'offre '+esc(o.name)+'" aria-expanded="false" aria-controls="d-'+o.id+'">'+icon("info")+'</button>'+
+    '<button type="button" class="btn btn-primary" data-pick="'+o.id+'">En profiter<span class="sr-only"> : '+esc(o.name)+'</span></button></div>'+
+    '<div id="d-'+o.id+'" class="details" hidden>Prélèvement : '+o.commit+' mois d\'engagement. Comptant : '+CONFIG.cashMonths+' mois, soit '+eur(o.price*CONFIG.cashMonths)+'. Frais d\'adhésion '+eur(CONFIG.adhesionFee.amount)+' '+demo+'.</div>'+
+  '</article>';
+}
+const neon=()=>'<div class="tile tile-neon" aria-hidden="true">'+[["#35E0A8",8,10,-24],["#C04BFF",44,24,-18],["#2D8BFF",14,44,-30],["#FFC22E",50,52,-40],["#FF7A1A",18,72,-28],["#FF3FD8",52,80,-22]].map(([c,x,y,r])=>'<i style="--c:'+c+';left:'+x+'%;top:'+y+'%;transform:rotate('+r+'deg)"></i>').join("")+'</div>';
+let cmpSel=["77","","",""];
+function cmpCol(i){
+  const id=cmpSel[i], o=offerById(id);
+  const opts='<option value="">Choisir une carte</option>'+CONFIG.offers.map(x=>'<option value="'+x.id+'"'+(x.id===id?" selected":"")+'>'+esc(x.name)+'</option>').join("");
+  const body=!o?'<div class="cmp-body"><span class="plus" aria-hidden="true">'+icon("plus")+'</span></div>':
+    '<div class="cmp-body full"><div class="cardviz" aria-hidden="true"><span>VISUEL CARTE</span></div>'+
+    '<div class="perks">'+o.perks.map(p=>'<span>'+p+'</span>').join("")+'</div>'+
+    '<div class="cmp-row"><span class="k">Spectateurs par séance</span><span style="display:flex;color:'+o.icon+'">'+person(o.icon).repeat(o.who).replace(/<svg /g,'<svg width="10" height="18" ')+'</span></div>'+
+    '<div class="cmp-line">'+icon("calendar")+'<span>'+esc(o.days)+'</span></div>'+
+    '<div class="cmp-line '+(o.companion?"yes":"no")+'">'+icon(o.companion?"check":"x")+'<span>6 € la place pour un accompagnant par séance</span></div>'+
+    '<div class="cmp-line '+(o.popcorn?"yes":"no")+'">'+icon(o.popcorn?"check":"x")+'<span>2 grands pop-corn offerts chaque mois</span></div>'+
+    '<div class="cmp-row"><span class="k">Durée d\'engagement</span></div><div class="cmp-line" style="justify-content:space-between"><span>Par prélèvement</span><b>'+o.commit+' mois</b></div><div class="cmp-line" style="justify-content:space-between"><span>Au comptant</span><b>'+CONFIG.cashMonths+' mois</b></div>'+
+    '<div class="cmp-row"><span class="k">Prix mensuel</span><b style="font-size:18px">'+eur(o.price)+'</b></div>'+
+    '<button type="button" class="btn btn-primary" data-pick="'+o.id+'">En profiter<span class="sr-only"> : '+esc(o.name)+'</span></button></div>';
+  return '<div class="cmp-col"><label for="cmp'+i+'">'+(i===0?"Sélectionnez la carte à comparer":"Comparez avec une autre carte")+'</label><select id="cmp'+i+'" data-cmp="'+i+'">'+opts+'</select>'+body+'</div>';
+}
+function viewOffers(){
+  const promo=promoActive(), O=id=>offerCard(offerById(id),promo);
+  const until=fmtDate(new Date(CONFIG.promo.until));
+  app.innerHTML=crumb(["Accueil","Cartes &amp; offres","Les offres UGC Illimité"])+
+  '<section class="offers"><div class="wrap">'+
+    '<h1 tabindex="-1" id="pageTitle">Trouvez la carte UGC Illimité faite pour vous</h1>'+
+    '<p class="intro">Le cinéma en illimité dans les cinémas UGC et partenaires. Choisissez l\'abonnement adapté à vos envies : vous pourrez changer de formule à tout moment pendant la souscription.</p>'+
+    '<p class="compare-link"><a href="#cmpH">Comparer</a></p>'+
+    '<div class="grid">'+O("77")+O("duo")+
+      (promo?'<div class="tile tile-promo"><div><p class="k">Profitez du cinéma<br>en illimité</p><p class="m">1 mois à</p><p class="big">0<sup>€</sup><small>,00</small></p><p class="f">&amp; frais d\'adhésion offerts</p><p class="hl">Sur l\'abonnement de votre choix</p><p class="d">Jusqu\'au '+until+'</p></div></div>':'')+
+      O("26")+
+      '<div class="tile tile-perks"><div><h3>Vos avantages<br><span>UGC Illimité</span></h3><ul>'+
+        '<li>'+icon("ticket")+'<span class="hl">6 € la place</span><br>pour l\'accompagnant</li><li>'+icon("popcorn")+'-20 %<br>sur les formules gourmandes</li><li>'+icon("gift")+'Un cadeau<br>pour votre anniversaire</li><li>'+icon("ticket")+'Des invitations pour 2<br>à des avant-premières</li></ul>'+
+        '<p class="price-sub" style="color:#C9D4F2;margin-top:12px">Selon la formule '+demo+'</p></div></div>'+
+      O("sem")+O("we")+neon()+O("fam")+
+    '</div>'+
+    '<div class="howto"><div><h2>Comment m\'abonner&nbsp;?</h2><div class="howto-cards" style="margin-top:16px">'+
+      '<div class="howto-card"><span class="ico">'+icon("laptop")+'</span><b>M\'abonner en ligne</b><span>Choisissez une offre ci-dessus : 6 étapes, carte disponible tout de suite.</span></div>'+
+      '<div class="howto-card"><span class="ico">'+icon("sofa")+'</span><b>M\'abonner dans mon cinéma</b><span>À la caisse de votre cinéma, avec une pièce d\'identité.</span></div>'+
+    '</div></div><div class="more"><h2>Plus d\'infos</h2><a href="#notes">Conditions générales d\'abonnement</a><a href="#notes">Où utiliser ma carte UGC Illimité&nbsp;?</a><a href="#notes">Comment résilier&nbsp;?</a></div></div>'+
+    '<section class="cmp" aria-labelledby="cmpH"><div class="cmp-head"><h2 id="cmpH" tabindex="-1">Comparer les différents abonnements</h2><p>Utilisez les menus déroulants pour sélectionner les abonnements UGC Illimité qui vous intéressent. Ajoutez jusqu\'à 4 cartes pour comparer leurs avantages.</p></div>'+
+    '<div class="cmp-cols" id="cmpCols">'+[0,1,2,3].map(cmpCol).join("")+'</div></section>'+
+  '</div></section>'+
+  '<section class="quiz-band"><div class="wrap"><div class="quiz"><div><h2>Quelle carte UGC Illimité<br>est faite pour vous&nbsp;?</h2><p>Plutôt ciné en solo ou en tribu&nbsp;? Fan des séances en semaine ou adepte du week-end&nbsp;? <b>Répondez à 3 questions pour découvrir l\'abonnement qui vous correspond.</b></p><button type="button" class="btn btn-primary" data-act="quiz">Faire le test</button></div>'+neon()+'</div>'+
+    '<div class="notes" id="notes"><p><span class="fn">(1)</span> Durée initiale de l\'abonnement : 6 mois par prélèvement (12 mois pour UGC Illimité Famille), 12 mois au comptant. Frais d\'adhésion en sus, '+eur(CONFIG.adhesionFee.amount)+' '+demo+'.</p>'+
+    '<p><span class="fn">(2)</span> '+esc(CONFIG.promo.label)+' jusqu\'au '+until+', relevé sur ugc.fr le 20/10/2026. Conditions détaillées à vérifier sur le site officiel.</p>'+
+    '<p><span class="fn">(3)</span> Série limitée, dans la limite des premières souscriptions.</p><p>Texte de démonstration : les mentions légales officielles font foi.</p></div></div></section>';
+  app.querySelectorAll("[data-info]").forEach(b=>b.onclick=()=>{ const d=$("#d-"+b.dataset.info); d.hidden=!d.hidden; b.setAttribute("aria-expanded",String(!d.hidden)); });
+  bindPicks(app);
+  app.querySelector('.compare-link a').onclick=e=>{ e.preventDefault(); const h=$("#cmpH"); h.scrollIntoView({behavior:"smooth"}); h.focus({preventScroll:true}); };
+  $("#cmpCols").addEventListener("change",e=>{ const sel=e.target.closest("[data-cmp]"); if(!sel) return; const i=+sel.dataset.cmp; cmpSel[i]=sel.value;
+    const col=sel.closest(".cmp-col"); col.outerHTML=cmpCol(i); bindPicks($("#cmpCols")); $("#cmp"+i).focus(); });
+}
+function bindPicks(root){ root.querySelectorAll("[data-pick]").forEach(b=>b.onclick=()=>{ const keep=S.offer?S:null; if(!keep) S=blank(); S.offer=b.dataset.pick; S.step=1; save(); render(true); }); }
+
+/* ---------- Structure commune du parcours ---------- */
+function shell(inner){
+  const n=S.step, o=offerById(S.offer), m=money();
+  const steps=STEPS.map((l,i)=>'<li class="'+(i+1<n?"done":"")+'"'+(i+1===n?' aria-current="step"':'')+'><span class="n">'+(i+1<n?icon("check","icon-sm"):i+1)+'</span><span>'+l+'</span></li>').join("");
+  return '<div class="progress"><div class="wrap">'+
+      '<p class="progress-m">'+esc(STEPS[n-1])+' <span>Étape '+n+' sur '+STEPS.length+'</span></p><div class="bar" aria-hidden="true"><i style="width:'+(n/STEPS.length*100)+'%"></i></div>'+
+      '<ol class="steps" aria-label="Progression : étape '+n+' sur '+STEPS.length+'">'+steps+'</ol></div></div>'+
+    crumb(["Accueil","Cartes &amp; offres","Les offres UGC Illimité","Souscription"])+
+    '<div class="flow"><div class="wrap layout"><div class="main">'+inner+'</div>'+
+    (n<6?'<aside class="aside" aria-label="Votre offre">'+summary(o,m)+'</aside>':'')+'</div></div>';
+}
+function summary(o,m){
+  const wide=matchMedia("(min-width:900px)").matches;
+  return '<details class="summary" style="--accent:'+o.accent+'"'+(wide?' open':'')+'><summary><div class="cardviz" aria-hidden="true"><span>CARTE</span></div><div><p class="label-k">Votre offre</p><p class="s-name">'+esc(o.name)+'</p><p class="s-price">'+eur(o.price)+'/mois · '+(S.pay==="cash"?"comptant "+CONFIG.cashMonths+" mois":"prélèvement "+o.commit+" mois")+'</p></div>'+icon("chevron-down","chev")+'</summary>'+
+    '<div class="s-body"><ul>'+o.perks.map(p=>'<li>'+icon("check")+'<span>'+p+'</span></li>').join("")+'</ul>'+
+    '<dl><dt>Aujourd\'hui</dt><dd>'+eur(m.today)+'</dd>'+(m.monthly?'<dt>Puis chaque mois</dt><dd>'+eur(m.monthly)+'</dd>':'')+'<dt>Engagement</dt><dd>'+m.commit+' mois</dd></dl>'+
+    (S.step>1?'<button type="button" class="link" data-act="change">Changer d\'offre</button>':'')+'</div></details>';
+}
+function backbar(){ return '<div class="backbar">'+(S.step>1?'<button type="button" class="back" data-act="back">'+icon("arrow-left","icon-sm")+'Étape précédente</button>':'<button type="button" class="back" data-act="offers">'+icon("arrow-left","icon-sm")+'Toutes les offres</button>')+'<span class="saved">'+icon("check","icon-sm")+'Saisie conservée</span></div>'; }
+function errorSummary(errs){
+  return '<div class="alert alert-error" role="alert" tabindex="-1" id="errSum">'+icon("alert")+'<div><b>'+(errs.length>1?errs.length+" points à corriger":"1 point à corriger")+'</b><ul>'+errs.map(e=>'<li><a href="#'+e.id+'">'+esc(e.msg)+'</a></li>').join("")+'</ul></div></div>';
+}
+function field(id,label,attrs,opts={}){
+  return '<div class="field'+(opts.full?" full":"")+'" id="f-'+id+'"><label for="'+id+'">'+label+(opts.optional?' <span class="opt">(facultatif)</span>':'')+'</label>'+
+    (opts.hint?'<p class="hint" id="'+id+'-h">'+opts.hint+'</p>':'')+
+    (opts.select?'<select class="input" id="'+id+'" '+attrs+'>'+opts.select+'</select>':'<input class="input" id="'+id+'" '+attrs+(opts.hint?' aria-describedby="'+id+'-h '+id+'-e"':' aria-describedby="'+id+'-e"')+'>')+
+    '<p class="err" id="'+id+'-e">'+icon("alert")+'<span></span></p></div>';
+}
+function setErr(id,msg){
+  const f=$("#f-"+id), i=$("#"+id); if(!f) return;
+  f.classList.toggle("invalid",!!msg); if(i) i.setAttribute("aria-invalid",msg?"true":"false");
+  f.querySelector(".err span").textContent=msg||"";
+}
+
+/* ---------- Étape 1 : offre et mode de paiement ---------- */
+function step1(){
+  const o=offerById(S.offer), promo=promoActive();
+  return backbar()+'<section class="panel" aria-labelledby="st"><h1 class="step-title" id="st" tabindex="-1">Votre offre</h1>'+
+    '<p class="step-lede">Vérifiez les avantages et choisissez votre mode de paiement.</p>'+
+    '<fieldset class="choices"><legend>Formule</legend>'+CONFIG.offers.map(x=>
+      '<label class="choice"><input type="radio" name="offer" value="'+x.id+'"'+(x.id===o.id?" checked":"")+'><span><b>'+esc(x.name)+'</b><span>'+esc(x.tag)+'</span></span><span class="amt">'+eur(x.price)+'/mois</span></label>').join("")+'</fieldset>'+
+    '<fieldset class="choices"><legend>Mode de paiement</legend>'+
+      '<label class="choice"><input type="radio" name="pay" value="debit"'+(S.pay==="debit"?" checked":"")+'><span><b>Prélèvement mensuel</b><span>'+o.commit+' mois d\'engagement, puis sans engagement. '+(promo?'Premier mois à 0,00 €.':'')+'</span></span><span class="amt">'+eur(o.price)+'/mois</span></label>'+
+      '<label class="choice"><input type="radio" name="pay" value="cash"'+(S.pay==="cash"?" checked":"")+'><span><b>Paiement comptant</b><span>'+CONFIG.cashMonths+' mois payés en une fois'+(promo?', dont '+CONFIG.promo.freeMonths+' mois offert':'')+'.</span></span><span class="amt">'+eur(o.price*(CONFIG.cashMonths-(promo?CONFIG.promo.freeMonths:0)))+'</span></label>'+
+    '</fieldset>'+
+    (o.docs.includes("age")?'<div class="alert alert-info">'+icon("info")+'<span>Cette formule demande un <b>justificatif d\'âge</b> à l\'étape 4, en plus de la photo.</span></div>':'')+
+    '<div class="actions"><button type="button" class="btn btn-primary" data-act="next">Continuer</button></div></section>';
+}
+function bind1(){
+  app.querySelectorAll('input[name=offer]').forEach(r=>r.onchange=()=>{ S.offer=r.value; save(); render(false,'input[name=offer]:checked'); });
+  app.querySelectorAll('input[name=pay]').forEach(r=>r.onchange=()=>{ S.pay=r.value; save(); render(false,'input[name=pay]:checked'); });
+}
+
+/* ---------- Étape 2 : compte ---------- */
+const EMAIL=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+function pwRules(p){ return [["8 caractères minimum",p.length>=8],["1 majuscule",/[A-Z]/.test(p)],["1 chiffre",/\d/.test(p)]]; }
+function step2(){
+  const c=S.authMode==="create", a=S.account;
+  return backbar()+'<section class="panel" aria-labelledby="st"><h1 class="step-title" id="st" tabindex="-1">Votre compte UGC</h1>'+
+    '<p class="step-lede">Votre abonnement sera rattaché à ce compte : c\'est là que vous retrouverez votre carte.</p>'+
+    '<div id="errBox"></div>'+
+    '<div class="tabs" role="tablist" aria-label="Type de connexion"><button type="button" class="tab" role="tab" id="t-create" aria-selected="'+c+'" aria-controls="authPanel" data-mode="create">Créer un compte</button><button type="button" class="tab" role="tab" id="t-login" aria-selected="'+!c+'" aria-controls="authPanel" data-mode="login">J\'ai déjà un compte</button></div>'+
+    '<form id="authPanel" role="tabpanel" aria-labelledby="'+(c?"t-create":"t-login")+'" class="fields" novalidate>'+
+      field("email","Adresse e-mail",'type="email" autocomplete="email" inputmode="email" value="'+esc(a.email)+'"',{hint:"Exemple fictif : camille.demo@exemple.fr"})+
+      '<div class="field" id="f-password"><label for="password">Mot de passe</label><div class="pw"><input class="input" id="password" type="password" autocomplete="'+(c?"new-password":"current-password")+'" value="'+esc(a.password)+'" aria-describedby="'+(c?"pwRules ":"")+'password-e"><button type="button" id="pwToggle" aria-pressed="false">Afficher</button></div>'+
+      (c?'<ul class="rules" id="pwRules">'+pwRules(a.password).map(([l,ok])=>'<li class="'+(ok?"ok":"")+'">'+icon(ok?"check":"circle")+l+'</li>').join("")+'</ul>':'<button type="button" class="link" style="justify-self:start" data-act="forgot">Mot de passe oublié&nbsp;?</button>')+
+      '<p class="err" id="password-e">'+icon("alert")+'<span></span></p></div>'+
+    '</form>'+
+    '<p class="note">'+icon("info","icon-sm")+'<span>Démo : aucun compte n\'est créé ni vérifié. N\'utilisez pas vos vrais identifiants.</span></p>'+
+    '<div class="actions"><button type="button" class="btn btn-primary" data-act="next">'+(c?"Créer mon compte et continuer":"Me connecter et continuer")+'</button></div></section>';
+}
+function bind2(){
+  app.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{ S.authMode=t.dataset.mode; save(); render(false,"#t-"+t.dataset.mode); });
+  $("#tabsKeys")||app.querySelector(".tabs").addEventListener("keydown",e=>{ if(e.key==="ArrowRight"||e.key==="ArrowLeft"){ S.authMode=S.authMode==="create"?"login":"create"; save(); render(false,"#t-"+S.authMode); } });
+  $("#email").oninput=e=>{ S.account.email=e.target.value.trim(); save(); };
+  $("#password").oninput=e=>{ S.account.password=e.target.value; save();
+    const r=$("#pwRules"); if(r) r.innerHTML=pwRules(S.account.password).map(([l,ok])=>'<li class="'+(ok?"ok":"")+'">'+icon(ok?"check":"circle")+l+'</li>').join(""); };
+  $("#pwToggle").onclick=e=>{ const i=$("#password"), show=i.type==="password"; i.type=show?"text":"password"; e.target.textContent=show?"Masquer":"Afficher"; e.target.setAttribute("aria-pressed",String(show)); };
+}
+function valid2(){
+  const a=S.account, errs=[];
+  if(!a.email) errs.push({id:"email",msg:"Indiquez votre adresse e-mail."});
+  else if(!EMAIL.test(a.email)) errs.push({id:"email",msg:"L'adresse e-mail doit ressembler à nom@domaine.fr."});
+  if(!a.password) errs.push({id:"password",msg:"Indiquez votre mot de passe."});
+  else if(S.authMode==="create"&&pwRules(a.password).some(r=>!r[1])) errs.push({id:"password",msg:"Le mot de passe doit contenir 8 caractères, 1 majuscule et 1 chiffre."});
+  return errs;
+}
+
+/* ---------- Étape 3 : informations de l'abonné ---------- */
+function age(birth){ const b=new Date(birth+"T00:00:00"); let a=today.getFullYear()-b.getFullYear(); const m=today.getMonth()-b.getMonth(); if(m<0||(m===0&&today.getDate()<b.getDate())) a--; return a; }
+function step3(){
+  const i=S.info, o=offerById(S.offer);
+  return backbar()+'<section class="panel" aria-labelledby="st"><h1 class="step-title" id="st" tabindex="-1">Vos informations</h1>'+
+    '<p class="step-lede">Elles apparaissent sur votre carte et servent à vous contacter. Données fictives uniquement.</p>'+
+    '<div id="errBox"></div>'+
+    '<form class="fields two" novalidate id="infoForm">'+
+      '<fieldset class="radios full" id="f-civ"><legend>Civilité</legend>'+["Madame","Monsieur","Ne pas préciser"].map(c=>'<label><input type="radio" name="civ" value="'+c+'"'+(i.civ===c?" checked":"")+'> '+c+'</label>').join("")+'</fieldset>'+
+      field("first","Prénom",'autocomplete="given-name" value="'+esc(i.first)+'"')+
+      field("last","Nom",'autocomplete="family-name" value="'+esc(i.last)+'"')+
+      field("birth","Date de naissance",'type="date" autocomplete="bday" max="'+today.toISOString().slice(0,10)+'" value="'+esc(i.birth)+'"',{hint:o.maxAge?"Cette formule est réservée aux moins de "+o.maxAge+" ans au jour de la souscription.":""})+
+      field("phone","Téléphone mobile",'type="tel" autocomplete="tel" inputmode="tel" value="'+esc(i.phone)+'"',{hint:"Format : 06 12 34 56 78"})+
+      field("address","Adresse",'autocomplete="street-address" value="'+esc(i.address)+'"',{full:true,hint:"Pour l'envoi de votre carte physique."})+
+      field("zip","Code postal",'autocomplete="postal-code" inputmode="numeric" maxlength="5" value="'+esc(i.zip)+'"')+
+      field("city","Ville",'autocomplete="address-level2" value="'+esc(i.city)+'"')+
+      field("cinema","Cinéma favori",'',{full:true,optional:true,select:'<option value="">Choisir un cinéma</option>'+CONFIG.cinemas.map(c=>'<option'+(i.cinema===c?" selected":"")+'>'+c+'</option>').join("")})+
+    '</form>'+
+    '<div class="actions"><button type="button" class="btn btn-primary" data-act="next">Continuer</button></div></section>';
+}
+function bind3(){
+  ["first","last","birth","phone","address","zip","city","cinema"].forEach(k=>{ const el=$("#"+k); el.addEventListener(el.tagName==="SELECT"?"change":"input",()=>{ S.info[k]=el.value; save(); }); });
+  app.querySelectorAll('input[name=civ]').forEach(r=>r.onchange=()=>{ S.info.civ=r.value; save(); });
+}
+function valid3(){
+  const i=S.info, o=offerById(S.offer), e=[];
+  if(!i.civ) e.push({id:"civ",msg:"Choisissez une civilité (ou « Ne pas préciser »)."});
+  if(!i.first.trim()) e.push({id:"first",msg:"Indiquez votre prénom."});
+  if(!i.last.trim()) e.push({id:"last",msg:"Indiquez votre nom."});
+  if(!i.birth) e.push({id:"birth",msg:"Indiquez votre date de naissance."});
+  else { const a=age(i.birth);
+    if(a<0||a>120) e.push({id:"birth",msg:"Cette date de naissance n'est pas valide."});
+    else if(o.maxAge&&a>=o.maxAge) e.push({id:"birth",msg:"Vous avez "+a+" ans : la formule "+o.name+" est réservée aux moins de "+o.maxAge+" ans. Revenez à l'étape 1 pour choisir une autre formule."});
+    else if(a<12) e.push({id:"birth",msg:"L'abonné doit avoir au moins 12 ans (règle de démonstration)."}); }
+  if(!i.phone.trim()) e.push({id:"phone",msg:"Indiquez votre numéro de mobile."});
+  else if(!/^0[67](\s?\d{2}){4}$/.test(i.phone.trim())) e.push({id:"phone",msg:"Le numéro doit commencer par 06 ou 07 et compter 10 chiffres."});
+  if(!i.address.trim()) e.push({id:"address",msg:"Indiquez votre adresse."});
+  if(!/^\d{5}$/.test(i.zip)) e.push({id:"zip",msg:"Le code postal doit compter 5 chiffres."});
+  if(!i.city.trim()) e.push({id:"city",msg:"Indiquez votre ville."});
+  return e;
+}
+
+/* ---------- Étape 4 : photo et justificatifs ---------- */
+const MAX=5*1024*1024;
+function step4(){
+  const o=offerById(S.offer);
+  return backbar()+'<section class="panel" aria-labelledby="st"><h1 class="step-title" id="st" tabindex="-1">Photo et justificatifs</h1>'+
+    '<div class="needs"><h3>Avant de commencer : ce dont vous aurez besoin '+demo+'</h3><ul>'+o.docs.map(d=>{const D=CONFIG.docs[d]; return '<li>'+icon(d==="photo"?"camera":"file")+'<span><b>'+D.title+'</b> — '+D.what+' '+D.why+'<br><span class="hint">'+D.formats+'</span></span></li>';}).join("")+'</ul>'+
+    '<p class="note">'+icon("lock","icon-sm")+'<span>Démo : les fichiers restent dans votre navigateur et ne sont envoyés nulle part.</span></p></div>'+
+    '<div id="errBox"></div>'+
+    o.docs.map(d=>upload(d)).join("")+
+    '<div class="actions"><button type="button" class="btn btn-primary" data-act="next">Continuer</button></div></section>';
+}
+function upload(d){
+  const D=CONFIG.docs[d], f=S.files[d], photo=d==="photo";
+  return '<div class="upload'+(f?" has":"")+'" id="f-'+d+'"><h3>'+D.title+'</h3>'+
+    '<div class="up-row'+(photo?"":" doc")+'">'+(photo?'<div class="preview">'+(f?'<img src="'+f.url+'" alt="Aperçu de votre photo">':icon("camera"))+'</div>':'<div class="doc-ico">'+icon("file")+'</div>')+
+    '<div class="up-meta">'+(f?'<p class="fname">'+esc(f.name)+'</p><p class="ok-line">'+icon("check","icon-sm")+(photo?'Photo conforme ('+f.w+' × '+f.h+' px)':'Document ajouté ('+(f.size/1024).toFixed(0)+' Ko)')+'</p>':'<p class="hint">'+D.formats+'</p>')+
+      '<div class="up-btns"><input type="file" class="file-input" id="in-'+d+'" accept="'+(photo?"image/jpeg,image/png":"application/pdf,image/jpeg,image/png")+'" aria-describedby="'+d+'-e">'+
+      '<label for="in-'+d+'" class="btn btn-secondary" role="button" tabindex="0">'+(f?"Remplacer":"Choisir un fichier")+'</label>'+
+      (photo&&!f?'<button type="button" class="btn btn-ghost" data-demo="'+d+'">Photo de démonstration</button>':'')+
+      (!photo&&!f?'<button type="button" class="btn btn-ghost" data-demo="'+d+'">Document de démonstration</button>':'')+
+      (f?'<button type="button" class="btn btn-ghost" data-remove="'+d+'">Retirer</button>':'')+'</div>'+
+    '<p class="err" id="'+d+'-e" role="alert">'+icon("alert")+'<span></span></p></div></div></div>';
+}
+function setUpErr(d,msg){ const box=$("#f-"+d); box.classList.toggle("invalid",!!msg); box.querySelector(".err").style.display=msg?"flex":""; box.querySelector(".err span").textContent=msg||""; }
+function readFile(d,file){
+  if(!file) return;
+  const photo=d==="photo", okTypes=photo?["image/jpeg","image/png"]:["application/pdf","image/jpeg","image/png"];
+  if(!okTypes.includes(file.type)) return setUpErr(d,"Ce format n'est pas accepté ("+(file.name.split(".").pop()||"inconnu").toUpperCase()+"). Choisissez un fichier "+(photo?"JPG ou PNG":"PDF, JPG ou PNG")+".");
+  if(file.size>MAX) return setUpErr(d,"Ce fichier pèse "+(file.size/1048576).toFixed(1).replace(".",",")+" Mo : la limite est de 5 Mo. Réduisez sa taille ou prenez une autre photo.");
+  const r=new FileReader();
+  r.onload=()=>{
+    if(!photo){ S.files[d]={name:file.name,size:file.size}; render(false,'label[for="in-'+d+'"]'); return; }
+    const img=new Image();
+    img.onload=()=>{ if(img.naturalWidth<300||img.naturalHeight<400) return setUpErr(d,"Cette photo est trop petite ("+img.naturalWidth+" × "+img.naturalHeight+" px) : il faut au moins 300 × 400 px pour qu'elle soit nette sur la carte.");
+      S.files[d]={name:file.name,size:file.size,url:r.result,w:img.naturalWidth,h:img.naturalHeight}; render(false,'label[for="in-'+d+'"]'); };
+    img.onerror=()=>setUpErr(d,"Ce fichier image semble endommagé. Essayez avec une autre photo.");
+    img.src=r.result;
+  };
+  r.readAsDataURL(file);
+}
+function demoPhoto(){
+  const c=document.createElement("canvas"); c.width=360; c.height=480; const g=c.getContext("2d");
+  g.fillStyle="#DCE3EE"; g.fillRect(0,0,360,480);
+  g.fillStyle="#7A8BA6"; g.beginPath(); g.arc(180,190,82,0,Math.PI*2); g.fill();
+  g.beginPath(); g.ellipse(180,470,150,150,0,Math.PI,0); g.fill();
+  g.fillStyle="#10131A"; g.font="600 18px Arial"; g.textAlign="center"; g.fillText("PHOTO FICTIVE",180,40);
+  return {name:"photo-demo.png", size:48000, url:c.toDataURL("image/png"), w:360, h:480};
+}
+function bind4(){
+  offerById(S.offer).docs.forEach(d=>{
+    const inp=$("#in-"+d); inp.onchange=()=>readFile(d,inp.files[0]);
+    const lab=app.querySelector('label[for="in-'+d+'"]'); lab.onkeydown=e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); inp.click(); } };
+  });
+  app.querySelectorAll("[data-demo]").forEach(b=>b.onclick=()=>{ const d=b.dataset.demo; S.files[d]=d==="photo"?demoPhoto():{name:"piece-identite-demo.pdf",size:182000}; render(false,'label[for="in-'+d+'"]'); });
+  app.querySelectorAll("[data-remove]").forEach(b=>b.onclick=()=>{ delete S.files[b.dataset.remove]; render(false,'label[for="in-'+b.dataset.remove+'"]'); });
+}
+function valid4(){ return offerById(S.offer).docs.filter(d=>!S.files[d]).map(d=>({id:"in-"+d,box:d,msg:d==="photo"?"Ajoutez votre photo d'identité.":"Ajoutez votre justificatif d'âge."})); }
+
+/* ---------- Étape 5 : récapitulatif financier et paiement simulé ---------- */
+const ibanOk=v=>{ const s=v.replace(/\s/g,"").toUpperCase(); if(!/^FR\d{2}[0-9A-Z]{23}$/.test(s)) return false; const r=(s.slice(4)+s.slice(0,4)).replace(/[A-Z]/g,c=>c.charCodeAt(0)-55); let m=0; for(const ch of r) m=(m*10+ +ch)%97; return m===1; };
+const luhn=v=>{ const s=v.replace(/\s/g,""); if(!/^\d{16}$/.test(s)) return false; let t=0; for(let i=0;i<16;i++){ let n=+s[15-i]; if(i%2){ n*=2; if(n>9) n-=9; } t+=n; } return t%10===0; };
+function step5(){
+  const m=money(), o=m.o, p=S.payment, debit=S.pay==="debit";
+  const rows=[
+    ['Frais d\'adhésion '+demo, m.feeDue<m.fee?'<span class="strike">'+eur(m.fee)+'</span><span class="free">Offerts</span>':eur(m.fee)],
+    debit?['Premier mois<small>du '+fmtDate(today)+' au '+fmtDate(addMonths(today,1))+'</small>', m.free?'<span class="strike">'+eur(o.price)+'</span><span class="free">0,00 €</span>':eur(o.price)]
+         :[CONFIG.cashMonths+' mois au comptant'+(m.free?'<small>dont '+m.free+' mois offert</small>':''), (m.free?'<span class="strike">'+eur(o.price*CONFIG.cashMonths)+'</span>':'')+eur(o.price*(CONFIG.cashMonths-m.free))]
+  ];
+  return backbar()+'<section class="panel" aria-labelledby="st"><h1 class="step-title" id="st" tabindex="-1">Récapitulatif et paiement</h1>'+
+    '<p class="step-lede">Ce que vous payez aujourd\'hui, chaque mois, et jusqu\'à quand vous êtes engagé.</p>'+
+    '<div class="blocks">'+
+      '<div class="mblock today"><p class="k">À payer aujourd\'hui</p><p class="v">'+eur(m.today)+'</p><p class="d">'+(m.today===0?"Rien à régler aujourd'hui.":"Débité à la validation.")+'</p></div>'+
+      (debit?'<div class="mblock monthly"><p class="k">Puis chaque mois</p><p class="v">'+eur(m.monthly)+'</p><p class="d">À partir du '+fmtDate(m.firstDebit)+', '+CONFIG.debitDay.label+' '+demo+'</p></div>'
+            :'<div class="mblock monthly"><p class="k">Mensualités</p><p class="v">Aucune</p><p class="d">Tout est réglé aujourd\'hui.</p></div>')+
+      '<div class="mblock commit"><p class="k">Engagement</p><p class="v">'+m.commit+' mois</p><p class="d">Jusqu\'au '+fmtDate(m.end)+'. '+(debit?"Ensuite, résiliable à tout moment.":"")+'</p></div>'+
+    '</div>'+
+    '<table class="money"><caption>Détail</caption><tbody>'+rows.map(r=>'<tr><th scope="row">'+r[0]+'</th><td>'+r[1]+'</td></tr>').join("")+
+      '<tr class="total"><th scope="row">Total aujourd\'hui</th><td>'+eur(m.today)+'</td></tr></tbody></table>'+
+    (debit?'<p class="note">'+icon("info","icon-sm")+'<span>Montant total sur la durée d\'engagement : <b>'+eur(m.total)+'</b> ('+(m.free?"1 mois à 0,00 € + ":"")+(m.commit-1)+' × '+eur(o.price)+').</span></p>':'')+
+    '</section>'+
+    '<section class="panel" aria-labelledby="payH"><h2 class="step-title" id="payH" style="font-size:24px;line-height:28px">'+(debit?"Mandat de prélèvement SEPA":"Carte bancaire")+'</h2>'+
+    '<p class="secure">'+icon("lock","icon-sm")+'Paiement simulé : aucune donnée n\'est transmise.</p>'+
+    '<div id="errBox"></div>'+
+    '<form class="fields two" novalidate>'+
+      (debit
+        ? field("holder","Titulaire du compte",'autocomplete="name" value="'+esc(p.holder)+'"',{full:true})+
+          field("iban","IBAN",'autocomplete="off" inputmode="text" value="'+esc(p.iban)+'"',{full:true,hint:'IBAN français, 27 caractères. <button type="button" class="link" data-act="fillIban">Utiliser un IBAN de démonstration</button>'})+
+          '<label class="check full" id="f-mandate"><input type="checkbox" id="mandate"'+(p.mandate?" checked":"")+'><span>J\'autorise le prélèvement mensuel de '+eur(o.price)+' sur ce compte pour mon abonnement '+esc(o.name)+'.</span></label>'
+        : field("cardNumber","Numéro de carte",'autocomplete="off" inputmode="numeric" value="'+esc(p.cardNumber)+'"',{full:true,hint:'16 chiffres. <button type="button" class="link" data-act="fillCard">Utiliser une carte de démonstration</button>'})+
+          field("cardExp","Date d'expiration",'autocomplete="off" inputmode="numeric" placeholder="MM/AA" value="'+esc(p.cardExp)+'"',{hint:"Format MM/AA"})+
+          field("cardCvc","Cryptogramme",'autocomplete="off" inputmode="numeric" maxlength="3" value="'+esc(p.cardCvc)+'"',{hint:"3 chiffres au dos de la carte"}))+
+      '<label class="check full" id="f-cgv"><input type="checkbox" id="cgv"'+(p.cgv?" checked":"")+'><span>J\'accepte les conditions générales d\'abonnement UGC Illimité (document non fourni dans la démo).</span></label>'+
+    '</form>'+
+    '<div class="actions"><button type="button" class="btn btn-primary" data-act="next">'+icon("lock","icon-sm")+(m.today>0?"Payer "+eur(m.today)+" et souscrire":"Valider ma souscription")+'</button></div></section>';
+}
+function bind5(){
+  const p=S.payment;
+  ["holder","iban","cardNumber","cardExp","cardCvc"].forEach(k=>{ const el=$("#"+k); if(el) el.oninput=()=>{ let v=el.value;
+    if(k==="iban") v=v.toUpperCase().replace(/[^0-9A-Z]/g,"").slice(0,27).replace(/(.{4})/g,"$1 ").trim();
+    if(k==="cardNumber") v=v.replace(/\D/g,"").slice(0,16).replace(/(\d{4})/g,"$1 ").trim();
+    if(k==="cardExp"){ v=v.replace(/\D/g,"").slice(0,4); if(v.length>2) v=v.slice(0,2)+"/"+v.slice(2); }
+    if(k==="cardCvc") v=v.replace(/\D/g,"").slice(0,3);
+    if(v!==el.value) el.value=v; p[k]=v; save(); }; });
+  ["mandate","cgv"].forEach(k=>{ const el=$("#"+k); if(el) el.onchange=()=>{ p[k]=el.checked; save(); }; });
+}
+function valid5(){
+  const p=S.payment, e=[];
+  if(S.pay==="debit"){
+    if(!p.holder.trim()) e.push({id:"holder",msg:"Indiquez le nom du titulaire du compte."});
+    if(!p.iban) e.push({id:"iban",msg:"Indiquez votre IBAN."});
+    else if(!ibanOk(p.iban)) e.push({id:"iban",msg:"Cet IBAN n'est pas valide : vérifiez les 27 caractères (il commence par FR)."});
+    if(!p.mandate) e.push({id:"mandate",msg:"Autorisez le prélèvement pour continuer."});
+  } else {
+    if(!luhn(p.cardNumber)) e.push({id:"cardNumber",msg:"Ce numéro de carte n'est pas valide : vérifiez les 16 chiffres."});
+    const m=p.cardExp.match(/^(\d{2})\/(\d{2})$/);
+    if(!m||+m[1]<1||+m[1]>12) e.push({id:"cardExp",msg:"Indiquez la date d'expiration au format MM/AA."});
+    else if(new Date(2000+ +m[2], +m[1], 0)<today) e.push({id:"cardExp",msg:"Cette carte a expiré : utilisez une carte valide."});
+    if(!/^\d{3}$/.test(p.cardCvc)) e.push({id:"cardCvc",msg:"Le cryptogramme compte 3 chiffres."});
+  }
+  if(!p.cgv) e.push({id:"cgv",msg:"Acceptez les conditions générales d'abonnement."});
+  return e;
+}
+
+/* ---------- Étape 6 : confirmation et carte dématérialisée ---------- */
+function qr(seed){
+  let h=0; for(const c of seed) h=(h*31+c.charCodeAt(0))>>>0;
+  const rnd=()=>{ h^=h<<13; h>>>=0; h^=h>>17; h^=h<<5; h>>>=0; return h/4294967296; };
+  let cells=""; const N=21;
+  const finder=(x,y)=>'<rect x="'+x+'" y="'+y+'" width="7" height="7" fill="#061A55"/><rect x="'+(x+1)+'" y="'+(y+1)+'" width="5" height="5" fill="#fff"/><rect x="'+(x+2)+'" y="'+(y+2)+'" width="3" height="3" fill="#061A55"/>';
+  for(let y=0;y<N;y++) for(let x=0;x<N;x++){ const inF=(x<8&&y<8)||(x>12&&y<8)||(x<8&&y>12); if(!inF&&rnd()>.5) cells+='<rect x="'+x+'" y="'+y+'" width="1" height="1" fill="#061A55"/>'; }
+  return '<svg class="qr" viewBox="0 0 21 21" role="img" aria-label="QR code fictif de la carte" shape-rendering="crispEdges">'+cells+finder(0,0)+finder(14,0)+finder(0,14)+'</svg>';
+}
+function step6(){
+  const m=money(), o=m.o, i=S.info, f=S.files.photo;
+  return '<section class="panel" aria-labelledby="st"><div class="success-head"><span class="ok">'+icon("check")+'</span><div><h1 class="step-title" id="st" tabindex="-1">Bienvenue dans UGC Illimité</h1><p class="step-lede" style="margin-top:0">Souscription simulée · référence fictive <b>'+S.ref+'</b></p></div></div>'+
+    '<div class="next"><div><p class="k">Prochaine étape</p><h3>Réservez votre première séance</h3><p>Votre carte dématérialisée est active dès maintenant : présentez-la (ou réservez avec) dans l\'application UGC ou sur le site, rubrique Mon compte.</p></div>'+
+      '<button type="button" class="btn btn-primary" data-act="book">'+icon("ticket")+'Réserver une séance</button></div>'+
+    '<div class="dcard" role="group" aria-label="Carte dématérialisée UGC Illimité, données fictives">'+
+      '<span class="logo-slot" aria-hidden="true">LOGO UGC</span>'+
+      '<div class="ph">'+(f?'<img src="'+f.url+'" alt="">':'')+'</div>'+
+      '<div class="who"><b>'+esc(i.first+" "+i.last)+'</b><span>'+esc(o.name)+'</span><span>N° '+S.ref+'</span></div>'+
+      '<div class="bottom"><span style="font:400 11px/14px var(--font);color:#D5D9E8">Valable dès le '+today.toLocaleDateString("fr-FR")+'</span>'+qr(S.ref)+'</div>'+
+    '</div>'+
+    '<div class="actions" style="justify-content:center"><button type="button" class="btn btn-secondary" data-act="wallet">'+icon("phone")+'Ajouter au téléphone</button><button type="button" class="btn btn-secondary" data-act="mail">'+icon("mail")+'Recevoir par e-mail</button></div>'+
+    '</section>'+
+    '<section class="panel" aria-labelledby="tl"><h2 class="step-title" id="tl" style="font-size:24px;line-height:28px">Et ensuite&nbsp;?</h2><ol class="timeline">'+
+      '<li><span class="dot">'+icon("check","icon-sm")+'</span><div><b>Aujourd\'hui</b><span>Carte dématérialisée active. Vous pouvez réserver tout de suite. Payé : '+eur(m.today)+'.</span></div></li>'+
+      '<li><span class="dot">'+icon("mail","icon-sm")+'</span><div><b>Dans quelques jours</b><span>Réception de votre carte physique à l\'adresse indiquée.</span></div></li>'+
+      (S.pay==="debit"?'<li><span class="dot">'+icon("calendar","icon-sm")+'</span><div><b>'+fmtDate(m.firstDebit)+'</b><span>Premier prélèvement de '+eur(m.monthly)+'.</span></div></li>':'')+
+      '<li><span class="dot">'+icon("calendar","icon-sm")+'</span><div><b>'+fmtDate(m.end)+'</b><span>Fin de l\'engagement de '+m.commit+' mois.</span></div></li>'+
+    '</ol><button type="button" class="link" data-act="restart" style="justify-self:start">Recommencer la démo</button></section>';
+}
+
+/* ---------- Navigation ---------- */
+const VIEWS={1:[step1,bind1,()=>[]],2:[step2,bind2,valid2],3:[step3,bind3,valid3],4:[step4,bind4,valid4],5:[step5,bind5,valid5],6:[step6,()=>{},()=>[]]};
+function render(focusTitle,focusSel){
+  if(!S.offer||S.step===0){ viewOffers(); if(focusTitle) { $("#pageTitle").focus(); scrollTo(0,0); } return; }
+  const [view,bind]=VIEWS[S.step];
+  app.innerHTML=shell(view()); bind();
+  if(focusTitle){ scrollTo(0,0); $("#st").focus({preventScroll:true}); }
+  else if(focusSel){ const el=app.querySelector(focusSel); if(el) el.focus(); }
+}
+function showErrors(errs){
+  app.querySelectorAll(".field.invalid,.upload.invalid,.check.invalid").forEach(f=>f.classList.remove("invalid"));
+  app.querySelectorAll('[aria-invalid="true"]').forEach(i=>i.setAttribute("aria-invalid","false"));
+  errs.forEach(e=>{ if(e.box) setUpErr(e.box,e.msg); else if($("#f-"+e.id+" .err")) setErr(e.id,e.msg); else { const c=$("#f-"+e.id); if(c) c.classList.add("invalid"); } });
+  const box=$("#errBox"); if(!box) return;
+  box.innerHTML=errs.length?errorSummary(errs):"";
+  if(errs.length){ const s=$("#errSum"); s.focus(); s.querySelectorAll("a").forEach(a=>a.onclick=ev=>{ ev.preventDefault(); const t=$("#"+a.getAttribute("href").slice(1)); if(t){ t.focus(); t.scrollIntoView({block:"center"}); } }); }
+}
+app.addEventListener("click",e=>{
+  const b=e.target.closest("[data-act]"); if(!b) return;
+  const act=b.dataset.act;
+  if(act==="next"){ const errs=VIEWS[S.step][2](); if(errs.length) return showErrors(errs);
+    if(S.step===5) S.ref="UI-DEMO-"+Math.random().toString(36).slice(2,6).toUpperCase()+"-"+String(Math.floor(Math.random()*9000)+1000);
+    S.step++; save(); render(true); }
+  else if(act==="back"){ S.step--; save(); render(true); }
+  else if(act==="offers"||act==="change"){ S.step=act==="change"?1:0; save(); render(true); }
+  else if(act==="restart"){ S=blank(); save(); render(true); }
+  else if(act==="fillIban"){ S.payment.iban="FR76 3000 6000 0112 3456 7890 189"; save(); render(false,"#iban"); }
+  else if(act==="fillCard"){ S.payment.cardNumber="4970 1000 0000 0063"; S.payment.cardExp="12/29"; S.payment.cardCvc="123"; save(); render(false,"#cardNumber"); }
+  else if(act==="forgot") toast("Démo : un lien de réinitialisation serait envoyé par e-mail.");
+  else if(act==="quiz") toast("Démo : le test en 3 questions n'est pas simulé dans ce prototype.");
+  else if(act==="book") toast("Démo : ouverture du parcours de réservation de séance.");
+  else if(act==="wallet") toast("Démo : la carte serait ajoutée au portefeuille du téléphone.");
+  else if(act==="mail") toast("Démo : la carte serait envoyée à "+(S.account.email||"votre adresse e-mail")+".");
+});
+render(false);
+})();
+</script>
+</body>
+</html>
