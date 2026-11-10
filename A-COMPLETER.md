@@ -3,11 +3,11 @@
 Chaque point apparaît sur le site, surligné en jaune, sous la forme `[À COMPLÉTER PAR CAROLINE]`.
 Remplacez le texte entre crochets (et la balise `<span class="todo">` qui l'entoure), ou supprimez la phrase.
 
-## Étude de cas 1 — Énergie et showroom (`cas-siplec.html`)
-- [ ] Durée du projet (en-tête « Durée »)
+## Étude de cas 1 — Gestion de flotte (`cas-siplec.html`)
+- [ ] Temps passé au total (l'historique montre seulement une journée de publication pour le prototype)
+- [ ] Ce que vous avez transmis à Claude Code pour construire le prototype (note de cadrage, brief écrit, consignes de charte ?)
 - [ ] Deux ou trois exemples concrets de ce que vous avez fait corriger ou refusé à l'IA
-- [ ] Nombre d'échanges avec l'IA (ordre de grandeur)
-- [ ] Gemini et ChatGPT : le projet d'origine indique les avoir utilisés pour explorer des pistes. Confirmer ou retirer
+- [ ] Vérifications faites sur le rendu mobile et l'accessibilité
 
 ## Étude de cas 2 — Supports marketing B2B (`cas-amundi.html`)
 - [ ] Durée du projet
