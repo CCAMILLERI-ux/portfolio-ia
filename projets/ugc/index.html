@@ -1,0 +1,1049 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quel film ce soir ?</title>
+<meta name="description" content="Prototype conceptuel non officiel – Caroline Camilleri. Assistant de choix de séance dans l'univers UGC.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Barlow+Condensed:wght@400;500;600&display=swap">
+<style>
+/* Tokens : UGC-DESIGN-SYSTEM.md §3, §5, §7, §28 */
+:root{
+  --ugc-navy:#061A55; --ugc-blue:#123B9B; --ugc-electric-blue:#1769E0; --ugc-light-blue:#35B9E9;
+  --white:#FFFFFF; --background:#F5F6F8; --surface:#FFFFFF; --surface-subtle:#F0F2F5;
+  --text-primary:#10131A; --text-secondary:#60646C; --text-muted:#858A94;
+  --border:#E2E5EA; --border-strong:#C7CBD2;
+  --cinema-black:#090B12;
+  --success:#18794E; --warning:#A15C00; --error:#C62828; --info:#1769E0;
+
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-6:24px; --space-8:32px; --space-12:48px; --space-16:64px; --space-20:80px;
+  --radius-xs:2px; --radius-sm:4px; --radius-md:8px; --radius-lg:12px; --radius-pill:999px;
+  --shadow-card:0 4px 16px rgba(0,0,0,.08);
+  --shadow-overlay:0 12px 32px rgba(0,0,0,.18);
+  --focus-ring:0 0 0 3px rgba(23,105,224,.25);
+  --duration-fast:120ms; --duration-normal:200ms;
+
+  --font:"Inter", Arial, Helvetica, sans-serif;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0; background:var(--background); color:var(--text-primary); font:400 16px/24px var(--font)}
+h1,h2,h3,p{margin:0}
+.icon{width:20px; height:20px; flex:none; fill:none; stroke:currentColor; stroke-width:1.75; stroke-linecap:round; stroke-linejoin:round}
+.icon-sm{width:16px; height:16px}
+:focus-visible{outline:3px solid var(--ugc-electric-blue); outline-offset:2px}
+.sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0}
+
+/* ---------- Page (grille §6, mobile first) ---------- */
+.wrap{max-width:1280px; margin:0 auto; padding:var(--space-8) var(--space-4) var(--space-12); display:grid; gap:var(--space-8)}
+.page-head{display:grid; gap:var(--space-3); max-width:760px}
+.eyebrow{font:600 12px/16px var(--font); letter-spacing:.08em; text-transform:uppercase; color:var(--ugc-blue)}
+h1{font:700 32px/40px var(--font)}
+.lede{color:var(--text-secondary)}
+.disclaimer{display:inline-flex; align-items:center; gap:var(--space-2); justify-self:start; min-height:32px; padding:var(--space-1) var(--space-3);
+  background:var(--surface); border:1px solid var(--border-strong); border-radius:var(--radius-sm); font:600 14px/20px var(--font); color:var(--text-primary)}
+.disclaimer .icon{color:var(--ugc-blue)}
+.layout{display:grid; grid-template-columns:minmax(0,1fr); gap:var(--space-8); align-items:start}
+.folio{display:flex; flex-wrap:wrap; gap:var(--space-2) var(--space-6); padding-bottom:var(--space-3); border-bottom:1px solid var(--border); font:600 14px/20px var(--font)}
+.folio a{color:var(--ugc-blue); text-decoration:none}
+.folio a:hover{text-decoration:underline}
+.folio a[aria-current="page"]{color:var(--text-primary); cursor:default; text-decoration:none}
+
+/* ---------- Démo : téléphone ----------
+   Habillage relevé sur les captures de l'app mobile UGC (fond nuit, pilules, bleu cyan,
+   capitales grasses). Tokens d'app ci-dessous ; le reste vient du design system. */
+.screen{
+  --app-bg:#04072B; --app-surface:#1A2050; --app-surface-2:#10163F; --app-line:rgba(255,255,255,.14);
+  --app-cyan:#0A9EF0; --app-badge:#2A10E8; --app-ink:#04072B; --app-light:#E5E8F0; --app-link:#0067B8;
+  --app-text:#FFFFFF; --app-muted:#A9AECB;
+}
+.device{width:100%; max-width:420px; justify-self:center}
+.screen{background:var(--app-bg); color:var(--app-text); border-radius:var(--radius-lg); overflow:clip; display:flex; flex-direction:column}
+.screen :focus-visible{outline:3px solid var(--app-cyan); outline-offset:2px}
+.status{display:none}
+.caps{text-transform:uppercase; letter-spacing:.04em}
+
+/* Header : logo centré */
+.app-header{display:flex; justify-content:center; padding:var(--space-6) var(--space-4) var(--space-4)}
+.logo-slot{display:inline-flex; align-items:center; justify-content:center; height:40px; padding:0 var(--space-4);
+  border:1px dashed rgba(255,255,255,.55); border-radius:var(--radius-sm); font:700 12px/16px var(--font); letter-spacing:.08em; color:var(--white); white-space:nowrap}
+
+/* Barre cinémas | jours (affichage) */
+.picker{display:grid; grid-template-columns:1fr 1fr; gap:2px; margin:0 var(--space-4); border-radius:var(--radius-md); overflow:hidden}
+.picker div{display:flex; align-items:center; gap:var(--space-3); min-height:56px; padding:var(--space-2) var(--space-4); background:var(--app-surface); font:400 14px/20px var(--font)}
+.picker .icon{width:24px; height:24px}
+
+/* Pilules de navigation */
+.pills{display:flex; gap:var(--space-3); padding:var(--space-4) var(--space-4) 0; overflow-x:auto; scrollbar-width:none}
+.pill{display:inline-flex; align-items:center; min-height:44px; padding:0 var(--space-4); border:2px solid var(--white); border-radius:var(--radius-lg);
+  color:var(--white); text-decoration:none; font:800 14px/20px var(--font); letter-spacing:.06em; text-transform:uppercase; white-space:nowrap}
+.pill:hover{background:rgba(255,255,255,.08)}
+.pill.on{background:var(--app-cyan); border-color:var(--app-cyan); color:var(--app-ink)}
+
+.app{padding:var(--space-6) var(--space-4); display:grid; gap:var(--space-6); align-content:start}
+
+/* Formulaire */
+.ask{display:grid; gap:var(--space-3)}
+.ask label{font:800 20px/28px var(--font); text-transform:uppercase}
+.ask .hint{font:400 14px/20px var(--font); color:var(--app-muted); margin-top:calc(-1 * var(--space-2))}
+textarea{width:100%; min-height:96px; resize:vertical; padding:var(--space-3) var(--space-4); background:var(--app-surface); color:var(--white);
+  border:2px solid transparent; border-radius:var(--radius-md); font:400 16px/24px var(--font); transition:border-color var(--duration-fast)}
+textarea:focus{outline:none; border-color:var(--app-cyan)}
+.examples-k{font:800 12px/16px var(--font); letter-spacing:.08em; text-transform:uppercase; color:var(--app-muted)}
+.chips{display:flex; flex-wrap:wrap; gap:var(--space-2)}
+.chip{min-height:44px; padding:var(--space-2) var(--space-3); text-align:left; background:transparent; color:var(--white);
+  border:2px solid rgba(255,255,255,.55); border-radius:var(--radius-lg); font:400 14px/20px var(--font); cursor:pointer;
+  transition:border-color var(--duration-fast), background var(--duration-fast)}
+.chip:hover{border-color:var(--white); background:rgba(255,255,255,.08)}
+
+/* Boutons */
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:var(--space-2); min-height:52px; padding:0 var(--space-6);
+  border-radius:var(--radius-lg); font:800 15px/20px var(--font); letter-spacing:.06em; text-transform:uppercase; cursor:pointer;
+  transition:background var(--duration-fast), color var(--duration-fast), border-color var(--duration-fast)}
+.btn-primary{background:var(--app-cyan); color:var(--app-ink); border:2px solid var(--app-cyan)}
+.btn-primary:hover{background:#3DB4F5; border-color:#3DB4F5}
+.btn-primary:active{background:#0886CC; border-color:#0886CC}
+.btn-secondary{background:var(--app-surface); color:var(--white); border:2px solid var(--app-surface)}
+.btn-secondary:hover{background:#262D66; border-color:#262D66}
+.btn-outline{background:transparent; color:var(--app-ink); border:2px solid var(--app-ink)}
+.btn-outline:hover{background:rgba(4,7,43,.06)}
+.btn:disabled{background:#C9CEDC; color:#5D6380; border-color:#C9CEDC; cursor:not-allowed}
+.btn-block{width:100%}
+
+.engine{display:flex; flex-wrap:wrap; justify-content:space-between; gap:var(--space-2); font:400 12px/16px var(--font); color:var(--app-muted)}
+.engine-on{display:inline-flex; align-items:center; gap:var(--space-2)}
+.engine-on .dot{width:8px; height:8px; border-radius:var(--radius-pill); background:#3DD68C}
+
+/* Étiquettes « Compris » : badges façon « NOUVEAU » */
+.understood{display:flex; flex-wrap:wrap; gap:var(--space-2); align-items:center}
+.understood:empty{display:none}
+.understood .k{display:inline-flex; align-items:center; gap:var(--space-1); font:800 12px/16px var(--font); letter-spacing:.08em; text-transform:uppercase; color:var(--app-muted); margin-right:var(--space-1)}
+.understood .k .icon{color:#3DD68C}
+.badge{display:inline-flex; align-items:center; min-height:24px; padding:var(--space-1) var(--space-2); border-radius:var(--radius-sm); font:800 12px/16px var(--font); letter-spacing:.06em; text-transform:uppercase}
+.badge-tag{background:var(--app-badge); color:var(--white)}
+
+/* Résultats */
+.results{display:grid; gap:var(--space-4)}
+.results-head{font:800 20px/28px var(--font); text-transform:uppercase}
+.card{background:var(--app-surface-2); border-radius:var(--radius-lg); padding:var(--space-4); display:grid; gap:var(--space-4)}
+.card-top{display:grid; grid-template-columns:104px minmax(0,1fr); gap:var(--space-4)}
+.poster{position:relative; aspect-ratio:2/3; border-radius:var(--radius-md); overflow:hidden; background:var(--cinema-black)}
+.poster svg{display:block; width:100%; height:100%}
+.poster.is-photo{container-type:inline-size}
+.poster.is-photo img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block}
+.poster.is-photo::after{content:""; position:absolute; inset:45% 0 0; background:linear-gradient(transparent,rgba(0,0,0,.8))}
+.p-credit{position:absolute; z-index:1; top:7cqw; left:7cqw; font:600 4cqw/1 var(--font); letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.85)}
+.p-title{position:absolute; z-index:1; left:7cqw; right:7cqw; bottom:6cqw; font:700 10.5cqw/1.1 var(--font); letter-spacing:.02em; color:var(--white); text-shadow:0 1px 4px rgba(0,0,0,.5)}
+.poster .age{z-index:2}
+.age{position:absolute; right:6px; bottom:6px; display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px; border-radius:var(--radius-pill);
+  background:var(--white); color:var(--app-ink); font:800 11px/1 var(--font)}
+.card h3{font:800 18px/24px var(--font); text-transform:uppercase}
+.meta{display:flex; flex-wrap:wrap; align-items:center; gap:var(--space-1) var(--space-2); margin-top:var(--space-1); font:700 14px/20px var(--font)}
+.meta i{width:6px; height:6px; border-radius:var(--radius-pill); background:var(--app-muted)}
+.public{font:700 13px/18px var(--font); color:var(--app-muted); margin-top:var(--space-1)}
+.why{font:400 14px/20px var(--font); margin-top:var(--space-2); color:#DADDEE}
+.why b{font-weight:700; color:var(--white)}
+.cine-name{font:800 14px/20px var(--font); text-transform:uppercase}
+.cine-sub{font:400 13px/18px var(--font); color:var(--app-muted)}
+/* Tuile séance façon app : heure dominante, fin, version, salle */
+.showtime{background:var(--white); color:var(--app-ink); border-radius:var(--radius-lg); box-shadow:0 4px 16px rgba(0,0,0,.25); display:grid; text-align:center; max-width:200px}
+.showtime .st-top{padding:var(--space-3) var(--space-3) var(--space-2)}
+.time{display:block; font:800 28px/32px var(--font); font-variant-numeric:tabular-nums}
+.end{display:block; font:400 13px/18px var(--font)}
+.st-tags{display:flex; justify-content:space-around; gap:var(--space-2); margin-top:var(--space-2); font:800 13px/18px var(--font); letter-spacing:.04em}
+.st-tags .salle{color:var(--app-link)}
+.st-foot{display:flex; align-items:center; justify-content:center; gap:var(--space-2); padding:var(--space-2); border-top:1px solid #D5D9E4; font:700 12px/16px var(--font); color:#4A5070}
+.seats-low{color:#A15C00}
+.slot{display:grid; gap:var(--space-3)}
+
+/* Parcours réservation : écran clair façon « séances » */
+.search-view,.book-view{display:grid; gap:var(--space-6)}
+.search-view[hidden],.book-view[hidden]{display:none}
+.screen.is-light .app{background:var(--app-light); color:var(--app-ink)}
+.screen.is-light .tabbar,.screen.is-light .app-header,.screen.is-light .picker,.screen.is-light .pills{display:none}
+.screen.is-light .app-note{color:#4A5070; border-top-color:#C9CEDC}
+.book-head{display:flex; align-items:center; justify-content:space-between; gap:var(--space-3); margin:calc(-1 * var(--space-6)) calc(-1 * var(--space-4)) 0;
+  padding:var(--space-4); background:var(--app-bg); color:var(--white)}
+.book-head h2{font:800 20px/28px var(--font); text-transform:uppercase}
+.close{display:inline-flex; align-items:center; justify-content:center; width:52px; height:52px; flex:none; border:0; border-radius:var(--radius-lg);
+  background:var(--app-surface); color:var(--white); cursor:pointer}
+.close:hover{background:#262D66}
+.close .icon{width:26px; height:26px}
+.book-sub{display:flex; flex-wrap:wrap; gap:var(--space-1) var(--space-3); font:700 13px/18px var(--font); color:var(--app-muted)}
+/* Bande d'étapes façon sélecteur de dates */
+.steps{display:grid; grid-template-columns:repeat(3,1fr); margin:calc(-1 * var(--space-6)) calc(-1 * var(--space-4)) 0; padding:0; list-style:none; background:var(--white)}
+.steps li{display:grid; justify-items:center; padding:var(--space-3) var(--space-2); border-bottom:4px solid transparent; color:#9AA0B8; font:800 12px/16px var(--font); text-transform:uppercase; letter-spacing:.04em}
+.steps li b{font:800 24px/28px var(--font)}
+.steps li.done{color:var(--app-ink)}
+.steps li[aria-current="step"]{color:var(--app-link); border-bottom-color:var(--app-cyan)}
+.back{display:inline-flex; align-items:center; gap:var(--space-2); justify-self:start; min-height:44px; padding:0; border:0; background:none;
+  color:var(--app-link); font:800 13px/20px var(--font); letter-spacing:.04em; text-transform:uppercase; cursor:pointer}
+.back:hover{text-decoration:underline}
+.step-title{font:800 20px/28px var(--font); text-transform:uppercase}
+.step-title:focus{outline:none}
+.step-hint{font:400 14px/20px var(--font); color:#4A5070; margin-top:calc(-1 * var(--space-4))}
+.panel-w{background:var(--white); border-radius:var(--radius-lg); box-shadow:0 4px 16px rgba(4,7,43,.08); padding:var(--space-4)}
+
+/* Quantité */
+.qty{display:flex; align-items:center; justify-content:space-between; gap:var(--space-4)}
+.qty-label{font:800 16px/22px var(--font); text-transform:uppercase}
+.qty-sub{display:block; font:400 14px/20px var(--font); color:#4A5070}
+.stepper{display:flex; align-items:center; gap:var(--space-2)}
+.stepper .btn{width:52px; padding:0}
+.stepper output{min-width:32px; text-align:center; font:800 24px/28px var(--font); font-variant-numeric:tabular-nums}
+
+/* Plan de salle */
+.hall{display:grid; gap:var(--space-3)}
+.screen-bar{text-align:center; padding-bottom:var(--space-2); border-bottom:4px solid var(--app-cyan); font:800 12px/16px var(--font); letter-spacing:.08em; text-transform:uppercase; color:#4A5070}
+.seat-grid{display:grid; grid-template-columns:16px repeat(4,minmax(0,1fr)) 12px repeat(4,minmax(0,1fr)); gap:var(--space-2) var(--space-1); align-items:center}
+.row-k{font:800 12px/16px var(--font); color:#4A5070; text-align:center}
+.seat{aspect-ratio:1; width:100%; max-width:40px; justify-self:center; display:inline-flex; align-items:center; justify-content:center; padding:0;
+  background:var(--white); border:2px solid var(--app-ink); border-radius:var(--radius-md) var(--radius-md) var(--radius-sm) var(--radius-sm); color:var(--app-ink); cursor:pointer;
+  transition:background var(--duration-fast), color var(--duration-fast)}
+.seat:hover{background:#EEF1F8}
+.seat[aria-pressed="true"]{background:var(--app-cyan); border-color:var(--app-cyan); color:var(--app-ink)}
+.seat:disabled{background:#D5D9E4; border-color:#D5D9E4; color:#6B7190; cursor:not-allowed}
+.seat .icon{width:14px; height:14px; stroke-width:2.5}
+.legend{display:flex; flex-wrap:wrap; gap:var(--space-2) var(--space-4); font:400 12px/16px var(--font); color:#4A5070}
+.legend span{display:inline-flex; align-items:center; gap:var(--space-2)}
+.legend .seat{width:20px; height:20px; cursor:default; pointer-events:none}
+.legend .seat.sel{background:var(--app-cyan); border-color:var(--app-cyan)}
+.legend .seat.taken{background:#D5D9E4; border-color:#D5D9E4; color:#6B7190}
+.seat-status{font:700 14px/20px var(--font)}
+.seat-status .warn{display:block; font-weight:400; color:#A15C00}
+
+/* Récapitulatif et confirmation */
+.recap-box{display:grid; gap:var(--space-4)}
+.recap-box.success{border-top:4px solid #18794E}
+.confirm-head{display:flex; align-items:center; gap:var(--space-3)}
+.confirm-head .ok{display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; flex:none; border-radius:var(--radius-pill); background:#18794E; color:var(--white)}
+.ref{font:400 14px/20px var(--font); color:#4A5070}
+.ref b{font-weight:800; color:var(--app-ink); letter-spacing:.06em}
+.recap{display:grid; grid-template-columns:auto minmax(0,1fr); gap:var(--space-2) var(--space-4); margin:0; font:400 14px/20px var(--font)}
+.recap dt{color:#4A5070}
+.recap dd{margin:0; font-weight:700}
+.book-note{display:flex; gap:var(--space-2); align-items:flex-start; font:400 14px/20px var(--font); color:#4A5070}
+.book-note .icon{margin-top:2px}
+.actions{display:grid; gap:var(--space-3)}
+
+/* État vide */
+.empty{display:grid; gap:var(--space-3); padding:var(--space-4); background:var(--app-surface-2); border-radius:var(--radius-lg)}
+.empty-line{display:flex; gap:var(--space-2); align-items:flex-start}
+.empty-line .icon{color:#F2B33D; margin-top:2px}
+.empty .btn{justify-self:start}
+
+/* Grille « À l'affiche » façon app : 2 colonnes d'affiches */
+.carousel{display:grid; gap:var(--space-4); scroll-margin-top:var(--space-4)}
+.section-head{display:flex; align-items:baseline; justify-content:space-between; gap:var(--space-3)}
+.section-head h2{font:800 20px/28px var(--font); text-transform:uppercase}
+.section-head span{font:400 12px/16px var(--font); color:var(--app-muted)}
+.rail{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--space-6) var(--space-4); margin:0; padding:0; list-style:none}
+.rail li{position:relative; padding-top:var(--space-3)}
+.rail .poster{border-radius:var(--radius-lg)}
+.rail .badge{position:absolute; top:0; left:var(--space-3); z-index:1}
+.rail h3{font:800 13px/18px var(--font); text-transform:uppercase; margin-top:var(--space-2)}
+.rail p{font:400 12px/16px var(--font); color:var(--app-muted)}
+
+/* Barre d'onglets façon app, bouton recherche central */
+.tabbar{position:sticky; bottom:0; display:grid; grid-template-columns:repeat(5,1fr); align-items:end; padding:var(--space-3) var(--space-1) var(--space-3); background:var(--app-bg)}
+.tabbar .curve{position:absolute; left:0; right:0; top:0; width:100%; height:18px; pointer-events:none}
+.tab{position:relative; display:grid; justify-items:center; gap:var(--space-1); font:800 10px/14px var(--font); letter-spacing:.06em; text-transform:uppercase; color:var(--white)}
+.tab .icon{width:26px; height:26px}
+.fab{justify-self:center; display:inline-flex; align-items:center; justify-content:center; width:60px; height:60px; margin-top:-28px; border:0; border-radius:var(--radius-lg);
+  background:var(--app-cyan); color:var(--white); cursor:pointer}
+.fab .icon{width:30px; height:30px; stroke-width:2.5}
+.fab:hover{background:#3DB4F5}
+
+.app-note{display:flex; gap:var(--space-2); align-items:flex-start; font:400 12px/16px var(--font); color:var(--app-muted); padding-top:var(--space-4); border-top:1px solid var(--app-line)}
+
+/* ---------- Mode « Site web » ----------
+   Même DOM et même logique que l'app. Habillage relevé sur une capture de ugc.fr : page blanche,
+   double en-tête (barre nuit + rubriques), capitales condensées, CTA rouge à angles droits,
+   affiches sans arrondi, pied de page nuit. */
+.modes{display:inline-flex; justify-self:start; border:1px solid var(--ugc-blue); border-radius:var(--radius-sm); overflow:hidden}
+.mode{display:inline-flex; align-items:center; gap:var(--space-2); min-height:44px; padding:0 var(--space-4); border:0; background:var(--white); color:var(--ugc-blue);
+  font:700 14px/20px var(--font); cursor:pointer; transition:background var(--duration-fast)}
+.mode+.mode{border-left:1px solid var(--ugc-blue)}
+.mode:hover{background:var(--surface-subtle)}
+.mode[aria-pressed="true"]{background:var(--ugc-blue); color:var(--white)}
+.browser,.web-header,.web-hero,.web-footer{display:none}
+.layout.is-web{grid-template-columns:minmax(0,1fr)}
+.device.is-web{max-width:1280px; justify-self:stretch; padding:0; background:none; box-shadow:var(--shadow-card); border-radius:var(--radius-lg)}
+
+.screen.is-web{
+  --web-red:#D7063B; --web-red-dark:#B0002E; --web-grey:#E8EAF0; --web-cond:"Barlow Condensed", "Arial Narrow", Arial, sans-serif;
+  min-height:0; background:var(--white); color:var(--text-primary)}
+.screen.is-web :focus-visible{outline-color:var(--ugc-electric-blue)}
+.screen.is-web .status,.screen.is-web .app-header,.screen.is-web .picker,.screen.is-web .pills,.screen.is-web .tabbar,.screen.is-web .app-note{display:none}
+.screen.is-web .browser{display:flex; align-items:center; gap:var(--space-4); padding:var(--space-2) var(--space-4); background:var(--web-grey); color:#4A5070; font:400 12px/16px var(--font)}
+.browser .dots{display:flex; gap:6px}
+.browser .dots i{width:10px; height:10px; border-radius:var(--radius-pill); background:#C9CEDC}
+.browser .url{flex:1; max-width:420px; padding:var(--space-1) var(--space-3); background:var(--white); border-radius:var(--radius-pill)}
+
+/* En-tête : barre nuit (logo + accès) puis barre blanche des rubriques */
+.screen.is-web .web-header{display:block}
+.web-top{display:flex; align-items:center; justify-content:space-between; gap:var(--space-4); height:64px; padding:0 var(--space-4); background:var(--ugc-navy); color:var(--white)}
+.web-top .logo-slot{height:36px}
+.web-tools{display:flex; align-items:center; gap:var(--space-1)}
+.web-tool{display:grid; justify-items:center; gap:2px; min-width:44px; min-height:44px; padding:var(--space-1) var(--space-2); border:0; background:none; color:var(--white);
+  font:600 11px/14px var(--web-cond); letter-spacing:.04em; text-transform:uppercase; cursor:default}
+.web-tool span{display:none}
+button.web-tool{cursor:pointer; border-radius:var(--radius-xs)}
+button.web-tool:hover{background:rgba(255,255,255,.12)}
+.web-nav{display:flex; gap:var(--space-6); margin:0; padding:0 var(--space-4); list-style:none; overflow-x:auto; scrollbar-width:none; background:var(--white); border-bottom:1px solid var(--border);
+  font:500 14px/20px var(--web-cond); letter-spacing:.03em; text-transform:uppercase; color:var(--ugc-navy)}
+.web-nav li{padding:var(--space-3) 0; border-bottom:3px solid transparent; white-space:nowrap}
+.web-nav li.on{color:var(--ugc-blue); border-bottom-color:var(--ugc-electric-blue); font-weight:600}
+
+/* Bandeau nuit façon carrousel d'accueil */
+.screen.is-web .web-hero{display:grid; grid-template-columns:minmax(0,1fr); align-items:center; gap:var(--space-6); padding:var(--space-8) var(--space-4) var(--space-16); background:var(--ugc-navy); color:var(--white)}
+.web-hero-k{font:600 13px/16px var(--web-cond); letter-spacing:.12em; text-transform:uppercase; color:var(--ugc-light-blue)}
+.web-hero-t{font:500 40px/44px var(--web-cond); text-transform:uppercase; margin-top:var(--space-2)}
+.web-hero-s{font:400 18px/24px var(--web-cond); color:#C9CEDC; margin-top:var(--space-2); max-width:36ch}
+.web-hero-posters{display:none; grid-template-columns:repeat(3,120px); gap:var(--space-4); justify-content:end}
+.web-hero-posters .poster{border-radius:0; box-shadow:0 12px 32px rgba(0,0,0,.35)}
+
+/* Contenu */
+.screen.is-web .app{padding:0 var(--space-4) var(--space-12); color:var(--text-primary)}
+.screen.is-web .search-view{gap:var(--space-12)}
+.screen.is-web .ask{position:relative; z-index:1; width:100%; max-width:800px; justify-self:center; margin-top:calc(-1 * var(--space-12)); padding:var(--space-6);
+  background:var(--white); border-radius:var(--radius-sm); box-shadow:0 2px 16px rgba(6,26,85,.14)}
+.screen.is-web .ask label{font:500 16px/20px var(--web-cond); text-transform:none; letter-spacing:.02em; color:var(--ugc-navy)}
+.screen.is-web .ask .hint{color:var(--text-secondary)}
+.screen.is-web textarea{background:var(--web-grey); color:var(--ugc-navy); border:2px solid var(--web-grey); border-radius:var(--radius-xs); min-height:72px}
+.screen.is-web textarea:focus{border-color:var(--ugc-electric-blue); box-shadow:var(--focus-ring)}
+.screen.is-web .examples-k,.screen.is-web .understood .k{font-family:var(--web-cond); color:var(--text-secondary)}
+.screen.is-web .chip{background:var(--web-grey); border-color:var(--web-grey); color:var(--ugc-navy); border-radius:var(--radius-xs); font:500 15px/20px var(--web-cond); letter-spacing:.02em}
+.screen.is-web .chip:hover{border-color:var(--ugc-navy); background:var(--web-grey)}
+.screen.is-web .btn{border-radius:var(--radius-xs); font:600 16px/20px var(--web-cond); letter-spacing:.06em; min-height:48px}
+.screen.is-web .btn-primary{background:var(--web-red); border-color:var(--web-red); color:var(--white)}
+.screen.is-web .btn-primary:hover{background:var(--web-red-dark); border-color:var(--web-red-dark)}
+.screen.is-web .btn-primary:active{background:#8C0025; border-color:#8C0025}
+.screen.is-web .btn-outline{color:var(--ugc-navy); border-color:var(--ugc-navy)}
+.screen.is-web .btn:disabled{background:var(--web-grey); border-color:var(--web-grey); color:var(--text-muted)}
+.screen.is-web .engine{color:var(--text-secondary)}
+.screen.is-web .engine-on .dot{background:var(--success)}
+.screen.is-web .understood .k .icon{color:var(--success)}
+.screen.is-web .badge{border-radius:var(--radius-xs); font:600 12px/16px var(--web-cond); letter-spacing:.06em}
+.screen.is-web .badge-tag{background:var(--ugc-navy); color:var(--white)}
+
+/* Titres de section façon « FILMS », « DERNIÈRES NEWS » */
+.screen.is-web .results-head,.screen.is-web .section-head h2{font:400 32px/36px var(--web-cond); text-transform:uppercase; color:var(--ugc-navy)}
+.screen.is-web .section-head{padding-bottom:var(--space-2); border-bottom:1px solid var(--border)}
+.screen.is-web .section-head span{color:var(--text-secondary)}
+
+/* Cartes séance */
+.screen.is-web .card{background:var(--white); border:1px solid var(--border); border-radius:var(--radius-xs)}
+.screen.is-web .poster{border-radius:0}
+.screen.is-web .card h3{font:600 22px/26px var(--web-cond); color:var(--ugc-navy)}
+.screen.is-web .meta{color:var(--ugc-navy); font-family:var(--web-cond); font-size:16px}
+.screen.is-web .meta i{background:var(--text-muted)}
+.screen.is-web .public{color:var(--text-secondary); font-family:var(--web-cond); font-size:15px}
+.screen.is-web .why{color:var(--text-primary)}
+.screen.is-web .why b{color:var(--ugc-navy)}
+.screen.is-web .cine-name{font:600 18px/22px var(--web-cond); color:var(--ugc-navy)}
+.screen.is-web .cine-sub{color:var(--text-secondary)}
+.screen.is-web .showtime{border:1px solid var(--border-strong); border-radius:var(--radius-xs); box-shadow:none; color:var(--ugc-navy)}
+.screen.is-web .time{font:600 34px/36px var(--web-cond)}
+.screen.is-web .st-tags{font-family:var(--web-cond); font-size:15px}
+.screen.is-web .st-tags .salle{color:var(--ugc-blue)}
+.screen.is-web .st-foot{border-top-color:var(--border); color:var(--text-secondary)}
+
+/* Affiches : grille, label centré en haut, titre condensé dessous */
+.screen.is-web .rail{grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:var(--space-8) var(--space-6)}
+.screen.is-web .rail li{padding-top:0}
+.screen.is-web .rail .poster{border-radius:0}
+.screen.is-web .rail .badge{top:0; left:50%; transform:translateX(-50%); font-size:11px; min-height:20px; padding:2px 6px}
+.screen.is-web .rail h3{font:500 16px/20px var(--web-cond); color:var(--ugc-navy); margin-top:var(--space-2)}
+.screen.is-web .rail p{color:var(--text-secondary)}
+.screen.is-web .empty{background:var(--surface-subtle); border-radius:var(--radius-xs)}
+
+/* Pied de page nuit */
+.screen.is-web .web-footer{display:grid; gap:var(--space-4); justify-items:center; padding:var(--space-8) var(--space-4); background:var(--ugc-navy); color:var(--white); text-align:center}
+.web-footer ul{display:flex; flex-wrap:wrap; justify-content:center; gap:var(--space-2) var(--space-6); margin:0; padding:0; list-style:none; font:600 13px/16px var(--web-cond); letter-spacing:.04em; text-transform:uppercase}
+.web-footer p{font:400 14px/20px var(--font); color:#C9CEDC}
+
+@media (min-width:840px){
+  .web-top{padding:0 var(--space-8)}
+  .web-tool span{display:block}
+  .web-nav{padding:0 var(--space-8); gap:var(--space-8)}
+  .screen.is-web .web-hero{grid-template-columns:minmax(0,1fr) auto; padding:var(--space-12) var(--space-8) var(--space-20)}
+  .web-hero-t{font-size:56px; line-height:60px}
+  .web-hero-posters{display:grid}
+  .screen.is-web .app{padding:0 var(--space-8) var(--space-16)}
+  .screen.is-web .ask{grid-template-columns:minmax(0,1fr) auto; column-gap:var(--space-4); padding:var(--space-6) var(--space-8)}
+  .screen.is-web .ask>*{grid-column:1/-1}
+  .screen.is-web .ask textarea{grid-column:1; grid-row:3}
+  .screen.is-web .ask #go{grid-column:2; grid-row:3; align-self:stretch}
+  .screen.is-web .results{grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:var(--space-6)}
+  .screen.is-web .results>h2,.screen.is-web .results>.empty{grid-column:1/-1}
+}
+
+/* Réservation sur le web : fenêtre modale (§25) */
+.book-dialog{display:grid; gap:var(--space-6)}
+.screen.is-web .book-view{position:fixed; inset:0; z-index:20; display:grid; justify-items:center; align-items:start; padding:var(--space-8) var(--space-4); overflow-y:auto; background:rgba(6,26,85,.72)}
+.screen.is-web .book-view[hidden]{display:none}
+.screen.is-web .book-dialog{width:100%; max-width:640px; padding:var(--space-6) var(--space-4); background:var(--background); color:var(--text-primary); border-radius:var(--radius-sm); overflow:clip; box-shadow:var(--shadow-overlay)}
+.screen.is-web .book-head{background:var(--ugc-navy)}
+.screen.is-web .book-head h2{font:500 26px/30px var(--web-cond)}
+.screen.is-web .book-sub{color:#C9CEDC; font-family:var(--web-cond); font-size:15px}
+.screen.is-web .close{background:transparent; border:1px solid rgba(255,255,255,.5); border-radius:var(--radius-xs)}
+.screen.is-web .close:hover{background:rgba(255,255,255,.12)}
+.screen.is-web .steps{border-bottom:1px solid var(--border)}
+.screen.is-web .steps li{font-family:var(--web-cond); font-weight:500; font-size:14px; color:var(--text-muted)}
+.screen.is-web .steps li b{font:600 24px/28px var(--web-cond)}
+.screen.is-web .steps li.done{color:var(--ugc-navy)}
+.screen.is-web .steps li[aria-current="step"]{color:var(--ugc-blue); border-bottom-color:var(--ugc-electric-blue)}
+.screen.is-web .back{color:var(--ugc-blue); font-family:var(--web-cond); font-size:15px; font-weight:600}
+.screen.is-web .step-title,.screen.is-web .qty-label{font:500 24px/28px var(--web-cond); color:var(--ugc-navy)}
+.screen.is-web .qty-label{font-size:18px; line-height:22px}
+.screen.is-web .panel-w{border:1px solid var(--border); border-radius:var(--radius-xs); box-shadow:none}
+.screen.is-web .screen-bar{border-bottom-color:var(--ugc-electric-blue); font-family:var(--web-cond)}
+.screen.is-web .seat{border-color:var(--ugc-navy); border-radius:var(--radius-xs); color:var(--ugc-navy)}
+.screen.is-web .seat[aria-pressed="true"],.screen.is-web .legend .seat.sel{background:var(--ugc-electric-blue); border-color:var(--ugc-electric-blue); color:var(--white)}
+.screen.is-web .seat:disabled,.screen.is-web .legend .seat.taken{background:var(--web-grey); border-color:var(--web-grey); color:var(--text-muted)}
+@media (min-width:768px){
+  .screen.is-web .book-dialog{padding:var(--space-6) var(--space-8)}
+  .screen.is-web .book-head,.screen.is-web .steps{margin-left:calc(-1 * var(--space-8)); margin-right:calc(-1 * var(--space-8))}
+}
+
+/* ---------- Note produit ---------- */
+.notecol{display:grid; gap:var(--space-4); min-width:0}
+.panel{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-md); padding:var(--space-6) var(--space-4); display:grid; gap:var(--space-3)}
+.panel h2{font:700 20px/28px var(--font)}
+.panel .eyebrow{margin-bottom:calc(-1 * var(--space-1))}
+.panel-why{border-left:4px solid var(--ugc-blue)}
+.panel p{max-width:66ch}
+.two{display:grid; grid-template-columns:minmax(0,1fr); gap:var(--space-4)}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse; width:100%; font:400 14px/20px var(--font)}
+th,td{text-align:left; padding:var(--space-2) var(--space-3); border-bottom:1px solid var(--border); vertical-align:top}
+th{font:600 12px/16px var(--font); letter-spacing:.08em; text-transform:uppercase; color:var(--text-secondary)}
+td.num{font-variant-numeric:tabular-nums; white-space:nowrap; font-weight:700; color:var(--ugc-blue)}
+ul.clean{margin:0; padding-left:20px; display:grid; gap:var(--space-2)}
+.small{font:400 14px/20px var(--font); color:var(--text-secondary)}
+.page-foot{border-top:1px solid var(--border-strong); padding-top:var(--space-4); font:400 14px/20px var(--font); color:var(--text-secondary)}
+.page-foot strong{color:var(--text-primary); font-weight:600}
+
+/* Breakpoints §6 */
+@media (min-width:640px){
+  .two{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .panel{padding:var(--space-6)}
+}
+@media (min-width:768px){
+  .wrap{padding:var(--space-12) var(--space-6) var(--space-16)}
+  h1{font-size:40px; line-height:48px}
+  .device{background:var(--cinema-black); padding:var(--space-3); border-radius:var(--radius-lg); box-shadow:var(--shadow-card)}
+  .screen{border-radius:var(--radius-md); min-height:760px}
+  .app{flex:1}
+  .status{display:flex; justify-content:space-between; padding:var(--space-3) var(--space-6) 0; color:var(--white); font:700 14px/20px var(--font)}
+}
+@media (min-width:1024px){
+  .wrap{padding-left:var(--space-12); padding-right:var(--space-12)}
+  .layout{grid-template-columns:420px minmax(0,1fr); gap:var(--space-12)}
+}
+@media (prefers-reduced-motion:no-preference){
+  .card,.book-view>*{animation:rise var(--duration-normal) ease-out both}
+  @keyframes rise{from{transform:translateY(6px)}to{transform:none}}
+}
+</style>
+</head>
+<body>
+
+<!-- Icônes Lucide (outline, §8) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+  <symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></symbol>
+  <symbol id="i-ticket" viewBox="0 0 24 24"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M6 3 20 12 6 21Z"/></symbol>
+  <symbol id="i-armchair" viewBox="0 0 24 24"><path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"/><path d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"/><path d="M5 18v2"/><path d="M19 18v2"/></symbol>
+  <symbol id="i-circle-user" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2"/><path d="M12 18h.01"/></symbol>
+  <symbol id="i-monitor" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></symbol>
+  <symbol id="i-card" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2"/><path d="M2 10h20"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+</svg>
+
+<div class="wrap">
+  <nav class="folio" aria-label="Projets du portfolio">
+    <a href="index.html" aria-current="page">Projet 1 · Assistant « Quel film ce soir ? »</a>
+    <a href="illimite.html">Projet 2 · Souscription UGC Illimité</a>
+  </nav>
+  <header class="page-head">
+    <p class="eyebrow">Prototype · IA dans le parcours de réservation</p>
+    <h1>Quel film ce soir&nbsp;?</h1>
+    <p class="lede">Le spectateur dit ce dont il a envie, l'assistant lui propose trois séances du programme et le mène jusqu'à la réservation. Essayez une demande dans l'application.</p>
+    <p class="disclaimer"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-info"/></svg><span>Projet fictif de démonstration, sans lien avec UGC – Caroline Camilleri · un concept, pas une copie de l'existant. <a href="../../cas-ugc.html">Retour à l'étude de cas</a></span></p>
+  </header>
+
+  <div class="modes" role="group" aria-label="Canal affiché dans la démo">
+    <button type="button" class="mode" data-mode="app" aria-pressed="true"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Application mobile</button>
+    <button type="button" class="mode" data-mode="web" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-monitor"/></svg>Site web</button>
+  </div>
+
+  <div class="layout" id="layout">
+    <!-- ---------- Application ---------- -->
+    <section class="device" id="device" aria-label="Démonstration">
+      <div class="screen" id="screen">
+        <div class="browser" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="url">Prototype · site web (démo)</span></div>
+        <header class="web-header">
+          <div class="web-top">
+            <span class="logo-slot" role="img" aria-label="Emplacement du logo UGC officiel">LOGO UGC</span>
+            <div class="web-tools">
+              <button type="button" class="web-tool" id="webSearch"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg><span>Rechercher</span></button>
+              <span class="web-tool" aria-hidden="true"><svg class="icon"><use href="#i-circle-user"/></svg><span>Mon compte</span></span>
+              <span class="web-tool" aria-hidden="true"><svg class="icon"><use href="#i-ticket"/></svg><span>UGC Illimité</span></span>
+              <span class="web-tool" aria-hidden="true"><svg class="icon"><use href="#i-card"/></svg><span>Cartes &amp; offres</span></span>
+            </div>
+          </div>
+          <ul class="web-nav" aria-hidden="true">
+            <li>Cinémas</li><li>Films</li><li>Labels &amp; sélections</li><li>En famille</li><li>Événements</li><li>News</li><li class="on">Assistant</li>
+          </ul>
+        </header>
+        <div class="web-hero">
+          <div><p class="web-hero-k">Nouveau</p><p class="web-hero-t">L'assistant séance</p><p class="web-hero-s">Dites ce dont vous avez envie : l'assistant vous propose trois séances et vous mène jusqu'à la réservation.</p></div>
+          <div class="web-hero-posters" id="heroPosters" aria-hidden="true"></div>
+        </div>
+        <div class="status" aria-hidden="true"><span>20:12</span><span>5G · 82 %</span></div>
+        <header class="app-header">
+          <span class="logo-slot" role="img" aria-label="Emplacement du logo UGC officiel">LOGO UGC</span>
+        </header>
+        <div class="picker" aria-label="Périmètre de la démo">
+          <div><svg class="icon" aria-hidden="true"><use href="#i-armchair"/></svg>3 cinémas fictifs</div>
+          <div><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg>Ce soir et demain</div>
+        </div>
+        <nav class="pills" aria-label="Sections de l'écran">
+          <a class="pill on" href="#askForm" aria-current="true">Assistant</a>
+          <a class="pill" href="#railH">À l'affiche</a>
+        </nav>
+
+        <div class="app">
+          <div class="search-view" id="searchView">
+          <form class="ask" id="askForm">
+            <label for="q">Quel film ce soir&nbsp;?</label>
+            <p class="hint" id="qHint">Dites ce qui vous ferait plaisir : envie, horaire, avec qui, version…</p>
+            <textarea id="q" rows="3" aria-describedby="qHint">Un film drôle ce soir après 20 h, avec mon ado de 13 ans</textarea>
+            <span class="examples-k" id="exK">Exemples</span>
+            <div class="chips" id="chips" role="group" aria-labelledby="exK"></div>
+            <button class="btn btn-primary btn-block" id="go" type="submit"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>Trouver ma séance</button>
+            <div class="engine"><span class="engine-on"><i class="dot" aria-hidden="true"></i>Moteur : règles locales</span><span>Programme fictif</span></div>
+          </form>
+
+          <div class="understood" id="understood"></div>
+          <div class="results" id="results" aria-live="polite"></div>
+
+          <section class="carousel" aria-labelledby="railH">
+            <div class="section-head"><h2 id="railH" tabindex="-1">À l'affiche</h2><span>Programme fictif</span></div>
+            <ul class="rail" id="rail"></ul>
+          </section>
+          </div>
+
+          <section class="book-view" id="bookView" aria-label="Réservation" hidden></section>
+
+          <p class="app-note"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-info"/></svg><span>Démo : programme et cinémas fictifs, aucune réservation réelle. Prototype conceptuel non officiel – Caroline Camilleri.</span></p>
+        </div>
+        <footer class="web-footer">
+          <ul aria-hidden="true"><li>Besoin d'aide&nbsp;?</li><li>Contact</li><li>Mentions légales</li><li>Cookies</li><li>Accessibilité</li></ul>
+          <p>Prototype conceptuel non officiel – Caroline Camilleri · Films, cinémas et séances fictifs, aucune réservation réelle.</p>
+        </footer>
+        <!-- Barre d'onglets : seuls les onglets sont décoratifs ; le bouton recherche central est actif -->
+        <div class="tabbar">
+          <svg class="curve" viewBox="0 0 400 18" preserveAspectRatio="none" aria-hidden="true"><path d="M0 16 Q200 -12 400 16" fill="none" stroke="#0A9EF0" stroke-width="2"/></svg>
+          <span class="tab" aria-hidden="true"><svg class="icon"><use href="#i-play"/></svg>Films</span>
+          <span class="tab" aria-hidden="true"><svg class="icon"><use href="#i-armchair"/></svg>Cinémas</span>
+          <button class="fab" type="button" id="searchBtn" aria-label="Rechercher une séance avec l'assistant"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg></button>
+          <span class="tab" aria-hidden="true"><svg class="icon"><use href="#i-ticket"/></svg>Mes résas</span>
+          <span class="tab" aria-hidden="true"><svg class="icon"><use href="#i-circle-user"/></svg>Compte</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- Note produit ---------- -->
+    <div class="notecol">
+      <section class="panel panel-why" aria-labelledby="whyH">
+        <h2 id="whyH">Pourquoi ce prototype&nbsp;?</h2>
+        <p>Ce prototype <strong>n'a pas vocation à imiter ni à remplacer l'application ou le site UGC</strong>. Il reprend leurs codes visuels pour que le concept se lise dans un contexte familier, mais son objet est ailleurs : montrer comment je passe d'une intuition produit à un parcours testable, en cadrant le problème, en formulant une hypothèse, en maquettant un parcours interactif sur deux canaux et en définissant comment mesurer le résultat.</p>
+        <p>L'assistant décrit ici est une <strong>hypothèse à valider</strong> avec les équipes et les spectateurs. Ce n'est pas un diagnostic des outils actuels, dont je ne connais ni les données d'usage ni les contraintes techniques.</p>
+      </section>
+
+      <section class="panel">
+        <p class="eyebrow">Note produit</p>
+        <h2>Le problème</h2>
+        <p>Pour choisir une séance, le spectateur croise le film, l'horaire, le cinéma, la version et l'âge de ceux qui l'accompagnent. Cela demande plusieurs allers-retours entre les écrans avant de réserver, et une partie abandonne en chemin.</p>
+        <p><strong>Hypothèse :</strong> une demande formulée en langage naturel raccourcit le temps de choix et augmente le passage à la réservation, sans remplacer la recherche classique.</p>
+      </section>
+
+      <section class="panel">
+        <h2>Objectifs fixés avant la mise en ligne</h2>
+        <div class="tbl"><table>
+          <thead><tr><th scope="col">Indicateur</th><th scope="col">Cible d'exemple</th><th scope="col">Mesure</th></tr></thead>
+          <tbody>
+            <tr><td>Passage de la recherche à la réservation</td><td class="num">+10 %</td><td>Tunnel comparé avec et sans assistant</td></tr>
+            <tr><td>Temps médian jusqu'au choix d'une séance</td><td class="num">−30 %</td><td>Événements de parcours</td></tr>
+            <tr><td>Réservations passées via l'assistant</td><td class="num">15 %</td><td>Part du total sur l'app</td></tr>
+            <tr><td>Demandes sans proposition utile</td><td class="num">&lt; 10 %</td><td>Clic « Autre chose » ou abandon</td></tr>
+          </tbody>
+        </table></div>
+        <p class="small">Cibles indicatives, à caler avec l'équipe data sur les chiffres actuels du tunnel avant de lancer le test A/B.</p>
+      </section>
+
+      <div class="two">
+        <section class="panel">
+          <h2>Test utilisateurs</h2>
+          <ul class="clean">
+            <li>5 spectateurs, 3 scénarios : sortie en famille, soirée en VO, envie de dernière minute.</li>
+            <li>On observe le temps de choix, les reformulations et la confiance dans les propositions.</li>
+            <li>Arbitrage : ce qui ne sert pas la réservation sort du périmètre.</li>
+          </ul>
+        </section>
+        <section class="panel">
+          <h2>À cadrer avec la DSI</h2>
+          <ul class="clean">
+            <li>Programme et places en temps réel via l'API billetterie.</li>
+            <li>Garde-fou : l'IA ne peut proposer qu'une séance qui existe, vérifiée côté code.</li>
+            <li>Coût par requête, temps de réponse, données personnelles.</li>
+            <li>Repli automatique sur la recherche classique si l'IA ne répond pas.</li>
+          </ul>
+        </section>
+      </div>
+
+      <section class="panel">
+        <h2>Comment fonctionne la démo</h2>
+        <p>La demande est interprétée par un moteur de règles local, exécuté dans le navigateur : il repère l'envie, le jour, l'horaire, la version, le public et le cinéma, puis classe les séances du programme fictif. Aucune donnée n'est envoyée à un service externe. En production, ce moteur servirait de repli si le modèle d'IA ne répond pas.</p>
+        <p>Le sélecteur « Application mobile | Site web » montre le même assistant sur les deux canaux : un seul moteur et un seul parcours, deux interfaces adaptées (écran plein sur mobile, fenêtre de réservation sur le web).</p>
+        <p>Après « Réserver », la démo simule la suite du parcours : nombre de places, choix des sièges sur un plan de salle fictif, récapitulatif puis confirmation avec un numéro fictif. Les tarifs et le paiement ne sont pas simulés.</p>
+      </section>
+
+      <footer class="page-foot"><strong>Prototype conceptuel non officiel – Caroline Camilleri.</strong> Interface inspirée de l'univers digital public d'UGC, sans lien avec le Groupe UGC. Les emplacements de logo attendent les assets officiels. Films, cinémas et séances sont fictifs ; certaines affiches sont générées par IA.</footer>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+const FILMS = {
+  voisins:{t:"Les Voisins du 3e", g:"comédie", d:102, r:"Tous publics", c:["#E0663A","#7A2A52"], s:"Une colocation improbable entre un retraité grincheux et deux étudiants."},
+  lisbonne:{t:"Plan B à Lisbonne", g:"comédie romantique", d:115, r:"Tous publics", c:["#E8A33C","#B23A5A"], s:"Deux inconnus bloqués à Lisbonne par une grève des avions."},
+  fuite:{t:"Ligne de fuite", g:"thriller", d:128, r:"-12 ans", c:["#2F4A6E","#0F1626"], s:"Une contrôleuse aérienne découvre un vol qui n'existe pas."},
+  orbite:{t:"Orbite basse", g:"science-fiction", d:141, r:"Tous publics", c:["#3640A8","#0B0D2A"], s:"Une mission de réparation en orbite tourne au huis clos."},
+  hiver:{t:"Le Dernier Hiver", g:"drame", d:118, r:"Tous publics", c:["#7D8FA3","#2D3440"], s:"Trois générations réunies dans une ferme du Jura."},
+  pipo:{t:"Pipo et la Forêt bleue", g:"animation", d:84, r:"Tous publics", c:["#2E9E8F","#174A6B"], s:"Un petit renard part à la recherche des lucioles disparues."},
+  osaka:{t:"Nuit blanche à Osaka", g:"action", d:110, r:"-12 ans", c:["#D2414B","#2A0F1A"], s:"Une coursière doit traverser la ville avant l'aube."},
+  maison:{t:"La Maison du bout", g:"horreur", d:99, r:"-16 ans", c:["#4A3B3B","#100A0A"], s:"Une maison de vacances dont personne ne revient tout à fait."},
+  rock:{t:"Mes années rock", g:"documentaire musical", d:96, r:"Tous publics", c:["#C78B2B","#3A2A12"], s:"Les salles de concert françaises racontées par ceux qui y ont joué."},
+  selle:{t:"Tous en selle !", g:"comédie familiale", d:91, r:"Tous publics", c:["#6BAF4B","#2A5A2E"], s:"Une famille traverse la France à vélo, sans GPS."}
+};
+Object.keys(FILMS).forEach(k=>FILMS[k].key=k);
+/* Cinémas fictifs : le dernier mot sert de mot-clé au moteur */
+const CINES = ["Ciné Démo Bercy","Ciné Démo Odéon","Ciné Démo Gobelins"];
+const PLAN = [
+ ["voisins",0,"tonight","18:10","VF"],["voisins",0,"tonight","20:30","VF"],["voisins",2,"tonight","21:15","VF"],["voisins",1,"sat","14:00","VF"],
+ ["lisbonne",1,"tonight","19:40","VF"],["lisbonne",1,"tonight","22:00","VO"],["lisbonne",0,"sat","17:30","VF"],
+ ["fuite",0,"tonight","20:45","VF"],["fuite",1,"tonight","21:30","VO"],["fuite",2,"sat","22:10","VO"],
+ ["orbite",0,"tonight","19:00","VO"],["orbite",2,"tonight","20:15","VF"],["orbite",0,"sat","15:45","VF"],
+ ["hiver",1,"tonight","18:30","VO"],["hiver",1,"sat","11:00","VO"],
+ ["pipo",2,"tonight","17:20","VF"],["pipo",0,"sat","10:15","VF"],["pipo",2,"sat","11:30","VF"],
+ ["osaka",0,"tonight","22:15","VO"],["osaka",2,"tonight","20:50","VF"],
+ ["maison",1,"tonight","22:30","VF"],["maison",0,"sat","21:45","VO"],
+ ["rock",1,"tonight","20:00","VO"],
+ ["selle",2,"tonight","19:20","VF"],["selle",0,"sat","10:45","VF"],["selle",1,"sat","16:00","VF"]
+];
+const SEANCES = PLAN.map((p,i)=>({id:"S"+(i+1), film:p[0], cine:CINES[p[1]], day:p[2], time:p[3], v:p[4], seats:[12,34,7,58,21,4,40,16][i%8]}));
+const DAY = {tonight:"Ce soir", sat:"Demain (samedi)"};
+const VERSION = {VF:"Version française", VO:"Version originale sous-titrée"};
+const byId = Object.fromEntries(SEANCES.map(s=>[s.id,s]));
+const mins = t=>{const [h,m]=t.split(":").map(Number); return h*60+m};
+const fmtD = d=>Math.floor(d/60)+" h "+String(d%60).padStart(2,"0");
+/* Affichages façon app : « 1h42 », « 20:30 », fin de séance (≈ 20 min de bandes-annonces), salle fictive */
+const appD = d=>Math.floor(d/60)+"h"+String(d%60).padStart(2,"0");
+const hm = m=>String(Math.floor(m/60)%24).padStart(2,"0")+":"+String(m%60).padStart(2,"0");
+const endTime = s=>hm(mins(s.time)+FILMS[s.film].d+20);
+const salle = s=>(parseInt(s.id.slice(1),10)*7)%12+1;
+const cap = t=>t.charAt(0).toUpperCase()+t.slice(1);
+const AGE = {"-12 ans":"12","-16 ans":"16"};
+const NEW = new Set(["orbite","osaka","pipo"]);
+const icon = (id,cls)=>'<svg class="icon'+(cls?" "+cls:"")+'" aria-hidden="true"><use href="#i-'+id+'"/></svg>';
+
+const EXAMPLES = ["Un film drôle ce soir après 20 h, avec mon ado de 13 ans","Quelque chose d'intense en VO, ce soir vers Bercy","Samedi matin avec deux enfants de 6 et 8 ans","Pas trop long, je sors du bureau à 19 h"];
+const $ = id=>document.getElementById(id);
+const chips=$("chips");
+EXAMPLES.forEach(e=>{const b=document.createElement("button"); b.type="button"; b.className="chip"; b.textContent=e; b.onclick=()=>{$("q").value=e; run();}; chips.append(b);});
+$("searchBtn").onclick=$("webSearch").onclick=()=>{ if(bk) closeBooking(true); else $("q").focus(); };
+
+/* ---------- Canal affiché : application mobile ou site web ---------- */
+const isWeb = ()=>$("screen").classList.contains("is-web");
+const INERT = ()=>[...document.querySelectorAll(".page-head,.modes,.notecol,.web-header,.web-hero,.web-footer,.browser,#searchView,.app-note")];
+function setMode(m){
+  if(bk) closeBooking();
+  const web=m==="web";
+  ["layout","device","screen"].forEach(id=>$(id).classList.toggle("is-web",web));
+  $("device").setAttribute("aria-label",web?"Site web, démonstration":"Application mobile, démonstration");
+  document.querySelectorAll(".mode").forEach(b=>b.setAttribute("aria-pressed",b.dataset.mode===m));
+  try{ history.replaceState(null,"",web?"#web":location.pathname+location.search); }catch(e){}
+}
+document.querySelectorAll(".mode").forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
+document.addEventListener("keydown",e=>{ if(e.key==="Escape" && bk && isWeb()) closeBooking(); });
+
+/* ---------- Moteur de règles local ---------- */
+function norm(s){return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"")}
+function localPick(q){
+  const n=norm(q); const und=[]; const want={};
+  const G=[[/drol|rire|marrant|comed|leger/,["comédie","comédie romantique","comédie familiale"],"Comédie"],[/intense|suspense|thriller|frisson/,["thriller","action"],"Intense"],[/peur|horreur|flipp/,["horreur"],"Horreur"],[/science|espace|sf\b/,["science-fiction"],"Science-fiction"],[/romant|amoureu|couple|date/,["comédie romantique","drame"],"Romantique"],[/emouv|drame|pleur/,["drame"],"Émouvant"],[/musique|concert|rock|docu/,["documentaire musical"],"Musique"],[/action|bagarre/,["action"],"Action"]];
+  for(const [re,gs,l] of G){ if(re.test(n)){want.genres=(want.genres||[]).concat(gs); und.push(l);} }
+  if(/samedi|demain/.test(n)){want.day="sat"; und.push("Samedi");} else {want.day="tonight"; und.push("Ce soir");}
+  let m=n.match(/(?:apres|a partir de|des)\s*(\d{1,2})\s*h\s*(\d{2})?/); if(m){want.after=+m[1]*60+(+(m[2]||0)); und.push("Après "+m[1]+" h"+(m[2]||""));}
+  m=n.match(/vers\s*(\d{1,2})\s*h/); if(m){want.around=+m[1]*60; und.push("Vers "+m[1]+" h");}
+  m=n.match(/(?:sors|sortie|libre|fini).*?(\d{1,2})\s*h/); if(m&&!want.after){want.after=+m[1]*60+30; und.push("À partir de "+m[1]+" h 30");}
+  if(/matin/.test(n)){want.before=12*60; und.push("Le matin");}
+  if(/enfant|petit|famille|\b[3-9] ans/.test(n)){want.kids=true; want.genres=(want.genres||[]).concat(["animation","comédie familiale"]); und.push("Avec des enfants");}
+  else if(/ado|\b1[0-5] ans/.test(n)){want.teen=true; und.push("Avec un ado");}
+  if(/\bvo\b|version originale|anglais/.test(n)){want.v="VO"; und.push("VO");}
+  if(/\bvf\b/.test(n)){want.v="VF"; und.push("VF");}
+  if(/pas trop long|court|rapide/.test(n)){want.short=true; und.push("Moins de 1 h 45");}
+  CINES.forEach(c=>{const k=norm(c.split(" ").pop()); if(n.includes(k)){want.cine=c; und.push(c);}});
+  const scored=SEANCES.map(s=>{const f=FILMS[s.film]; let sc=0; const why=[];
+    if(s.day!==want.day) return null;
+    const t=mins(s.time);
+    if(want.after && t<want.after) return null;
+    if(want.before && t>=want.before) return null;
+    if(want.kids && (f.r!=="Tous publics" || !["animation","comédie familiale","comédie"].includes(f.g))) return null;
+    if(want.teen && f.r==="-16 ans") return null;
+    if(want.genres){ if(want.genres.includes(f.g)){sc+=5; why.push(f.g.charAt(0).toUpperCase()+f.g.slice(1));} else sc-=2; }
+    if(want.kids && ["animation","comédie familiale"].includes(f.g)){sc+=3;}
+    if(want.teen && f.r!=="Tous publics"){why.push("accessible dès 12 ans");}
+    if(want.v){ if(s.v===want.v){sc+=2; why.push("en "+s.v);} else sc-=3; }
+    if(want.cine){ if(s.cine===want.cine){sc+=3; why.push("à "+s.cine);} else sc-=1; }
+    if(want.around){ sc+=Math.max(0,3-Math.abs(t-want.around)/30); }
+    if(want.short){ if(f.d<=105){sc+=3; why.push("seulement "+fmtD(f.d));} else sc-=3; }
+    if(want.after){ why.push("commence à "+s.time.replace(":"," h ")); sc+=Math.max(0,2-(t-want.after)/60); }
+    sc+=s.seats>10?0.5:0;
+    return {s,sc,why};
+  }).filter(Boolean).sort((a,b)=>b.sc-a.sc);
+  const out=[]; const seen=new Set();
+  for(const x of scored){ if(seen.has(x.s.film)) continue; seen.add(x.s.film); out.push({id:x.s.id, why:(x.why.length?x.why.join(", "):"Bonne séance disponible au créneau demandé")+"."}); if(out.length===3) break; }
+  return {understood:und, picks:out};
+}
+
+/* ---------- Rendu ---------- */
+function render(res){
+  const u=$("understood"); u.innerHTML="";
+  if(res.understood.length){
+    const k=document.createElement("span"); k.className="k"; k.innerHTML=icon("check","icon-sm")+"Compris"; u.append(k);
+    res.understood.forEach(t=>{const s=document.createElement("span"); s.className="badge badge-tag"; s.textContent=t; u.append(s);});
+  }
+  const box=$("results"); box.innerHTML="";
+  if(!res.picks.length){
+    const e=document.createElement("div"); e.className="empty";
+    e.innerHTML='<p class="empty-line">'+icon("alert")+'<span>Aucune séance ne correspond exactement. Essayez un autre horaire ou un autre jour.</span></p><button type="button" class="btn btn-secondary">Modifier ma demande</button>';
+    e.querySelector("button").onclick=()=>$("q").focus();
+    box.append(e); return;
+  }
+  const h=document.createElement("h2"); h.className="results-head"; h.textContent="3 séances pour vous"; if(res.picks.length<3) h.textContent=res.picks.length+(res.picks.length>1?" séances pour vous":" séance pour vous"); box.append(h);
+  res.picks.forEach((p,i)=>{
+    const s=byId[p.id], f=FILMS[s.film];
+    const c=document.createElement("article"); c.className="card"; c.style.animationDelay=(i*60)+"ms";
+    c.innerHTML='<div class="card-top"><div class="poster" aria-hidden="true"></div><div><h3></h3><p class="meta"></p><p class="public"></p><p class="why"><b>Pourquoi&nbsp;:</b> <span></span></p></div></div>'+
+      '<div class="slot"><div><p class="cine-name"></p><p class="cine-sub"></p></div>'+
+      '<div class="showtime"><div class="st-top"><span class="time"></span><span class="end"></span><div class="st-tags"><span class="v"></span><span class="salle"></span></div></div>'+
+      '<div class="st-foot">'+icon("armchair","icon-sm")+'<span class="seats"></span></div></div>'+
+      '<button class="btn btn-primary btn-block book" type="button">'+icon("ticket")+'Réserver</button></div>';
+    paintPoster(c.querySelector(".poster"),f);
+    c.querySelector("h3").textContent=f.t;
+    c.querySelector(".meta").innerHTML='<span>'+esc(cap(f.g))+'</span><i aria-hidden="true"></i><span>'+appD(f.d)+'</span>';
+    c.querySelector(".public").textContent=f.r==="Tous publics"?"Tous publics":"Interdit "+f.r;
+    c.querySelector(".why span").textContent=p.why;
+    c.querySelector(".cine-name").textContent=s.cine;
+    c.querySelector(".cine-sub").textContent=DAY[s.day]+" · Paris (cinéma fictif)";
+    c.querySelector(".time").textContent=s.time;
+    c.querySelector(".end").textContent="(Fin "+endTime(s)+")";
+    const vb=c.querySelector(".v"); vb.textContent=s.v==="VO"?"VOSTF":"VF"; vb.title=VERSION[s.v];
+    c.querySelector(".salle").textContent="Salle "+salle(s);
+    const seats=c.querySelector(".seats"); seats.textContent=s.seats<10?"Plus que "+s.seats+" places":s.seats+" places";
+    if(s.seats<10) seats.className="seats seats-low";
+    const book=c.querySelector(".book"); book.setAttribute("aria-label","Réserver "+f.t+", "+DAY[s.day].toLowerCase()+" à "+s.time.replace(":"," h ")+", "+s.cine);
+    book.onclick=()=>openBooking(s,book);
+    box.append(c);
+  });
+}
+/* ---------- Affiches fictives (SVG dessinés, 2:3) ---------- */
+const POSTERS = {
+  voisins:{lines:["LES VOISINS","DU 3E"], art:u=>
+    '<rect width="200" height="300" fill="#F4A259"/><circle cx="160" cy="38" r="18" fill="#FFD27A"/>'+
+    '<rect x="14" y="54" width="172" height="10" fill="#5E1F40"/><rect x="20" y="62" width="160" height="238" fill="#7A2A52"/>'+
+    [80,128,176,224].map((y,r)=>[38,86,134].map((x,c)=>'<rect x="'+x+'" y="'+y+'" width="28" height="34" fill="'+(r===0||(r+c)%3===1?"#FFC857":"#3D1229")+'"/>').join("")).join("")+
+    '<circle cx="100" cy="92" r="5" fill="#3D1229"/><path d="M91 114 q9-12 18 0Z" fill="#3D1229"/><circle cx="148" cy="94" r="4" fill="#3D1229"/><path d="M141 114 q7-10 14 0Z" fill="#3D1229"/>'+
+    '<rect x="30" y="116" width="140" height="4" fill="#F4A259"/><circle cx="46" cy="112" r="5" fill="#6BAF4B"/><circle cx="54" cy="110" r="6" fill="#4E8F3A"/>'},
+  lisbonne:{lines:["PLAN B","À LISBONNE"], art:u=>
+    '<defs><linearGradient id="'+u+'s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FBD38D"/><stop offset="1" stop-color="#E0607E"/></linearGradient></defs>'+
+    '<rect width="200" height="300" fill="url(#'+u+'s)"/><circle cx="100" cy="112" r="44" fill="#FFF1C1" opacity=".9"/>'+
+    '<path d="M0 172 Q50 138 100 158 T200 148 V300 H0Z" fill="#B23A5A"/>'+
+    '<rect x="16" y="150" width="16" height="16" fill="#F6E3C6"/><rect x="36" y="144" width="14" height="20" fill="#E8A33C"/><rect x="150" y="140" width="18" height="16" fill="#F6E3C6"/><rect x="172" y="146" width="14" height="12" fill="#E8A33C"/>'+
+    '<path d="M100 164 L90 148 L110 140" stroke="#2B1A22" stroke-width="2" fill="none"/>'+
+    '<rect x="46" y="163" width="108" height="8" rx="3" fill="#D9A21B"/><rect x="40" y="170" width="120" height="64" rx="6" fill="#F2C230"/>'+
+    [50,76,102,128].map(x=>'<rect x="'+x+'" y="180" width="20" height="22" rx="2" fill="#5B2A3A"/>').join("")+
+    '<rect x="40" y="212" width="120" height="4" fill="#FFFFFF" opacity=".7"/><rect x="0" y="240" width="200" height="60" fill="#8E2C47"/><rect x="0" y="240" width="200" height="3" fill="#2B1A22"/>'+
+    '<circle cx="62" cy="236" r="7" fill="#2B1A22"/><circle cx="138" cy="236" r="7" fill="#2B1A22"/>'},
+  fuite:{lines:["LIGNE","DE FUITE"], art:u=>
+    '<rect width="200" height="300" fill="#0F1626"/>'+
+    [30,60,90,120].map(r=>'<circle cx="100" cy="128" r="'+r+'" fill="none" stroke="#3E7CB1" stroke-width="1" opacity=".55"/>').join("")+
+    '<path d="M100 8 V248 M-20 128 H220" stroke="#3E7CB1" stroke-width="1" opacity=".4"/>'+
+    '<path d="M100 128 L220 128 A120 120 0 0 0 184.9 43.1 Z" fill="#6EC1E4" opacity=".22"/>'+
+    '<path d="M152 78 L210 30" stroke="#F2B33D" stroke-width="1.5" stroke-dasharray="4 4"/>'+
+    '<circle cx="152" cy="78" r="10" fill="none" stroke="#F2B33D" opacity=".6"/><circle cx="152" cy="78" r="4" fill="#F2B33D"/>'+
+    '<path d="M60 150 l14 -4 l6 -10 l3 1 l-3 9 l10 -2 l3 -4 l2 1 l-2 5 l-30 8Z" fill="#9CC7E8"/>'},
+  orbite:{lines:["ORBITE","BASSE"], art:u=>
+    '<defs><linearGradient id="'+u+'s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0B0D2A"/><stop offset="1" stop-color="#1E2470"/></linearGradient>'+
+    '<linearGradient id="'+u+'p" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3D7BE0"/><stop offset="1" stop-color="#0E2A6B"/></linearGradient></defs>'+
+    '<rect width="200" height="300" fill="url(#'+u+'s)"/>'+
+    Array.from({length:28},(_,i)=>'<circle cx="'+((i*73)%197+2)+'" cy="'+((i*41)%170+6)+'" r="'+(i%4?0.8:1.4)+'" fill="#FFFFFF" opacity="'+(i%3?.6:.95)+'"/>').join("")+
+    '<circle cx="100" cy="380" r="180" fill="url(#'+u+'p)"/><circle cx="100" cy="380" r="182" fill="none" stroke="#35B9E9" stroke-width="3" opacity=".7"/>'+
+    '<ellipse cx="100" cy="112" rx="80" ry="22" fill="none" stroke="#FFFFFF" stroke-dasharray="3 5" opacity=".35"/>'+
+    '<rect x="50" y="104" width="34" height="10" fill="#35B9E9" stroke="#D9DEE8"/><rect x="116" y="104" width="34" height="10" fill="#35B9E9" stroke="#D9DEE8"/>'+
+    '<rect x="84" y="108" width="32" height="2" fill="#D9DEE8"/><rect x="90" y="100" width="20" height="18" rx="3" fill="#D9DEE8"/><path d="M100 100 V90" stroke="#D9DEE8" stroke-width="1.5"/>'},
+  hiver:{lines:["LE DERNIER","HIVER"], ink:"#1E2633", art:u=>
+    '<defs><linearGradient id="'+u+'s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A9B8C9"/><stop offset="1" stop-color="#DCE5EE"/></linearGradient></defs>'+
+    '<rect width="200" height="300" fill="url(#'+u+'s)"/><circle cx="148" cy="58" r="16" fill="#F4F6F8" opacity=".85"/>'+
+    '<path d="M0 170 L40 128 L70 150 L110 112 L150 148 L200 120 V300 H0Z" fill="#8FA1B5"/>'+
+    '<path d="M0 196 Q100 176 200 200 V300 H0Z" fill="#F5F7FA"/>'+
+    '<rect x="72" y="168" width="56" height="34" fill="#3A4250"/><path d="M64 170 L100 144 L136 170Z" fill="#2D3440"/><path d="M66 169 L100 145 L134 169" stroke="#FFFFFF" stroke-width="3" fill="none"/>'+
+    '<rect x="82" y="178" width="10" height="10" fill="#F2C46B"/><rect x="108" y="178" width="10" height="10" fill="#F2C46B"/>'+
+    '<path d="M30 200 V160 M30 172 l-10 -10 M30 168 l9 -12 M170 204 V170 M170 180 l-8 -8 M170 176 l8 -10" stroke="#3A4250" stroke-width="2" fill="none"/>'+
+    Array.from({length:22},(_,i)=>'<circle cx="'+((i*53)%193+4)+'" cy="'+((i*37)%180+8)+'" r="'+(i%3?1.2:2)+'" fill="#FFFFFF" opacity=".9"/>').join("")},
+  pipo:{lines:["PIPO ET LA","FORÊT BLEUE"], art:u=>
+    '<defs><linearGradient id="'+u+'s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#174A6B"/><stop offset="1" stop-color="#2E9E8F"/></linearGradient></defs>'+
+    '<rect width="200" height="300" fill="url(#'+u+'s)"/><circle cx="152" cy="48" r="14" fill="#E8F4F0"/>'+
+    [[20,160,40],[60,150,50],[110,156,44],[160,148,52],[196,162,38]].map(([x,y,h])=>'<path d="M'+(x-20)+' '+(y+20)+' L'+x+' '+(y-h)+' L'+(x+20)+' '+(y+20)+'Z" fill="#1C5E63"/>').join("")+
+    [[10,210,70],[52,214,60],[150,212,66],[194,206,74]].map(([x,y,h])=>'<path d="M'+(x-24)+' '+y+' L'+x+' '+(y-h)+' L'+(x+24)+' '+y+'Z" fill="#0F3B4A"/>').join("")+
+    '<rect x="0" y="206" width="200" height="94" fill="#12404D"/>'+
+    '<path d="M116 226 q22 -4 26 -22 q-6 16 -24 16Z" fill="#E8763A"/><circle cx="140" cy="206" r="3" fill="#FFFFFF"/>'+
+    '<ellipse cx="104" cy="226" rx="18" ry="11" fill="#E8763A"/>'+
+    '<path d="M80 204 L84 190 L90 202 L98 202 L104 190 L108 204 L94 222Z" fill="#E8763A"/><path d="M90 214 L94 222 L98 214Z" fill="#FFFFFF"/>'+
+    '<circle cx="89" cy="208" r="1.6" fill="#12202A"/><circle cx="99" cy="208" r="1.6" fill="#12202A"/>'+
+    [[40,120],[70,96],[130,110],[164,92],[150,140],[56,168],[176,182],[30,186],[120,170]].map(([x,y])=>'<circle cx="'+x+'" cy="'+y+'" r="6" fill="#FFE27A" opacity=".22"/><circle cx="'+x+'" cy="'+y+'" r="2" fill="#FFE27A"/>').join("")},
+  osaka:{lines:["NUIT BLANCHE","À OSAKA"], art:u=>
+    '<defs><linearGradient id="'+u+'s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#12060F"/><stop offset="1" stop-color="#4A1226"/></linearGradient></defs>'+
+    '<rect width="200" height="300" fill="url(#'+u+'s)"/><circle cx="40" cy="44" r="12" fill="#F6E7D8"/>'+
+    [[0,120,30],[30,96,26],[56,140,22],[78,84,30],[108,128,24],[132,100,28],[160,136,20],[180,110,20]].map(([x,y,w])=>'<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+(232-y)+'" fill="#1A0A12"/>').join("")+
+    Array.from({length:26},(_,i)=>'<rect x="'+((i*29)%186+6)+'" y="'+(140+(i*17)%80)+'" width="3" height="4" fill="#F2B33D" opacity=".75"/>').join("")+
+    '<rect x="84" y="94" width="4" height="40" fill="#FF4D6D"/><rect x="82" y="92" width="8" height="44" fill="#FF4D6D" opacity=".25"/>'+
+    '<rect x="138" y="112" width="4" height="30" fill="#35B9E9"/><rect x="136" y="110" width="8" height="34" fill="#35B9E9" opacity=".25"/>'+
+    '<rect x="34" y="106" width="16" height="4" fill="#FF4D6D"/>'+
+    '<rect x="0" y="232" width="200" height="68" fill="#1F0B15"/><path d="M100 236 V300" stroke="#F6E7D8" stroke-width="2" stroke-dasharray="6 8" opacity=".5"/>'+
+    '<path d="M100 250 L60 300 H140Z" fill="#FFF4C2" opacity=".18"/><circle cx="100" cy="250" r="4" fill="#FFF4C2"/>'},
+  maison:{lines:["LA MAISON","DU BOUT"], art:u=>
+    '<defs><linearGradient id="'+u+'s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#100A0A"/><stop offset="1" stop-color="#2E2222"/></linearGradient></defs>'+
+    '<rect width="200" height="300" fill="url(#'+u+'s)"/><circle cx="148" cy="56" r="22" fill="#D9D2C5" opacity=".85"/>'+
+    '<path d="M28 240 V120 M28 160 L10 140 M28 150 L46 124 M46 124 L54 112 M28 132 L18 110" stroke="#050303" stroke-width="4" fill="none" stroke-linecap="round"/>'+
+    '<path d="M60 236 V164 L110 124 L160 164 V236Z" fill="#050303"/><rect x="132" y="128" width="10" height="24" fill="#050303"/>'+
+    '<rect x="86" y="164" width="28" height="34" fill="#F2B33D" opacity=".18"/><rect x="92" y="170" width="16" height="22" fill="#F2B33D"/>'+
+    '<ellipse cx="60" cy="236" rx="90" ry="10" fill="#FFFFFF" opacity=".07"/><ellipse cx="150" cy="242" rx="80" ry="9" fill="#FFFFFF" opacity=".06"/>'},
+  rock:{lines:["MES ANNÉES","ROCK"], art:u=>
+    '<defs><linearGradient id="'+u+'s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A2A12"/><stop offset="1" stop-color="#140D05"/></linearGradient></defs>'+
+    '<rect width="200" height="300" fill="url(#'+u+'s)"/>'+
+    '<path d="M84 0 H116 L172 252 H28Z" fill="#F2D27A" opacity=".16"/><ellipse cx="100" cy="252" rx="78" ry="12" fill="#F2D27A" opacity=".25"/>'+
+    '<circle cx="160" cy="46" r="24" fill="#120C05"/><circle cx="160" cy="46" r="16" fill="none" stroke="#3A2A12"/><circle cx="160" cy="46" r="7" fill="#C78B2B"/>'+
+    '<path d="M100 156 V250 M84 252 H116" stroke="#0D0904" stroke-width="4"/><rect x="92" y="128" width="16" height="30" rx="8" fill="#0D0904"/>'+
+    '<rect x="30" y="200" width="36" height="50" fill="#0D0904"/><circle cx="48" cy="225" r="11" fill="#2A1E0E"/><rect x="138" y="206" width="32" height="44" fill="#0D0904"/><circle cx="154" cy="228" r="9" fill="#2A1E0E"/>'},
+  selle:{lines:["TOUS EN","SELLE !"], art:u=>
+    '<defs><linearGradient id="'+u+'s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9ED3E6"/><stop offset="1" stop-color="#F6F1D9"/></linearGradient></defs>'+
+    '<rect width="200" height="300" fill="url(#'+u+'s)"/><circle cx="150" cy="58" r="20" fill="#FFD500"/>'+
+    '<path d="M0 150 Q60 118 120 140 T200 132 V300 H0Z" fill="#8CC66B"/><path d="M0 186 Q80 160 200 182 V300 H0Z" fill="#6BAF4B"/>'+
+    '<path d="M92 300 Q96 220 104 150 L108 150 Q120 220 150 300Z" fill="#E9D9B0"/>'+
+    '<g fill="none" stroke="#1E3A1E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="78" cy="226" r="16"/><circle cx="124" cy="226" r="16"/>'+
+    '<path d="M78 226 L94 202 L124 226 M94 202 L114 202 L124 226 M90 196 H100 M114 202 L118 190 H126"/></g>'+
+    '<circle cx="104" cy="168" r="7" fill="#E8763A"/><path d="M98 176 L94 200 M106 176 L114 200" stroke="#E8763A" stroke-width="4" stroke-linecap="round"/>'}
+};
+let posterSeq=0;
+function posterSVG(key){
+  const p=POSTERS[key], u="pp"+(posterSeq++)+"-", ink=p.ink||"#FFFFFF", dark=!p.ink;
+  const n=p.lines.length;
+  return '<svg viewBox="0 0 200 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">'+p.art(u)+
+    (dark?'<defs><linearGradient id="'+u+'o" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".78"/></linearGradient></defs><rect y="170" width="200" height="130" fill="url(#'+u+'o)"/>':'')+
+    '<text x="14" y="22" fill="'+ink+'" font-family="Inter, Arial, sans-serif" font-size="8" font-weight="600" letter-spacing="2" opacity=".85">UN FILM FICTIF</text>'+
+    p.lines.map((l,i)=>'<text x="14" y="'+(284-(n-1-i)*24)+'" fill="'+ink+'" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="700" letter-spacing=".5">'+l+'</text>').join("")+
+    '</svg>';
+}
+/* Affiches générées par IA (dossier posters/) : titre posé par-dessus, affiche dessinée en secours si l'image manque */
+const PHOTO_POSTERS = new Set(["lisbonne","maison","osaka","pipo","hiver","orbite","fuite","voisins","selle","rock"]);
+function paintPoster(el,f){
+  const age=AGE[f.r]?'<span class="age">'+AGE[f.r]+'</span>':"";
+  if(!PHOTO_POSTERS.has(f.key)){ el.innerHTML=posterSVG(f.key)+age; return; }
+  el.classList.add("is-photo");
+  el.innerHTML='<img src="posters/'+f.key+'.webp" alt="" loading="lazy" decoding="async"><span class="p-credit">Un film fictif</span><span class="p-title">'+POSTERS[f.key].lines.join("<br>")+'</span>'+age;
+  el.querySelector("img").onerror=()=>{ el.classList.remove("is-photo"); el.innerHTML=posterSVG(f.key)+age; };
+}
+
+/* ---------- Parcours réservation simulé ---------- */
+const ROWS="ABCDEFG", PER_ROW=8, MAX_QTY=6;
+const STEPS=["Places","Sièges","Récapitulatif"];
+const esc=t=>String(t).replace(/[&<>"]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch]));
+let bk=null;
+
+/* Sièges occupés tirés de façon stable à partir de l'id de séance : il reste exactement s.seats places libres */
+function takenSeats(s){
+  let h=0; for(const ch of s.id) h=(h*31+ch.charCodeAt(0))>>>0;
+  const rnd=()=>{h=(h+0x6D2B79F5)>>>0; let t=h; t=Math.imul(t^t>>>15,t|1); t^=t+Math.imul(t^t>>>7,t|61); return ((t^t>>>14)>>>0)/4294967296;};
+  const all=[]; for(const r of ROWS) for(let n=1;n<=PER_ROW;n++) all.push(r+n);
+  for(let i=all.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1)); [all[i],all[j]]=[all[j],all[i]];}
+  return new Set(all.slice(0,Math.max(0,all.length-s.seats)));
+}
+function openBooking(s,trigger){
+  const taken=takenSeats(s); const free=ROWS.length*PER_ROW-taken.size;
+  bk={s, f:FILMS[s.film], trigger, taken, maxQty:Math.min(MAX_QTY,free), qty:Math.min(2,free), seats:[]};
+  if(isWeb()){
+    // Fenêtre modale : le reste de la page devient inerte (focus piégé), Échap ferme
+    INERT().forEach(el=>el.inert=true); document.body.style.overflow="hidden";
+  } else {
+    $("searchView").hidden=true; $("screen").classList.add("is-light");
+  }
+  $("bookView").hidden=false;
+  showStep(1);
+}
+function closeBooking(focusQuery){
+  $("bookView").hidden=true; $("bookView").innerHTML=""; $("searchView").hidden=false; $("screen").classList.remove("is-light");
+  INERT().forEach(el=>el.inert=false); document.body.style.overflow="";
+  const t=bk.trigger; bk=null;
+  if(focusQuery){ $("q").focus(); $("q").select(); } else t.focus();
+}
+function filmHeader(){
+  const s=bk.s;
+  return '<div class="book-head"><div><h2 id="bkT">'+esc(bk.f.t)+'</h2><p class="book-sub"><span>'+esc(DAY[s.day])+'</span><span>'+s.time+'</span><span>'+(s.v==="VO"?"VOSTF":"VF")+'</span><span>'+esc(s.cine)+'</span></p></div>'+
+    '<button type="button" class="close" data-act="close" aria-label="Fermer et revenir aux propositions">'+icon("x")+'</button></div>';
+}
+function stepper(n){
+  return '<ol class="steps" aria-label="Étape '+n+' sur '+STEPS.length+'">'+
+    STEPS.map((l,i)=>'<li'+(i+1<n?' class="done"':'')+(i+1===n?' aria-current="step"':'')+'><span>Étape</span><b>'+(i+1)+'</b><span>'+l+'</span></li>').join("")+'</ol>';
+}
+function recapList(){
+  const s=bk.s;
+  return '<dl class="recap"><dt>Film</dt><dd>'+esc(bk.f.t)+'</dd><dt>Cinéma</dt><dd>'+esc(s.cine)+'</dd><dt>Date</dt><dd>'+esc(DAY[s.day])+'</dd>'+
+    '<dt>Heure</dt><dd>'+s.time+' (fin '+endTime(s)+')</dd><dt>Salle</dt><dd>'+salle(s)+'</dd><dt>Version</dt><dd>'+esc(VERSION[s.v])+' ('+s.v+')</dd>'+
+    '<dt>Places</dt><dd>'+bk.qty+' · '+bk.seats.join(", ")+'</dd></dl>';
+}
+function showStep(n){
+  const v=$("bookView");
+  let html=filmHeader();
+  if(n<=3) html+=stepper(n);
+  if(n===2||n===3) html+='<button type="button" class="back" data-act="back">'+icon("arrow-left","icon-sm")+'Étape précédente</button>';
+
+  if(n===1){
+    html+='<h3 class="step-title" tabindex="-1">Combien de places&nbsp;?</h3>'+
+      '<div class="qty panel-w"><div><span class="qty-label" id="qtyL">Nombre de places</span><span class="qty-sub">'+bk.maxQty+' au maximum pour cette séance</span></div>'+
+      '<div class="stepper" role="group" aria-labelledby="qtyL"><button type="button" class="btn btn-outline" data-act="minus" aria-label="Retirer une place">'+icon("minus")+'</button>'+
+      '<output aria-live="polite" id="qtyOut">'+bk.qty+'</output>'+
+      '<button type="button" class="btn btn-outline" data-act="plus" aria-label="Ajouter une place">'+icon("plus")+'</button></div></div>'+
+      '<p class="book-note">'+icon("info","icon-sm")+'<span>Tarifs non simulés dans cette démo : dans le vrai parcours, le choix du tarif se fait ici.</span></p>'+
+      '<button type="button" class="btn btn-primary btn-block" data-act="next">Choisir les sièges</button>';
+  }
+  if(n===2){
+    let grid='';
+    for(const r of ROWS){
+      grid+='<span class="row-k" aria-hidden="true">'+r+'</span>';
+      for(let i=1;i<=PER_ROW;i++){
+        if(i===5) grid+='<span aria-hidden="true"></span>';
+        const id=r+i, taken=bk.taken.has(id), sel=bk.seats.includes(id);
+        grid+= taken
+          ? '<button type="button" class="seat" disabled aria-label="Rang '+r+', place '+i+', occupée">'+icon("x")+'</button>'
+          : '<button type="button" class="seat" data-seat="'+id+'" aria-pressed="'+sel+'" aria-label="Rang '+r+', place '+i+'">'+(sel?icon("check"):'')+'</button>';
+      }
+    }
+    html+='<h3 class="step-title" tabindex="-1">Choisissez vos sièges</h3>'+
+      '<p class="step-hint">Salle fictive, disponibilités simulées.</p>'+
+      '<div class="hall panel-w"><div class="screen-bar">Écran</div><div class="seat-grid">'+grid+'</div>'+
+      '<div class="legend"><span><i class="seat" aria-hidden="true"></i>Libre</span><span><i class="seat sel" aria-hidden="true">'+icon("check")+'</i>Votre choix</span>'+
+      '<span><i class="seat taken" aria-hidden="true">'+icon("x")+'</i>Occupée</span></div></div>'+
+      '<p class="seat-status" id="seatStatus" aria-live="polite"></p>'+
+      '<button type="button" class="btn btn-primary btn-block" data-act="next">Continuer</button>';
+  }
+  if(n===3){
+    html+='<h3 class="step-title" tabindex="-1">Vérifiez votre réservation</h3>'+
+      '<div class="recap-box panel-w">'+recapList()+'</div>'+
+      '<p class="book-note">'+icon("info","icon-sm")+'<span>Paiement non simulé : dans le vrai parcours, cette étape mène au paiement de la billetterie.</span></p>'+
+      '<div class="actions"><button type="button" class="btn btn-primary btn-block" data-act="next">'+icon("ticket")+'Confirmer la réservation</button>'+
+      '<button type="button" class="btn btn-outline btn-block" data-act="back">Modifier les sièges</button></div>';
+  }
+  if(n===4){
+    const ref="DEMO-"+Math.random().toString(36).slice(2,6).toUpperCase();
+    html+='<div class="recap-box panel-w success"><div class="confirm-head"><span class="ok">'+icon("check","icon-sm")+'</span><h3 class="step-title" tabindex="-1">Réservation simulée</h3></div>'+
+      '<p class="ref">Numéro fictif : <b>'+ref+'</b></p>'+recapList()+'</div>'+
+      '<p class="book-note">'+icon("info","icon-sm")+'<span>Démo : aucune place n\'a été réellement réservée. Dans le vrai parcours, les billets arrivent ici et par e-mail.</span></p>'+
+      '<div class="actions"><button type="button" class="btn btn-primary btn-block" data-act="new">'+icon("search")+'Nouvelle recherche</button>'+
+      '<button type="button" class="btn btn-outline btn-block" data-act="list">Revenir aux propositions</button></div>';
+  }
+  v.innerHTML='<div class="book-dialog" role="dialog" aria-modal="true" aria-labelledby="bkT">'+html+'</div>'; v.dataset.step=n;
+  if(n===1) updateQty();
+  if(n===2) updateSeats();
+  v.querySelector(".step-title").focus();
+}
+function updateQty(){
+  const v=$("bookView");
+  $("qtyOut").textContent=bk.qty;
+  v.querySelector('[data-act="minus"]').disabled=bk.qty<=1;
+  v.querySelector('[data-act="plus"]').disabled=bk.qty>=bk.maxQty;
+}
+function updateSeats(warn){
+  const left=bk.qty-bk.seats.length;
+  $("seatStatus").innerHTML=esc(bk.seats.length+" place"+(bk.seats.length>1?"s":"")+" sur "+bk.qty+" choisie"+(bk.seats.length>1?"s":"")+
+    (bk.seats.length?" : "+bk.seats.join(", "):""))+(warn?'<span class="warn">'+esc(warn)+'</span>':'');
+  const next=$("bookView").querySelector('[data-act="next"]');
+  next.disabled=left!==0;
+  next.textContent=left>0?"Encore "+left+" siège"+(left>1?"s":"")+" à choisir":"Continuer";
+}
+$("bookView").addEventListener("click",e=>{
+  if(!bk) return;
+  if(e.target===$("bookView")){ closeBooking(); return; }
+  const v=$("bookView"), n=+v.dataset.step;
+  const seat=e.target.closest("[data-seat]");
+  if(seat){
+    const id=seat.dataset.seat, i=bk.seats.indexOf(id);
+    if(i>=0){ bk.seats.splice(i,1); }
+    else if(bk.seats.length<bk.qty){ bk.seats.push(id); }
+    else { updateSeats("Vous avez déjà choisi "+bk.qty+" siège"+(bk.qty>1?"s":"")+". Retirez-en un pour en choisir un autre."); return; }
+    const on=bk.seats.includes(id); seat.setAttribute("aria-pressed",on); seat.innerHTML=on?icon("check"):"";
+    updateSeats(); return;
+  }
+  const b=e.target.closest("[data-act]"); if(!b) return;
+  const act=b.dataset.act;
+  if(act==="minus"||act==="plus"){
+    bk.qty=Math.min(bk.maxQty,Math.max(1,bk.qty+(act==="plus"?1:-1)));
+    if(bk.seats.length>bk.qty) bk.seats.length=bk.qty;
+    updateQty(); return;
+  }
+  if(act==="back"){ n===1?closeBooking():showStep(n-1); return; }
+  if(act==="next"){ showStep(n+1); return; }
+  if(act==="new"){ closeBooking(true); return; }
+  if(act==="list"||act==="close"){ closeBooking(); return; }
+});
+
+Object.values(FILMS).forEach(f=>{
+  const li=document.createElement("li");
+  li.innerHTML=(NEW.has(f.key)?'<span class="badge badge-tag">Nouveau</span>':'')+'<div class="poster" aria-hidden="true"></div><h3></h3><p></p>';
+  paintPoster(li.querySelector(".poster"),f);
+  li.querySelector("h3").textContent=f.t;
+  li.querySelector("p").textContent=cap(f.g)+" · "+appD(f.d)+(AGE[f.r]?" · Interdit "+f.r:"");
+  $("rail").append(li);
+});
+
+["orbite","lisbonne","osaka"].forEach(k=>{ const d=document.createElement("div"); d.className="poster"; paintPoster(d,FILMS[k]); $("heroPosters").append(d); });
+
+function run(){ const q=$("q").value.trim(); if(!q) return; render(localPick(q)); }
+$("askForm").addEventListener("submit",e=>{e.preventDefault(); run();});
+$("q").addEventListener("keydown",e=>{ if(e.key==="Enter"&&!e.shiftKey){e.preventDefault(); run();} });
+render(localPick($("q").value));
+if(location.hash==="#web") setMode("web");
+})();
+</script>
+</body>
+</html>

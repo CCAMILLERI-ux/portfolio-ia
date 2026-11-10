@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Offre énergie B2B et showroom professionnel – Étude de cas – Caroline Camilleri</title>
+<meta name="description" content="Étude de cas exploratoire : une page d'offre énergie B2B avec formulaire guidé et un showroom produits pour acheteurs, conçus avec Claude Code à partir d'un design system rédigé en amont.">
+<link rel="canonical" href="https://ccamilleri-ux.github.io/portfolio-ia/cas-siplec.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Caroline Camilleri – Projets IA">
+<meta property="og:title" content="Offre énergie B2B et showroom professionnel – étude de cas">
+<meta property="og:description" content="Cadrer deux offres B2B et les traduire en parcours testables avec Claude Code : formulaire guidé, showroom, plan de recette.">
+<meta property="og:url" content="https://ccamilleri-ux.github.io/portfolio-ia/cas-siplec.html">
+<meta property="og:image" content="https://ccamilleri-ux.github.io/portfolio-ia/assets/img/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">Caroline Camilleri <span>Projets IA no code</span></a>
+    <nav class="site-nav" aria-label="Navigation principale">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="cas-siplec.html" aria-current="page">Énergie et showroom</a></li>
+        <li><a href="cas-amundi.html">Supports B2B</a></li>
+        <li><a href="cas-ugc.html">Assistant et abonnement</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<aside class="disclaimer" aria-label="Mention">
+  <div class="wrap">
+    <p>Étude de cas exploratoire réalisée à titre de démonstration, sans lien avec SIPLEC ni le Mouvement E.Leclerc. Les marques citées appartiennent à leurs propriétaires.</p>
+  </div>
+</aside>
+
+<main id="contenu">
+  <section class="case-hero" aria-labelledby="titre-page">
+    <div class="wrap">
+      <span class="eyebrow">Étude de cas 1 · Univers SIPLEC (Mouvement E.Leclerc)</span>
+      <h1 id="titre-page">Offre énergie B2B et showroom professionnel</h1>
+      <p class="lead narrow">Deux offres B2B, deux parcours en ligne : une demande de rendez-vous qualifiée pour un service, une sélection de produits pour des acheteurs.</p>
+      <dl class="facts">
+        <dt>Livrable</dt><dd>Un site de 4 pages : accueil, cas énergie, cas non alimentaire, bibliothèque de composants</dd>
+        <dt>Réalisé avec</dt><dd>Claude Code, à partir d'un design system que j'ai préparé</dd>
+        <dt>Durée</dt><dd><span class="todo">[À COMPLÉTER PAR CAROLINE]</span></dd>
+      </dl>
+      <nav class="toc" aria-labelledby="titre-sommaire">
+        <h2 id="titre-sommaire">Sommaire</h2>
+        <ol>
+          <li><a href="#contexte">Le contexte</a></li>
+          <li><a href="#probleme">Le problème et la cible</a></li>
+          <li><a href="#demarche">Ma démarche avec l'IA</a></li>
+          <li><a href="#livrable">Le livrable</a></li>
+          <li><a href="#demontre">Ce que le cas démontre</a></li>
+          <li><a href="#limites">Limites et suites</a></li>
+          <li><a href="#outils">Outils utilisés</a></li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <section class="case-section" id="contexte" aria-labelledby="h-contexte">
+      <div class="narrow">
+        <h2 id="h-contexte"><span class="num">1</span>Le contexte</h2>
+        <p>Je me suis posé une question : comment présenter en ligne deux offres B2B de nature différente ? D'un côté, un service (un accompagnement en efficacité énergétique) qui doit générer des demandes exploitables. De l'autre, une gamme de produits qu'un professionnel doit pouvoir comparer.</p>
+        <p>C'est une hypothèse de travail, pas une commande. Les offres, les produits et les données sont fictifs.</p>
+        <details>
+          <summary>Les deux sujets choisis</summary>
+          <div class="details-body">
+            <ul>
+              <li><strong>Énergie</strong> : un accompagnement pour réduire la consommation d'un bâtiment, produire de l'énergie sur site ou installer des bornes de recharge. L'objectif est de transformer une visite en demande qu'un conseiller peut traiter.</li>
+              <li><strong>Non alimentaire</strong> : une gamme printemps d'équipement extérieur de six produits fictifs. Aucun prix, stock ni certification n'est indiqué.</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="case-section" id="probleme" aria-labelledby="h-probleme">
+      <div class="narrow">
+        <h2 id="h-probleme"><span class="num">2</span>Le problème et la cible</h2>
+        <p>Pour l'énergie, un dirigeant ou un responsable des services généraux veut savoir si l'offre le concerne et quoi préparer. Le conseiller, lui, a besoin de demandes complètes.</p>
+        <p>Pour la gamme, un acheteur ou un responsable de rayon doit comprendre vite les produits, les comparer et constituer une sélection à discuter.</p>
+        <details>
+          <summary>Les choix de parcours qui en découlent</summary>
+          <div class="details-body">
+            <h3>Cas énergie</h3>
+            <ul>
+              <li>La liste des informations à préparer avant le formulaire.</li>
+              <li>Le besoin d'abord, les coordonnées en dernier.</li>
+              <li>Une option « Je ne sais pas encore » : un projet flou reste une opportunité.</li>
+              <li>Le téléphone obligatoire seulement si l'on demande à être rappelé.</li>
+              <li>Un récapitulatif modifiable par étape, puis une confirmation qui annonce la suite.</li>
+            </ul>
+            <h3>Cas non alimentaire</h3>
+            <ul>
+              <li>Des filtres par usage (terrasse, balcon, jardin) autant que par catégorie.</li>
+              <li>Une comparaison limitée à trois produits pour rester lisible sur mobile.</li>
+              <li>Une sélection qui débouche sur une demande d'information à l'équipe commerciale.</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="case-section" id="demarche" aria-labelledby="h-demarche">
+      <div class="narrow">
+        <h2 id="h-demarche"><span class="num">3</span>Ma démarche avec l'IA</h2>
+        <p>Avant toute génération, j'ai préparé un fichier de design system : règles absolues, ton, couleurs avec leurs contrastes, typographie et sept composants documentés. Claude Code a construit le site à partir de ce fichier.</p>
+        <p>La recette a porté sur l'accessibilité, le rendu mobile et la prudence des contenus réglementaires.</p>
+        <details>
+          <summary>Le brief et le design system</summary>
+          <div class="details-body">
+            <p>Le fichier fixe des règles que l'IA doit respecter sur chaque page :</p>
+            <ul>
+              <li>aucun logo ni élément d'identité de la marque ;</li>
+              <li>un bandeau de mention en haut de chaque page ;</li>
+              <li>des produits, chiffres et témoignages uniquement fictifs et signalés comme tels ;</li>
+              <li>pas de superlatifs, pas de chiffres non sourcés, des libellés d'action avec un verbe ;</li>
+              <li>une règle de couleur précise : le texte blanc sur l'orange clair (contraste de 2,92:1) est interdit, on utilise un orange plus foncé (4,95:1).</li>
+            </ul>
+            <p><a href="projets/siplec/brief-design-system.html">Lire le design system tel que je l'ai transmis à l'IA</a></p>
+          </div>
+        </details>
+        <details>
+          <summary>Itérations, corrections et refus</summary>
+          <div class="details-body">
+            <p>Ce que j'ai demandé de corriger, ou refusé, au fil des versions : <span class="todo">[À COMPLÉTER PAR CAROLINE : deux ou trois exemples concrets]</span></p>
+            <p>Nombre d'échanges avec l'IA : <span class="todo">[À COMPLÉTER PAR CAROLINE]</span></p>
+            <p>Autres outils d'IA : le livrable indique aussi Gemini et ChatGPT pour explorer des pistes et vérifier certains points. <span class="todo">[À COMPLÉTER PAR CAROLINE : confirmer ou retirer]</span></p>
+          </div>
+        </details>
+        <details>
+          <summary>Les vérifications</summary>
+          <div class="details-body">
+            <ul>
+              <li><strong>Accessibilité</strong> : contrôles sur une sélection de critères RGAA 4.1.2, documentés dans le livrable avec la méthode et le résultat. Ils ont été faits par script (navigateur automatisé et outil d'audit axe-core) : parcours complet au clavier, contrastes, focus visible, étiquettes de champs, messages d'erreur.</li>
+              <li><strong>Mobile</strong> : parcours vérifiés à 1 280 et 375 pixels de large.</li>
+              <li><strong>Exactitude</strong> : la mention du décret « Éco Énergie Tertiaire » renvoie à sa source officielle, à faire valider par des experts métier.</li>
+              <li><strong>Ce qui n'a pas été fait</strong> : restitution avec un lecteur d'écran, zoom à 200 %, audit complet. Aucune conformité n'est annoncée.</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="case-section" id="livrable" aria-labelledby="h-livrable">
+      <div class="narrow">
+        <h2 id="h-livrable"><span class="num">4</span>Le livrable</h2>
+        <p>Un site de quatre pages qui fonctionne sur ordinateur et sur mobile. Les formulaires sont interactifs mais n'envoient ni ne conservent aucune donnée.</p>
+      </div>
+      <div class="shots">
+        <figure>
+          <img src="assets/img/captures/siplec-desktop.webp" width="1440" height="900" loading="lazy" alt="Accueil du projet sur ordinateur : bandeau de mention, titre « Dispositifs marketing digitaux B2B », bloc de contact et début des deux cas.">
+          <figcaption>Accueil, sur ordinateur.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/img/captures/siplec-mobile.webp" width="780" height="1688" loading="lazy" alt="Cas énergie sur mobile : page d'offre fictive « Préparez votre projet d'efficacité énergétique avec un conseiller ».">
+          <figcaption>Page d'offre énergie, sur mobile.</figcaption>
+        </figure>
+      </div>
+      <div class="narrow">
+        <details>
+          <summary>Ce qui fonctionne dans le prototype</summary>
+          <div class="details-body">
+            <h3>Cas énergie</h3>
+            <ul>
+              <li>Une page d'offre avec FAQ repliable et la liste des informations à préparer.</li>
+              <li>Un formulaire en trois étapes (besoin, projet, coordonnées), des messages d'erreur qui disent comment corriger, un récapitulatif modifiable et une confirmation.</li>
+              <li>Une maquette de publication LinkedIn et une page d'inscription à un webinaire.</li>
+              <li>Un protocole de test utilisateur, une hypothèse d'A/B test, des événements de mesure à paramétrer et trois tickets de backlog rédigés en user stories avec critères d'acceptation.</li>
+            </ul>
+            <h3>Cas non alimentaire</h3>
+            <ul>
+              <li>Un showroom de six produits : recherche, filtres, fiches détaillées, comparaison, sélection puis demande d'information.</li>
+              <li>Un kit d'animation en magasin : affiche, stop-rayon, fiche argumentaire.</li>
+            </ul>
+          </div>
+        </details>
+        <ul class="links">
+          <li><a class="button" href="projets/siplec/index.html">Voir le projet en ligne</a></li>
+          <li><a class="button button--ghost" href="projets/siplec/cas-energie.html">Cas énergie</a></li>
+          <li><a class="button button--ghost" href="projets/siplec/cas-non-alimentaire.html">Cas non alimentaire</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="case-section" id="demontre" aria-labelledby="h-demontre">
+      <div class="narrow">
+        <h2 id="h-demontre"><span class="num">5</span>Ce que le cas démontre</h2>
+        <ul>
+          <li><strong>Cadrage d'offre</strong> : cible, besoin, promesse, pour un service et pour une gamme.</li>
+          <li><strong>Conception de parcours</strong> : chaque choix d'interface est justifié par un besoin utilisateur.</li>
+          <li><strong>Accessibilité</strong> : intégrée dès le brief, puis vérifiée, avec ses limites écrites.</li>
+          <li><strong>Préparation du run</strong> : mesure, backlog, plan de lancement et protocole de test.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="case-section" id="limites" aria-labelledby="h-limites">
+      <div class="narrow">
+        <h2 id="h-limites"><span class="num">6</span>Limites et suites possibles</h2>
+        <p>Rien n'a été testé avec de vrais utilisateurs, et les contenus métier n'ont pas été validés par des experts. Le prototype n'est relié à aucun outil commercial.</p>
+        <details>
+          <summary>Les suites à donner</summary>
+          <div class="details-body">
+            <ul>
+              <li>Mener les tests utilisateurs selon le protocole proposé : dirigeants, responsables de site, conseillers.</li>
+              <li>Faire valider les contenus énergie et réglementaires par des experts métier.</li>
+              <li>Cadrer l'intégration au SI : transmission des demandes à l'outil commercial, données personnelles avec le DPO.</li>
+              <li>Mesurer un état initial avant de fixer tout objectif chiffré.</li>
+              <li>Faire réaliser un audit d'accessibilité complet.</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="case-section" id="outils" aria-labelledby="h-outils">
+      <div class="narrow">
+        <h2 id="h-outils"><span class="num">7</span>Outils utilisés</h2>
+        <ul class="tags">
+          <li>Claude Code</li><li>Design system en Markdown</li><li>GitHub</li><li>GitHub Pages</li><li>Contrôles automatisés (axe-core)</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <div class="wrap">
+    <nav class="next-case" aria-label="Autres études de cas">
+      <a href="index.html">← Retour à l'accueil</a>
+      <a href="cas-amundi.html">Étude de cas suivante : supports marketing B2B →</a>
+    </nav>
+  </div>
+</main>
+
+<footer class="site-footer" id="contact">
+  <div class="wrap">
+    <p><strong>Caroline Camilleri</strong> · Product Owner, cheffe de projet digital</p>
+    <p><a href="mailto:camilleri.caro@gmail.com">camilleri.caro@gmail.com</a> · <a href="https://www.linkedin.com/in/caroline-camilleri-pro/" rel="noopener" target="_blank">LinkedIn<span class="visually-hidden"> (nouvelle fenêtre)</span></a></p>
+    <p class="small">Étude de cas exploratoire réalisée à titre de démonstration, sans lien avec SIPLEC ni le Mouvement E.Leclerc. Les marques citées appartiennent à leurs propriétaires.</p>
+  </div>
+</footer>
+</body>
+</html>
