@@ -222,3 +222,34 @@ summary:hover { background: var(--bg); }
 .shot-single { margin: 1.5rem 0 0; max-width: 20rem; }
 .shot-single img { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
 .shot-single figcaption { font-size: .875rem; color: var(--muted); margin-top: .5rem; }
+
+/* Accueil : grille de projets et fiches */
+@media (min-width: 64rem) { .cards--five { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 48rem) and (max-width: 63.99rem) { .cards--five { grid-template-columns: repeat(2, 1fr); } }
+.card .tags { margin-bottom: .75rem; }
+.card__demo { color: var(--muted); }
+
+.section--fiches { padding-top: 0; border-top: 0; }
+.fiche {
+  background: var(--surface); border: 1px solid var(--line); border-top: 4px solid var(--blue);
+  border-radius: var(--radius); padding: 1.5rem 1.25rem; margin: 0 0 2rem; scroll-margin-top: 1rem;
+}
+@media (min-width: 48rem) { .fiche { padding: 2.25rem 2.5rem; } }
+.fiche h3 { font-size: clamp(1.3rem, 3vw, 1.6rem); margin-bottom: .5rem; }
+.fiche h4 { font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--blue-text); margin: 1.5rem 0 .5rem; }
+.fiche__pb { font-size: 1.1rem; font-weight: 550; max-width: 44rem; }
+.fiche__ctx { color: var(--muted); }
+.fiche__grid { display: grid; gap: 1.5rem; }
+@media (min-width: 64rem) { .fiche__grid { grid-template-columns: 1.4fr 1fr; gap: 2.5rem; } }
+.fiche__shots { display: grid; gap: 1rem; align-content: start; }
+.fiche__shots figure { margin: 0; }
+.fiche__shots img { border: 1px solid var(--line); border-radius: 8px; width: 100%; }
+.fiche__shots--mobile figure { max-width: 17rem; }
+.fiche__shots figcaption { font-size: .85rem; color: var(--muted); margin-top: .4rem; }
+.method { margin: 0; }
+.method dt { font-weight: 650; margin-top: .6rem; }
+.method dd { margin: .15rem 0 0; color: var(--muted); }
+.fiche .links { align-items: center; margin-top: 1.75rem; }
+.link-more { font-weight: 600; }
+
+@media (min-width: 64rem) { .steps--four { grid-template-columns: repeat(4, 1fr); } }
