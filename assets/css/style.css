@@ -109,18 +109,17 @@ main { display: block; }
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden;
   transition: box-shadow .2s, transform .2s;
 }
-.card:hover, .card:focus-within { box-shadow: 0 10px 30px rgba(28, 28, 30, .08); transform: translateY(-2px); }
-@media (prefers-reduced-motion: reduce) { .card { transition: none; } .card:hover, .card:focus-within { transform: none; } }
+.card:hover { box-shadow: 0 10px 30px rgba(28, 28, 30, .08); }
+@media (prefers-reduced-motion: reduce) { .card { transition: none; } }
 .card img { aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border-bottom: 1px solid var(--line); width: 100%; }
 .card__body { padding: 1.25rem 1.25rem 1.5rem; display: flex; flex-direction: column; flex: 1; }
 .card__context { color: var(--muted); font-size: .875rem; margin: 0 0 .35rem; }
 .card h3 { margin-bottom: .5rem; font-size: 1.2rem; }
 .card h3 a { color: var(--text); text-decoration: none; }
-.card h3 a::after { content: ""; position: absolute; inset: 0; }
-.card h3 a:focus-visible { outline: none; }
-.card:focus-within { outline: 3px solid var(--gold); outline-offset: 3px; }
 .card__demo { margin: 0 0 1rem; }
-.card__more { margin-top: auto; color: var(--gold-text); font-weight: 600; font-size: .95rem; }
+.card h3 a:hover { text-decoration: underline; }
+.card__actions { margin-top: auto; display: flex; flex-wrap: wrap; gap: .5rem; }
+.card__actions .button { font-size: .95rem; padding: .55rem .9rem; }
 
 .tags { list-style: none; padding: 0; margin: 0 0 1rem; display: flex; flex-wrap: wrap; gap: .4rem; }
 .tags li { margin: 0; font-size: .8rem; font-weight: 550; padding: .2rem .6rem; border-radius: 999px; background: var(--gold-soft); color: var(--text); }
