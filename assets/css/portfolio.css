@@ -63,7 +63,7 @@ a { color: var(--gold-text); text-underline-offset: .15em; }
 /* Cartes : toute la carte mène à la fiche, le bouton mène à la démo */
 .cards { list-style: none; padding: 0; margin: 0; display: grid; gap: .9rem; grid-template-columns: 1fr; }
 @media (min-width: 40rem) { .cards { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 64rem) { .cards { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 64rem) { .cards { grid-template-columns: repeat(3, 1fr); } }
 .card { position: relative; display: flex; flex-direction: column; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; transition: border-color .15s, box-shadow .15s; }
 .card:hover { border-color: var(--blue); box-shadow: 0 6px 18px rgba(29, 35, 80, .10); }
 .card:has(h3 a:focus-visible) { outline: 3px solid var(--gold); outline-offset: 2px; }
@@ -74,7 +74,7 @@ a { color: var(--gold-text); text-underline-offset: .15em; }
 .card h3 a::after { content: ""; position: absolute; inset: 0; z-index: 1; }
 .card h3 a:focus-visible { outline: none; }
 .card p { font-size: .88rem; color: var(--muted); }
-.card .demo { position: relative; z-index: 2; align-self: flex-start; margin-top: auto; }
+.card__actions { position: relative; z-index: 2; margin-top: auto; padding-top: .3rem; display: flex; flex-wrap: wrap; gap: .4rem; }
 
 .tags { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: .3rem; }
 .tags li { font-size: .75rem; font-weight: 600; padding: .1rem .5rem; border-radius: 999px; background: var(--tint); color: var(--navy); }
@@ -114,3 +114,13 @@ a { color: var(--gold-text); text-underline-offset: .15em; }
 .foot { background: var(--navy); color: #D5DAE8; font-size: .85rem; padding: 1rem 0; }
 .foot a { color: #fff; }
 .fig-portrait img { max-width: 12rem; }
+
+/* Pages fiches */
+.crumb { margin: 1.25rem 0 .75rem; font-size: .92rem; }
+.fiche--page { margin-bottom: 1.25rem; }
+.fiche--page h1 { font-size: clamp(1.4rem, 3.5vw, 1.8rem); margin-top: .2rem; }
+.fiche--page .pb { font-size: 1.05rem; }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin: 0 0 2rem; font-size: .92rem; font-weight: 600; }
+.cv-head .cv-name { font-size: clamp(1.7rem, 4.5vw, 2.4rem); font-weight: 700; line-height: 1.2; letter-spacing: -.01em; }
+.cv-head .cv-name a { color: #fff; text-decoration: none; }
+.cv-head .cv-name a:hover { text-decoration: underline; }

@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VALHOR Info (maquette) — Caroline Camilleri</title>
+  <meta name="description" content="Maquette exploratoire et non officielle de la newsletter VALHOR Info, réalisée par Caroline Camilleri, projet de démonstration.">
+  <meta name="robots" content="noindex">
+  <!--
+    Maquette d'e-mail : mise en page en tableaux de 600 px et styles en ligne,
+    comme pour un envoi réel. Les styles ci-dessous ne servent qu'à la
+    consultation dans le navigateur (cadre de lecture, adaptation mobile).
+    Contenus publics repris de valhor.fr : label Fleurs de France, Salon du
+    Végétal, journée Palette végétale urbaine, appel d'offres relations médias.
+    Blocs marqués « Exemple » : contenus de démonstration à valider.
+  -->
+  <style>
+    @font-face {
+      font-family: "Montserrat";
+      font-weight: 100 900;
+      font-display: swap;
+      src: url("../assets/fonts/montserrat-latin-wght-normal.woff2") format("woff2");
+    }
+    body { margin: 0; background: #e9eee9; }
+    a:focus-visible, .viewer a:focus-visible { outline: 3px solid #0b6bcb; outline-offset: 2px; }
+    .viewer {
+      max-width: 600px; margin: 0 auto; padding: 16px 16px 12px;
+      font-family: -apple-system, system-ui, "Segoe UI", Roboto, Arial, sans-serif; color: #17251d;
+    }
+    .viewer a { color: #0f5f31; font-weight: 600; }
+    .viewer__inbox { margin-top: 12px; padding: 12px 14px; background: #fff; border: 1px solid #d3ddd5; border-radius: 8px; font-size: 14px; line-height: 1.45; }
+    .viewer__inbox p { margin: 0; }
+    .viewer__label { color: #45584f; }
+    .viewer__note { margin: 10px 0 0; font-size: 13px; color: #45584f; }
+    .tag-ex {
+      display: inline-block; padding: 1px 6px; margin-left: 6px;
+      font: 700 10px/1.6 Arial, sans-serif; letter-spacing: .06em; text-transform: uppercase;
+      color: #45584f; border: 1px dashed #45584f; border-radius: 3px; vertical-align: middle;
+    }
+    @media (max-width: 620px) {
+      .wrap-600 { width: 100% !important; }
+      .px { padding-left: 20px !important; padding-right: 20px !important; }
+      .stack, .stack tr, .stack td { display: block !important; width: 100% !important; box-sizing: border-box; }
+      .stack .gap { height: 12px !important; }
+      .h1 { font-size: 26px !important; }
+      .num { font-size: 40px !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="viewer">
+    <p><a href="../index.html#newsletter">← Retour au portfolio</a></p>
+    <div class="viewer__inbox" role="note" aria-label="Aperçu dans la boîte de réception">
+      <p><span class="viewer__label">Objet :</span> <strong>Fleurs de France, Salon du Végétal et une campagne à relayer</strong></p>
+      <p><span class="viewer__label">Texte d’aperçu :</span> Le label évolue, rendez-vous à Angers en septembre, et des contenus pour faire découvrir nos métiers.</p>
+    </div>
+    <p class="viewer__note">Maquette exploratoire et non officielle, réalisée par Caroline Camilleri, projet de démonstration sans lien avec VALHOR. Les actualités reprennent des informations publiques de valhor.fr ; les blocs marqués <span class="tag-ex">Exemple</span> sont des contenus de démonstration à valider.</p>
+  </div>
+
+  <!-- ===================== E-MAIL ===================== -->
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#e9eee9;">
+    <tr>
+      <td align="center" style="padding:8px 0 32px;">
+        <table role="presentation" class="wrap-600" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px;background:#ffffff;font-family:Montserrat,Arial,Helvetica,sans-serif;color:#17251d;">
+
+          <!-- Texte d'aperçu masqué (preheader) -->
+          <tr><td style="display:none;font-size:1px;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;">Le label Fleurs de France évolue, rendez-vous au Salon du Végétal à Angers, et des contenus pour faire découvrir nos métiers.</td></tr>
+
+          <!-- En-tête -->
+          <tr>
+            <td class="px" style="padding:28px 40px 20px;border-bottom:4px solid #afcb08;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td valign="middle" style="font-family:Arial,Helvetica,sans-serif;font-size:26px;font-weight:bold;letter-spacing:1px;color:#0f5f31;">VALHOR</td>
+                  <td valign="middle" align="right" style="font-size:13px;line-height:1.4;color:#45584f;">
+                    <strong style="display:block;font-size:20px;color:#0f5f31;letter-spacing:-.01em;">VALHOR Info</strong>
+                    Septembre 2026 · numéro d’exemple
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Édito -->
+          <tr>
+            <td class="px" style="padding:32px 40px 8px;">
+              <p style="margin:0 0 8px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#45584f;">Édito <span class="tag-ex">Exemple</span></p>
+              <h1 class="h1" style="margin:0 0 12px;font-size:30px;line-height:1.2;font-weight:800;color:#0f5f31;">Une rentrée tournée vers vos entreprises</h1>
+              <p style="margin:0;font-size:16px;line-height:1.6;">En septembre, la filière se retrouve à Angers pour le Salon du Végétal. Dans ce numéro&nbsp;: l’évolution du label Fleurs de France, les prochains rendez-vous professionnels et une campagne à relayer pour faire découvrir nos métiers.</p>
+            </td>
+          </tr>
+
+          <!-- À la une : Développer votre activité -->
+          <tr>
+            <td class="px" style="padding:28px 40px 8px;">
+              <p style="margin:0 0 12px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#45584f;">À la une · Développer votre activité</p>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#e7f4ea;border-left:6px solid #0f5f31;">
+                <tr>
+                  <td style="padding:22px 24px;">
+                    <p style="margin:0 0 6px;"><span style="display:inline-block;padding:2px 8px;font-size:12px;font-weight:700;color:#ffffff;background:#0f5f31;">Production</span> <span style="font-size:13px;color:#45584f;">10 juillet 2026</span></p>
+                    <h2 style="margin:0 0 8px;font-size:22px;line-height:1.25;font-weight:800;color:#0f5f31;">Évolution du label Fleurs de France</h2>
+                    <p style="margin:0 0 16px;font-size:15px;line-height:1.6;">VALHOR accompagne l’évolution du label Fleurs de France afin d’en renforcer la lisibilité. Ce qui change pour les entreprises labellisées est détaillé dans l’article.</p>
+                    <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td style="background:#0f5f31;">
+                      <a href="https://www.valhor.fr/" target="_blank" rel="noopener" style="display:inline-block;padding:12px 20px;font-size:15px;font-weight:700;color:#ffffff;text-decoration:none;">Lire l’article sur valhor.fr</a>
+                    </td></tr></table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Agenda et retour sur -->
+          <tr>
+            <td class="px" style="padding:28px 40px 8px;">
+              <p style="margin:0 0 12px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#45584f;">Rendez-vous de la filière</p>
+              <table role="presentation" class="stack" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td valign="top" width="252" style="width:252px;padding:18px;border:1px solid #d3ddd5;">
+                    <p style="margin:0 0 6px;font-size:12px;font-weight:700;color:#0f5f31;">Événement</p>
+                    <p style="margin:0 0 4px;font-size:26px;line-height:1.1;font-weight:800;color:#0f5f31;">15 – 17 sept.</p>
+                    <p style="margin:0 0 10px;font-size:15px;font-weight:700;">Salon du Végétal · Angers</p>
+                    <p style="margin:0 0 12px;font-size:14px;line-height:1.55;">VALHOR sera présente au Salon du Végétal, du 15 au 17 septembre 2026.</p>
+                    <a href="https://www.valhor.fr/" target="_blank" rel="noopener" style="font-size:14px;font-weight:700;color:#0f5f31;">→ Préparer votre visite</a>
+                  </td>
+                  <td class="gap" width="16" style="width:16px;font-size:0;">&nbsp;</td>
+                  <td valign="top" width="252" style="width:252px;padding:18px;border:1px solid #d3ddd5;">
+                    <p style="margin:0 0 6px;font-size:12px;font-weight:700;color:#0f5f31;">Urbain · retour sur</p>
+                    <p style="margin:0 0 10px;font-size:17px;line-height:1.3;font-weight:800;color:#0f5f31;">Palette végétale urbaine : la journée professionnelle</p>
+                    <p style="margin:0 0 12px;font-size:14px;line-height:1.55;">Une journée organisée par VALHOR en coconception avec VERDIR.</p>
+                    <a href="https://www.valhor.fr/" target="_blank" rel="noopener" style="font-size:14px;font-weight:700;color:#0f5f31;">→ Lire le compte rendu</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Chiffres et prospective -->
+          <tr>
+            <td class="px" style="padding:28px 40px 8px;">
+              <p style="margin:0 0 12px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#45584f;">Chiffres et prospective <span class="tag-ex">Exemple</span></p>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#0c4a27;">
+                <tr>
+                  <td style="padding:22px 24px;color:#e4eec0;">
+                    <p class="num" style="margin:0 0 6px;font-size:48px;line-height:1;font-weight:800;color:#afcb08;">[chiffre]</p>
+                    <p style="margin:0 0 12px;font-size:15px;line-height:1.55;color:#ffffff;">Emplacement pour un chiffre clé de la filière, issu de la dernière étude publiée dans « Chiffres et prospective de la filière ».</p>
+                    <p style="margin:0;font-size:13px;line-height:1.5;">À sourcer et dater avant l’envoi.</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Promouvoir le végétal : campagne à relayer -->
+          <tr>
+            <td class="px" style="padding:28px 40px 8px;">
+              <p style="margin:0 0 12px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#45584f;">Promouvoir le végétal et les professionnels</p>
+              <a href="../index.html#video"><img src="../assets/img/newsletter/campagne.jpg" width="520" alt="Un horticulteur repique un jeune plant sous serre. Voir la vidéo « Les métiers du végétal » (33 secondes)." style="display:block;width:100%;max-width:520px;height:auto;border:0;"></a>
+              <h2 style="margin:16px 0 8px;font-size:22px;line-height:1.25;font-weight:800;color:#0f5f31;">Derrière chaque espace végétalisé, des métiers à découvrir</h2>
+              <p style="margin:0 0 14px;font-size:15px;line-height:1.6;">Une vidéo de 33 secondes et un carrousel LinkedIn pour faire découvrir l’horticulture, la fleuristerie et le paysage aux personnes en orientation ou en reconversion. Relayez-les sur vos réseaux, en point de vente ou auprès des établissements de formation.</p>
+              <table role="presentation" class="stack" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="background:#0f5f31;" align="center"><a href="../index.html#video" style="display:block;padding:12px 16px;font-size:15px;font-weight:700;color:#ffffff;text-decoration:none;">Voir la vidéo</a></td>
+                  <td class="gap" width="12" style="width:12px;font-size:0;">&nbsp;</td>
+                  <td style="border:2px solid #0f5f31;" align="center"><a href="../index.html#carrousel" style="display:block;padding:10px 16px;font-size:15px;font-weight:700;color:#0f5f31;text-decoration:none;">Voir le carrousel</a></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- En bref -->
+          <tr>
+            <td class="px" style="padding:28px 40px 32px;">
+              <p style="margin:0 0 12px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#45584f;">En bref</p>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-top:1px solid #d3ddd5;">
+                <tr>
+                  <td style="padding:14px 0;border-bottom:1px solid #d3ddd5;">
+                    <p style="margin:0 0 4px;font-size:13px;color:#45584f;">Appel d’offres · 23 juillet 2026</p>
+                    <p style="margin:0;font-size:15px;line-height:1.5;"><a href="https://www.valhor.fr/" target="_blank" rel="noopener" style="font-weight:700;color:#0f5f31;">Prestation de services pour renforcer la stratégie de relations médias de VALHOR</a></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:14px 0;border-bottom:1px solid #d3ddd5;">
+                    <p style="margin:0 0 4px;font-size:13px;color:#45584f;">Transition et RSE <span class="tag-ex">Exemple</span></p>
+                    <p style="margin:0;font-size:15px;line-height:1.5;">Emplacement pour une actualité liée à l’ambition « transition et RSE » du projet Horizon 2030.</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Pied de page -->
+          <tr>
+            <td class="px" style="padding:28px 40px;background:#0c4a27;color:#e4eec0;font-size:13px;line-height:1.6;">
+              <p style="margin:0 0 8px;font-size:15px;font-weight:700;color:#ffffff;">VALHOR, l’interprofession de l’horticulture, de la fleuristerie et du paysage</p>
+              <p style="margin:0 0 14px;"><a href="https://www.valhor.fr/" target="_blank" rel="noopener" style="color:#afcb08;font-weight:700;">www.valhor.fr</a></p>
+              <p style="margin:0 0 6px;">Vous recevez cette lettre en tant que contact professionnel de la filière. Se désinscrire (lien inactif dans cette maquette).</p>
+              <p style="margin:0;">Proposition exploratoire non officielle · Caroline Camilleri</p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

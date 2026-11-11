@@ -106,7 +106,7 @@ export function Layout({ route, children }: { route: Route; children: ReactNode 
       <div className="lg:pl-64">
         <aside aria-label="Mention" className="bg-accent-50 px-4 py-2 text-xs text-navy md:px-8">
           Projet fictif réalisé à titre de démonstration, sans lien avec SIPLEC ni E.Leclerc. Les marques citées appartiennent à leurs propriétaires. Données fictives.{' '}
-          <a href="../../index.html#siplec" className="font-semibold underline">Retour au portfolio</a>
+          <a href="../../fiche-siplec.html" className="font-semibold underline">Retour au portfolio</a>
         </aside>
         <header className="sticky top-0 z-20 border-b border-slate-200 bg-white/90 backdrop-blur">
           <div className="mx-auto flex h-16 max-w-[1400px] items-center gap-3 px-4 md:px-8">

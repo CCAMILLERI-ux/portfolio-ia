@@ -1,9 +1,0 @@
-# Une adresse par ligne. Les lignes qui commencent par # sont ignorées.
-https://ccamilleri-ux.github.io/portfolio-ia/
-https://ccamilleri-ux.github.io/portfolio-ia/projets/siplec-flotte/index.html
-https://ccamilleri-ux.github.io/portfolio-ia/projets/siplec-offre-energie/index.html
-https://ccamilleri-ux.github.io/portfolio-ia/projets/amundi/index.html
-https://ccamilleri-ux.github.io/portfolio-ia/projets/ugc/index.html
-https://ccamilleri-ux.github.io/portfolio-ia/projets/ugc/illimite.html
-https://ccamilleri-ux.github.io/portfolio-ia/projets/valhor/index.html
-https://ccamilleri-ux.github.io/portfolio-ia/projets/cahier-des-charges/index.html
