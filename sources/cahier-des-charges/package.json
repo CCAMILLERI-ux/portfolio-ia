@@ -1,0 +1,16 @@
+{
+  "name": "cahier-des-charges-claude",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Analyse d'un cahier des charges par Claude, dans le navigateur. Construit vers projets/cahier-des-charges/claude-cdc.js",
+  "type": "module",
+  "scripts": {
+    "build": "esbuild src/claude-cdc.ts --bundle --format=esm --minify --target=es2020 --outfile=../../projets/cahier-des-charges/claude-cdc.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "1.8.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.24.0"
+  }
+}
