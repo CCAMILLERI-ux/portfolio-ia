@@ -6,8 +6,8 @@ En ligne : https://ccamilleri-ux.github.io/portfolio-ia/
 
 ## Contenu
 
-- `index.html` : accroche, grille de cinq projets, une fiche courte par projet (ancres `#siplec`, `#amundi`, `#ugc`, `#valhor`, `#adoma`, `#cahier-des-charges`, `#kit-recette`), méthode en quatre étapes, contact
-- `cas-siplec.html`, `cas-amundi.html`, `cas-ugc.html` : études détaillées
+- `index.html` : en-tête façon CV, grille de sept projets (la carte mène à la fiche, le bouton à la démo), fiches courtes avec ancres (`#siplec`, `#amundi`, `#ugc`, `#adoma`, `#valhor`, `#cahier-des-charges`, `#kit-recette`), méthode, contact
+- `cas-siplec.html`, `cas-amundi.html`, `cas-ugc.html` : anciennes études détaillées, remplacées par des redirections vers les fiches
 - `projets/` : démos de démonstration, modifiables indépendamment des dépôts d'origine
   - `siplec-flotte/` (build de `sources/siplec-flotte/` : `npm install` puis `npm run build` dans ce dossier), `siplec-offre-energie/`, `amundi/`, `ugc/`, `valhor/`, `cahier-des-charges/`, `kit-recette/`
   - le projet Adoma est hébergé sur Lovable (lien externe)
