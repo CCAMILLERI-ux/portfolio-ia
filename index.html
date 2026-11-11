@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Projets IA – Caroline Camilleri, cheffe de projet digital</title>
-<meta name="description" content="Cinq études de cas exploratoires : cadrer, prototyper et livrer des projets digitaux avec Claude, Claude Code, Lovable et Gamma.">
+<meta name="description" content="Sept projets réalisés en autonomie : cadrer, prototyper, rédiger les livrables et automatiser la recette avec Claude, Claude Code, Lovable et Gamma.">
 <meta name="author" content="Caroline Camilleri">
 <link rel="canonical" href="https://ccamilleri-ux.github.io/portfolio-ia/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="Caroline Camilleri – Projets IA">
 <meta property="og:title" content="Projets IA – Caroline Camilleri, cheffe de projet digital">
-<meta property="og:description" content="Cheffe de projet digital, j'utilise l'IA pour cadrer, prototyper et livrer plus vite. Cinq études de cas exploratoires.">
+<meta property="og:description" content="Cheffe de projet digital, j'utilise l'IA pour cadrer, prototyper et livrer plus vite. Sept projets réalisés en autonomie.">
 <meta property="og:url" content="https://ccamilleri-ux.github.io/portfolio-ia/">
 <meta property="og:image" content="https://ccamilleri-ux.github.io/portfolio-ia/assets/img/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -54,7 +54,7 @@
     <div class="wrap">
       <h2 id="titre-projets">Projets</h2>
       <hr class="rule">
-      <p class="narrow">Cinq études de cas exploratoires, réalisées en autonomie. Aucune n'est une commande client : les besoins, les données et les résultats sont fictifs.</p>
+      <p class="narrow">Cinq études de cas exploratoires et deux mini-projets, réalisés en autonomie. Aucun n'est une commande client : les besoins, les données et les résultats sont fictifs.</p>
       <ul class="cards cards--five">
         <li class="card">
           <img src="assets/img/captures/flotte-desktop-carte.webp" width="720" height="450" loading="lazy" alt="Tableau de bord de gestion de flotte avec une alerte « Consommation inhabituelle » en tête.">
@@ -113,6 +113,30 @@
             <div class="card__actions">
               <a class="button" href="https://adoma-design-flow.lovable.app/diffusion">Voir la démo<span class="visually-hidden"> : portail éditorial (site externe)</span></a>
               <a class="button button--ghost" href="#adoma">Lire la fiche<span class="visually-hidden"> : résidences sociales</span></a>
+            </div>
+          </div>
+        </li>
+        <li class="card">
+          <img src="assets/img/captures/cdc-carte.webp" width="720" height="450" loading="lazy" alt="Cahier de recette : tableau de tickets avec scénario, étapes, résultat attendu et statut.">
+          <div class="card__body">
+            <h3><a href="#cahier-des-charges">Du cahier des charges aux tickets de recette</a></h3>
+            <ul class="tags" aria-label="Outils"><li>Claude Code</li></ul>
+            <p class="card__demo">Analyse, user stories, recette et compte-rendu, avec contrôle de couverture.</p>
+            <div class="card__actions">
+              <a class="button" href="projets/cahier-des-charges/index.html">Voir la démo<span class="visually-hidden"> : cahier des charges</span></a>
+              <a class="button button--ghost" href="#cahier-des-charges">Lire la fiche<span class="visually-hidden"> : cahier des charges</span></a>
+            </div>
+          </div>
+        </li>
+        <li class="card">
+          <img src="assets/img/captures/kit-carte.webp" width="720" height="450" loading="lazy" alt="Rapport de recette automatisée : synthèse des problèmes par page et par gravité.">
+          <div class="card__body">
+            <h3><a href="#kit-recette">Kit de recette automatisée</a></h3>
+            <ul class="tags" aria-label="Outils"><li>Claude Code</li><li>Playwright</li><li>axe-core</li></ul>
+            <p class="card__demo">Une commande pour contrôler une liste de pages et sortir les tickets.</p>
+            <div class="card__actions">
+              <a class="button" href="projets/kit-recette/index.html">Voir la démo<span class="visually-hidden"> : rapport de recette</span></a>
+              <a class="button button--ghost" href="#kit-recette">Lire la fiche<span class="visually-hidden"> : kit de recette</span></a>
             </div>
           </div>
         </li>
@@ -318,6 +342,79 @@
         </div>
         <ul class="links">
           <li><a class="button" href="https://adoma-design-flow.lovable.app/diffusion">Voir la démo<span class="visually-hidden"> (site externe)</span></a></li>
+        </ul>
+      </article>
+      <article class="fiche" id="cahier-des-charges" aria-labelledby="t-cdc">
+        <p class="eyebrow">Projet 6 · Livrables de chef de projet</p>
+        <h3 id="t-cdc">Du cahier des charges aux tickets de recette</h3>
+        <p class="fiche__pb">Transformer un cahier des charges imprécis en livrables utilisables par l'équipe et par le client, sans rien inventer.</p>
+        <div class="fiche__grid">
+          <div>
+            <p class="fiche__ctx"><strong>Contexte</strong> : mini-projet de démonstration. Le cahier des charges, le client et la réunion sont fictifs.</p>
+            <h4>Ce que j'ai fait</h4>
+            <ul>
+              <li>Fait produire par Claude, à partir d'une page de cahier des charges : 13 exigences, 8 questions au client, les risques, 9 user stories et 16 tickets de recette.</li>
+              <li>Fait transformer des notes brutes de réunion en compte-rendu, puis reporté les décisions dans les user stories et la recette.</li>
+              <li>Fait contrôler la couverture : chaque exigence reliée à une user story, chaque user story à un ticket.</li>
+              <li>Exporté user stories et tickets en CSV, prêts à importer dans un outil de suivi.</li>
+            </ul>
+            <h4>Outils</h4>
+            <ul class="tags"><li>Claude Code</li></ul>
+            <h4>Ma méthode IA</h4>
+            <dl class="method">
+              <dt>Contexte donné</dt>
+              <dd>Deux consignes réutilisables, affichées sur la page, avec une règle : une information absente devient une question au client, jamais une invention.</dd>
+              <dt>Vérifications et corrections</dt>
+              <dd>La matrice de traçabilité est recalculée automatiquement. Elle signale 3 exigences sans user story (contrainte technique, échéance, formation), à suivre dans le planning. <span class="todo">[À COMPLÉTER : mes corrections après relecture]</span></dd>
+            </dl>
+          </div>
+          <div class="fiche__shots">
+            <figure>
+              <img src="assets/img/captures/cdc-desktop.webp" width="1280" height="800" loading="lazy" alt="Cahier de recette : tickets REC-01 à REC-05 avec étapes, résultat attendu et statut « À tester ».">
+              <figcaption>Le cahier de recette.</figcaption>
+            </figure>
+          </div>
+        </div>
+        <ul class="links">
+          <li><a class="button" href="projets/cahier-des-charges/index.html">Voir la démo</a></li>
+          <li><a class="link-more" href="projets/cahier-des-charges/cahier-de-recette.csv" download>Télécharger le cahier de recette (CSV)</a></li>
+        </ul>
+      </article>
+
+      <article class="fiche" id="kit-recette" aria-labelledby="t-kit">
+        <p class="eyebrow">Projet 7 · Automatisation</p>
+        <h3 id="t-kit">Kit de recette automatisée</h3>
+        <p class="fiche__pb">À chaque livraison, on refait les mêmes contrôles à la main : captures, rendu mobile, accessibilité, liens.</p>
+        <div class="fiche__grid">
+          <div>
+            <p class="fiche__ctx"><strong>Contexte</strong> : mini-projet de démonstration, testé sur les démos de ce portfolio.</p>
+            <h4>Ce que j'ai fait</h4>
+            <ul>
+              <li>Fait construire un script qui contrôle une liste de pages en une seule commande.</li>
+              <li>Obtenu un rapport lisible et un fichier de tickets à importer dans Jira, Trello ou un tableur.</li>
+              <li>Fait écrire un mode d'emploi pas à pas, pour qu'une équipe le relance sans aide.</li>
+              <li>Lancé le kit sur les 8 démos du portfolio : 6 problèmes majeurs trouvés sur 3 démos.</li>
+            </ul>
+            <h4>Outils</h4>
+            <ul class="tags"><li>Claude Code</li><li>Playwright</li><li>axe-core</li></ul>
+            <h4>Ma méthode IA</h4>
+            <dl class="method">
+              <dt>Contexte donné</dt>
+              <dd>La liste des contrôles refaits à chaque livraison, les formats de sortie attendus (rapport, tickets) et le public : une équipe qui ne code pas.</dd>
+              <dt>Vérifications et corrections</dt>
+              <dd>Le rapport rappelle ce que l'automatique ne voit pas : audit RGAA complet, test avec un lecteur d'écran, relecture des contenus.</dd>
+            </dl>
+          </div>
+          <div class="fiche__shots">
+            <figure>
+              <img src="assets/img/captures/kit-detail.webp" width="1280" height="800" loading="lazy" alt="Détail du rapport pour une page : captures ordinateur et mobile, puis tableau des problèmes avec gravité, règle et élément concerné.">
+              <figcaption>Détail du rapport pour une page.</figcaption>
+            </figure>
+          </div>
+        </div>
+        <ul class="links">
+          <li><a class="button" href="projets/kit-recette/index.html">Voir la démo</a></li>
+          <li><a class="link-more" href="https://github.com/CCAMILLERI-ux/portfolio-ia/tree/main/outils/kit-recette">Code et mode d'emploi</a></li>
         </ul>
       </article>
     </div>
