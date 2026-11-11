@@ -1,0 +1,176 @@
+{
+  "date": "2026-11-11T15:48:46.065Z",
+  "pages": [
+    {
+      "url": "https://ccamilleri-ux.github.io/portfolio-ia/",
+      "nom": "01-portfolio-ia",
+      "problemes": [],
+      "captures": {
+        "ordinateur": "captures/01-portfolio-ia-ordinateur.jpg",
+        "mobile": "captures/01-portfolio-ia-mobile.jpg"
+      },
+      "statut": 200,
+      "poidsKo": 115,
+      "requetes": 12,
+      "titre": "Projets IA – Caroline Camilleri, cheffe de projet digital",
+      "langue": "fr",
+      "h1": 1
+    },
+    {
+      "url": "https://ccamilleri-ux.github.io/portfolio-ia/projets/siplec-flotte/index.html",
+      "nom": "02-projets-siplec-flotte",
+      "problemes": [
+        {
+          "type": "Accessibilité",
+          "gravite": "Majeur",
+          "regle": "color-contrast",
+          "element": ".uppercase",
+          "description": "Les éléments doivent avoir un contraste de couleurs suffisant",
+          "aide": "https://dequeuniversity.com/rules/axe/4.10/color-contrast?application=axeAPI"
+        },
+        {
+          "type": "Accessibilité",
+          "gravite": "Majeur",
+          "regle": "svg-img-alt",
+          "element": "path[name=\"Gazole\"] | path[name=\"SP95-E10\"] | path[name=\"E85\"] (+1)",
+          "description": "Les éléments svg avec un rôle 'img' ont un texte alternatif",
+          "aide": "https://dequeuniversity.com/rules/axe/4.10/svg-img-alt?application=axeAPI"
+        },
+        {
+          "type": "Mobile",
+          "gravite": "Majeur",
+          "regle": "Défilement horizontal à 320 px",
+          "element": "46 px de trop",
+          "description": "Le contenu dépasse la largeur de l'écran.",
+          "aide": "RGAA 10.11"
+        }
+      ],
+      "captures": {
+        "ordinateur": "captures/02-projets-siplec-flotte-ordinateur.jpg",
+        "mobile": "captures/02-projets-siplec-flotte-mobile.jpg"
+      },
+      "statut": 200,
+      "poidsKo": 682,
+      "requetes": 8,
+      "titre": "Énergie Pro – Gestion de flotte (prototype)",
+      "langue": "fr",
+      "h1": 1
+    },
+    {
+      "url": "https://ccamilleri-ux.github.io/portfolio-ia/projets/siplec-offre-energie/index.html",
+      "nom": "03-projets-siplec-offre-energie",
+      "problemes": [],
+      "captures": {
+        "ordinateur": "captures/03-projets-siplec-offre-energie-ordinateur.jpg",
+        "mobile": "captures/03-projets-siplec-offre-energie-mobile.jpg"
+      },
+      "statut": 200,
+      "poidsKo": 80,
+      "requetes": 7,
+      "titre": "Page d'offre énergie B2B et formulaire guidé – Projet de démonstration",
+      "langue": "fr",
+      "h1": 1
+    },
+    {
+      "url": "https://ccamilleri-ux.github.io/portfolio-ia/projets/amundi/index.html",
+      "nom": "04-projets-amundi",
+      "problemes": [
+        {
+          "type": "Accessibilité",
+          "gravite": "Majeur",
+          "regle": "color-contrast",
+          "element": "#livrables > .wrap > .eyebrow | article:nth-child(1) > .pbody > .plabel | article:nth-child(2) > .pbody > .plabel (+3)",
+          "description": "Les éléments doivent avoir un contraste de couleurs suffisant",
+          "aide": "https://dequeuniversity.com/rules/axe/4.10/color-contrast?application=axeAPI"
+        },
+        {
+          "type": "Accessibilité",
+          "gravite": "Majeur",
+          "regle": "scrollable-region-focusable",
+          "element": ".thumb-car > .car[data-car=\"\"] > .car-track",
+          "description": "Vérifier que les régions défilantes sont accessibles au clavier",
+          "aide": "https://dequeuniversity.com/rules/axe/4.10/scrollable-region-focusable?application=axeAPI"
+        }
+      ],
+      "captures": {
+        "ordinateur": "captures/04-projets-amundi-ordinateur.jpg",
+        "mobile": "captures/04-projets-amundi-mobile.jpg"
+      },
+      "statut": 200,
+      "poidsKo": 158,
+      "requetes": 10,
+      "titre": "Caroline Camilleri · Proposition marketing B2B épargne salariale et retraite",
+      "langue": "fr",
+      "h1": 1
+    },
+    {
+      "url": "https://ccamilleri-ux.github.io/portfolio-ia/projets/ugc/index.html",
+      "nom": "05-projets-ugc",
+      "problemes": [],
+      "captures": {
+        "ordinateur": "captures/05-projets-ugc-ordinateur.jpg",
+        "mobile": "captures/05-projets-ugc-mobile.jpg"
+      },
+      "statut": 200,
+      "poidsKo": 258,
+      "requetes": 10,
+      "titre": "Quel film ce soir ?",
+      "langue": "fr",
+      "h1": 1
+    },
+    {
+      "url": "https://ccamilleri-ux.github.io/portfolio-ia/projets/ugc/illimite.html",
+      "nom": "06-ugc-illimite",
+      "problemes": [
+        {
+          "type": "Accessibilité",
+          "gravite": "Majeur",
+          "regle": "color-contrast",
+          "element": "ol > li:nth-child(2) | ol > li:nth-child(3) | .hl (+7)",
+          "description": "Les éléments doivent avoir un contraste de couleurs suffisant",
+          "aide": "https://dequeuniversity.com/rules/axe/4.10/color-contrast?application=axeAPI"
+        }
+      ],
+      "captures": {
+        "ordinateur": "captures/06-ugc-illimite-ordinateur.jpg",
+        "mobile": "captures/06-ugc-illimite-mobile.jpg"
+      },
+      "statut": 200,
+      "poidsKo": 185,
+      "requetes": 6,
+      "titre": "Souscription UGC Illimité",
+      "langue": "fr",
+      "h1": 1
+    },
+    {
+      "url": "https://ccamilleri-ux.github.io/portfolio-ia/projets/valhor/index.html",
+      "nom": "07-projets-valhor",
+      "problemes": [],
+      "captures": {
+        "ordinateur": "captures/07-projets-valhor-ordinateur.jpg",
+        "mobile": "captures/07-projets-valhor-mobile.jpg"
+      },
+      "statut": 200,
+      "poidsKo": 100,
+      "requetes": 8,
+      "titre": "Les métiers du végétal : carrousel en cinq visuels – Projet de démonstration",
+      "langue": "fr",
+      "h1": 1
+    },
+    {
+      "url": "https://ccamilleri-ux.github.io/portfolio-ia/projets/cahier-des-charges/index.html",
+      "nom": "08-projets-cahier-des-charges",
+      "problemes": [],
+      "captures": {
+        "ordinateur": "captures/08-projets-cahier-des-charges-ordinateur.jpg",
+        "mobile": "captures/08-projets-cahier-des-charges-mobile.jpg"
+      },
+      "statut": 200,
+      "poidsKo": 78,
+      "requetes": 4,
+      "titre": "Du cahier des charges aux tickets de recette – Projet de démonstration",
+      "langue": "fr",
+      "h1": 1
+    }
+  ]
+}

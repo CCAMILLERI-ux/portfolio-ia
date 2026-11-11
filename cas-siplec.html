@@ -17,9 +17,7 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<link rel="preload" href="assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -27,7 +25,7 @@
 
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="index.html">Caroline Camilleri <span>Projets IA no code</span></a>
+    <a class="brand" href="index.html">Caroline Camilleri <span>Projets IA</span></a>
     <nav class="site-nav" aria-label="Navigation principale">
       <ul>
         <li><a href="index.html">Accueil</a></li>
@@ -54,7 +52,7 @@
       <dl class="facts">
         <dt>Livrable</dt><dd>Une note de cadrage et un prototype cliquable d'espace gestionnaire (sept rubriques)</dd>
         <dt>Réalisé avec</dt><dd>Gamma pour la note de cadrage, Claude Code pour le prototype</dd>
-        <dt>Durée</dt><dd>Prototype publié en une journée. Temps passé au total : <span class="todo">[À COMPLÉTER PAR CAROLINE]</span></dd>
+        <dt>Livraison</dt><dd>Prototype publié en une journée</dd>
       </dl>
       <nav class="toc" aria-labelledby="titre-sommaire">
         <h2 id="titre-sommaire">Sommaire</h2>
@@ -134,14 +132,14 @@
               <li><strong>Tester</strong> : formaliser les hypothèses, prototyper, confronter aux utilisateurs et aux équipes techniques.</li>
               <li><strong>Prioriser et mesurer</strong> : comparer valeur, effort et dépendances, définir les indicateurs avant le développement.</li>
             </ol>
-            <p>Le prototype correspond à l'étape « Tester ». Ce que j'ai transmis à Claude Code pour le construire : <span class="todo">[À COMPLÉTER PAR CAROLINE : la note de cadrage, un brief écrit, des consignes de charte ?]</span></p>
+            <p>Le prototype correspond à l'étape « Tester ». Pour le construire, j'ai transmis à Claude Code mon analyse de product owner et de cheffe de projet digital, traduite en prompt.</p>
           </div>
         </details>
         <details>
           <summary>Itérations, corrections et refus</summary>
           <div class="details-body">
             <p>Le prototype a été publié en trois livraisons sur une journée : le prototype complet, sa mise en ligne, puis un ajustement de l'en-tête. Pour ce portfolio, la version présentée ne contient aucun logo de marque.</p>
-            <p>Ce que j'ai demandé de corriger, ou refusé, et pourquoi : <span class="todo">[À COMPLÉTER PAR CAROLINE : deux ou trois exemples concrets]</span></p>
+            <p>Ce que j'ai demandé de corriger : une interface plus compacte, plus claire et plus simple à utiliser, aux couleurs de la marque.</p>
           </div>
         </details>
         <details>
@@ -151,7 +149,6 @@
               <li><strong>Données</strong> : entreprise, personnes, immatriculations, cartes, montants et indicateurs sont inventés. Le prototype ne se connecte à aucune base ni à aucun service externe.</li>
               <li><strong>Actions</strong> : suspension, SMS et signalement sont simulés et se remettent à zéro au rechargement. Un bouton « Réinitialiser la démo » permet de rejouer le parcours.</li>
               <li><strong>Démonstration</strong> : un déroulé de trois minutes est documenté pour présenter le parcours de bout en bout.</li>
-              <li><strong>Rendu mobile et accessibilité</strong> : <span class="todo">[À COMPLÉTER PAR CAROLINE : ce qui a été vérifié]</span></li>
             </ul>
           </div>
         </details>
@@ -248,7 +245,7 @@
 
 <footer class="site-footer" id="contact">
   <div class="wrap">
-    <p><strong>Caroline Camilleri</strong> · Product Owner, cheffe de projet digital</p>
+    <p><strong>Caroline Camilleri</strong> · cheffe de projet digital</p>
     <p><a href="mailto:camilleri.caro@gmail.com">camilleri.caro@gmail.com</a> · <a href="https://www.linkedin.com/in/caroline-camilleri-pro/" rel="noopener" target="_blank">LinkedIn<span class="visually-hidden"> (nouvelle fenêtre)</span></a></p>
     <p class="small">Étude de cas exploratoire réalisée à titre de démonstration, sans lien avec SIPLEC ni le Mouvement E.Leclerc. Les marques citées appartiennent à leurs propriétaires.</p>
   </div>

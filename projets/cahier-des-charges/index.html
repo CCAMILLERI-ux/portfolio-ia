@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Du cahier des charges aux tickets de recette – Projet de démonstration</title>
+<meta name="description" content="Projet de démonstration : un cahier des charges fictif transformé avec Claude en analyse, user stories, cahier de recette et compte-rendu, avec contrôle de couverture.">
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../../assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/css/livrable.css">
+</head>
+<body>
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+<aside class="disclaimer" aria-label="Mention">
+  <div class="wrap"><p>Projet de démonstration. Le cahier des charges, le client et la réunion sont fictifs. <a href="../../index.html#cahier-des-charges">Retour au portfolio</a></p></div>
+</aside>
+<main id="contenu" class="section">
+<div class="wrap">
+  <span class="eyebrow">Projet de démonstration · Livrables de chef de projet</span>
+  <h1>Du cahier des charges aux tickets de recette</h1>
+  <p class="lead narrow">Un cahier des charges d'une page, deux consignes données à Claude, et ce qui en sort : analyse, questions au client, user stories, cahier de recette, compte-rendu de lancement.</p>
+  <ul class="kpis" aria-label="En résumé">
+    <li><strong>13</strong> exigences</li><li><strong>8</strong> questions au client</li><li><strong>9</strong> user stories</li><li><strong>16</strong> tickets de recette</li>
+  </ul>
+  <ul class="links">
+    <li><a class="button" href="user-stories.csv" download>Télécharger les user stories (CSV)</a></li>
+    <li><a class="button button--ghost" href="cahier-de-recette.csv" download>Télécharger le cahier de recette (CSV)</a></li>
+  </ul>
+  <nav class="toc" aria-labelledby="sommaire"><h2 id="sommaire">Sommaire</h2><ol>
+    <li><a href="#entree">Entrée : le cahier des charges</a></li><li><a href="#consignes">Les consignes données à Claude</a></li>
+    <li><a href="#analyse">Analyse et questions au client</a></li><li><a href="#us">User stories</a></li>
+    <li><a href="#recette">Cahier de recette</a></li><li><a href="#couverture">Contrôle de couverture</a></li>
+    <li><a href="#cr">Compte-rendu de lancement</a></li><li><a href="#relecture">Ma relecture</a></li></ol></nav>
+
+  <section class="block" id="entree" aria-labelledby="h-entree">
+    <h2 id="h-entree"><span class="num">1</span>Entrée : le cahier des charges</h2>
+    <p>Refonte du site de l'école de musique Arpège (association fictive, Lyon). Cahier des charges rédigé pour l'exercice, volontairement imprécis par endroits, comme souvent.</p>
+    <details><summary>Lire le cahier des charges</summary><div class="details-body"><h3>1. Contexte</h3>
+<p>L'école de musique Arpège est une association lyonnaise : 350 élèves, 22 professeurs. Le site actuel date de 2016 et ne s'affiche pas correctement sur mobile. Les inscriptions se font sur papier en septembre, ce qui crée des files d'attente et des erreurs de saisie.</p>
+<h3>2. Objectifs</h3>
+<ul><li>Présenter l'offre de cours.</li><li>Permettre l'inscription et le paiement en ligne.</li><li>Réduire la charge du secrétariat en septembre.</li><li>Avoir un site moderne et accessible.</li></ul>
+<h3>3. Publics</h3>
+<p>Parents d'élèves mineurs, adultes débutants, professeurs (mise à jour de leurs pages).</p>
+<h3>4. Fonctionnalités attendues</h3>
+<ul><li>Catalogue des cours filtrable par instrument, âge, niveau et jour.</li><li>Fiche cours : description, professeur, horaires, tarif, places restantes.</li><li>Inscription en ligne avec un compte famille (plusieurs enfants).</li><li>Paiement en ligne en une ou trois fois. Les tarifs dépendent du quotient familial.</li><li>Espace professeur pour modifier sa page et ses horaires.</li><li>Actualités et agenda des concerts.</li><li>Formulaire de contact.</li><li>Si possible, lien avec le logiciel de gestion actuel.</li></ul>
+<h3>5. Contraintes</h3>
+<ul><li>Accessibilité (RGAA) : exigée par la collectivité, qui finance 40 % du projet.</li><li>RGPD : données d'élèves mineurs.</li><li>CMS souhaité : WordPress.</li><li>Budget : 25 000 € TTC.</li><li>Mise en ligne avant le 1<sup>er</sup> septembre.</li></ul>
+<h3>6. Livrables</h3>
+<p>Maquettes, site recetté, formation du secrétariat.</p></div></details>
+  </section>
+
+  <section class="block" id="consignes" aria-labelledby="h-consignes">
+    <h2 id="h-consignes"><span class="num">2</span>Les consignes données à Claude</h2>
+    <p>Le contexte et les règles comptent plus que l'outil. Ces consignes sont réutilisables telles quelles sur un autre cahier des charges.</p>
+    <details><summary>Consigne 1 : analyse, user stories, recette</summary><div class="details-body"><pre tabindex="0">Tu assistes une cheffe de projet digital en agence. À partir du cahier des charges ci-dessous :
+1. Résume le besoin en 5 lignes maximum.
+2. Liste les exigences numérotées (EX-xx), une par ligne, sans en ajouter.
+3. Liste les zones floues et formule une question au client pour chacune.
+4. Liste les risques projet (délai, budget, juridique, technique), chacun avec une parade.
+5. Rédige les user stories (US-xx) au format « En tant que…, je veux…, afin de… », chacune reliée à une exigence, avec 2 à 4 critères d&#x27;acceptation (Étant donné / Quand / Alors).
+6. Rédige le cahier de recette : un ticket (REC-xx) par critère d&#x27;acceptation clé, avec les étapes, le résultat attendu et le statut « À tester ».
+7. Vérifie que chaque exigence est couverte par au moins une user story, et chaque user story par au moins un ticket. Signale les trous.
+Règles : n&#x27;invente aucune fonctionnalité, aucun chiffre ni aucun délai absent du document. Si une information manque, mets-la dans les zones floues.</pre></div></details>
+    <details><summary>Consigne 2 : compte-rendu de réunion</summary><div class="details-body"><pre tabindex="0">À partir des notes brutes ci-dessous, rédige le compte-rendu de la réunion de lancement : participants, décisions, actions (qui, quoi, quand), points ouverts. N&#x27;ajoute rien qui ne figure pas dans les notes. Si une échéance manque, écris « non fixée ». Puis indique quelles questions au client la réunion a tranchées.</pre></div></details>
+  </section>
+
+  <section class="block" id="analyse" aria-labelledby="h-analyse">
+    <h2 id="h-analyse"><span class="num">3</span>Analyse et questions au client</h2>
+    <h3>Le besoin en 5 lignes</h3><ol><li>L&#x27;école de musique Arpège (association, 350 élèves) veut remplacer un site de 2016 non adapté au mobile.</li><li>Le nouveau site doit présenter les cours et permettre l&#x27;inscription et le paiement en ligne, avec un compte famille.</li><li>Les professeurs mettent à jour leur page ; le secrétariat publie actualités et concerts.</li><li>Contraintes fortes : RGAA (condition d&#x27;un financement de 40 %), RGPD pour des données de mineurs, WordPress, 25 000 € TTC.</li><li>Échéance : en ligne avant le 1er septembre, période des inscriptions.</li></ol>
+    <h3>Zones floues et questions au client</h3>
+    <div class="table-wrap" role="region" aria-labelledby="cap-q" tabindex="0"><table><caption id="cap-q">Questions à poser avant de chiffrer</caption>
+    <thead><tr><th scope="col">N°</th><th scope="col">Zone floue</th><th scope="col">Question au client</th></tr></thead><tbody><tr><th scope="row">Q1</th><td>Tarifs selon le quotient familial</td><td>Quel barème ? Quel justificatif ? Le tarif est-il calculé automatiquement ou validé par le secrétariat ?</td></tr><tr><th scope="row">Q2</th><td>Paiement en ligne</td><td>Quelle banque ou quel prestataire de paiement ? Le paiement en trois fois est-il sans frais ? Que se passe-t-il si une échéance échoue ?</td></tr><tr><th scope="row">Q3</th><td>Places restantes</td><td>Qui met à jour le nombre de places, et en temps réel ? Faut-il une liste d&#x27;attente quand un cours est complet ?</td></tr><tr><th scope="row">Q4</th><td>Logiciel de gestion « si possible »</td><td>Lequel ? Dispose-t-il d&#x27;une API ? Est-ce un prérequis ou une option ?</td></tr><tr><th scope="row">Q5</th><td>« Site moderne »</td><td>Existe-t-il une charte, un logo, des sites de référence ? Qui fournit textes et photos ?</td></tr><tr><th scope="row">Q6</th><td>Espace professeur</td><td>Les modifications des professeurs sont-elles publiées directement ou validées avant publication ?</td></tr><tr><th scope="row">Q7</th><td>Niveau RGAA</td><td>Quel niveau de conformité la collectivité attend-elle : audit, déclaration d&#x27;accessibilité ?</td></tr><tr><th scope="row">Q8</th><td>Formation du secrétariat</td><td>Combien de personnes, quel format, quelle durée ?</td></tr></tbody></table></div>
+    <details><summary>Les 13 exigences numérotées</summary><div class="details-body"><div class="table-wrap" role="region" aria-labelledby="cap-ex" tabindex="0"><table><caption id="cap-ex">Exigences extraites du cahier des charges</caption>
+    <thead><tr><th scope="col">ID</th><th scope="col">Exigence</th><th scope="col">User stories</th></tr></thead><tbody><tr><th scope="row">EX-01</th><td>Catalogue des cours filtrable par instrument, âge, niveau et jour.</td><td>US-01</td></tr><tr><th scope="row">EX-02</th><td>Fiche cours : description, professeur, horaires, tarif, places restantes.</td><td>US-02</td></tr><tr><th scope="row">EX-03</th><td>Inscription en ligne avec un compte famille regroupant plusieurs élèves.</td><td>US-03</td></tr><tr><th scope="row">EX-04</th><td>Paiement en ligne en une ou trois fois, tarifs selon le quotient familial.</td><td>US-04</td></tr><tr><th scope="row">EX-05</th><td>Espace professeur : modifier sa page et ses horaires.</td><td>US-05</td></tr><tr><th scope="row">EX-06</th><td>Actualités et agenda des concerts.</td><td>US-06</td></tr><tr><th scope="row">EX-07</th><td>Formulaire de contact.</td><td>US-07</td></tr><tr><th scope="row">EX-08</th><td>Site consultable sur mobile.</td><td>US-08</td></tr><tr><th scope="row">EX-09</th><td>Conformité au RGAA.</td><td>US-01, US-08</td></tr><tr><th scope="row">EX-10</th><td>Conformité au RGPD, notamment pour les données de mineurs.</td><td>US-09</td></tr><tr><th scope="row">EX-11</th><td>CMS WordPress (souhait).</td><td><strong>Aucune</strong></td></tr><tr><th scope="row">EX-12</th><td>Mise en ligne avant le 1er septembre.</td><td><strong>Aucune</strong></td></tr><tr><th scope="row">EX-13</th><td>Formation du secrétariat.</td><td><strong>Aucune</strong></td></tr></tbody></table></div></div></details>
+    <details><summary>Les risques projet et leurs parades</summary><div class="details-body"><div class="table-wrap" role="region" aria-labelledby="cap-r" tabindex="0"><table><caption id="cap-r">Risques projet</caption>
+    <thead><tr><th scope="col">Type</th><th scope="col">Risque</th><th scope="col">Parade</th></tr></thead><tbody><tr><th scope="row">Délai</th><td>Le 1er septembre tombe au pic des inscriptions : un retard renvoie tout sur papier.</td><td>Découper en lots : catalogue, inscription et paiement d&#x27;abord ; actualités et agenda ensuite.</td></tr><tr><th scope="row">Budget</th><td>25 000 € TTC pour inscription, paiement fractionné, compte famille, espace professeur et un éventuel connecteur : c&#x27;est serré.</td><td>Chiffrer le connecteur au logiciel de gestion à part, en option.</td></tr><tr><th scope="row">Juridique</th><td>Données de mineurs : base légale, durée de conservation, information des parents.</td><td>Atelier RGPD avec le bureau de l&#x27;association dès le cadrage.</td></tr><tr><th scope="row">Financement</th><td>La conformité RGAA conditionne 40 % du financement.</td><td>Critères RGAA dans la recette, audit avant mise en ligne.</td></tr><tr><th scope="row">Technique</th><td>Compte famille et paiement fractionné demandent des extensions WordPress.</td><td>Valider les extensions (maintenance, sécurité, coût) dès la conception.</td></tr></tbody></table></div></div></details>
+  </section>
+
+  <section class="block" id="us" aria-labelledby="h-us">
+    <h2 id="h-us"><span class="num">4</span>User stories</h2>
+    <p>Chaque user story est reliée à une exigence et porte ses critères d'acceptation.</p>
+    <details open><summary>Les 9 user stories</summary><div class="details-body us-list"><article class="us"><h3>US-01 <span class="ref">EX-01, EX-09</span></h3>
+<p>En tant que <strong>parent</strong>, je veux filtrer les cours par instrument, âge, niveau et jour, afin de trouver un cours compatible avec l&#x27;emploi du temps de mon enfant.</p><ol class="ca"><li>Étant donné le catalogue, quand je choisis « Piano » et « 8-10 ans », alors seuls les cours correspondants s&#x27;affichent, avec leur nombre.</li><li>Étant donné une combinaison de filtres sans résultat, quand je l&#x27;applique, alors un message propose d&#x27;élargir la recherche.</li><li>Étant donné une navigation au clavier, quand j&#x27;utilise les filtres, alors ils sont activables et le nombre de résultats est annoncé aux lecteurs d&#x27;écran.</li></ol></article><article class="us"><h3>US-02 <span class="ref">EX-02</span></h3>
+<p>En tant que <strong>parent</strong>, je veux consulter la fiche détaillée d&#x27;un cours, afin de décider avant d&#x27;inscrire mon enfant.</p><ol class="ca"><li>Étant donné une fiche cours, quand je l&#x27;ouvre, alors je vois la description, le professeur, les horaires, le tarif et les places restantes.</li><li>Étant donné un cours sans place restante, quand j&#x27;ouvre sa fiche, alors la mention « Complet » remplace le bouton d&#x27;inscription (liste d&#x27;attente : voir Q3).</li></ol></article><article class="us"><h3>US-03 <span class="ref">EX-03</span></h3>
+<p>En tant que <strong>parent de plusieurs enfants</strong>, je veux créer un seul compte famille, afin d'inscrire mes enfants sans ressaisir mes informations.</p><ol class="ca"><li>Étant donné un compte famille, quand j&#x27;ajoute un deuxième enfant, alors l&#x27;adresse et les coordonnées du parent sont reprises.</li><li>Étant donné une inscription validée, quand elle est enregistrée, alors je reçois un e-mail récapitulatif (élève, cours, montant).</li></ol></article><article class="us"><h3>US-04 <span class="ref">EX-04</span></h3>
+<p>En tant que <strong>parent</strong>, je veux payer en une ou trois fois, afin d'étaler la dépense de la rentrée.</p><ol class="ca"><li>Étant donné le récapitulatif, quand je choisis le paiement en trois fois, alors l&#x27;échéancier (montants et dates) s&#x27;affiche avant validation et le total égale le tarif.</li><li>Étant donné un paiement refusé, quand la banque répond, alors un message l&#x27;explique et l&#x27;inscription n&#x27;est pas validée.</li></ol></article><article class="us"><h3>US-05 <span class="ref">EX-05</span></h3>
+<p>En tant que <strong>professeur</strong>, je veux modifier ma page et mes horaires, afin de garder des informations à jour sans passer par le secrétariat.</p><ol class="ca"><li>Étant donné mon compte professeur, quand je modifie mes horaires, alors je n&#x27;ai besoin d&#x27;aucune aide technique.</li><li>Étant donné mon compte professeur, quand j&#x27;essaie d&#x27;ouvrir la page d&#x27;un collègue, alors l&#x27;accès est refusé.</li><li>Étant donné une modification de tarif, quand je l&#x27;enregistre, alors elle attend la validation du bureau (décision de la réunion de lancement).</li></ol></article><article class="us"><h3>US-06 <span class="ref">EX-06</span></h3>
+<p>En tant que <strong>membre du secrétariat</strong>, je veux publier des actualités et des dates de concert, afin d'informer les familles.</p><ol class="ca"><li>Étant donné une actualité avec une image, quand je publie sans texte alternatif, alors la publication est bloquée avec un message.</li><li>Étant donné des concerts passés et à venir, quand j&#x27;affiche l&#x27;agenda, alors seuls les concerts à venir apparaissent, par date.</li></ol></article><article class="us"><h3>US-07 <span class="ref">EX-07</span></h3>
+<p>En tant que <strong>visiteur</strong>, je veux contacter l&#x27;école en ligne, afin de poser une question sans me déplacer.</p><ol class="ca"><li>Étant donné le formulaire de contact, quand je l&#x27;envoie incomplet, alors chaque erreur est signalée sous le champ concerné.</li><li>Étant donné un formulaire valide, quand je l&#x27;envoie, alors un accusé de réception s&#x27;affiche.</li></ol></article><article class="us"><h3>US-08 <span class="ref">EX-08, EX-09</span></h3>
+<p>En tant que <strong>parent sur mobile</strong>, je veux m&#x27;inscrire depuis mon téléphone, afin de ne pas avoir à me déplacer en septembre.</p><ol class="ca"><li>Étant donné un écran de 320 px de large, quand je fais tout le parcours d&#x27;inscription, alors aucun défilement horizontal n&#x27;apparaît.</li><li>Étant donné une navigation au clavier seul, quand je fais le parcours d&#x27;inscription, alors chaque étape est atteignable, avec un focus visible.</li></ol></article><article class="us"><h3>US-09 <span class="ref">EX-10</span></h3>
+<p>En tant que <strong>parent</strong>, je veux savoir comment les données de mon enfant sont utilisées, afin d'inscrire mon enfant en confiance.</p><ol class="ca"><li>Étant donné la création d&#x27;un compte, quand je saisis les informations d&#x27;un mineur, alors une mention indique la finalité et la durée de conservation (texte à valider avec le responsable RGPD).</li></ol></article></div></details>
+  </section>
+
+  <section class="block" id="recette" aria-labelledby="h-recette">
+    <h2 id="h-recette"><span class="num">5</span>Cahier de recette</h2>
+    <p>Un ticket par critère clé, prêt à importer dans un outil de suivi (CSV).</p>
+    <div class="table-wrap" role="region" aria-labelledby="cap-rec" tabindex="0"><table class="rec"><caption id="cap-rec">Tickets de recette</caption>
+    <thead><tr><th scope="col">ID</th><th scope="col">US</th><th scope="col">Scénario</th><th scope="col">Étapes</th><th scope="col">Résultat attendu</th><th scope="col">Statut</th></tr></thead><tbody><tr><th scope="row">REC-01</th><td>US-01</td><td>Filtrer par instrument et âge</td><td><ol><li>Ouvrir le catalogue.</li><li>Choisir « Piano ».</li><li>Choisir « 8-10 ans ».</li></ol></td><td>Seuls les cours de piano pour 8-10 ans s&#x27;affichent ; le nombre de résultats est indiqué.</td><td>À tester</td></tr><tr><th scope="row">REC-02</th><td>US-01</td><td>Aucun résultat</td><td><ol><li>Choisir « Harpe », « Adulte », « Dimanche ».</li></ol></td><td>Un message propose d&#x27;élargir la recherche.</td><td>À tester</td></tr><tr><th scope="row">REC-03</th><td>US-01</td><td>Filtres au clavier</td><td><ol><li>Atteindre les filtres avec Tab.</li><li>Les activer avec Espace.</li></ol></td><td>Filtres activables, focus visible, nombre de résultats annoncé par le lecteur d&#x27;écran.</td><td>À tester</td></tr><tr><th scope="row">REC-04</th><td>US-02</td><td>Fiche cours complète</td><td><ol><li>Ouvrir une fiche cours.</li></ol></td><td>Description, professeur, horaires, tarif et places restantes sont affichés.</td><td>À tester</td></tr><tr><th scope="row">REC-05</th><td>US-02</td><td>Cours complet</td><td><ol><li>Ouvrir la fiche d&#x27;un cours à 0 place.</li></ol></td><td>La mention « Complet » remplace le bouton d&#x27;inscription.</td><td>À tester</td></tr><tr><th scope="row">REC-06</th><td>US-03</td><td>Compte famille, deux enfants</td><td><ol><li>Créer un compte.</li><li>Ajouter un enfant.</li><li>Ajouter un second enfant.</li></ol></td><td>Les coordonnées du parent ne sont pas ressaisies ; les deux enfants sont listés.</td><td>À tester</td></tr><tr><th scope="row">REC-07</th><td>US-03</td><td>E-mail de confirmation</td><td><ol><li>Valider une inscription.</li></ol></td><td>E-mail reçu avec l&#x27;élève, le cours et le montant.</td><td>À tester</td></tr><tr><th scope="row">REC-08</th><td>US-04</td><td>Paiement en trois fois</td><td><ol><li>Choisir le paiement en trois fois au récapitulatif.</li></ol></td><td>Échéancier affiché avant validation ; la somme des trois montants égale le tarif.</td><td>À tester</td></tr><tr><th scope="row">REC-09</th><td>US-04</td><td>Paiement refusé</td><td><ol><li>Payer avec une carte de test refusée.</li></ol></td><td>Message d&#x27;erreur ; inscription non validée ; place non décomptée.</td><td>À tester</td></tr><tr><th scope="row">REC-10</th><td>US-05</td><td>Droits du professeur</td><td><ol><li>Se connecter comme professeur A.</li><li>Ouvrir l&#x27;URL d&#x27;édition de la page du professeur B.</li></ol></td><td>Accès refusé.</td><td>À tester</td></tr><tr><th scope="row">REC-11</th><td>US-05</td><td>Modification de tarif</td><td><ol><li>Se connecter comme professeur.</li><li>Modifier un tarif et enregistrer.</li></ol></td><td>Le tarif reste en attente de validation du bureau ; l&#x27;ancien tarif reste affiché.</td><td>À tester</td></tr><tr><th scope="row">REC-12</th><td>US-06</td><td>Image sans texte alternatif</td><td><ol><li>Créer une actualité avec une image sans texte alternatif.</li><li>Publier.</li></ol></td><td>Publication bloquée, message explicite.</td><td>À tester</td></tr><tr><th scope="row">REC-13</th><td>US-06</td><td>Agenda des concerts</td><td><ol><li>Créer un concert passé et un concert à venir.</li><li>Afficher l&#x27;agenda.</li></ol></td><td>Seul le concert à venir apparaît dans « À venir ».</td><td>À tester</td></tr><tr><th scope="row">REC-14</th><td>US-07</td><td>Formulaire de contact incomplet</td><td><ol><li>Envoyer le formulaire vide.</li></ol></td><td>Une erreur sous chaque champ obligatoire ; focus placé sur le résumé des erreurs.</td><td>À tester</td></tr><tr><th scope="row">REC-15</th><td>US-08</td><td>Inscription à 320 px</td><td><ol><li>Faire tout le parcours d&#x27;inscription sur un écran de 320 px.</li></ol></td><td>Aucun défilement horizontal ; tous les boutons sont visibles et utilisables.</td><td>À tester</td></tr><tr><th scope="row">REC-16</th><td>US-09</td><td>Information RGPD</td><td><ol><li>Créer un compte et ajouter un enfant mineur.</li></ol></td><td>La mention de finalité et de durée de conservation est visible avant validation.</td><td>À tester</td></tr></tbody></table></div>
+  </section>
+
+  <section class="block" id="couverture" aria-labelledby="h-couv">
+    <h2 id="h-couv"><span class="num">6</span>Contrôle de couverture</h2>
+    <p>Ne pas croire l'IA sur parole : la matrice ci-dessous est recalculée à partir des identifiants, pas recopiée.</p>
+    <ul><li>Exigences sans user story : EX-11, EX-12, EX-13. Ce sont une contrainte technique (WordPress), une échéance et un livrable de formation : à suivre dans le planning et le devis, pas dans le backlog.</li><li>Chaque user story a au moins un ticket de recette.</li></ul>
+    <details><summary>Matrice exigences → user stories → tickets</summary><div class="details-body"><div class="table-wrap" role="region" aria-labelledby="cap-m" tabindex="0"><table><caption id="cap-m">Matrice de traçabilité</caption>
+    <thead><tr><th scope="col">Exigence</th><th scope="col">User stories</th><th scope="col">Tickets</th><th scope="col">État</th></tr></thead><tbody><tr><th scope="row">EX-01</th><td>US-01</td><td>REC-01, REC-02, REC-03</td><td>Couverte</td></tr><tr><th scope="row">EX-02</th><td>US-02</td><td>REC-04, REC-05</td><td>Couverte</td></tr><tr><th scope="row">EX-03</th><td>US-03</td><td>REC-06, REC-07</td><td>Couverte</td></tr><tr><th scope="row">EX-04</th><td>US-04</td><td>REC-08, REC-09</td><td>Couverte</td></tr><tr><th scope="row">EX-05</th><td>US-05</td><td>REC-10, REC-11</td><td>Couverte</td></tr><tr><th scope="row">EX-06</th><td>US-06</td><td>REC-12, REC-13</td><td>Couverte</td></tr><tr><th scope="row">EX-07</th><td>US-07</td><td>REC-14</td><td>Couverte</td></tr><tr><th scope="row">EX-08</th><td>US-08</td><td>REC-15</td><td>Couverte</td></tr><tr><th scope="row">EX-09</th><td>US-01, US-08</td><td>REC-01, REC-02, REC-03, REC-15</td><td>Couverte</td></tr><tr><th scope="row">EX-10</th><td>US-09</td><td>REC-16</td><td>Couverte</td></tr><tr><th scope="row">EX-11</th><td>—</td><td>—</td><td><strong>Non couverte</strong></td></tr><tr><th scope="row">EX-12</th><td>—</td><td>—</td><td><strong>Non couverte</strong></td></tr><tr><th scope="row">EX-13</th><td>—</td><td>—</td><td><strong>Non couverte</strong></td></tr></tbody></table></div></div></details>
+  </section>
+
+  <section class="block" id="cr" aria-labelledby="h-cr">
+    <h2 id="h-cr"><span class="num">7</span>Compte-rendu de lancement</h2>
+    <p>Des notes prises en réunion, transformées en compte-rendu. Puis le retour vers les questions au client : la réunion en a tranché quatre et en a précisé une, ce qui a ajouté le ticket REC-11.</p>
+    <details><summary>Entrée : les notes brutes</summary><div class="details-body"><pre tabindex="0">Lancement 12/02 — présents : Mme Durand (présidente asso), M. Petit (secrétariat), Léa (agence, CP), Hugo (agence, dev)
+- secrétariat : 350 dossiers papier l&#x27;an dernier, septembre très chargé
+- QF : barème de la mairie, justificatif CAF, le secrétariat valide à la main pour l&#x27;instant
+- paiement : banque à confirmer, M. Petit regarde
+- logiciel de gestion : nom à confirmer, pas d&#x27;API connue -&gt; export CSV ok pour démarrer
+- profs : publication directe OK sauf les tarifs (le bureau valide)
+- RGAA : la mairie demande une déclaration d&#x27;accessibilité
+- planning : maquettes fin mars, recette mi-juin, mise en ligne le 1er juillet idéalement (marge avant sept.)
+- Mme Durand envoie logo + photos de concerts avant le 28/02
+- prochain point le 26/02</pre></div></details>
+    <div class="cr">
+      <h3>Réunion de lancement — 12 février</h3>
+      <p><strong>Participants :</strong> Mme Durand (présidente de l&#x27;association), M. Petit (secrétariat), Léa (agence, cheffe de projet), Hugo (agence, développeur).</p>
+      <h4>Décisions</h4><ul><li>Tarifs : barème de la mairie selon le quotient familial, justificatif CAF ; validation manuelle par le secrétariat au lancement.</li><li>Logiciel de gestion : pas d&#x27;API connue ; échange par export CSV au démarrage.</li><li>Pages des professeurs : publication directe, sauf les tarifs, validés par le bureau.</li><li>Accessibilité : la mairie demande une déclaration d&#x27;accessibilité.</li><li>Planning visé : maquettes fin mars, recette mi-juin, mise en ligne le 1er juillet.</li></ul>
+      <h4>Actions</h4>
+      <div class="table-wrap" role="region" aria-labelledby="cap-a" tabindex="0"><table><caption id="cap-a" class="visually-hidden">Actions décidées</caption><thead><tr><th scope="col">Qui</th><th scope="col">Quoi</th><th scope="col">Échéance</th></tr></thead><tbody><tr><td>M. Petit</td><td>Confirmer la banque pour le paiement en ligne</td><td>Non fixée</td></tr><tr><td>Mme Durand</td><td>Envoyer le logo et des photos de concerts</td><td>28 février</td></tr></tbody></table></div>
+      <h4>Points ouverts</h4><ul><li>Banque et prestataire de paiement.</li><li>Nom du logiciel de gestion.</li><li>Audit à prévoir pour la déclaration d&#x27;accessibilité.</li></ul>
+      <p><strong>Prochain point :</strong> 26 février.</p>
+      <h4>Questions au client tranchées</h4><ul><li><strong>Q1</strong> tranchée : barème de la mairie, justificatif CAF, validation par le secrétariat.</li><li><strong>Q4</strong> tranchée pour le lancement : export CSV, sans connecteur.</li><li><strong>Q6</strong> tranchée : publication directe, sauf les tarifs. Ajout de REC-11.</li><li><strong>Q7</strong> précisée : déclaration d&#x27;accessibilité demandée ; l&#x27;audit reste à cadrer.</li><li><strong>Q2</strong> toujours ouverte : banque à confirmer.</li></ul>
+    </div>
+  </section>
+
+  <section class="block" id="relecture" aria-labelledby="h-relecture">
+    <h2 id="h-relecture"><span class="num">8</span>Ma relecture</h2>
+    <p>Ce que j'ai vérifié et corrigé dans la production de Claude : <span class="todo">[À COMPLÉTER PAR CAROLINE après relecture : deux ou trois corrections concrètes]</span></p>
+  </section>
+</div>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Caroline Camilleri</strong> · cheffe de projet digital</p>
+  <p><a href="mailto:camilleri.caro@gmail.com">camilleri.caro@gmail.com</a> · <a href="https://www.linkedin.com/in/caroline-camilleri-pro/" rel="noopener" target="_blank">LinkedIn<span class="visually-hidden"> (nouvelle fenêtre)</span></a> · <a href="../../index.html#cahier-des-charges">Retour au portfolio</a></p>
+</div></footer>
+</body>
+</html>

@@ -1,0 +1,26 @@
+/* Pages livrables (mini-projets) */
+.kpis { list-style: none; padding: 0; margin: 1.5rem 0 0; display: flex; flex-wrap: wrap; gap: .75rem; }
+.kpis li { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: .6rem 1rem; }
+.kpis strong { color: var(--text); font-size: 1.3rem; margin-right: .25rem; }
+.block { padding: 2.5rem 0 0; scroll-margin-top: 1rem; }
+.block h2 { display: flex; align-items: baseline; gap: .75rem; }
+.block h2 .num { color: var(--gold-text); }
+.block h3 { margin-top: 1.5rem; }
+.table-wrap { overflow-x: auto; margin: 1rem 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+caption { text-align: left; font-weight: 650; padding: .75rem 1rem; }
+th, td { border-top: 1px solid var(--line); padding: .6rem 1rem; text-align: left; vertical-align: top; }
+thead th { background: var(--bg); font-size: .85rem; }
+td ol { margin: 0; padding-left: 1.1em; }
+table.rec { min-width: 56rem; }
+pre { white-space: pre-wrap; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 1rem; font-size: .9rem; margin: .5rem 0 0; }
+.us { border-top: 1px solid var(--line); padding: 1rem 0 .25rem; }
+.us:first-child { border-top: 0; }
+.us h3 { margin: 0 0 .4rem; font-size: 1rem; }
+.us .ref { font-weight: 500; color: var(--blue-text); font-size: .85rem; margin-left: .4rem; }
+.ca { margin: .4rem 0 0; color: var(--muted); }
+.cr { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--gold); border-radius: 0 var(--radius) var(--radius) 0; padding: 1.25rem 1.5rem; margin-top: 1.25rem; }
+.cr h4 { margin: 1.1rem 0 .4rem; }
+.ok { color: #1E6B3A; font-weight: 600; }
+.ko { color: #B42318; font-weight: 600; }
+th[scope="row"], table.rec td:nth-child(2), table.rec td:last-child { white-space: nowrap; }
