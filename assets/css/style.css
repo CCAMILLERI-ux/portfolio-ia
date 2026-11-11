@@ -1,20 +1,31 @@
 /* Portfolio « Projets IA » — Caroline Camilleri
-   Typo Inter, accent or #AC8938, fond clair.
+   Typo Inter (auto-hébergée), palette : marine #1D2350, bleu #7788AB, doré #AC8938.
    Contrastes (WCAG) :
-   - texte #1C1C1E sur fond #FAF8F4 : 16:1
-   - texte secondaire #55555A sur #FAF8F4 : 7:1
-   - or foncé #7D6020 (liens, surtitres) sur #FAF8F4 : 5,5:1 ; sur blanc : 5,9:1
-   - or #AC8938 réservé aux éléments décoratifs et au contour de focus (≥ 3:1). */
+   - texte marine #1D2350 sur fond #F5F6FA : 13,8:1 ; sur blanc : 14,9:1
+   - texte secondaire #4B5375 sur #F5F6FA : 7:1
+   - bleu foncé #5A6A92 (surtitres) sur blanc : 5,4:1
+   - doré foncé #7D6020 (liens) sur #F5F6FA : 5,5:1
+   - bleu #7788AB et doré #AC8938 : éléments décoratifs, grands chiffres et contour de focus (≥ 3:1). */
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("../fonts/inter-latin-wght-normal.woff2") format("woff2");
+}
 
 :root {
-  --bg: #FAF8F4;
+  --bg: #F5F6FA;
   --surface: #FFFFFF;
-  --text: #1C1C1E;
-  --muted: #55555A;
-  --line: #E6E1D6;
+  --text: #1D2350;
+  --muted: #4B5375;
+  --line: #DDE1EC;
+  --blue: #7788AB;
+  --blue-text: #5A6A92;
   --gold: #AC8938;
   --gold-text: #7D6020;
-  --gold-soft: #F3EAD3;
+  --gold-soft: #E6E9F2;
   --todo-bg: #FFF1C2;
   --todo-text: #5A3E00;
   --radius: 10px;
@@ -87,7 +98,7 @@ main { display: block; }
 .section + .section { border-top: 1px solid var(--line); }
 @media (min-width: 48rem) { .section { padding: 5rem 0; } }
 
-.eyebrow { display: block; color: var(--gold-text); font-size: .8rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; margin-bottom: .75rem; }
+.eyebrow { display: block; color: var(--blue-text); font-size: .8rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; margin-bottom: .75rem; }
 .lead { font-size: clamp(1.1rem, 2.4vw, 1.3rem); color: var(--muted); }
 .rule { width: 3.5rem; height: 3px; background: var(--gold); border: 0; margin: 0 0 1.5rem; }
 
@@ -109,7 +120,7 @@ main { display: block; }
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden;
   transition: box-shadow .2s, transform .2s;
 }
-.card:hover { box-shadow: 0 10px 30px rgba(28, 28, 30, .08); }
+.card:hover { box-shadow: 0 10px 30px rgba(29, 35, 80, .10); }
 @media (prefers-reduced-motion: reduce) { .card { transition: none; } }
 .card img { aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border-bottom: 1px solid var(--line); width: 100%; }
 .card__body { padding: 1.25rem 1.25rem 1.5rem; display: flex; flex-direction: column; flex: 1; }
@@ -190,7 +201,7 @@ summary:hover { background: var(--bg); }
   display: inline-block; padding: .65rem 1.1rem; border-radius: 8px; font-weight: 600; text-decoration: none;
   background: var(--text); color: #fff; border: 2px solid var(--text);
 }
-.button:hover { background: #3A3A3E; border-color: #3A3A3E; }
+.button:hover { background: #2E3670; border-color: #2E3670; }
 .button--ghost { background: transparent; color: var(--text); }
 .button--ghost:hover { background: var(--gold-soft); border-color: var(--text); color: var(--text); }
 
@@ -202,11 +213,11 @@ summary:hover { background: var(--bg); }
 .next-case { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; padding: 2.5rem 0 3.5rem; border-top: 1px solid var(--line); }
 
 /* Pied de page */
-.site-footer { background: var(--text); color: #F2F0EB; padding: 2.5rem 0; font-size: .95rem; }
+.site-footer { background: var(--text); color: #F5F6FA; padding: 2.5rem 0; font-size: .95rem; }
 .site-footer a { color: #fff; }
-.site-footer a:focus-visible { outline-color: #E2C98A; }
+.site-footer a:focus-visible { outline-color: var(--gold); }
 .site-footer p { margin: 0 0 .5rem; }
-.site-footer .small { color: #C9C6BE; font-size: .85rem; margin-top: 1rem; }
+.site-footer .small { color: #C9D0E0; font-size: .85rem; margin-top: 1rem; }
 
 .shot-single { margin: 1.5rem 0 0; max-width: 20rem; }
 .shot-single img { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
