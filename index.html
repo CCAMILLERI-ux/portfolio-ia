@@ -49,8 +49,8 @@
           <img src="assets/img/captures/flotte-desktop-carte.webp" width="720" height="450" loading="lazy" alt="">
           <div class="card__body">
             <h3><a href="#siplec">Énergies B2B : gestion de flotte</a></h3>
-            <ul class="tags" aria-label="Outils"><li>Claude Code</li><li>Gamma</li></ul>
-            <p>Du cadrage à deux démos cliquables.</p>
+            <ul class="tags" aria-label="Outils"><li>Claude Code</li><li>API Claude</li><li>Gamma</li></ul>
+            <p>Une alerte expliquée par l'IA, une décision prise par l'humain.</p>
             <a class="button demo" href="projets/siplec-flotte/index.html">Voir la démo<span class="visually-hidden"> : gestion de flotte</span></a>
           </div>
         </li>
@@ -94,8 +94,8 @@
           <img src="assets/img/captures/cdc-carte.webp" width="720" height="450" loading="lazy" alt="">
           <div class="card__body">
             <h3><a href="#cahier-des-charges">Cahier des charges → tickets de recette</a></h3>
-            <ul class="tags" aria-label="Outils"><li>Claude Code</li></ul>
-            <p>Analyse, user stories, recette, compte-rendu.</p>
+            <ul class="tags" aria-label="Outils"><li>Claude Code</li><li>API Claude</li></ul>
+            <p>Analyse, user stories, recette : testable en direct.</p>
             <a class="button demo" href="projets/cahier-des-charges/index.html">Voir la démo<span class="visually-hidden"> : cahier des charges</span></a>
           </div>
         </li>
@@ -124,12 +124,14 @@
           <ul class="done">
             <li>Note de cadrage : écosystème de l'offre, 4 axes d'évolution.</li>
             <li>Prototype : alerte, analyse, suspension de la carte, journal d'activité.</li>
+            <li>IA intégrée : Claude explique l'alerte, propose une action et rédige le message au conducteur.</li>
             <li>Page d'offre avec formulaire guidé en 3 étapes.</li>
           </ul>
           <dl class="meta">
-            <dt>Outils</dt><dd>Claude Code, Gamma</dd>
+            <dt>Outils</dt><dd>Claude Code, API Claude (claude-opus-5-5), Gamma</dd>
             <dt>Contexte IA</dt><dd>Mon analyse produit, traduite en prompt.</dd>
             <dt>Corrigé</dt><dd>Interface plus compacte et plus claire, aux couleurs de la marque.</dd>
+            <dt>Garde-fous</dt><dd>Réponse au format imposé, hypothèses sans accusation, décision laissée au gestionnaire.</dd>
           </dl>
           <ul class="actions">
             <li><a class="button" href="projets/siplec-flotte/index.html">Voir la démo : gestion de flotte</a></li>
@@ -137,7 +139,7 @@
           </ul>
         </div>
         <figure>
-          <img src="assets/img/captures/flotte-alerte-desktop.webp" width="1440" height="900" loading="lazy" alt="Détail d'une alerte : explication en langage clair et quatre facteurs déclencheurs.">
+          <img src="assets/img/captures/flotte-claude.webp" width="1280" height="900" loading="lazy" alt="Détail d'une alerte avec le panneau « Analyse par Claude » : résumé, risque élevé, action recommandée « Contacter le conducteur » et hypothèses.">
         </figure>
       </article>
 
@@ -244,9 +246,10 @@
             <li>13 exigences, 8 questions au client, 9 user stories, 16 tickets de recette.</li>
             <li>Compte-rendu de réunion à partir de notes brutes, décisions reportées dans la recette.</li>
             <li>Matrice de couverture recalculée, exports CSV pour Jira ou un tableur.</li>
+            <li>Version en direct : on colle son cahier des charges, Claude l'analyse via l'API.</li>
           </ul>
           <dl class="meta">
-            <dt>Outils</dt><dd>Claude Code</dd>
+            <dt>Outils</dt><dd>Claude Code, API Claude (claude-opus-5-5)</dd>
             <dt>Règle donnée</dt><dd>Une information absente devient une question au client.</dd>
             <dt>Contrôle</dt><dd>3 exigences sans user story détectées, à suivre dans le planning. <span class="todo">[À COMPLÉTER : mes corrections]</span></dd>
           </dl>

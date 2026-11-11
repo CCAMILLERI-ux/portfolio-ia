@@ -27,17 +27,18 @@
   <ul class="links">
     <li><a class="button" href="user-stories.csv" download>Télécharger les user stories (CSV)</a></li>
     <li><a class="button button--ghost" href="cahier-de-recette.csv" download>Télécharger le cahier de recette (CSV)</a></li>
+    <li><a class="button button--ghost" href="#essai">Essayer avec votre cahier des charges</a></li>
   </ul>
   <nav class="toc" aria-labelledby="sommaire"><h2 id="sommaire">Sommaire</h2><ol>
     <li><a href="#entree">Entrée : le cahier des charges</a></li><li><a href="#consignes">Les consignes données à Claude</a></li>
     <li><a href="#analyse">Analyse et questions au client</a></li><li><a href="#us">User stories</a></li>
     <li><a href="#recette">Cahier de recette</a></li><li><a href="#couverture">Contrôle de couverture</a></li>
-    <li><a href="#cr">Compte-rendu de lancement</a></li><li><a href="#relecture">Ma relecture</a></li></ol></nav>
+    <li><a href="#cr">Compte-rendu de lancement</a></li><li><a href="#relecture">Ma relecture</a></li><li><a href="#essai">Essayer avec votre cahier des charges</a></li></ol></nav>
 
   <section class="block" id="entree" aria-labelledby="h-entree">
     <h2 id="h-entree"><span class="num">1</span>Entrée : le cahier des charges</h2>
     <p>Refonte du site de l'école de musique Arpège (association fictive, Lyon). Cahier des charges rédigé pour l'exercice, volontairement imprécis par endroits, comme souvent.</p>
-    <details><summary>Lire le cahier des charges</summary><div class="details-body"><h3>1. Contexte</h3>
+    <details><summary>Lire le cahier des charges</summary><div class="details-body" id="cdc-source"><h3>1. Contexte</h3>
 <p>L'école de musique Arpège est une association lyonnaise : 350 élèves, 22 professeurs. Le site actuel date de 2016 et ne s'affiche pas correctement sur mobile. Les inscriptions se font sur papier en septembre, ce qui crée des files d'attente et des erreurs de saisie.</p>
 <h3>2. Objectifs</h3>
 <ul><li>Présenter l'offre de cours.</li><li>Permettre l'inscription et le paiement en ligne.</li><li>Réduire la charge du secrétariat en septembre.</li><li>Avoir un site moderne et accessible.</li></ul>
@@ -131,6 +132,37 @@ Règles : n&#x27;invente aucune fonctionnalité, aucun chiffre ni aucun délai a
       <p><strong>Prochain point :</strong> 26 février.</p>
       <h4>Questions au client tranchées</h4><ul><li><strong>Q1</strong> tranchée : barème de la mairie, justificatif CAF, validation par le secrétariat.</li><li><strong>Q4</strong> tranchée pour le lancement : export CSV, sans connecteur.</li><li><strong>Q6</strong> tranchée : publication directe, sauf les tarifs. Ajout de REC-11.</li><li><strong>Q7</strong> précisée : déclaration d&#x27;accessibilité demandée ; l&#x27;audit reste à cadrer.</li><li><strong>Q2</strong> toujours ouverte : banque à confirmer.</li></ul>
     </div>
+  </section>
+
+  <section class="block" id="essai" aria-labelledby="h-essai">
+    <h2 id="h-essai"><span class="num">9</span>Essayer avec votre cahier des charges</h2>
+    <p>Collez un cahier des charges : Claude applique la consigne 1 et renvoie analyse, questions, user stories et tickets. La couverture est recalculée par la page, pas par l'IA.</p>
+    <form id="form-essai" class="essai" novalidate>
+      <label for="cdc">Cahier des charges <span class="aide">(200 à 20 000 caractères)</span></label>
+      <textarea id="cdc" name="cdc" rows="10" maxlength="20000" required></textarea>
+      <label for="cle">Votre clé API Anthropic</label>
+      <p id="cle-aide" class="aide">La clé reste dans votre navigateur : elle n'est envoyée qu'à l'API Anthropic, n'est pas enregistrée et est effacée après l'appel. Modèle : claude-opus-5-5. L'appel est facturé sur votre compte.</p>
+      <input id="cle" name="cle" type="password" autocomplete="off" spellcheck="false" aria-describedby="cle-aide" placeholder="sk-ant-…" required>
+      <p><button class="button" type="submit">Lancer l'analyse</button> <button class="button button--ghost" type="button" id="exemple-cdc">Utiliser le cahier des charges de la démo</button></p>
+      <p role="status" aria-live="polite" class="statut"></p>
+    </form>
+    <div id="resultat-claude" tabindex="-1"></div>
+    <script>
+      document.getElementById('exemple-cdc').addEventListener('click', function () {
+        var src = document.getElementById('cdc-source');
+        var parts = [];
+        if (src) src.querySelectorAll('h3, p, li').forEach(function (n) { parts.push((n.tagName === 'LI' ? '- ' : '') + n.textContent.replace(/\s+/g, ' ').trim()); });
+        document.getElementById('cdc').value = parts.join('\n');
+      });
+      document.getElementById('form-essai').addEventListener('submit', function (e) {
+        e.preventDefault();
+        var form = e.currentTarget, statut = form.querySelector('[role="status"]');
+        if (!form.cle.value.trim()) { statut.textContent = 'Saisissez votre clé API Anthropic.'; form.cle.focus(); return; }
+        statut.textContent = 'Chargement du module Claude…';
+        import('./claude-cdc.js').then(function (m) { return m.lancer(form); })
+          .catch(function () { statut.textContent = 'Chargement du module Claude impossible.'; });
+      });
+    </script>
   </section>
 
   <section class="block" id="relecture" aria-labelledby="h-relecture">
