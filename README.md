@@ -6,12 +6,12 @@ En ligne : https://ccamilleri-ux.github.io/portfolio-ia/
 
 ## Contenu
 
-- `index.html` : en-tête façon CV, grille de sept projets (la carte mène à la fiche, le bouton à la démo), fiches courtes avec ancres (`#siplec`, `#amundi`, `#ugc`, `#adoma`, `#valhor`, `#cahier-des-charges`, `#kit-recette`), méthode, contact
+- `index.html` : en-tête façon CV, grille de six projets (chaque carte : « Voir la fiche » et les démos), méthode, contact
+- `fiche-siplec.html`, `fiche-amundi.html`, `fiche-ugc.html`, `fiche-adoma.html`, `fiche-valhor.html`, `fiche-cahier-des-charges.html` : une fiche par projet (adresses à citer dans le CV) ; les anciennes ancres `index.html#…` redirigent vers ces fiches
 - `cas-siplec.html`, `cas-amundi.html`, `cas-ugc.html` : anciennes études détaillées, remplacées par des redirections vers les fiches
 - `projets/` : démos de démonstration, modifiables indépendamment des dépôts d'origine
-  - `siplec-flotte/` (build de `sources/siplec-flotte/` : `npm install` puis `npm run build` dans ce dossier), `siplec-offre-energie/`, `amundi/`, `ugc/`, `valhor/`, `cahier-des-charges/`, `kit-recette/`
+  - `siplec-flotte/` (build de `sources/siplec-flotte/` : `npm install` puis `npm run build` dans ce dossier), `siplec-offre-energie/`, `amundi/`, `ugc/`, `valhor/`, `cahier-des-charges/`
   - le projet Adoma est hébergé sur Lovable (lien externe)
-- `outils/kit-recette/` : kit de recette automatisée (script, mode d'emploi) ; son rapport sur les démos est publié dans `projets/kit-recette/`
 - `assets/` : feuille de style, police Inter (WOFF2, licence OFL), captures WebP, image de partage, favicon
 - `A-COMPLETER.md` : questions en attente
 

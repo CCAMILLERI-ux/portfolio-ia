@@ -58,7 +58,7 @@
 
   /* ---------- En-tête, mention, pied de page ---------- */
 
-  slot("mention").innerHTML = icone("leaf") + "<span>" + esc(C.meta.mention) + ' <a href="../../index.html#valhor">Retour au portfolio</a></span>';
+  slot("mention").innerHTML = icone("leaf") + "<span>" + esc(C.meta.mention) + ' <a href="../../fiche-valhor.html">Retour au portfolio</a></span>';
   slot("autrice").textContent = C.meta.autrice;
   slot("role").textContent = C.meta.role;
   slot("nav").innerHTML = C.navigation.map(function (n) {
@@ -69,7 +69,7 @@
     '<p class="site-footer__name">' + esc(C.meta.autrice) + " — " + esc(C.meta.role) + "</p>" +
     "<p>" + esc(C.meta.mention) + "</p>" +
     "<p>" + esc(C.meta.logo.mention) + " La palette s’inspire de l’univers public de VALHOR sans en être la charte officielle.</p>" +
-    '<p><a href="../../index.html#valhor">Retour au portfolio</a></p>';
+    '<p><a href="../../fiche-valhor.html">Retour au portfolio</a></p>';
 
   /* ---------- Introduction ---------- */
 

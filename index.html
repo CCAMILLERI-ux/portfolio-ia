@@ -21,6 +21,10 @@
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/portfolio.css">
+<script>
+  /* Anciennes adresses du type /#ugc : redirection vers la fiche du projet. */
+  (function () { var f = { siplec: 1, amundi: 1, ugc: 1, adoma: 1, valhor: 1, 'cahier-des-charges': 1 }; function go() { var h = location.hash.slice(1); if (f[h]) location.replace('fiche-' + h + '.html'); } go(); window.addEventListener('hashchange', go); })();
+</script>
 </head>
 <body>
 <a class="skip-link" href="#contenu">Aller au contenu</a>
@@ -48,248 +52,79 @@
         <li class="card">
           <img src="assets/img/captures/flotte-desktop-carte.webp" width="720" height="450" loading="lazy" alt="">
           <div class="card__body">
-            <h3><a href="#siplec">Énergies B2B : gestion de flotte</a></h3>
+            <h3><a href="fiche-siplec.html">Énergies B2B : gestion de flotte</a></h3>
             <ul class="tags" aria-label="Outils"><li>Claude Code</li><li>API Claude</li><li>Gamma</li></ul>
             <p>Une alerte expliquée par l'IA, une décision prise par l'humain.</p>
-            <a class="button demo" href="projets/siplec-flotte/index.html">Voir la démo<span class="visually-hidden"> : gestion de flotte</span></a>
+            <div class="card__actions">
+              <a class="button button--ghost" href="fiche-siplec.html">Voir la fiche<span class="visually-hidden"> : Énergies B2B : gestion de flotte</span></a>
+              <a class="button" href="projets/siplec-flotte/index.html">Gestion de flotte<span class="visually-hidden"> : Énergies B2B : gestion de flotte – Gestion de flotte</span></a>
+              <a class="button" href="projets/siplec-offre-energie/index.html">Page d'offre<span class="visually-hidden"> : Énergies B2B : gestion de flotte – Page d'offre</span></a>
+            </div>
           </div>
         </li>
         <li class="card">
           <img src="assets/img/captures/amundi-desktop-carte.webp" width="720" height="450" loading="lazy" alt="">
           <div class="card__body">
-            <h3><a href="#amundi">Épargne salariale : 4 supports B2B</a></h3>
+            <h3><a href="fiche-amundi.html">Épargne salariale : 4 supports B2B</a></h3>
             <ul class="tags" aria-label="Outils"><li>Claude Code</li></ul>
             <p>Un message réglementaire, quatre publics.</p>
-            <a class="button demo" href="projets/amundi/index.html">Voir la démo<span class="visually-hidden"> : supports B2B</span></a>
+            <div class="card__actions">
+              <a class="button button--ghost" href="fiche-amundi.html">Voir la fiche<span class="visually-hidden"> : Épargne salariale : 4 supports B2B</span></a>
+              <a class="button" href="projets/amundi/index.html">Voir la démo<span class="visually-hidden"> : Épargne salariale : 4 supports B2B</span></a>
+            </div>
           </div>
         </li>
         <li class="card">
           <img src="assets/img/captures/ugc-desktop-carte.webp" width="720" height="450" loading="lazy" alt="">
           <div class="card__body">
-            <h3><a href="#ugc">Cinéma : assistant de séance et abonnement</a></h3>
+            <h3><a href="fiche-ugc.html">Cinéma : assistant de séance et abonnement</a></h3>
             <ul class="tags" aria-label="Outils"><li>Claude Code</li><li>ChatGPT Image</li></ul>
             <p>Deux hypothèses produit, deux prototypes.</p>
-            <a class="button demo" href="projets/ugc/index.html">Voir la démo<span class="visually-hidden"> : assistant de séance</span></a>
+            <div class="card__actions">
+              <a class="button button--ghost" href="fiche-ugc.html">Voir la fiche<span class="visually-hidden"> : Cinéma : assistant de séance et abonnement</span></a>
+              <a class="button" href="projets/ugc/index.html">Assistant de séance<span class="visually-hidden"> : Cinéma : assistant de séance et abonnement – Assistant de séance</span></a>
+              <a class="button" href="projets/ugc/illimite.html">Abonnement<span class="visually-hidden"> : Cinéma : assistant de séance et abonnement – Abonnement</span></a>
+            </div>
           </div>
         </li>
         <li class="card">
           <img src="assets/img/captures/adoma-carte.webp" width="720" height="450" loading="lazy" alt="">
           <div class="card__body">
-            <h3><a href="#adoma">Résidences : portail éditorial</a></h3>
+            <h3><a href="fiche-adoma.html">Résidences : portail éditorial</a></h3>
             <ul class="tags" aria-label="Outils"><li>Lovable</li><li>Claude</li></ul>
             <p>Des initiatives locales aux contenus diffusés.</p>
-            <a class="button demo" href="https://adoma-design-flow.lovable.app/diffusion">Voir la démo<span class="visually-hidden"> : portail éditorial (site externe)</span></a>
+            <div class="card__actions">
+              <a class="button button--ghost" href="fiche-adoma.html">Voir la fiche<span class="visually-hidden"> : Résidences : portail éditorial</span></a>
+              <a class="button" href="https://adoma-design-flow.lovable.app/diffusion">Voir la démo<span class="visually-hidden"> : Résidences : portail éditorial</span></a>
+            </div>
           </div>
         </li>
         <li class="card">
           <img src="assets/img/captures/valhor-site-carte.webp" width="720" height="450" loading="lazy" alt="">
           <div class="card__body">
-            <h3><a href="#valhor">Végétal : campagne sur trois métiers</a></h3>
+            <h3><a href="fiche-valhor.html">Végétal : campagne sur trois métiers</a></h3>
             <ul class="tags" aria-label="Outils"><li>ChatGPT Image</li><li>ElevenLabs</li><li>Claude Code</li></ul>
             <p>Un message, cinq contenus : LinkedIn, newsletter, vidéo, article, diffusion.</p>
-            <a class="button demo" href="projets/valhor/index.html">Voir la démo<span class="visually-hidden"> : campagne métiers du végétal</span></a>
+            <div class="card__actions">
+              <a class="button button--ghost" href="fiche-valhor.html">Voir la fiche<span class="visually-hidden"> : Végétal : campagne sur trois métiers</span></a>
+              <a class="button" href="projets/valhor/index.html">La campagne<span class="visually-hidden"> : Végétal : campagne sur trois métiers – La campagne</span></a>
+              <a class="button" href="projets/valhor/index.html#video">La vidéo<span class="visually-hidden"> : Végétal : campagne sur trois métiers – La vidéo</span></a>
+            </div>
           </div>
         </li>
         <li class="card">
           <img src="assets/img/captures/cdc-carte.webp" width="720" height="450" loading="lazy" alt="">
           <div class="card__body">
-            <h3><a href="#cahier-des-charges">Cahier des charges → tickets de recette</a></h3>
+            <h3><a href="fiche-cahier-des-charges.html">Cahier des charges → tickets de recette</a></h3>
             <ul class="tags" aria-label="Outils"><li>Claude Code</li><li>API Claude</li></ul>
             <p>Analyse, user stories, recette : testable en direct.</p>
-            <a class="button demo" href="projets/cahier-des-charges/index.html">Voir la démo<span class="visually-hidden"> : cahier des charges</span></a>
-          </div>
-        </li>
-        <li class="card">
-          <img src="assets/img/captures/kit-carte.webp" width="720" height="450" loading="lazy" alt="">
-          <div class="card__body">
-            <h3><a href="#kit-recette">Kit de recette automatisée</a></h3>
-            <ul class="tags" aria-label="Outils"><li>Claude Code</li><li>Playwright</li><li>axe-core</li></ul>
-            <p>Une commande, un rapport, des tickets.</p>
-            <a class="button demo" href="projets/kit-recette/index.html">Voir la démo<span class="visually-hidden"> : rapport de recette</span></a>
+            <div class="card__actions">
+              <a class="button button--ghost" href="fiche-cahier-des-charges.html">Voir la fiche<span class="visually-hidden"> : Cahier des charges → tickets de recette</span></a>
+              <a class="button" href="projets/cahier-des-charges/index.html">Voir la démo<span class="visually-hidden"> : Cahier des charges → tickets de recette</span></a>
+            </div>
           </div>
         </li>
       </ul>
-    </div>
-  </section>
-
-  <section class="sec" aria-labelledby="t-fiches">
-    <div class="wrap">
-      <h2 class="sec-title" id="t-fiches">Fiches projets</h2>
-
-      <article class="fiche" id="siplec" aria-labelledby="f-siplec">
-        <div>
-          <p class="kicker">Univers SIPLEC (E.Leclerc) · étude exploratoire</p>
-          <h3 id="f-siplec">Énergies B2B : gestion de flotte et demande de rendez-vous</h3>
-          <p class="pb">Repérer une consommation de carburant anormale et agir sans appeler le support.</p>
-          <ul class="done">
-            <li>Note de cadrage : écosystème de l'offre, 4 axes d'évolution.</li>
-            <li>Prototype : alerte, analyse, suspension de la carte, journal d'activité.</li>
-            <li>IA intégrée : Claude explique l'alerte, propose une action et rédige le message au conducteur.</li>
-            <li>Page d'offre avec formulaire guidé en 3 étapes.</li>
-          </ul>
-          <dl class="meta">
-            <dt>Outils</dt><dd>Claude Code, API Claude (claude-opus-5-5), Gamma</dd>
-            <dt>Contexte IA</dt><dd>Mon analyse produit, traduite en prompt.</dd>
-            <dt>Corrigé</dt><dd>Interface plus compacte et plus claire, aux couleurs de la marque.</dd>
-            <dt>Garde-fous</dt><dd>Réponse au format imposé, hypothèses sans accusation, décision laissée au gestionnaire.</dd>
-          </dl>
-          <ul class="actions">
-            <li><a class="button" href="projets/siplec-flotte/index.html">Voir la démo : gestion de flotte</a></li>
-            <li><a class="button button--ghost" href="projets/siplec-offre-energie/index.html">Voir la démo : page d'offre</a></li>
-          </ul>
-        </div>
-        <figure>
-          <img src="assets/img/captures/flotte-claude.webp" width="1280" height="900" loading="lazy" alt="Détail d'une alerte avec le panneau « Analyse par Claude » : résumé, risque élevé, action recommandée « Contacter le conducteur » et hypothèses.">
-        </figure>
-      </article>
-
-      <article class="fiche" id="amundi" aria-labelledby="f-amundi">
-        <div>
-          <p class="kicker">Univers Amundi Épargne Salariale · étude exploratoire</p>
-          <h3 id="f-amundi">Épargne salariale : 4 supports marketing B2B</h3>
-          <p class="pb">Faire comprendre l'obligation de partage de la valeur aux dirigeants de PME, et en faire un rendez-vous commercial.</p>
-          <ul class="done">
-            <li>Un message, quatre supports : carrousel LinkedIn, emailing, page salariés, brochure.</li>
-            <li>Page salariés conçue comme un gabarit de CMS, modifiable sans développement.</li>
-          </ul>
-          <dl class="meta">
-            <dt>Outils</dt><dd>Claude Code</dd>
-            <dt>Contexte IA</dt><dd>La problématique de l'entreprise.</dd>
-            <dt>Corrigé</dt><dd>Langage simplifié, visuels LinkedIn plus percutants, conditions vérifiées sur les sources officielles.</dd>
-          </dl>
-          <ul class="actions">
-            <li><a class="button" href="projets/amundi/index.html">Voir la démo</a></li>
-          </ul>
-        </div>
-        <figure>
-          <img src="assets/img/captures/amundi-desktop.webp" width="1440" height="900" loading="lazy" alt="Page de présentation des quatre supports marketing sur l'épargne salariale.">
-        </figure>
-      </article>
-
-      <article class="fiche" id="ugc" aria-labelledby="f-ugc">
-        <div>
-          <p class="kicker">Univers UGC · étude exploratoire</p>
-          <h3 id="f-ugc">Cinéma : assistant de séance et parcours d'abonnement</h3>
-          <p class="pb">Choisir une séance en moins d'étapes, et s'abonner sans abandonner en route.</p>
-          <ul class="done">
-            <li>Design system de 40 sections, avec consignes pour Claude Code.</li>
-            <li>Assistant qui propose 3 séances à partir d'une demande en langage naturel.</li>
-            <li>Souscription repensée en 6 étapes, avec note produit.</li>
-          </ul>
-          <dl class="meta">
-            <dt>Outils</dt><dd>Claude Code, ChatGPT Image (affiches)</dd>
-            <dt>Contexte IA</dt><dd>Le design system, lu avant chaque génération.</dd>
-            <dt>Corrigé</dt><dd>Fluidité de l'interface et du parcours, en 8 livraisons. L'IA de l'assistant est simulée, et c'est écrit.</dd>
-          </dl>
-          <ul class="actions">
-            <li><a class="button" href="projets/ugc/index.html">Voir la démo : assistant</a></li>
-            <li><a class="button button--ghost" href="projets/ugc/illimite.html">Voir la démo : abonnement</a></li>
-          </ul>
-        </div>
-        <figure>
-          <img src="assets/img/captures/ugc-illimite-desktop.webp" width="1440" height="900" loading="lazy" alt="Page des offres d'abonnement : choix de la formule avant la souscription en six étapes.">
-        </figure>
-      </article>
-
-      <article class="fiche" id="adoma" aria-labelledby="f-adoma">
-        <div>
-          <p class="kicker">Univers Adoma · étude exploratoire</p>
-          <h3 id="f-adoma">Résidences : portail de contribution éditoriale</h3>
-          <p class="pb">Simplifier la remontée des initiatives des résidences et leur valorisation par la communication.</p>
-          <ul class="done">
-            <li>Parcours : la résidence propose, la communication valide et diffuse.</li>
-            <li>Génération par Claude d'un article, d'un post LinkedIn et d'une newsletter, à partir des seuls faits saisis.</li>
-            <li>Kit de diffusion par public et calendrier de publication.</li>
-          </ul>
-          <dl class="meta">
-            <dt>Outils</dt><dd>Lovable, Claude (intégré)</dd>
-            <dt>Contexte IA</dt><dd>Un prompt construit sur la problématique de l'entreprise.</dd>
-            <dt>Garde-fou</dt><dd>Tout texte généré reste « à relire » jusqu'à validation.</dd>
-          </dl>
-          <ul class="actions">
-            <li><a class="button" href="https://adoma-design-flow.lovable.app/diffusion">Voir la démo<span class="visually-hidden"> (site externe)</span></a></li>
-          </ul>
-        </div>
-        <figure>
-          <img src="assets/img/captures/adoma-atelier.webp" width="1200" height="1151" loading="lazy" alt="Atelier éditorial : les faits d'une initiative et l'article web généré par Claude, marqué « à relire » puis « Validé ».">
-        </figure>
-      </article>
-
-      <article class="fiche" id="valhor" aria-labelledby="f-valhor">
-        <div>
-          <p class="kicker">Univers VALHOR · étude exploratoire</p>
-          <h3 id="f-valhor">Végétal : campagne multicanale sur trois métiers</h3>
-          <p class="pb">Faire découvrir l'horticulture, la fleuristerie et le paysage aux personnes en orientation ou en reconversion.</p>
-          <ul class="done">
-            <li>Un message décliné en 5 réalisations : carrousel LinkedIn, newsletter VALHOR Info, vidéo de 33 s, article web, plan de diffusion.</li>
-            <li>Vidéo montée par script, avec voix off et sous-titres, et fiche de production prête pour un prestataire.</li>
-            <li>Newsletter codée comme un vrai e-mail (600 px, adaptée au mobile), article dans un gabarit de site d'actualité.</li>
-            <li>Calendrier de diffusion sur deux semaines et indicateurs par canal.</li>
-          </ul>
-          <dl class="meta">
-            <dt>Outils</dt><dd>ChatGPT Image (visuels), ElevenLabs (voix off), Claude Design, Claude Code</dd>
-            <dt>Contexte IA</dt><dd>Brief sur l'interprofession, pages clés de son site, sa charte graphique.</dd>
-            <dt>Itérations</dt><dd>Design system reconstitué à partir des visuels, voix off refaite pour un appel à l'action complet, montage recalé.</dd>
-          </dl>
-          <ul class="actions">
-            <li><a class="button" href="projets/valhor/index.html">Voir la démo</a></li>
-            <li><a class="button button--ghost" href="projets/valhor/index.html#video">Voir la vidéo</a></li>
-            <li><a class="button button--ghost" href="projets/valhor/newsletter/valhor-info.html">Lire la newsletter</a></li>
-          </ul>
-        </div>
-        <figure>
-          <img src="assets/img/captures/valhor-video.webp" width="1280" height="800" loading="lazy" alt="La vidéo de 33 secondes, plan fleuristerie avec sous-titre, à côté de sa description : script, brief de production, voix off, montage, sous-titrage.">
-        </figure>
-      </article>
-
-      <article class="fiche" id="cahier-des-charges" aria-labelledby="f-cdc">
-        <div>
-          <p class="kicker">Livrables de chef de projet · mini-projet</p>
-          <h3 id="f-cdc">Du cahier des charges aux tickets de recette</h3>
-          <p class="pb">Passer d'un cahier des charges imprécis à des livrables exploitables, sans rien inventer.</p>
-          <ul class="done">
-            <li>13 exigences, 8 questions au client, 9 user stories, 16 tickets de recette.</li>
-            <li>Compte-rendu de réunion à partir de notes brutes, décisions reportées dans la recette.</li>
-            <li>Matrice de couverture recalculée, exports CSV pour Jira ou un tableur.</li>
-            <li>Version en direct : on colle son cahier des charges, Claude l'analyse via l'API.</li>
-          </ul>
-          <dl class="meta">
-            <dt>Outils</dt><dd>Claude Code, API Claude (claude-opus-5-5)</dd>
-            <dt>Règle donnée</dt><dd>Une information absente devient une question au client.</dd>
-            <dt>Contrôle</dt><dd>3 exigences sans user story détectées, à suivre dans le planning. <span class="todo">[À COMPLÉTER : mes corrections]</span></dd>
-          </dl>
-          <ul class="actions">
-            <li><a class="button" href="projets/cahier-des-charges/index.html">Voir la démo</a></li>
-          </ul>
-        </div>
-        <figure>
-          <img src="assets/img/captures/cdc-desktop.webp" width="1280" height="800" loading="lazy" alt="Cahier de recette : tickets avec étapes, résultat attendu et statut « À tester ».">
-        </figure>
-      </article>
-
-      <article class="fiche" id="kit-recette" aria-labelledby="f-kit">
-        <div>
-          <p class="kicker">Automatisation · mini-projet</p>
-          <h3 id="f-kit">Kit de recette automatisée</h3>
-          <p class="pb">Ne plus refaire à la main les mêmes contrôles à chaque livraison.</p>
-          <ul class="done">
-            <li>Une commande : captures, accessibilité, mobile, liens, poids des pages.</li>
-            <li>Rapport lisible, tickets CSV pour Jira ou Trello, mode d'emploi pour l'équipe.</li>
-            <li>Testé sur les 8 démos du portfolio : 6 problèmes majeurs trouvés.</li>
-          </ul>
-          <dl class="meta">
-            <dt>Outils</dt><dd>Claude Code, Playwright, axe-core</dd>
-            <dt>Limite écrite</dt><dd>Ne remplace ni un audit RGAA complet, ni un test avec un lecteur d'écran.</dd>
-          </dl>
-          <ul class="actions">
-            <li><a class="button" href="projets/kit-recette/index.html">Voir la démo</a></li>
-            <li><a class="button button--ghost" href="https://github.com/CCAMILLERI-ux/portfolio-ia/tree/main/outils/kit-recette">Code et mode d'emploi</a></li>
-          </ul>
-        </div>
-        <figure>
-          <img src="assets/img/captures/kit-detail.webp" width="1280" height="800" loading="lazy" alt="Détail du rapport : captures ordinateur et mobile, tableau des problèmes par gravité.">
-        </figure>
-      </article>
     </div>
   </section>
 
