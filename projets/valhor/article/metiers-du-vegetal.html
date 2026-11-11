@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Métiers du végétal : des savoir-faire à découvrir (maquette) — Caroline Camilleri</title>
+  <meta name="description" content="Simulation non officielle d'une actualité sur valhor.fr, rédigée par Caroline Camilleri, projet de démonstration.">
+  <meta name="robots" content="noindex">
+  <!--
+    Simulation du gabarit « actualité » de valhor.fr, réalisée pour un
+    portfolio de démonstration. Ni le logo ni les textes ne constituent une
+    publication de VALHOR. Les liens de navigation simulés sont inactifs.
+  -->
+  <style>
+    @font-face {
+      font-family: "Montserrat";
+      font-weight: 100 900;
+      font-display: swap;
+      src: url("../assets/fonts/montserrat-latin-wght-normal.woff2") format("woff2");
+    }
+    :root {
+      --vert: #0f5f31;
+      --vert-fonce: #0c4a27;
+      --vert-clair: #4e982a;
+      --menthe: #e7f6ed;
+      --corail: #C93A3F;
+      --texte: #232123;
+      --gris: #6b6b6b;
+      --bord: #dfe6e1;
+      --font: "Montserrat", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #fff; color: var(--texte); font-family: var(--font); font-size: 1.0625rem; line-height: 1.7; overflow-x: hidden; }
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: var(--vert); }
+    :focus-visible { outline: 3px solid #0b6bcb; outline-offset: 3px; }
+    .wrap { max-width: 1200px; margin: 0 auto; padding-inline: max(16px, 4vw); }
+    .narrow { max-width: 780px; margin: 0 auto; }
+
+    /* Bandeau de maquette (hors gabarit) */
+    .maquette { background: #17251d; color: #e4eec0; font-size: 0.85rem; line-height: 1.45; }
+    .maquette .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.4rem 1.5rem; padding-block: 0.6rem; }
+    .maquette a { color: #afcb08; font-weight: 600; }
+
+    /* En-tête simulé */
+    .header { border-bottom: 1px solid var(--bord); }
+    .header .wrap { display: flex; align-items: center; gap: 2rem; min-height: 96px; }
+    .header__logo img { width: 190px; }
+    .header__logo--texte { font-weight: 800; font-size: 1.7rem; letter-spacing: .04em; color: #0f5f31; }
+    .header__nav { display: flex; flex-wrap: nowrap; align-items: center; gap: 1.6rem; flex: 1; justify-content: space-between; margin: 0; padding: 0; list-style: none; text-transform: uppercase; font-size: 0.82rem; line-height: 1.3; color: var(--vert); text-align: center; }
+    .header__nav li { max-width: 13rem; }
+    .header__nav .actif { font-weight: 700; box-shadow: 0 3px 0 var(--vert-clair); padding-bottom: 4px; }
+    @media (max-width: 960px) { .header__nav { display: none; } .header .wrap { min-height: 72px; } .header__logo img { width: 150px; } }
+
+    /* Fil d'Ariane */
+    .ariane { padding-block: 1.2rem; font-size: 0.82rem; color: var(--gris); }
+    .ariane ol { display: flex; flex-wrap: wrap; gap: 0.3rem; margin: 0; padding: 0; list-style: none; }
+    .ariane li + li::before { content: "›"; margin-right: 0.3rem; }
+
+    /* Article */
+    .article__tete { padding-bottom: 1.5rem; }
+    .tag { display: inline-block; padding: 0.35rem 0.8rem; font-size: 0.9rem; font-weight: 700; color: #fff; background: var(--corail); }
+    h1 { margin: 1rem 0 0.8rem; font-size: clamp(1.75rem, 1.2rem + 2.4vw, 2.75rem); line-height: 1.2; font-weight: 800; color: var(--vert); text-wrap: balance; }
+    .date { margin: 0; color: var(--gris); font-size: 0.95rem; }
+    .une { margin: 0 0 2.5rem; }
+    .une img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+    .chapo { margin: 0 0 1.8rem; font-size: 1.15rem; font-weight: 700; line-height: 1.65; color: var(--vert-fonce); }
+    .article p { margin: 0 0 1.2rem; }
+    .article h2 { margin: 2.6rem 0 1rem; font-size: clamp(1.3rem, 1.1rem + 0.8vw, 1.65rem); line-height: 1.3; font-weight: 800; color: var(--vert); text-wrap: balance; }
+    .article figure { margin: 2rem 0; }
+    .article figcaption { margin-top: 0.5rem; font-size: 0.85rem; color: var(--gris); }
+    .encadre { margin: 2.5rem 0 1.5rem; padding: 1.5rem 1.6rem; background: var(--menthe); border-left: 5px solid var(--vert); }
+    .encadre p { margin: 0 0 1.2rem; font-weight: 700; color: var(--vert-fonce); }
+    .bouton { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.9rem 1.4rem; font-weight: 700; font-size: 0.95rem; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none; color: #fff; background: var(--vert); }
+    .bouton:hover { background: var(--vert-fonce); }
+    .partage { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem; margin: 2rem 0 0; padding-top: 1.2rem; border-top: 1px solid var(--bord); font-size: 0.9rem; color: var(--gris); }
+
+    /* À lire aussi */
+    .aussi { margin-top: 4rem; padding-block: 3rem 4rem; background: var(--menthe); }
+    .aussi h2 { margin: 0 0 1.5rem; font-size: 1.6rem; font-weight: 800; color: var(--vert); }
+    .cartes { display: grid; gap: 1.5rem; margin: 0; padding: 0; list-style: none; }
+    @media (min-width: 760px) { .cartes { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .carte { background: #fff; }
+    .carte__image { position: relative; }
+    .carte__image img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
+    .carte__image .tag { position: absolute; top: 1rem; left: 1rem; font-size: 0.85rem; }
+    .carte__corps { padding: 1rem 1.2rem 1.4rem; }
+    .carte h3 { margin: 0.4rem 0 0.6rem; font-size: 1.2rem; line-height: 1.3; font-weight: 800; color: var(--vert); }
+    .carte p { margin: 0 0 0.8rem; font-size: 0.95rem; line-height: 1.55; }
+    .carte a { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; }
+    .carte a:hover { text-decoration: underline; }
+
+    /* Pied simulé */
+    .pied { background: var(--vert-fonce); color: #e4eec0; padding-block: 2rem; font-size: 0.85rem; }
+    .pied p { margin: 0 0 0.4rem; }
+    .pied a { color: #afcb08; }
+  </style>
+</head>
+<body>
+  <div class="maquette" role="note">
+    <div class="wrap">
+      <p style="margin:0">Simulation non officielle du gabarit d’actualité de valhor.fr · proposition d’article de Caroline Camilleri</p>
+      <p style="margin:0"><a href="../index.html#article">← Retour au portfolio</a></p>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="wrap">
+      <span class="header__logo header__logo--texte">VALHOR</span>
+      <ul class="header__nav" aria-label="Menu du site simulé (inactif)">
+        <li class="actif">Actualités</li>
+        <li>Nous connaître</li>
+        <li>Promouvoir le végétal et les professionnels</li>
+        <li>Développer votre activité</li>
+        <li>Chiffres et prospective de la filière</li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="contenu">
+    <nav class="wrap ariane" aria-label="Fil d’Ariane">
+      <ol><li>Accueil</li><li>Actualités</li><li aria-current="page">Métiers du végétal : des savoir-faire à découvrir</li></ol>
+    </nav>
+
+    <article class="article">
+      <div class="wrap">
+        <div class="narrow article__tete">
+          <span class="tag">Métiers &amp; transmission</span>
+          <h1>Métiers du végétal : des savoir-faire à découvrir, des vocations à faire grandir</h1>
+          <p class="date">Proposition d’article · date de publication à définir</p>
+        </div>
+        <figure class="une">
+          <picture>
+            <source type="image/webp" srcset="../assets/img/article/une.webp">
+            <img src="../assets/img/article/une.jpg" width="1200" height="675" alt="Trois gestes du végétal côte à côte : repiquer un plant sous serre, nouer un bouquet, planter un massif.">
+          </picture>
+        </figure>
+
+        <div class="narrow">
+          <p class="chapo">Reconnaître une plante, composer un bouquet, aménager un jardin : derrière ces gestes se trouvent des connaissances, de la précision et de la créativité. À travers les concours qu’elle accompagne, VALHOR met en lumière les compétences des professionnels du végétal et de celles et ceux qui se forment à leurs métiers.</p>
+
+          <p>Un bouquet attire le regard. Un jardin donne envie de s’arrêter. Une plante trouve sa place sur un balcon. Le résultat est visible ; le travail qui l’a rendu possible l’est parfois moins.</p>
+          <p>Pour découvrir l’horticulture, la fleuristerie et le paysage, il faut aussi regarder les gestes : observer, choisir, assembler, planter. Les compétitions professionnelles offrent cette occasion. Elles rendent les savoir-faire concrets et permettent de découvrir des métiers dans toute leur exigence.</p>
+
+          <h2>Connaître les végétaux : apprendre à regarder autrement</h2>
+          <p>Avant de produire, de conseiller ou de planter, il faut connaître les végétaux. Savoir les identifier, distinguer leurs caractéristiques et comprendre leurs spécificités constitue une base essentielle pour les professionnels.</p>
+          <p>C’est cette connaissance que valorise le Concours national de reconnaissance des végétaux. VALHOR soutient les épreuves régionales et organise une finale nationale tous les deux ans. Le concours s’adresse aux apprenants de la production horticole, du paysage et du commerce des végétaux, ainsi qu’aux professionnels de ces domaines.</p>
+          <p>L’exercice met en lumière une compétence qui échappe souvent au grand public : derrière un nom de plante se trouve un apprentissage patient, fait d’observation et de pratique. Il valorise aussi le travail des établissements de formation qui accompagnent les futurs professionnels.</p>
+
+          <h2>Créer et réaliser : la précision au service d’une idée</h2>
+          <p>Les métiers du végétal mobilisent aussi la capacité à transformer une intention en réalisation. Une composition florale ou un aménagement paysager demande de faire des choix, de maîtriser des techniques et d’organiser son travail.</p>
+          <figure>
+            <img src="../assets/img/article/creer.webp" width="900" height="600" alt="Une fleuriste compose un bouquet de roses poudrées, de fleurs blanches et d’eucalyptus." loading="lazy">
+            <figcaption>Composer un bouquet : des choix, des techniques et une organisation du travail.</figcaption>
+          </figure>
+          <p>Les épreuves WorldSkills en donnent une illustration. VALHOR y accompagne les métiers de l’horticulture, de l’art floral et de jardinier-paysagiste. Les candidats doivent conjuguer connaissances, créativité et gestes précis dans un temps limité.</p>
+          <p>Pour les visiteurs, ces compétitions permettent de dépasser une image parfois réductrice des métiers manuels. Elles montrent le raisonnement derrière le geste, la préparation derrière la réalisation et l’entraînement derrière la maîtrise.</p>
+
+          <h2>Rendre les compétences visibles pour ouvrir les horizons</h2>
+          <p>Comment se projeter dans un métier dont on ne connaît que le résultat ? Montrer les étapes, expliquer les choix et donner à voir les professionnels au travail peut aider à mieux comprendre leur quotidien.</p>
+          <p>Un jeune en recherche d’orientation pourra s’intéresser à la dimension créative. Une personne en reconversion sera peut-être attirée par le travail avec le vivant. Une autre voudra découvrir les connaissances techniques nécessaires. Ces portes d’entrée sont différentes et méritent toutes d’être explorées.</p>
+          <p>Promouvoir les savoir-faire, faire connaître la diversité des métiers et attirer de nouveaux talents font partie des missions de VALHOR. Les concours constituent l’un des moyens de donner corps à cette ambition, en rapprochant découverte des professions, formation et transmission.</p>
+
+          <h2>Et si la découverte commençait par un geste ?</h2>
+          <p>Observer une épreuve, rencontrer un professionnel, échanger avec un établissement de formation : une première découverte permet de poser des questions concrètes. Qu’apprend-on ? Quels gestes faut-il maîtriser ? Quelle place occupent la création, la technique et le travail en équipe ?</p>
+          <p>Derrière chaque réalisation végétale, il y a des compétences à comprendre et des parcours à découvrir. Prendre le temps de les regarder, c’est déjà ouvrir de nouvelles possibilités.</p>
+
+          <div class="encadre">
+            <p>Pour aller plus loin : découvrez les concours et initiatives de valorisation des métiers présentés sur le site de VALHOR.</p>
+            <a class="bouton" href="https://www.valhor.fr/promouvoir-le-vegetal-et-les-professionnels/valoriser-les-metiers" target="_blank" rel="noopener">Découvrir les initiatives de VALHOR <span aria-hidden="true">→</span><span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)"> (site valhor.fr, nouvel onglet)</span></a>
+          </div>
+
+          <p class="partage">Partager : LinkedIn · Facebook · e-mail <span>(boutons simulés, inactifs)</span></p>
+        </div>
+      </div>
+    </article>
+
+    <section class="aussi" aria-labelledby="aussi-titre">
+      <div class="wrap">
+        <h2 id="aussi-titre">Ces contenus pourraient vous intéresser</h2>
+        <ul class="cartes">
+          <li class="carte">
+            <div class="carte__image"><img src="../assets/img/article/carte-1.webp" width="400" height="400" alt="" loading="lazy"><span class="tag">Métiers &amp; transmission</span></div>
+            <div class="carte__corps">
+              <h3>Derrière chaque espace végétalisé, des métiers à découvrir</h3>
+              <p>Un carrousel en cinq pages pour présenter l’horticulture, la fleuristerie et le paysage.</p>
+              <a href="../index.html#carrousel">→ Voir le carrousel</a>
+            </div>
+          </li>
+          <li class="carte">
+            <div class="carte__image"><img src="../assets/img/article/carte-2.webp" width="400" height="400" alt="" loading="lazy"><span class="tag">Vidéo</span></div>
+            <div class="carte__corps">
+              <h3>Trois univers pour travailler avec le vivant</h3>
+              <p>Une vidéo de 33 secondes sur les gestes des métiers du végétal.</p>
+              <a href="../index.html#video">→ Voir la vidéo</a>
+            </div>
+          </li>
+          <li class="carte">
+            <div class="carte__image"><img src="../assets/img/article/carte-3.webp" width="400" height="400" alt="" loading="lazy"><span class="tag">Newsletter</span></div>
+            <div class="carte__corps">
+              <h3>VALHOR Info : les actualités de la filière</h3>
+              <p>Développement de l’activité, rendez-vous professionnels et campagne à relayer.</p>
+              <a href="../newsletter/valhor-info.html">→ Lire la newsletter</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pied">
+    <div class="wrap">
+      <p>Projet fictif réalisé à titre de démonstration par Caroline Camilleri, sans lien avec VALHOR. Ce n’est pas une page de valhor.fr. Les marques citées appartiennent à leurs propriétaires.</p>
+      <p><a href="../index.html#article">Retour au projet</a> · <a href="../../../index.html#valhor">Retour au portfolio</a></p>
+    </div>
+  </footer>
+</body>
+</html>
