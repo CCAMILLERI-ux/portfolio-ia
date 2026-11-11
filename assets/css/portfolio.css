@@ -1,0 +1,116 @@
+/* Portfolio « Projets IA » — page d'accueil compacte
+   Palette du CV : marine #1D2350, bleu #7788AB, doré #AC8938. Typo Inter.
+   Contrastes : marine sur blanc 14,9:1 ; #4B5375 sur blanc 7,5:1 ; blanc sur marine 14,9:1 ;
+   doré #AC8938 sur marine 4,5:1 ; bleu #7788AB et doré réservés aux filets, puces et grands éléments. */
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("../fonts/inter-latin-wght-normal.woff2") format("woff2");
+}
+
+:root {
+  --navy: #1D2350;
+  --blue: #7788AB;
+  --blue-text: #5A6A92;
+  --gold: #AC8938;
+  --gold-text: #7D6020;
+  --text: #1D2350;
+  --muted: #4B5375;
+  --line: #DDE1EC;
+  --tint: #EEF0F6;
+  --bg: #F5F6FA;
+  --radius: 8px;
+  --wrap: 68rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--text); font: 400 1rem/1.55 "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; overflow-wrap: break-word; }
+img { max-width: 100%; height: auto; display: block; }
+h1, h2, h3, p, li, dd { text-wrap: pretty; }
+h1, h2, h3 { line-height: 1.2; letter-spacing: -.01em; margin: 0; }
+p, ul, dl { margin: 0; }
+a { color: var(--gold-text); text-underline-offset: .15em; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; border-radius: 3px; }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip-link { position: absolute; left: 1rem; top: -4rem; z-index: 10; background: #fff; color: var(--navy); padding: .5rem .9rem; border-radius: 6px; }
+.skip-link:focus { top: .75rem; }
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 1rem; }
+@media (min-width: 48rem) { .wrap { padding: 0 1.5rem; } }
+
+/* En-tête façon CV */
+.cv-head { background: var(--navy); color: #fff; border-bottom: 4px solid var(--gold); }
+.cv-head .wrap { display: grid; gap: .75rem 2rem; padding-top: 1.75rem; padding-bottom: 1.5rem; }
+@media (min-width: 48rem) { .cv-head .wrap { grid-template-columns: 1fr auto; align-items: end; } }
+.cv-head h1 { font-size: clamp(1.7rem, 4.5vw, 2.4rem); font-weight: 700; }
+.cv-head .role { color: #fff; font-weight: 600; margin-top: .2rem; }
+.cv-head .pitch { color: #D5DAE8; margin-top: .4rem; max-width: 40rem; }
+.cv-head .contact { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem 1.25rem; font-size: .95rem; }
+.cv-head .contact a { color: #fff; }
+.cv-head .contact a:focus-visible { outline-color: var(--gold); }
+
+/* Titres de section façon CV : majuscules + filet doré */
+.sec { padding: 1.75rem 0 0; }
+.sec:last-of-type { padding-bottom: 2rem; }
+.sec-title { display: flex; align-items: center; gap: .75rem; font-size: .85rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--navy); margin-bottom: .9rem; }
+.sec-title::after { content: ""; flex: 1; height: 2px; background: var(--gold); }
+.sec-note { color: var(--muted); font-size: .9rem; margin: -.4rem 0 .9rem; }
+
+/* Cartes : toute la carte mène à la fiche, le bouton mène à la démo */
+.cards { list-style: none; padding: 0; margin: 0; display: grid; gap: .9rem; grid-template-columns: 1fr; }
+@media (min-width: 40rem) { .cards { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 64rem) { .cards { grid-template-columns: repeat(4, 1fr); } }
+.card { position: relative; display: flex; flex-direction: column; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; transition: border-color .15s, box-shadow .15s; }
+.card:hover { border-color: var(--blue); box-shadow: 0 6px 18px rgba(29, 35, 80, .10); }
+.card:has(h3 a:focus-visible) { outline: 3px solid var(--gold); outline-offset: 2px; }
+.card img { aspect-ratio: 16 / 9; object-fit: cover; object-position: top; width: 100%; border-bottom: 1px solid var(--line); }
+.card__body { padding: .7rem .8rem .8rem; display: flex; flex-direction: column; gap: .4rem; flex: 1; }
+.card h3 { font-size: .98rem; font-weight: 650; }
+.card h3 a { color: var(--text); text-decoration: none; }
+.card h3 a::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+.card h3 a:focus-visible { outline: none; }
+.card p { font-size: .88rem; color: var(--muted); }
+.card .demo { position: relative; z-index: 2; align-self: flex-start; margin-top: auto; }
+
+.tags { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: .3rem; }
+.tags li { font-size: .75rem; font-weight: 600; padding: .1rem .5rem; border-radius: 999px; background: var(--tint); color: var(--navy); }
+
+.button { display: inline-block; font-size: .88rem; font-weight: 600; text-decoration: none; padding: .4rem .8rem; border-radius: 6px; background: var(--navy); color: #fff; border: 2px solid var(--navy); }
+.button:hover { background: #2E3670; border-color: #2E3670; }
+.button--ghost { background: #fff; color: var(--navy); }
+.button--ghost:hover { background: var(--tint); color: var(--navy); }
+
+/* Fiches */
+.fiche { background: #fff; border: 1px solid var(--line); border-left: 4px solid var(--blue); border-radius: var(--radius); padding: 1rem 1.1rem; margin-bottom: .9rem; scroll-margin-top: .75rem; display: grid; gap: 1rem; }
+@media (min-width: 56rem) { .fiche { grid-template-columns: 1fr 19rem; padding: 1.1rem 1.4rem; } }
+.fiche:target { border-left-color: var(--gold); }
+.fiche .kicker { font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--blue-text); }
+.fiche h3 { font-size: 1.15rem; margin-top: .15rem; }
+.fiche .pb { margin-top: .35rem; font-weight: 550; }
+.fiche ul.done { margin-top: .55rem; padding-left: 1.1rem; }
+.fiche ul.done li { margin-bottom: .2rem; }
+.fiche ul.done li::marker { color: var(--gold); }
+.fiche .meta { margin-top: .6rem; display: grid; grid-template-columns: max-content 1fr; gap: .3rem .75rem; font-size: .92rem; }
+.fiche .meta dt { font-weight: 650; color: var(--navy); }
+.fiche .meta dd { margin: 0; color: var(--muted); }
+.fiche .actions { list-style: none; padding: 0; margin-top: .8rem; display: flex; flex-wrap: wrap; gap: .5rem; }
+.fiche figure { margin: 0; align-self: start; }
+.fiche figure img { border: 1px solid var(--line); border-radius: 6px; width: 100%; }
+
+/* Méthode */
+.steps { list-style: none; padding: 0; margin: 0; display: grid; gap: .6rem; counter-reset: s; }
+@media (min-width: 40rem) { .steps { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 64rem) { .steps { grid-template-columns: repeat(4, 1fr); } }
+.steps li { counter-increment: s; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: .7rem .9rem; font-size: .92rem; color: var(--muted); }
+.steps li::before { content: counter(s); font-weight: 700; color: var(--gold-text); margin-right: .4rem; }
+.steps strong { color: var(--navy); }
+
+.todo { background: #FFF1C2; color: #5A3E00; font-weight: 600; padding: 0 .25em; border-radius: 3px; }
+
+.foot { background: var(--navy); color: #D5DAE8; font-size: .85rem; padding: 1rem 0; }
+.foot a { color: #fff; }
+.fig-portrait img { max-width: 12rem; }
