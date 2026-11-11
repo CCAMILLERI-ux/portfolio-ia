@@ -1,25 +1,16 @@
 {
-  "date": "2026-11-11T15:47:58.718Z",
+  "date": "2026-11-11T15:48:46.065Z",
   "pages": [
     {
       "url": "https://ccamilleri-ux.github.io/portfolio-ia/",
       "nom": "01-portfolio-ia",
-      "problemes": [
-        {
-          "type": "Lien",
-          "gravite": "Majeur",
-          "regle": "Lien cassé (404)",
-          "element": "https://ccamilleri-ux.github.io/portfolio-ia/projets/kit-recette/index.html",
-          "description": "Le lien mène à une page introuvable.",
-          "aide": ""
-        }
-      ],
+      "problemes": [],
       "captures": {
         "ordinateur": "captures/01-portfolio-ia-ordinateur.jpg",
         "mobile": "captures/01-portfolio-ia-mobile.jpg"
       },
       "statut": 200,
-      "poidsKo": 151,
+      "poidsKo": 115,
       "requetes": 12,
       "titre": "Projets IA – Caroline Camilleri, cheffe de projet digital",
       "langue": "fr",
@@ -106,7 +97,7 @@
         "mobile": "captures/04-projets-amundi-mobile.jpg"
       },
       "statut": 200,
-      "poidsKo": 195,
+      "poidsKo": 158,
       "requetes": 10,
       "titre": "Caroline Camilleri · Proposition marketing B2B épargne salariale et retraite",
       "langue": "fr",
@@ -145,7 +136,7 @@
         "mobile": "captures/06-ugc-illimite-mobile.jpg"
       },
       "statut": 200,
-      "poidsKo": 193,
+      "poidsKo": 185,
       "requetes": 6,
       "titre": "Souscription UGC Illimité",
       "langue": "fr",
@@ -175,7 +166,7 @@
         "mobile": "captures/08-projets-cahier-des-charges-mobile.jpg"
       },
       "statut": 200,
-      "poidsKo": 47,
+      "poidsKo": 78,
       "requetes": 4,
       "titre": "Du cahier des charges aux tickets de recette – Projet de démonstration",
       "langue": "fr",
