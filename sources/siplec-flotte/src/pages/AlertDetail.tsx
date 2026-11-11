@@ -25,6 +25,7 @@ import { ALERTS, ANOMALY_LABELS, CARDS, DRIVERS, MAIN_MANAGER, PRIMARY_ALERT_DET
 import { DURATION_LABELS, useFleet, type Suspension, type SuspensionDuration } from '../state/FleetContext';
 import { Button, CardStatusBadge, Modal, Panel, PriorityBadge, StatusBadge, TableWrap, td, th } from '../components/ui';
 import { cx, formatDate, formatDateTime, formatEur, formatLongDate, formatTime } from '../utils';
+import { ClaudeAnalyse } from '../components/ClaudeAnalyse';
 
 type Factor = { icon: ReactNode; title: string; detail: string; value: string };
 
@@ -338,7 +339,7 @@ export function AlertDetail({ id }: { id: string }) {
 
   return (
     <div>
-      <nav className="mb-4 flex items-center gap-1.5 text-[13px] text-slate-500" aria-label="Fil d’Ariane">
+      <nav className="mb-4 flex items-center gap-1.5 text-[13px] text-slate-600" aria-label="Fil d’Ariane">
         <a href="#/alertes" className="inline-flex items-center gap-1 font-medium text-brand hover:underline">
           <ArrowLeft size={14} aria-hidden /> Alertes
         </a>
@@ -351,7 +352,7 @@ export function AlertDetail({ id }: { id: string }) {
           <div className="mb-2 flex flex-wrap items-center gap-2">
             <PriorityBadge priority={alert.priority} />
             <StatusBadge status={status} />
-            <span className="text-[13px] text-slate-500">Détectée le {formatDateTime(alert.date)}</span>
+            <span className="text-[13px] text-slate-600">Détectée le {formatDateTime(alert.date)}</span>
           </div>
           <h1 className="font-title text-2xl font-semibold text-navy md:text-[26px]">{ANOMALY_LABELS[alert.type]}</h1>
           <p className="mt-1 text-sm text-slate-600">
@@ -381,6 +382,19 @@ export function AlertDetail({ id }: { id: string }) {
               </div>
             </div>
           </section>
+
+          <ClaudeAnalyse
+            alertId={alert.id}
+            faits={{
+              alerte: { id: alert.id, type: ANOMALY_LABELS[alert.type], priorite: alert.priority, detectee_le: alert.date, resume_regles: analysis.explanation },
+              vehicule: { modele: alert.vehicleModel, immatriculation: alert.vehicle, plage_horaire_habituelle: alert.id === PRIMARY_ALERT_ID ? PRIMARY_ALERT_DETAIL.usualHours : 'non fournie' },
+              conducteur: alert.driver,
+              carte: { fin: card.last4, statut: suspension ? 'suspendue' : 'active' },
+              facteurs: analysis.factors.map((f) => ({ facteur: f.title, detail: f.detail })),
+              comparaison_litres: analysis.comparison.map((c) => ({ repere: c.name, litres: c.litres })),
+              operations_recentes: analysis.recent,
+            }}
+          />
 
           <Panel title={`Facteurs ayant déclenché l’alerte (${analysis.factors.length})`}>
             <ul className="grid grid-cols-1 gap-3 md:grid-cols-2">
