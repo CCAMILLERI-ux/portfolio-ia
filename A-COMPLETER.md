@@ -1,28 +1,36 @@
-# Points à compléter par Caroline
+# Questions pour Caroline
 
-Chaque point apparaît sur le site, surligné en jaune, sous la forme `[À COMPLÉTER PAR CAROLINE]`.
-Remplacez le texte entre crochets (et la balise `<span class="todo">` qui l'entoure), ou supprimez la phrase.
+Chaque point apparaît sur le site, surligné en jaune (`<span class="todo">`). Remplacez le texte entre crochets, ou supprimez la phrase.
 
-## Étude de cas 1 — Gestion de flotte (`cas-siplec.html`)
-- [ ] Temps passé au total (l'historique montre seulement une journée de publication pour le prototype)
-- [ ] Ce que vous avez transmis à Claude Code pour construire le prototype (note de cadrage, brief écrit, consignes de charte ?)
-- [ ] Deux ou trois exemples concrets de ce que vous avez fait corriger ou refusé à l'IA
-- [ ] Vérifications faites sur le rendu mobile et l'accessibilité
+## Projet 1 — Énergies B2B, SIPLEC (`index.html#siplec`)
+- [ ] Ce qui a été transmis à Claude Code pour le prototype de gestion de flotte (note de cadrage Gamma, brief écrit, consignes ?)
+- [ ] Deux exemples de corrections ou de refus
 
-## Étude de cas 2 — Supports marketing B2B (`cas-amundi.html`)
-- [ ] Durée du projet
-- [ ] Source utilisée pour vérifier les conditions du partage de la valeur (11 à 49 salariés, 1 %, 3 exercices, 2025)
-- [ ] Comment la charte et les consignes ont été transmises à l'IA (brief, captures, fichier de design system ?)
-- [ ] Ce que vous avez refusé ou fait corriger, et pourquoi
-- [ ] Vérifications faites sur le rendu mobile et l'accessibilité
-- [ ] Canva : la carte « brochure » du projet le cite. L'avez-vous utilisé ?
+## Projet 2 — Épargne salariale, Amundi (`index.html#amundi`)
+- [ ] Contexte donné à l'IA : brief, charte, consignes
+- [ ] Source utilisée pour vérifier les conditions du partage de la valeur
+- [ ] Corrections ou refus
+- [ ] Canva : utilisé ou non ?
 
-## Étude de cas 3 — Assistant et abonnement (`cas-ugc.html`)
-- [ ] Temps passé au total (l'historique montre seulement deux jours de publication)
-- [ ] Ce que vous avez refusé ou fait corriger, et pourquoi
-- [ ] Vérifications faites sur le rendu mobile et l'accessibilité
-- [ ] Outil de génération d'images utilisé pour les affiches
+## Projet 3 — Cinéma, UGC (`index.html#ugc`)
+- [ ] Outil utilisé pour générer les affiches de films
+- [ ] Corrections ou refus
 
-## À décider
-- [ ] Ajouter votre employeur actuel dans la phrase de présentation de l'accueil (volontairement absent)
-- [ ] Projet UGC : la note produit de la copie contient encore des « cibles d'exemple » chiffrées (+10 %, −30 %, 15 %, < 10 %). Elles sont présentées comme des cibles à caler, pas comme des résultats. Les garder ou les remplacer par « à définir sur l'état initial »
+## Projet 4 — Filière du végétal, VALHOR (`index.html#valhor`)
+- [ ] Outils utilisés (texte, images, mise en page)
+- [ ] Contexte donné à l'IA, itérations, vérifications et corrections
+
+## Projet 5 — Portail éditorial, Adoma (`index.html#adoma`)
+- [ ] Le problème traité, en une phrase (fiche + carte)
+- [ ] Ce que vous avez fait : 3 à 4 actions
+- [ ] Contexte donné à Lovable, itérations, vérifications et corrections
+- [ ] Une ou deux captures d'écran (l'application n'est pas accessible depuis l'environnement de travail de Claude)
+- [ ] L'application Lovable contient-elle une mention « candidature » ou un logo à retirer ?
+
+## Pages détaillées (`cas-siplec.html`, `cas-amundi.html`, `cas-ugc.html`)
+- [ ] Les garder en lien secondaire « Étude détaillée » (choix actuel) ou les supprimer
+- [ ] Elles contiennent encore leurs propres points [À COMPLÉTER] (durées, corrections, vérifications)
+
+## Manques par rapport aux attendus du poste (mini-projets proposés)
+- [ ] Attendu 4, automatiser une tâche répétitive : kit de recette automatisée (captures + rapport d'accessibilité pour une liste d'URL, avec mode d'emploi)
+- [ ] Attendu 3, livrables de chef de projet : « du cahier des charges aux tickets de recette » (analyse, user stories, tickets, compte-rendu, corrections annotées)
