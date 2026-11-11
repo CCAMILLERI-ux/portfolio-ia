@@ -1,0 +1,17 @@
+﻿ID;User story;Scénario;Étapes;Résultat attendu;Statut
+REC-01;US-01;Filtrer par instrument et âge;1. Ouvrir le catalogue. / 2. Choisir « Piano ». / 3. Choisir « 8-10 ans ».;"Seuls les cours de piano pour 8-10 ans s'affichent ; le nombre de résultats est indiqué.";À tester
+REC-02;US-01;Aucun résultat;1. Choisir « Harpe », « Adulte », « Dimanche ».;Un message propose d'élargir la recherche.;À tester
+REC-03;US-01;Filtres au clavier;1. Atteindre les filtres avec Tab. / 2. Les activer avec Espace.;Filtres activables, focus visible, nombre de résultats annoncé par le lecteur d'écran.;À tester
+REC-04;US-02;Fiche cours complète;1. Ouvrir une fiche cours.;Description, professeur, horaires, tarif et places restantes sont affichés.;À tester
+REC-05;US-02;Cours complet;1. Ouvrir la fiche d'un cours à 0 place.;La mention « Complet » remplace le bouton d'inscription.;À tester
+REC-06;US-03;Compte famille, deux enfants;1. Créer un compte. / 2. Ajouter un enfant. / 3. Ajouter un second enfant.;"Les coordonnées du parent ne sont pas ressaisies ; les deux enfants sont listés.";À tester
+REC-07;US-03;E-mail de confirmation;1. Valider une inscription.;E-mail reçu avec l'élève, le cours et le montant.;À tester
+REC-08;US-04;Paiement en trois fois;1. Choisir le paiement en trois fois au récapitulatif.;"Échéancier affiché avant validation ; la somme des trois montants égale le tarif.";À tester
+REC-09;US-04;Paiement refusé;1. Payer avec une carte de test refusée.;"Message d'erreur ; inscription non validée ; place non décomptée.";À tester
+REC-10;US-05;Droits du professeur;1. Se connecter comme professeur A. / 2. Ouvrir l'URL d'édition de la page du professeur B.;Accès refusé.;À tester
+REC-11;US-05;Modification de tarif;1. Se connecter comme professeur. / 2. Modifier un tarif et enregistrer.;"Le tarif reste en attente de validation du bureau ; l'ancien tarif reste affiché.";À tester
+REC-12;US-06;Image sans texte alternatif;1. Créer une actualité avec une image sans texte alternatif. / 2. Publier.;Publication bloquée, message explicite.;À tester
+REC-13;US-06;Agenda des concerts;1. Créer un concert passé et un concert à venir. / 2. Afficher l'agenda.;Seul le concert à venir apparaît dans « À venir ».;À tester
+REC-14;US-07;Formulaire de contact incomplet;1. Envoyer le formulaire vide.;"Une erreur sous chaque champ obligatoire ; focus placé sur le résumé des erreurs.";À tester
+REC-15;US-08;Inscription à 320 px;1. Faire tout le parcours d'inscription sur un écran de 320 px.;"Aucun défilement horizontal ; tous les boutons sont visibles et utilisables.";À tester
+REC-16;US-09;Information RGPD;1. Créer un compte et ajouter un enfant mineur.;La mention de finalité et de durée de conservation est visible avant validation.;À tester
