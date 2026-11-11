@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Offre énergie B2B et showroom professionnel – Étude de cas – Caroline Camilleri</title>
-<meta name="description" content="Étude de cas exploratoire : une page d'offre énergie B2B avec formulaire guidé et un showroom produits pour acheteurs, conçus avec Claude Code à partir d'un design system rédigé en amont.">
+<title>Gestion de flotte : détecter une consommation anormale – Étude de cas – Caroline Camilleri</title>
+<meta name="description" content="Étude de cas exploratoire : du cadrage d'une offre de carte carburant professionnelle à un prototype d'espace gestionnaire de flotte, réalisé avec Claude Code.">
 <link rel="canonical" href="https://ccamilleri-ux.github.io/portfolio-ia/cas-siplec.html">
 <meta property="og:type" content="article">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="Caroline Camilleri – Projets IA">
-<meta property="og:title" content="Offre énergie B2B et showroom professionnel – étude de cas">
-<meta property="og:description" content="Cadrer deux offres B2B et les traduire en parcours testables avec Claude Code : formulaire guidé, showroom, plan de recette.">
+<meta property="og:title" content="Gestion de flotte : détecter une consommation anormale – étude de cas">
+<meta property="og:description" content="Passer d'un cadrage produit B2B à un prototype cliquable avec Claude Code : de l'alerte à la décision, puis à la traçabilité.">
 <meta property="og:url" content="https://ccamilleri-ux.github.io/portfolio-ia/cas-siplec.html">
 <meta property="og:image" content="https://ccamilleri-ux.github.io/portfolio-ia/assets/img/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -31,7 +31,7 @@
     <nav class="site-nav" aria-label="Navigation principale">
       <ul>
         <li><a href="index.html">Accueil</a></li>
-        <li><a href="cas-siplec.html" aria-current="page">Énergie et showroom</a></li>
+        <li><a href="cas-siplec.html" aria-current="page">Gestion de flotte</a></li>
         <li><a href="cas-amundi.html">Supports B2B</a></li>
         <li><a href="cas-ugc.html">Assistant et abonnement</a></li>
       </ul>
@@ -49,12 +49,12 @@
   <section class="case-hero" aria-labelledby="titre-page">
     <div class="wrap">
       <span class="eyebrow">Étude de cas 1 · Univers SIPLEC (Mouvement E.Leclerc)</span>
-      <h1 id="titre-page">Offre énergie B2B et showroom professionnel</h1>
-      <p class="lead narrow">Deux offres B2B, deux parcours en ligne : une demande de rendez-vous qualifiée pour un service, une sélection de produits pour des acheteurs.</p>
+      <h1 id="titre-page">Gestion de flotte : détecter et traiter une consommation anormale</h1>
+      <p class="lead narrow">Un espace web pour le gestionnaire de flotte d'une entreprise cliente d'une carte carburant professionnelle : repérer une anomalie, la comprendre et agir depuis le même écran.</p>
       <dl class="facts">
-        <dt>Livrable</dt><dd>Un site de 4 pages : accueil, cas énergie, cas non alimentaire, bibliothèque de composants</dd>
-        <dt>Réalisé avec</dt><dd>Claude Code, à partir d'un design system que j'ai préparé</dd>
-        <dt>Durée</dt><dd><span class="todo">[À COMPLÉTER PAR CAROLINE]</span></dd>
+        <dt>Livrable</dt><dd>Une note de cadrage et un prototype cliquable d'espace gestionnaire (sept rubriques)</dd>
+        <dt>Réalisé avec</dt><dd>Gamma pour la note de cadrage, Claude Code pour le prototype</dd>
+        <dt>Durée</dt><dd>Prototype publié en une journée. Temps passé au total : <span class="todo">[À COMPLÉTER PAR CAROLINE]</span></dd>
       </dl>
       <nav class="toc" aria-labelledby="titre-sommaire">
         <h2 id="titre-sommaire">Sommaire</h2>
@@ -75,15 +75,28 @@
     <section class="case-section" id="contexte" aria-labelledby="h-contexte">
       <div class="narrow">
         <h2 id="h-contexte"><span class="num">1</span>Le contexte</h2>
-        <p>Je me suis posé une question : comment présenter en ligne deux offres B2B de nature différente ? D'un côté, un service (un accompagnement en efficacité énergétique) qui doit générer des demandes exploitables. De l'autre, une gamme de produits qu'un professionnel doit pouvoir comparer.</p>
-        <p>C'est une hypothèse de travail, pas une commande. Les offres, les produits et les données sont fictifs.</p>
+        <p>L'offre explorée est une carte carburant professionnelle et ses services en ligne pour les entreprises. J'ai d'abord cartographié l'écosystème, puis dégagé quatre axes d'évolution. J'en ai retenu un pour le prototyper : le pilotage de la flotte.</p>
+        <p>Ce sont des hypothèses construites à partir d'informations publiques, à confronter aux services existants, aux utilisateurs et aux données. Il ne s'agit pas d'une commande.</p>
         <details>
-          <summary>Les deux sujets choisis</summary>
+          <summary>La cartographie de l'écosystème</summary>
           <div class="details-body">
             <ul>
-              <li><strong>Énergie</strong> : un accompagnement pour réduire la consommation d'un bâtiment, produire de l'énergie sur site ou installer des bornes de recharge. L'objectif est de transformer une visite en demande qu'un conseiller peut traiter.</li>
-              <li><strong>Non alimentaire</strong> : une gamme printemps d'équipement extérieur de six produits fictifs. Aucun prix, stock ni certification n'est indiqué.</li>
+              <li><strong>Acteurs</strong> : entreprises clientes, gestionnaires de flotte et comptables, conducteurs, équipes internes, stations et partenaires.</li>
+              <li><strong>Parcours</strong> : souscription et gestion des comptes, commande et paramétrage des cartes, suivi des consommations et des transactions, facturation et reporting, assistance et incidents.</li>
+              <li><strong>Pilotage produit</strong> : vision, discovery, roadmap et backlog, coordination avec les métiers, la tech, la data et l'architecture, recette et amélioration continue.</li>
             </ul>
+          </div>
+        </details>
+        <details>
+          <summary>Les quatre axes d'évolution et l'axe retenu</summary>
+          <div class="details-body">
+            <ol>
+              <li><strong>Simplifier et sécuriser le selfcare</strong> : souscription guidée, gestion autonome des cartes et des droits, blocage immédiat. Valeur recherchée : plus d'autonomie, moins de sollicitations du support.</li>
+              <li><strong>Renforcer le pilotage de la flotte</strong> : tableau de bord, suivi des dépenses et des plafonds, alertes sur les transactions inhabituelles. Valeur recherchée : mieux contrôler les dépenses et repérer les anomalies.</li>
+              <li><strong>Connecter la plateforme aux outils des entreprises</strong> : exports comptables, API vers les logiciels de gestion, rapprochements automatisés. Valeur recherchée : moins de tâches manuelles.</li>
+              <li><strong>Préparer une expérience multi-énergies</strong> : carburant et recharge électrique dans une même vue, bornes compatibles, indicateurs RSE. Valeur recherchée : accompagner la transition des flottes.</li>
+            </ol>
+            <p>Le prototype porte sur l'axe 2, avec un geste de l'axe 1 : la suspension immédiate d'une carte depuis l'alerte.</p>
           </div>
         </details>
       </div>
@@ -92,24 +105,15 @@
     <section class="case-section" id="probleme" aria-labelledby="h-probleme">
       <div class="narrow">
         <h2 id="h-probleme"><span class="num">2</span>Le problème et la cible</h2>
-        <p>Pour l'énergie, un dirigeant ou un responsable des services généraux veut savoir si l'offre le concerne et quoi préparer. Le conseiller, lui, a besoin de demandes complètes.</p>
-        <p>Pour la gamme, un acheteur ou un responsable de rayon doit comprendre vite les produits, les comparer et constituer une sélection à discuter.</p>
+        <p>La cible est le gestionnaire de flotte d'une PME. Il veut repérer vite une consommation de carburant inhabituelle, en comprendre l'origine et agir tout de suite, sans parcourir plusieurs tableaux ni appeler le support.</p>
         <details>
-          <summary>Les choix de parcours qui en découlent</summary>
+          <summary>Les constats supposés, à valider en discovery</summary>
           <div class="details-body">
-            <h3>Cas énergie</h3>
             <ul>
-              <li>La liste des informations à préparer avant le formulaire.</li>
-              <li>Le besoin d'abord, les coordonnées en dernier.</li>
-              <li>Une option « Je ne sais pas encore » : un projet flou reste une opportunité.</li>
-              <li>Le téléphone obligatoire seulement si l'on demande à être rappelé.</li>
-              <li>Un récapitulatif modifiable par étape, puis une confirmation qui annonce la suite.</li>
-            </ul>
-            <h3>Cas non alimentaire</h3>
-            <ul>
-              <li>Des filtres par usage (terrasse, balcon, jardin) autant que par catégorie.</li>
-              <li>Une comparaison limitée à trois produits pour rester lisible sur mobile.</li>
-              <li>Une sélection qui débouche sur une demande d'information à l'équipe commerciale.</li>
+              <li>Les anomalies sont repérées tard, souvent à réception du relevé mensuel.</li>
+              <li>Les analyser oblige à croiser transactions, véhicules et conducteurs dans plusieurs écrans ou exports.</li>
+              <li>Bloquer une carte passe souvent par un appel au support, ce qui retarde la mesure.</li>
+              <li>Les décisions prises ne sont pas toujours tracées, ce qui complique le dialogue avec les conducteurs et la direction.</li>
             </ul>
           </div>
         </details>
@@ -119,38 +123,35 @@
     <section class="case-section" id="demarche" aria-labelledby="h-demarche">
       <div class="narrow">
         <h2 id="h-demarche"><span class="num">3</span>Ma démarche avec l'IA</h2>
-        <p>Avant toute génération, j'ai préparé un fichier de design system : règles absolues, ton, couleurs avec leurs contrastes, typographie et sept composants documentés. Claude Code a construit le site à partir de ce fichier.</p>
-        <p>La recette a porté sur l'accessibilité, le rendu mobile et la prudence des contenus réglementaires.</p>
+        <p>J'ai rédigé une note de cadrage en sept pages avant de prototyper : écosystème, méthode de travail, démarche de discovery et pistes d'évolution. Claude Code a ensuite construit le prototype autour d'un principe simple : données, décision, action, traçabilité.</p>
         <details>
-          <summary>Le brief et le design system</summary>
+          <summary>Le brief</summary>
           <div class="details-body">
-            <p>Le fichier fixe des règles que l'IA doit respecter sur chaque page :</p>
-            <ul>
-              <li>aucun logo ni élément d'identité de la marque ;</li>
-              <li>un bandeau de mention en haut de chaque page ;</li>
-              <li>des produits, chiffres et témoignages uniquement fictifs et signalés comme tels ;</li>
-              <li>pas de superlatifs, pas de chiffres non sourcés, des libellés d'action avec un verbe ;</li>
-              <li>une règle de couleur précise : le texte blanc sur l'orange clair (contraste de 2,92:1) est interdit, on utilise un orange plus foncé (4,95:1).</li>
-            </ul>
-            <p><a href="projets/siplec/brief-design-system.html">Lire le design system tel que je l'ai transmis à l'IA</a></p>
+            <p>La note de cadrage pose une démarche de discovery en quatre temps :</p>
+            <ol>
+              <li><strong>Explorer</strong> : écouter les métiers, analyser les usages, repérer les besoins non couverts.</li>
+              <li><strong>Qualifier</strong> : clarifier le problème, estimer la valeur client et business, prendre en compte les risques.</li>
+              <li><strong>Tester</strong> : formaliser les hypothèses, prototyper, confronter aux utilisateurs et aux équipes techniques.</li>
+              <li><strong>Prioriser et mesurer</strong> : comparer valeur, effort et dépendances, définir les indicateurs avant le développement.</li>
+            </ol>
+            <p>Le prototype correspond à l'étape « Tester ». Ce que j'ai transmis à Claude Code pour le construire : <span class="todo">[À COMPLÉTER PAR CAROLINE : la note de cadrage, un brief écrit, des consignes de charte ?]</span></p>
           </div>
         </details>
         <details>
           <summary>Itérations, corrections et refus</summary>
           <div class="details-body">
-            <p>Ce que j'ai demandé de corriger, ou refusé, au fil des versions : <span class="todo">[À COMPLÉTER PAR CAROLINE : deux ou trois exemples concrets]</span></p>
-            <p>Nombre d'échanges avec l'IA : <span class="todo">[À COMPLÉTER PAR CAROLINE]</span></p>
-            <p>Autres outils d'IA : le livrable indique aussi Gemini et ChatGPT pour explorer des pistes et vérifier certains points. <span class="todo">[À COMPLÉTER PAR CAROLINE : confirmer ou retirer]</span></p>
+            <p>Le prototype a été publié en trois livraisons sur une journée : le prototype complet, sa mise en ligne, puis un ajustement de l'en-tête. Pour ce portfolio, la version présentée ne contient aucun logo de marque.</p>
+            <p>Ce que j'ai demandé de corriger, ou refusé, et pourquoi : <span class="todo">[À COMPLÉTER PAR CAROLINE : deux ou trois exemples concrets]</span></p>
           </div>
         </details>
         <details>
           <summary>Les vérifications</summary>
           <div class="details-body">
             <ul>
-              <li><strong>Accessibilité</strong> : contrôles sur une sélection de critères RGAA 4.1.2, documentés dans le livrable avec la méthode et le résultat. Ils ont été faits par script (navigateur automatisé et outil d'audit axe-core) : parcours complet au clavier, contrastes, focus visible, étiquettes de champs, messages d'erreur.</li>
-              <li><strong>Mobile</strong> : parcours vérifiés à 1 280 et 375 pixels de large.</li>
-              <li><strong>Exactitude</strong> : la mention du décret « Éco Énergie Tertiaire » renvoie à sa source officielle, à faire valider par des experts métier.</li>
-              <li><strong>Ce qui n'a pas été fait</strong> : restitution avec un lecteur d'écran, zoom à 200 %, audit complet. Aucune conformité n'est annoncée.</li>
+              <li><strong>Données</strong> : entreprise, personnes, immatriculations, cartes, montants et indicateurs sont inventés. Le prototype ne se connecte à aucune base ni à aucun service externe.</li>
+              <li><strong>Actions</strong> : suspension, SMS et signalement sont simulés et se remettent à zéro au rechargement. Un bouton « Réinitialiser la démo » permet de rejouer le parcours.</li>
+              <li><strong>Démonstration</strong> : un déroulé de trois minutes est documenté pour présenter le parcours de bout en bout.</li>
+              <li><strong>Rendu mobile et accessibilité</strong> : <span class="todo">[À COMPLÉTER PAR CAROLINE : ce qui a été vérifié]</span></li>
             </ul>
           </div>
         </details>
@@ -160,40 +161,39 @@
     <section class="case-section" id="livrable" aria-labelledby="h-livrable">
       <div class="narrow">
         <h2 id="h-livrable"><span class="num">4</span>Le livrable</h2>
-        <p>Un site de quatre pages qui fonctionne sur ordinateur et sur mobile. Les formulaires sont interactifs mais n'envoient ni ne conservent aucune donnée.</p>
+        <p>Un prototype cliquable pour une entreprise fictive de transport : 24 cartes, 18 véhicules. L'alerte prioritaire remonte d'elle-même sur le tableau de bord, et le gestionnaire va de l'analyse à la suspension de la carte en quelques clics.</p>
       </div>
       <div class="shots">
         <figure>
-          <img src="assets/img/captures/siplec-desktop.webp" width="1440" height="900" loading="lazy" alt="Accueil du projet sur ordinateur : bandeau de mention, titre « Dispositifs marketing digitaux B2B », bloc de contact et début des deux cas.">
-          <figcaption>Accueil, sur ordinateur.</figcaption>
+          <img src="assets/img/captures/flotte-desktop.webp" width="1440" height="900" loading="lazy" alt="Tableau de bord « Gestion de flotte » sur ordinateur : alerte prioritaire « Consommation inhabituelle – Renault Master », indicateurs de la flotte et courbe de consommation hebdomadaire.">
+          <figcaption>Tableau de bord, sur ordinateur.</figcaption>
         </figure>
         <figure>
-          <img src="assets/img/captures/siplec-mobile.webp" width="780" height="1688" loading="lazy" alt="Cas énergie sur mobile : page d'offre fictive « Préparez votre projet d'efficacité énergétique avec un conseiller ».">
-          <figcaption>Page d'offre énergie, sur mobile.</figcaption>
+          <img src="assets/img/captures/flotte-mobile.webp" width="780" height="1688" loading="lazy" alt="Détail de l'alerte sur mobile : « Pourquoi cette alerte ? » avec l'explication en langage clair, puis les facteurs déclencheurs.">
+          <figcaption>Détail d'une alerte, sur mobile.</figcaption>
         </figure>
       </div>
       <div class="narrow">
         <details>
-          <summary>Ce qui fonctionne dans le prototype</summary>
+          <summary>Le parcours démontré, étape par étape</summary>
           <div class="details-body">
-            <h3>Cas énergie</h3>
-            <ul>
-              <li>Une page d'offre avec FAQ repliable et la liste des informations à préparer.</li>
-              <li>Un formulaire en trois étapes (besoin, projet, coordonnées), des messages d'erreur qui disent comment corriger, un récapitulatif modifiable et une confirmation.</li>
-              <li>Une maquette de publication LinkedIn et une page d'inscription à un webinaire.</li>
-              <li>Un protocole de test utilisateur, une hypothèse d'A/B test, des événements de mesure à paramétrer et trois tickets de backlog rédigés en user stories avec critères d'acceptation.</li>
-            </ul>
-            <h3>Cas non alimentaire</h3>
-            <ul>
-              <li>Un showroom de six produits : recherche, filtres, fiches détaillées, comparaison, sélection puis demande d'information.</li>
-              <li>Un kit d'animation en magasin : affiche, stop-rayon, fiche argumentaire.</li>
-            </ul>
+            <ol>
+              <li><strong>Tableau de bord</strong> : cartes actives, véhicules, consommation, budget, évolution, répartition par énergie (gazole, SP95-E10, E85, recharge électrique) et alerte prioritaire.</li>
+              <li><strong>Alerte</strong> : consommation inhabituelle sur un utilitaire, bouton « Analyser l'alerte ».</li>
+              <li><strong>Liste des alertes</strong> : cinq types d'anomalies, niveaux de priorité et filtres.</li>
+              <li><strong>Détail de l'anomalie</strong> : explication en langage clair, quatre facteurs déclencheurs, graphique comparatif et dernières opérations du véhicule.</li>
+              <li><strong>Suspension temporaire de la carte</strong> : fenêtre de confirmation, durée au choix, motif facultatif.</li>
+              <li><strong>Confirmation et traçabilité</strong> : statut « Suspendue » répercuté partout et entrée horodatée dans le journal d'activité.</li>
+            </ol>
+            <p>Les rubriques Cartes, Véhicules, Conducteurs et Transactions sont consultables. La rubrique Rapports esquisse des services additionnels : pilotage budgétaire, règles d'usage, empreinte carbone, comparaison entre flottes.</p>
           </div>
         </details>
+        <figure class="shot-single" style="max-width:none">
+          <img src="assets/img/captures/flotte-alerte-desktop.webp" width="1440" height="900" loading="lazy" alt="Détail de l'alerte sur ordinateur : explication, quatre facteurs déclencheurs (volume, horaire, deux opérations en moins de 24 heures, écart avec la moyenne) et opération concernée.">
+          <figcaption>Détail d'une alerte, sur ordinateur.</figcaption>
+        </figure>
         <ul class="links">
-          <li><a class="button" href="projets/siplec/index.html">Voir le projet en ligne</a></li>
-          <li><a class="button button--ghost" href="projets/siplec/cas-energie.html">Cas énergie</a></li>
-          <li><a class="button button--ghost" href="projets/siplec/cas-non-alimentaire.html">Cas non alimentaire</a></li>
+          <li><a class="button" href="projets/siplec-flotte/index.html">Voir le prototype en ligne</a></li>
         </ul>
       </div>
     </section>
@@ -202,10 +202,10 @@
       <div class="narrow">
         <h2 id="h-demontre"><span class="num">5</span>Ce que le cas démontre</h2>
         <ul>
-          <li><strong>Cadrage d'offre</strong> : cible, besoin, promesse, pour un service et pour une gamme.</li>
-          <li><strong>Conception de parcours</strong> : chaque choix d'interface est justifié par un besoin utilisateur.</li>
-          <li><strong>Accessibilité</strong> : intégrée dès le brief, puis vérifiée, avec ses limites écrites.</li>
-          <li><strong>Préparation du run</strong> : mesure, backlog, plan de lancement et protocole de test.</li>
+          <li><strong>Discovery et cadrage</strong> : cartographier un écosystème B2B, formuler des axes d'évolution et leur valeur attendue.</li>
+          <li><strong>Choix d'un périmètre</strong> : retenir un axe et le traduire en un parcours testable de bout en bout.</li>
+          <li><strong>Conception orientée action</strong> : une alerte expliquée, une action possible tout de suite, une décision tracée.</li>
+          <li><strong>Lecture business</strong> : valeur potentielle pour le client (moins de pertes, moins de temps passé) et pour l'offre (différenciation par le service, moins de sollicitations du support), présentée comme hypothèse.</li>
         </ul>
       </div>
     </section>
@@ -213,16 +213,15 @@
     <section class="case-section" id="limites" aria-labelledby="h-limites">
       <div class="narrow">
         <h2 id="h-limites"><span class="num">6</span>Limites et suites possibles</h2>
-        <p>Rien n'a été testé avec de vrais utilisateurs, et les contenus métier n'ont pas été validés par des experts. Le prototype n'est relié à aucun outil commercial.</p>
+        <p>La détection d'anomalies est simulée et l'indice de confiance est inventé. Le prototype n'a été testé avec aucun gestionnaire de flotte. Je ne connais pas les services déjà proposés ni les contraintes du système d'information.</p>
         <details>
           <summary>Les suites à donner</summary>
           <div class="details-body">
             <ul>
-              <li>Mener les tests utilisateurs selon le protocole proposé : dirigeants, responsables de site, conseillers.</li>
-              <li>Faire valider les contenus énergie et réglementaires par des experts métier.</li>
-              <li>Cadrer l'intégration au SI : transmission des demandes à l'outil commercial, données personnelles avec le DPO.</li>
-              <li>Mesurer un état initial avant de fixer tout objectif chiffré.</li>
-              <li>Faire réaliser un audit d'accessibilité complet.</li>
+              <li>Confronter le prototype aux services existants et à des gestionnaires de flotte.</li>
+              <li>Cadrer avec la tech, la data et l'architecture : flux de transactions, règles de détection, gestion des fausses alertes, blocage réel d'une carte.</li>
+              <li>Définir les indicateurs avant toute expérimentation : délai entre une transaction anormale et l'action, part des alertes traitées en libre-service, part des alertes jugées pertinentes, appels au support évités, usage hebdomadaire de l'espace.</li>
+              <li>Prioriser les services additionnels selon la valeur, l'effort et les dépendances.</li>
             </ul>
           </div>
         </details>
@@ -233,7 +232,7 @@
       <div class="narrow">
         <h2 id="h-outils"><span class="num">7</span>Outils utilisés</h2>
         <ul class="tags">
-          <li>Claude Code</li><li>Design system en Markdown</li><li>GitHub</li><li>GitHub Pages</li><li>Contrôles automatisés (axe-core)</li>
+          <li>Claude Code</li><li>Gamma</li><li>GitHub</li><li>GitHub Pages</li>
         </ul>
       </div>
     </section>
