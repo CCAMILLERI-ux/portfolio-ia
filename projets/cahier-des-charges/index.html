@@ -21,6 +21,7 @@
   <span class="eyebrow">Projet de démonstration · Livrables de chef de projet</span>
   <h1>Du cahier des charges aux tickets de recette</h1>
   <p class="lead narrow">Un cahier des charges d'une page, deux consignes données à Claude, et ce qui en sort : analyse, questions au client, user stories, cahier de recette, compte-rendu de lancement.</p>
+  <p class="note-ia" role="note"><strong>Comment ça marche :</strong> cette page présente un exemple déjà produit avec Claude. Pour analyser <strong>votre propre cahier des charges en direct</strong>, utilisez la <a href="#essai">section 8</a> avec votre clé API Anthropic : l’appel est facturé sur votre compte (quelques centimes), la clé n’est jamais stockée.</p>
   <ul class="kpis" aria-label="En résumé">
     <li><strong>13</strong> exigences</li><li><strong>8</strong> questions au client</li><li><strong>9</strong> user stories</li><li><strong>16</strong> tickets de recette</li>
   </ul>
@@ -137,6 +138,7 @@ Règles : n&#x27;invente aucune fonctionnalité, aucun chiffre ni aucun délai a
   <section class="block" id="essai" aria-labelledby="h-essai">
     <h2 id="h-essai"><span class="num">8</span>Essayer avec votre cahier des charges</h2>
     <p>Collez un cahier des charges : Claude applique la consigne 1 et renvoie analyse, questions, user stories et tickets. La couverture est recalculée par la page, pas par l'IA.</p>
+    <p class="note-ia" role="note"><strong>Appel réel à Claude :</strong> cette section fonctionne uniquement avec votre clé API Anthropic. Sans clé, rien n’est envoyé ; l’exemple des sections 1 à 7 reste consultable.</p>
     <form id="form-essai" class="essai" novalidate>
       <label for="cdc">Cahier des charges <span class="aide">(200 à 20 000 caractères)</span></label>
       <textarea id="cdc" name="cdc" rows="10" maxlength="20000" required></textarea>
