@@ -93,6 +93,9 @@ export function ClaudeAnalyse({ alertId, faits }: { alertId: string; faits: unkn
         </Button>
       }
     >
+      <div role="note" className="mb-4 rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-[13px] leading-snug text-navy">
+        <strong>Comment ça marche :</strong> par défaut, vous voyez un <strong>exemple enregistré</strong>, préparé avec Claude Code selon la même consigne. Pour un <strong>appel réel à Claude</strong>, cliquez sur « Analyser en direct » et saisissez votre clé API Anthropic : l’appel est facturé sur votre compte (moins d’un centime), la clé n’est jamais stockée.
+      </div>
       {ouvert && (
         <form
           id="claude-direct"
