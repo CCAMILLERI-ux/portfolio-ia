@@ -484,19 +484,19 @@ ul.clean{margin:0; padding-left:20px; display:grid; gap:var(--space-2)}
   <header class="page-head">
     <p class="eyebrow">Prototype · IA dans le parcours de réservation</p>
     <h1>Quel film ce soir&nbsp;?</h1>
-    <p class="lede">Le spectateur dit ce dont il a envie, l'assistant lui propose trois séances du programme et le mène jusqu'à la réservation. Essayez une demande dans l'application.</p>
+    <p class="lede">Le spectateur dit ce dont il a envie, l'assistant lui propose trois séances du programme et le mène jusqu'à la réservation. Essayez une demande.</p>
     <p class="disclaimer"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-info"/></svg><span>Projet fictif de démonstration, sans lien avec UGC – Caroline Camilleri · un concept, pas une copie de l'existant. <a href="../../fiche-ugc.html">Retour au portfolio</a></span></p>
   </header>
 
   <div class="modes" role="group" aria-label="Canal affiché dans la démo">
-    <button type="button" class="mode" data-mode="app" aria-pressed="true"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Application mobile</button>
-    <button type="button" class="mode" data-mode="web" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-monitor"/></svg>Site web</button>
+    <button type="button" class="mode" data-mode="web" aria-pressed="true"><svg class="icon" aria-hidden="true"><use href="#i-monitor"/></svg>Site web</button>
+    <button type="button" class="mode" data-mode="app" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Application mobile</button>
   </div>
 
-  <div class="layout" id="layout">
+  <div class="layout is-web" id="layout">
     <!-- ---------- Application ---------- -->
-    <section class="device" id="device" aria-label="Démonstration">
-      <div class="screen" id="screen">
+    <section class="device is-web" id="device" aria-label="Site web, démonstration">
+      <div class="screen is-web" id="screen">
         <div class="browser" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="url">Prototype · site web (démo)</span></div>
         <header class="web-header">
           <div class="web-top">
@@ -622,7 +622,7 @@ ul.clean{margin:0; padding-left:20px; display:grid; gap:var(--space-2)}
       <section class="panel">
         <h2>Comment fonctionne la démo</h2>
         <p>La demande est interprétée par un moteur de règles local, exécuté dans le navigateur : il repère l'envie, le jour, l'horaire, la version, le public et le cinéma, puis classe les séances du programme fictif. Aucune donnée n'est envoyée à un service externe. En production, ce moteur servirait de repli si le modèle d'IA ne répond pas.</p>
-        <p>Le sélecteur « Application mobile | Site web » montre le même assistant sur les deux canaux : un seul moteur et un seul parcours, deux interfaces adaptées (écran plein sur mobile, fenêtre de réservation sur le web).</p>
+        <p>Le sélecteur « Site web | Application mobile » montre le même assistant sur les deux canaux : un seul moteur et un seul parcours, deux interfaces adaptées (écran plein sur mobile, fenêtre de réservation sur le web).</p>
         <p>Après « Réserver », la démo simule la suite du parcours : nombre de places, choix des sièges sur un plan de salle fictif, récapitulatif puis confirmation avec un numéro fictif. Les tarifs et le paiement ne sont pas simulés.</p>
       </section>
 
@@ -691,7 +691,7 @@ function setMode(m){
   ["layout","device","screen"].forEach(id=>$(id).classList.toggle("is-web",web));
   $("device").setAttribute("aria-label",web?"Site web, démonstration":"Application mobile, démonstration");
   document.querySelectorAll(".mode").forEach(b=>b.setAttribute("aria-pressed",b.dataset.mode===m));
-  try{ history.replaceState(null,"",web?"#web":location.pathname+location.search); }catch(e){}
+  try{ history.replaceState(null,"",web?location.pathname+location.search:"#app"); }catch(e){}
 }
 document.querySelectorAll(".mode").forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
 document.addEventListener("keydown",e=>{ if(e.key==="Escape" && bk && isWeb()) closeBooking(); });
@@ -1042,7 +1042,7 @@ function run(){ const q=$("q").value.trim(); if(!q) return; render(localPick(q))
 $("askForm").addEventListener("submit",e=>{e.preventDefault(); run();});
 $("q").addEventListener("keydown",e=>{ if(e.key==="Enter"&&!e.shiftKey){e.preventDefault(); run();} });
 render(localPick($("q").value));
-if(location.hash==="#web") setMode("web");
+setMode(location.hash==="#app"?"app":"web");
 })();
 </script>
 </body>
