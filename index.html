@@ -31,15 +31,25 @@
 
 <header class="cv-head">
   <div class="wrap">
-    <div>
-      <h1>Caroline Camilleri</h1>
-      <p class="role">Cheffe de projet digital · Projets IA</p>
-      <p class="pitch">J'utilise l'IA pour cadrer, prototyper et livrer plus vite. Je n'écris pas le code : je pilote l'IA comme une agence, du brief à la recette.</p>
+    <div class="cv-top">
+      <img class="photo" src="assets/img/caroline-camilleri.webp" width="320" height="320" alt="Caroline Camilleri">
+      <div>
+        <h1>Caroline Camilleri</h1>
+        <p class="role">Cheffe de projet digital · Projets IA</p>
+        <p class="pitch">J'utilise l'IA pour cadrer, prototyper et livrer plus vite. Je n'écris pas le code : je pilote l'IA comme une agence, du brief à la recette.</p>
+      </div>
+      <ul class="contact" aria-label="Contact">
+        <li><a href="https://www.linkedin.com/in/caroline-camilleri-pro/" rel="noopener" target="_blank">LinkedIn<span class="visually-hidden"> (nouvelle fenêtre)</span></a></li>
+        <li><a href="mailto:camilleri.caro@gmail.com">camilleri.caro@gmail.com</a></li>
+      </ul>
     </div>
-    <ul class="contact" aria-label="Contact">
-      <li><a href="https://www.linkedin.com/in/caroline-camilleri-pro/" rel="noopener" target="_blank">LinkedIn<span class="visually-hidden"> (nouvelle fenêtre)</span></a></li>
-      <li><a href="mailto:camilleri.caro@gmail.com">camilleri.caro@gmail.com</a></li>
-    </ul>
+    <dl class="skills">
+      <div><dt>IA et outils</dt><dd><ul class="tags tags--dark"><li>Claude</li><li>ChatGPT</li><li>Gemini</li><li>Lovable</li><li>Figma</li><li>Jira</li><li>Confluence</li><li>Google Drive</li></ul></dd></div>
+      <div><dt>Projets pilotés</dt><dd>Sites, espaces connectés et produits digitaux : création, refonte, évolution</dd></div>
+      <div><dt>Missions</dt><dd><ul class="tags tags--dark"><li>Cahier des charges</li><li>Ateliers de cadrage</li><li>Wireframes</li><li>Prototypes</li><li>Recette</li></ul></dd></div>
+      <div><dt>CMS</dt><dd><ul class="tags tags--dark"><li>WordPress</li><li>Strapi</li></ul></dd></div>
+      <div><dt>Langue</dt><dd>Anglais opérationnel</dd></div>
+    </dl>
   </div>
 </header>
 
@@ -47,7 +57,7 @@
   <section class="sec" aria-labelledby="t-projets">
     <div class="wrap">
       <h2 class="sec-title" id="t-projets">Projets</h2>
-      <p class="sec-note">Études exploratoires réalisées en autonomie : aucune commande client, données fictives.</p>
+      <p class="sec-note">Études exploratoires réalisées en autonomie en utilisant l'IA.</p>
       <ul class="cards">
         <li class="card">
           <img src="assets/img/captures/flotte-desktop-carte.webp" width="720" height="450" loading="lazy" alt="">
@@ -56,9 +66,11 @@
             <ul class="tags" aria-label="Outils"><li>Claude Code</li><li>API Claude</li><li>Gamma</li></ul>
             <p>Une alerte expliquée par l'IA, une décision prise par l'humain.</p>
             <div class="card__actions">
-              <a class="button button--ghost" href="fiche-siplec.html">Voir la fiche<span class="visually-hidden"> : Énergies B2B : gestion de flotte</span></a>
-              <a class="button" href="projets/siplec-flotte/index.html">Gestion de flotte<span class="visually-hidden"> : Énergies B2B : gestion de flotte – Gestion de flotte</span></a>
-              <a class="button" href="projets/siplec-offre-energie/index.html">Page d'offre<span class="visually-hidden"> : Énergies B2B : gestion de flotte – Page d'offre</span></a>
+              <a class="button button--ghost card__fiche" href="fiche-siplec.html">Voir la fiche projet<span class="visually-hidden"> : Énergies B2B : gestion de flotte</span></a>
+              <div class="card__demos">
+                <a class="button" href="projets/siplec-flotte/index.html">Gestion de flotte<span class="visually-hidden"> : Énergies B2B : gestion de flotte – Gestion de flotte</span></a>
+                <a class="button" href="projets/siplec-offre-energie/index.html">Page d'offre<span class="visually-hidden"> : Énergies B2B : gestion de flotte – Page d'offre</span></a>
+              </div>
             </div>
           </div>
         </li>
@@ -69,8 +81,10 @@
             <ul class="tags" aria-label="Outils"><li>Claude Code</li></ul>
             <p>Un message réglementaire, quatre publics.</p>
             <div class="card__actions">
-              <a class="button button--ghost" href="fiche-amundi.html">Voir la fiche<span class="visually-hidden"> : Épargne salariale : 4 supports B2B</span></a>
-              <a class="button" href="projets/amundi/index.html">Voir la démo<span class="visually-hidden"> : Épargne salariale : 4 supports B2B</span></a>
+              <a class="button button--ghost card__fiche" href="fiche-amundi.html">Voir la fiche projet<span class="visually-hidden"> : Épargne salariale : 4 supports B2B</span></a>
+              <div class="card__demos">
+                <a class="button" href="projets/amundi/index.html">Voir la démo<span class="visually-hidden"> : Épargne salariale : 4 supports B2B</span></a>
+              </div>
             </div>
           </div>
         </li>
@@ -81,9 +95,11 @@
             <ul class="tags" aria-label="Outils"><li>Claude Code</li><li>ChatGPT Image</li></ul>
             <p>Deux hypothèses produit, deux prototypes.</p>
             <div class="card__actions">
-              <a class="button button--ghost" href="fiche-ugc.html">Voir la fiche<span class="visually-hidden"> : Cinéma : assistant de séance et abonnement</span></a>
-              <a class="button" href="projets/ugc/index.html">Assistant de séance<span class="visually-hidden"> : Cinéma : assistant de séance et abonnement – Assistant de séance</span></a>
-              <a class="button" href="projets/ugc/illimite.html">Abonnement<span class="visually-hidden"> : Cinéma : assistant de séance et abonnement – Abonnement</span></a>
+              <a class="button button--ghost card__fiche" href="fiche-ugc.html">Voir la fiche projet<span class="visually-hidden"> : Cinéma : assistant de séance et abonnement</span></a>
+              <div class="card__demos">
+                <a class="button" href="projets/ugc/index.html">Assistant de séance<span class="visually-hidden"> : Cinéma : assistant de séance et abonnement – Assistant de séance</span></a>
+                <a class="button" href="projets/ugc/illimite.html">Abonnement<span class="visually-hidden"> : Cinéma : assistant de séance et abonnement – Abonnement</span></a>
+              </div>
             </div>
           </div>
         </li>
@@ -94,8 +110,10 @@
             <ul class="tags" aria-label="Outils"><li>Lovable</li><li>Claude</li></ul>
             <p>Des initiatives locales aux contenus diffusés.</p>
             <div class="card__actions">
-              <a class="button button--ghost" href="fiche-adoma.html">Voir la fiche<span class="visually-hidden"> : Résidences : portail éditorial</span></a>
-              <a class="button" href="https://adoma-design-flow.lovable.app/diffusion">Voir la démo<span class="visually-hidden"> : Résidences : portail éditorial</span></a>
+              <a class="button button--ghost card__fiche" href="fiche-adoma.html">Voir la fiche projet<span class="visually-hidden"> : Résidences : portail éditorial</span></a>
+              <div class="card__demos">
+                <a class="button" href="https://adoma-design-flow.lovable.app/diffusion">Voir la démo<span class="visually-hidden"> : Résidences : portail éditorial</span></a>
+              </div>
             </div>
           </div>
         </li>
@@ -106,9 +124,11 @@
             <ul class="tags" aria-label="Outils"><li>ChatGPT Image</li><li>ElevenLabs</li><li>Claude Code</li></ul>
             <p>Un message, cinq contenus : LinkedIn, newsletter, vidéo, article, diffusion.</p>
             <div class="card__actions">
-              <a class="button button--ghost" href="fiche-valhor.html">Voir la fiche<span class="visually-hidden"> : Végétal : campagne sur trois métiers</span></a>
-              <a class="button" href="projets/valhor/index.html">La campagne<span class="visually-hidden"> : Végétal : campagne sur trois métiers – La campagne</span></a>
-              <a class="button" href="projets/valhor/index.html#video">La vidéo<span class="visually-hidden"> : Végétal : campagne sur trois métiers – La vidéo</span></a>
+              <a class="button button--ghost card__fiche" href="fiche-valhor.html">Voir la fiche projet<span class="visually-hidden"> : Végétal : campagne sur trois métiers</span></a>
+              <div class="card__demos">
+                <a class="button" href="projets/valhor/index.html">La campagne<span class="visually-hidden"> : Végétal : campagne sur trois métiers – La campagne</span></a>
+                <a class="button" href="projets/valhor/index.html#video">La vidéo<span class="visually-hidden"> : Végétal : campagne sur trois métiers – La vidéo</span></a>
+              </div>
             </div>
           </div>
         </li>
@@ -119,8 +139,10 @@
             <ul class="tags" aria-label="Outils"><li>Claude Code</li><li>API Claude</li></ul>
             <p>Analyse, user stories, recette : testable en direct.</p>
             <div class="card__actions">
-              <a class="button button--ghost" href="fiche-cahier-des-charges.html">Voir la fiche<span class="visually-hidden"> : Cahier des charges → tickets de recette</span></a>
-              <a class="button" href="projets/cahier-des-charges/index.html">Voir la démo<span class="visually-hidden"> : Cahier des charges → tickets de recette</span></a>
+              <a class="button button--ghost card__fiche" href="fiche-cahier-des-charges.html">Voir la fiche projet<span class="visually-hidden"> : Cahier des charges → tickets de recette</span></a>
+              <div class="card__demos">
+                <a class="button" href="projets/cahier-des-charges/index.html">Voir la démo<span class="visually-hidden"> : Cahier des charges → tickets de recette</span></a>
+              </div>
             </div>
           </div>
         </li>
@@ -132,10 +154,10 @@
     <div class="wrap">
       <h2 class="sec-title" id="t-methode">Ma méthode avec l'IA</h2>
       <ol class="steps">
-        <li><strong>Contexte</strong> : brief, cible, design system, interdits.</li>
-        <li><strong>Génération</strong> : des demandes précises, un sujet à la fois.</li>
-        <li><strong>Vérification</strong> : mobile, clavier, contrastes, exactitude.</li>
-        <li><strong>Livraison</strong> : en ligne, versionnée, prête pour un atelier.</li>
+        <li><strong>Contexte</strong> : je donne à l'IA le bon contexte (brief, cible, design system, contraintes).</li>
+        <li><strong>Production</strong> : des demandes précises, un sujet à la fois, des itérations courtes.</li>
+        <li><strong>Regard critique</strong> : je vérifie, je corrige, je reste responsable de ce qui part chez le client.</li>
+        <li><strong>Livraison</strong> : une démo en ligne, prête pour un atelier ou un client.</li>
       </ol>
     </div>
   </section>
